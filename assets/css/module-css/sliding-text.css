@@ -119,7 +119,7 @@
     font-weight: 600;
     transition: all 200ms linear;
     transition-delay: 0.1s;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
@@ -189,7 +189,7 @@
     font-weight: 500;
     font-style: normal;
     text-transform: lowercase;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
 }
 

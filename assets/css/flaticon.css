@@ -67,6 +67,10 @@
   content: "\e908";
 }
 
+.icon-headphones:before {
+  content: "\e940";
+}
+
 .icon-thumbs-up:before {
   content: "\e909";
 }
@@ -221,4 +225,8 @@
 
 .icon-chart-simple:before {
   content: "\e930";
+}
+
+.icon-headphones:before {
+  content: "\e931";
 }

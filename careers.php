@@ -17,11 +17,8 @@
 
     <div class="page-wrapper">
         <div class="row">
-            <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div>
 
-            <div class="col-lg-80">
+            <div>
                 <?php include 'php/header.php'; ?>
 
                 <section class="career-sec" style="background-image: 
@@ -451,7 +448,7 @@
             }
         };
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const countrySelect = document.getElementById('country');
             const stateGroup = document.getElementById('stateGroup');
             const stateSelect = document.getElementById('state');
@@ -459,7 +456,7 @@
             const citySelect = document.getElementById('city');
 
             // Country change handler
-            countrySelect.addEventListener('change', function () {
+            countrySelect.addEventListener('change', function() {
                 if (this.value === 'Switzerland') {
                     stateGroup.style.display = 'block';
                     stateSelect.disabled = false;
@@ -478,7 +475,7 @@
             });
 
             // State (Canton) change handler
-            stateSelect.addEventListener('change', function () {
+            stateSelect.addEventListener('change', function() {
                 if (this.value) {
                     cityGroup.style.display = 'block';
                     citySelect.disabled = false;
@@ -499,7 +496,7 @@
             const resumeInput = document.getElementById('resume');
             const filePreview = document.querySelector('.file-preview');
 
-            resumeInput.addEventListener('change', function () {
+            resumeInput.addEventListener('change', function() {
                 if (this.files && this.files[0]) {
                     if (this.files[0].size > 5 * 1024 * 1024) {
                         alert('File size exceeds 5 MB limit');
@@ -520,7 +517,7 @@
             });
 
             // Form submission
-            document.getElementById('careerForm').addEventListener('submit', function (e) {
+            document.getElementById('careerForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 // Add your form submission logic here
                 alert('Form submitted successfully!');

@@ -7,6 +7,7 @@
     <title>Forget Password - Thaalam Radio Station </title>
 
     <?php include 'php/css.php'; ?>
+    <link rel="stylesheet" href="assets/css/module-css/forgor-password.css">
 
 </head>
 
@@ -14,14 +15,10 @@
     <?php $pagename = 'forget'; ?>
 
     <?php include 'php/preloader.php'; ?>
-
+    <?php include 'php/toast.php'; ?>
     <div class="page-wrapper">
         <div class="row">
-            <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div>
-
-            <div class="col-lg-80">
+            <div>
                 <?php include 'php/header.php'; ?>
 
                 <section class="forgot-password-section" style="background-image: 
@@ -30,7 +27,7 @@
                     <div class="forgot-password-container">
                         <div class="forgot-password-header">
                             <h2>Reset Your Password</h2>
-                            <p class="subtext">Enter your email to receive a password reset link</p>
+                            <p class="subtext" id="subtext">Enter your email to receive a password reset OTP</p>
                         </div>
 
                         <form id="forgotPasswordForm" class="forgot-password-form">
@@ -42,8 +39,16 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn-primary">
-                                Send Reset Link
+                            <div class="form-group" style="display: none;" id="otpContainer">
+                                <label for="otp"> OTP</label>
+                                <div class="input-container">
+                                    <i class="fas fa-shield"></i>
+                                    <input type="number" id="otp" name="otp" placeholder="Enter your OTP">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-primary" id="submitBtn">
+                                Send OTP
                                 <i class="fas fa-paper-plane"></i>
                             </button>
 
@@ -53,178 +58,6 @@
                         </form>
                     </div>
                 </section>
-
-                <style>
-                    :root {
-                        --primary: #D50000;
-                        --primary-dark: #B71C1C;
-                        --text: #222222;
-                        --text-light: #666666;
-                        --border: #E0E0E0;
-                        --border-focus: #BDBDBD;
-                        --background: #FAFAFA;
-                        --error: #D50000;
-                        --white: #FFFFFF;
-                    }
-
-                    .forgot-password-section {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        min-height: 100vh;
-                        background-color: var(--background);
-                        padding: 2rem;
-                    }
-
-                    .forgot-password-container {
-                        background: var(--white);
-                        border-radius: 12px;
-                        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-                        width: 100%;
-                        max-width: 440px;
-                        overflow: hidden;
-                        position: relative;
-                    }
-
-                    .forgot-password-container::before {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 4px;
-                        background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
-                    }
-
-                    .forgot-password-header {
-                        padding: 2.5rem 2.5rem 1.5rem;
-                        text-align: center;
-                    }
-
-
-                    .forgot-password-header h2 {
-                        font-size: 1.75rem;
-                        font-weight: 600;
-                        margin-bottom: 0.5rem;
-                        color: var(--text);
-                    }
-
-                    .subtext {
-                        color: var(--text-light);
-                        font-size: 0.95rem;
-                    }
-
-                    .forgot-password-form {
-                        padding: 0 2.5rem 2.5rem;
-                    }
-
-                    .form-group {
-                        margin-bottom: 1.5rem;
-                    }
-
-                    label {
-                        display: block;
-                        margin-bottom: 0.5rem;
-                        font-size: 0.875rem;
-                        font-weight: 500;
-                        color: var(--text);
-                    }
-
-                    .input-container {
-                        position: relative;
-                        display: flex;
-                        align-items: center;
-                    }
-
-                    .input-container i {
-                        position: absolute;
-                        left: 1rem;
-                        color: var(--text-light);
-                        font-size: 1rem;
-                    }
-
-                    input {
-                        width: 100%;
-                        padding: 0.5rem 1rem 0.5rem 2.5rem;
-                        font-size: 0.9375rem;
-                        border: 1px solid var(--border);
-                        border-radius: 8px;
-                        background-color: var(--white);
-                        transition: all 0.2s ease;
-                    }
-
-                    input:focus {
-                        border-color: var(--primary);
-                        box-shadow: 0 0 0 2px rgba(213, 0, 0, 0.1);
-                        outline: none;
-                    }
-
-                    input:hover {
-                        border-color: var(--border-focus);
-                    }
-
-                    .btn-primary {
-                        background-color: var(--primary);
-                        color: white;
-                        border: none;
-                        padding: 1rem 1.5rem;
-                        font-size: 0.9375rem;
-                        font-weight: 500;
-                        border-radius: 8px;
-                        width: 100%;
-                        cursor: pointer;
-                        transition: all 0.2s ease;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 0.75rem;
-                    }
-
-                    .btn-primary:hover {
-                        background-color: var(--primary-dark);
-                        transform: translateY(-1px);
-                    }
-
-                    .btn-primary:active {
-                        transform: translateY(0);
-                    }
-
-                    .auth-footer {
-                        text-align: center;
-                        margin-top: 1.5rem;
-                        font-size: 0.875rem;
-                        color: var(--text-light);
-                    }
-
-                    .auth-footer a {
-                        color: var(--primary);
-                        text-decoration: none;
-                        font-weight: 500;
-                        transition: color 0.2s ease;
-                    }
-
-                    .auth-footer a:hover {
-                        color: var(--primary-dark);
-                        text-decoration: underline;
-                    }
-
-                    /* Responsive adjustments */
-                    @media (max-width: 768px) {
-                        .forgot-password-container {
-                            padding: 1.5rem;
-                        }
-
-                        .forgot-password-header {
-                            padding: 1.5rem 1rem 1rem;
-                        }
-
-                        .forgot-password-form {
-                            padding: 0 1rem 1.5rem;
-                        }
-                    }
-                </style>
-
-
 
 
                 <?php include 'php/footer.php'; ?>
@@ -236,52 +69,114 @@
 
     <?php include 'php/mob-nav.php'; ?>
 
+    <?php include 'php/config-js.php'; ?>
+
     <?php include 'php/scripts.php'; ?>
 
     <script>
-        $(document).ready(function () {
-            // Form validation
-            $('#forgotPasswordForm').on('submit', function (e) {
+        $(document).ready(function() {
+            let step = localStorage.getItem("forgotStep") || 1;
+            let savedEmail = localStorage.getItem("forgotEmail") || "";
+
+            // Restore state if user already requested OTP
+            if (step == 2 && savedEmail) {
+                $("#email").val(savedEmail).prop("readonly", true);
+                $("#otpContainer").show();
+                $("#submitBtn").text("Verify OTP");
+                $("#subtext").text("Enter the OTP you received in your email");
+            }
+
+            $('#forgotPasswordForm').on('submit', function(e) {
                 e.preventDefault();
-                let isValid = true;
+                const submitBtn = $('#submitBtn');
+                const subtext = $('#subtext');
+                const otpContainer = $('#otpContainer');
 
-                // Clear previous errors
-                $('.error-message').text('');
-
-                // Validate email
                 const email = $('#email').val().trim();
-                if (!email) {
-                    $('#email').nextAll('.error-message').first().text('Email is required');
-                    isValid = false;
-                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                    $('#email').nextAll('.error-message').first().text('Please enter a valid email');
-                    isValid = false;
+                const otp = $('#otp').val().trim();
+
+                // STEP 1 → Send OTP
+                if (step == 1) {
+                    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        showToast("Please enter a valid email", "error");
+                        return;
+                    }
+
+                    submitBtn.prop('disabled', true).text("Sending...");
+                    $.ajax({
+                        url: `${window.API_BASE_URL}/members/forgot-password`,
+                        method: "POST",
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            email
+                        }),
+                        success: function() {
+                            showToast('OTP has been sent to your registered Email Address', "success");
+                            subtext.text('Enter the OTP you received in your email');
+                            otpContainer.show();
+                            submitBtn.text("Verify OTP");
+
+                            // Save progress in localStorage
+                            localStorage.setItem("forgotStep", 2);
+                            localStorage.setItem("forgotEmail", email);
+                            step = 2;
+                        },
+                        error: function(xhr) {
+                            const res = xhr.responseJSON;
+                            showToast(res?.message || "Failed to send OTP", "error");
+                            submitBtn.text("Send OTP");
+                        },
+                        complete: function() {
+                            submitBtn.prop('disabled', false);
+                        }
+                    });
                 }
 
-                if (isValid) {
-                    // Form submission would go here
-                    console.log('Form is valid, submitting...');
+                // STEP 2 → Verify OTP
+                else if (step == 2) {
+                    if (!otp) {
+                        showToast("Please enter OTP", "error");
+                        return;
+                    }
 
-                    // Show success message (optional)
-                    alert('Password reset link has been sent to your email!');
+                    submitBtn.prop('disabled', true).text("Verifying...");
+                    $.ajax({
+                        url: `${window.API_BASE_URL}/members/verify-otp`,
+                        method: "POST",
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            email,
+                            otp
+                        }),
+                        success: function() {
+                            showToast("OTP verified successfully!", "success");
 
-                    // Reset form
-                    this.reset();
+                            // Clear localStorage so flow can restart next time
+                            localStorage.removeItem("forgotStep");
 
-                    // Alternatively, you could redirect:
-                    // window.location.href = 'reset-confirmation.html';
+                            // Redirect to reset password page
+                            window.location.href = "reset-password.php";
+                        },
+                        error: function(xhr) {
+                            const res = xhr.responseJSON;
+                            showToast(res?.message || "Invalid OTP", "error");
+                        },
+                        complete: function() {
+                            submitBtn.prop('disabled', false).text("Verify OTP");
+                        }
+                    });
                 }
             });
 
             // Focus effects
             $('input').on({
-                focus: function () {
+                focus: function() {
                     $(this).css({
                         'border-color': 'var(--primary)',
                         'box-shadow': '0 0 0 2px rgba(213, 0, 0, 0.1)'
                     });
                 },
-                blur: function () {
+                blur: function() {
                     $(this).css({
                         'border-color': 'var(--border)',
                         'box-shadow': 'none'
@@ -290,6 +185,7 @@
             });
         });
     </script>
+
 
 
 </body>

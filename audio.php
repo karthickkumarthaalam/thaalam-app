@@ -17,11 +17,8 @@
 
     <div class="page-wrapper">
         <div class="row">
-            <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div>
 
-            <div class="col-lg-80">
+            <div>
                 <?php include 'php/header.php'; ?>
                 <section class="audio-page" style="background-image: 
         linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
@@ -583,7 +580,7 @@
                 </style>
 
                 <script>
-                    document.addEventListener('DOMContentLoaded', function () {
+                    document.addEventListener('DOMContentLoaded', function() {
                         // Audio player functionality
                         const audioPlayer = document.getElementById('audioPlayer');
                         const mainPlayBtn = document.getElementById('mainPlayBtn');
@@ -595,7 +592,7 @@
                         const trackButtons = document.querySelectorAll('.play-track');
 
                         // Main play button functionality
-                        mainPlayBtn.addEventListener('click', function () {
+                        mainPlayBtn.addEventListener('click', function() {
                             if (audioPlayer.paused) {
                                 audioPlayer.play();
                                 mainPlayIcon.classList.remove('fa-play');
@@ -608,7 +605,7 @@
                         });
 
                         // Volume control
-                        volumeSlider.addEventListener('input', function () {
+                        volumeSlider.addEventListener('input', function() {
                             audioPlayer.volume = this.value;
                             if (this.value == 0) {
                                 volumeIcon.classList.remove('fa-volume-up');
@@ -626,7 +623,7 @@
                         });
 
                         // Mute button
-                        volumeBtn.addEventListener('click', function () {
+                        volumeBtn.addEventListener('click', function() {
                             if (audioPlayer.volume > 0) {
                                 audioPlayer.volume = 0;
                                 volumeSlider.value = 0;
@@ -642,7 +639,7 @@
                         });
 
                         // Like button
-                        likeBtn.addEventListener('click', function () {
+                        likeBtn.addEventListener('click', function() {
                             this.classList.toggle('liked');
                             if (this.classList.contains('liked')) {
                                 this.innerHTML = '<i class="fas fa-heart"></i>';
@@ -653,7 +650,7 @@
 
                         // Track play buttons
                         trackButtons.forEach(button => {
-                            button.addEventListener('click', function () {
+                            button.addEventListener('click', function() {
                                 const trackSrc = this.getAttribute('data-src');
                                 const trackTitle = this.closest('.audio-page__track').querySelector('.audio-page__track-title').textContent;
                                 const trackArtist = this.closest('.audio-page__track').querySelector('.audio-page__track-artist').textContent;

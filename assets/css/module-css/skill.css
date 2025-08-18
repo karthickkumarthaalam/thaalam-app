@@ -49,7 +49,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-black);
 }
@@ -230,7 +230,7 @@
     font-size: 24px;
     font-weight: 600;
     line-height: 24px !important;
-    font-family: var(--fistudy-font-two) !important;
+    font-family: var(--fistudy-font) !important;
     color: var(--fistudy-base);
 }
 
@@ -238,13 +238,13 @@
     font-size: 24px;
     font-weight: 600;
     line-height: 24px !important;
-    font-family: var(--fistudy-font-two) !important;
+    font-family: var(--fistudy-font) !important;
     color: var(--fistudy-base);
 }
 
 .skill-one__experience-count>p {
     font-weight: 600;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-black);
     text-transform: capitalize;
     position: relative;
@@ -257,7 +257,7 @@
 
 .skill-one__experience-count-box>p {
     font-weight: 600;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-black);
     text-transform: lowercase;
     font-size: 16px;

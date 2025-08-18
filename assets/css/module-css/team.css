@@ -356,7 +356,7 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 26px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
 }
 
@@ -870,7 +870,7 @@
 .team-three__text {
     font-size: 16px;
     line-height: 24px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-black);
 }
@@ -934,7 +934,7 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 16px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
 }
 

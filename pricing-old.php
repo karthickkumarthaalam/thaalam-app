@@ -12,17 +12,14 @@
 </head>
 
 <body class="custom-cursor">
-     <?php $pagename = 'pricing'; ?>
+    <?php $pagename = 'pricing'; ?>
 
     <?php include 'php/preloader.php'; ?>
 
     <div class="page-wrapper">
         <div class="row">
-            <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div>
 
-            <div class="col-lg-80">
+            <div>
                 <?php include 'php/header.php'; ?>
 
                 <!--Pricing One Start -->

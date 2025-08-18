@@ -17,11 +17,7 @@
 
     <div class="page-wrapper">
         <div class="row">
-            <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div>
-
-            <div class="col-lg-80">
+            <div>
                 <?php include 'php/header.php'; ?>
 
                 <!--Team Details Start-->
@@ -112,7 +108,7 @@
                             </div>
                         </div>
                         <div class="row p-3 mt-4">
-                            <div class="blog-list__single blog-list__single-2 wow zoomInUp" data-wow-delay="600ms"
+                            <div class="blog-list__single blog-list__single-2 wow fadeInUp" data-wow-delay="600ms"
                                 data-wow-duration="2500ms">
                                 <div class="blog-list__content">
                                     <h3 class="blog-list__title-1">Thaalam's <span>Commitment to Music</span> and Youth
@@ -127,7 +123,7 @@
                                         gap between their mother tongue and the language of their residence.</p>
                                 </div>
                             </div>
-                            <div class="blog-list__single blog-list__single-2 wow fadeInUp" data-wow-delay="700ms"
+                            <div class="blog-list__single blog-list__single-2 wow fadeInUp" data-wow-delay="600ms"
                                 data-wow-duration="2500ms">
                                 <div class="blog-list__content">
                                     <h3 class="blog-list__title-1">Expertise in <span>Mega Events</span> </h3>
@@ -135,6 +131,32 @@
                                         expertise, network, team, and resources to orchestrate mega events successfully.
                                         We are the only media organization equipped to conduct these events seamlessly,
                                         solidifying our reputation as a credible and trustworthy entity.</p>
+                                </div>
+                            </div>
+                            <div class="blog-list__single blog-list__single-2 wow fadeInUp" data-wow-delay="600ms"
+                                data-wow-duration="2500ms">
+                                <div class="blog-list__content">
+                                    <h3 class="blog-list__title-1"> AR Rahman Event in Zurich - <span>October 2023</span> </h3>
+                                    <p class="blog-list__text"> In October 2023, Thaalam Media orchestrated a historic event at Zurich's Hallenstadion featuring the
+                                        musical maestro AR Rahman. This back-to-back two-day extravaganza marked a milestone in Rahman's 30-year
+                                        musical journey, attracting an unprecedented 18,750 enthusiastic music lovers. The event included an
+                                        unforgettable after-party attended by more than 3,000 people, making it the unmatched show of Rahman's
+                                        recent Europe Tour.</p>
+                                </div>
+                            </div>
+                            <div class="blog-list__single blog-list__single-2 wow fadeInUp" data-wow-delay="600ms"
+                                data-wow-duration="2500ms">
+                                <div class="blog-list__content">
+                                    <h3 class="blog-list__title-1"> Paranthu Pogiren with Pradeep Kumar Event in Colombo - <span>March 2023 </span>
+                                    </h3>
+                                    <p class="blog-list__text"> In March 2023, Thaalam Media presented the mega event "Paranthu Pogiren with Pradeep Kumar" at Colombo's
+                                        Sugathadasa Indoor Stadium. This mammoth success, held as a back-to-back houseful show, surpassed all
+                                        previous events in the Tamil Film Industry over the last 20 years. With unparalleled success, it stood as
+                                        the superlative hit in Sri Lanka, marking the largest event in the country in the past four years.</p>
+                                    <p class="blog-list__text"> At Thaalam Media, we continue to push boundaries, creating unparalleled experiences in media and
+                                        entertainment. Join us in our journey as we redefine the landscape of media and events, leaving an
+                                        indelible mark on the hearts of our audiences worldwide.
+                                    </p>
                                 </div>
                             </div>
                         </div>

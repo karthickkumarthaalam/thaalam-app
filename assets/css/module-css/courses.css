@@ -87,7 +87,7 @@
     font-size: 16px;
     line-height: 26px;
     font-weight: 500;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-primary);
     text-transform: capitalize;
     font-style: italic;
@@ -123,7 +123,7 @@
     font-size: 16px;
     line-height: 26px;
     font-weight: 500;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
 }
 
@@ -228,7 +228,7 @@
     font-size: 24px;
     font-weight: 600;
     line-height: 34px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-primary);
 }
 
@@ -823,7 +823,7 @@
     color: var(--fistudy-black);
     line-height: 16px;
     font-style: italic;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
 }
 
 .courses-three__meta li:last-child .icon span {
@@ -2042,7 +2042,7 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     text-align: center;
 }
@@ -2301,7 +2301,7 @@
     font-size: 18px;
     font-weight: 600;
     line-height: 28px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-base);
     counter-increment: count;
@@ -2321,7 +2321,7 @@
     right: -7px;
     top: 50%;
     transform: translateY(-50%);
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     font-size: 18px;
     font-weight: 600;
@@ -2379,7 +2379,7 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 24px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-black);
     -webkit-transition: all 500ms ease;
@@ -2897,7 +2897,7 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 24px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-black);
 }

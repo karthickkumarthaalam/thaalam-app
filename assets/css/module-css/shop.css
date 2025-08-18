@@ -2110,7 +2110,7 @@ Product Details
     transition: all 0.3s ease;
     z-index: 1;
     border: 1px solid var(--fistudy-bdr-color);
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     text-transform: capitalize;
     letter-spacing: 0.1em;
 }

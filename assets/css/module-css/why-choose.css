@@ -347,7 +347,7 @@
     font-size: 20px;
     font-weight: 700;
     line-height: 20px !important;
-    font-family: var(--fistudy-font-two) !important;
+    font-family: var(--fistudy-font) !important;
     color: var(--fistudy-white);
     font-style: italic;
 }
@@ -356,7 +356,7 @@
     font-size: 20px;
     font-weight: 700;
     line-height: 20px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-white);
     font-style: italic;
 }
@@ -1136,7 +1136,7 @@
     font-size: 18px;
     color: var(--fistudy-white);
     font-style: italic;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     line-height: 24px;
     margin-top: 15px;
 }

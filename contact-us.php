@@ -15,13 +15,12 @@
 
     <?php include 'php/preloader.php'; ?>
 
+    <?php include 'php/toast.php'; ?>
+
     <div class="page-wrapper">
         <div class="row">
-            <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div>
 
-            <div class="col-lg-80">
+            <div>
                 <?php include 'php/header.php'; ?>
 
                 <!--Contact Two Start-->
@@ -84,54 +83,50 @@
                                             Hear from You
                                         </h2>
                                     </div>
-                                    <form class="contact-form-validated contact-three__form"
-                                        action="https://weblayout.unicktheme.com/fistudy/main-html/assets/inc/sendemail.php"
-                                        method="post" novalidate="novalidate">
+                                    <form id="contactForm" class="contact-form-validated contact-three__form" novalidate>
                                         <div class="row">
                                             <div class="col-xl-6 col-lg-6">
-                                                <h4 class="contact-three__input-title">Full Name</h4>
+                                                <h4 class="contact-three__input-title">Full Name *</h4>
                                                 <div class="contact-three__input-box">
-                                                    <input type="text" name="name" placeholder="Jhon Doe" required="">
+                                                    <input type="text" name="name" placeholder="John Doe" required>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6">
                                                 <h4 class="contact-three__input-title">Email Address *</h4>
                                                 <div class="contact-three__input-box">
-                                                    <input type="email" name="email" placeholder="jhon@doman.com"
-                                                        required="">
+                                                    <input type="email" name="email" placeholder="john@domain.com" required>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
                                                 <h4 class="contact-three__input-title">Subject *</h4>
                                                 <div class="contact-three__input-box">
-                                                    <input type="text" name="Phone"
-                                                        placeholder="write about your enquiry" required="">
+                                                    <input type="text" name="subject" placeholder="Write about your enquiry" required>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
                                                 <h4 class="contact-three__input-title">Purpose *</h4>
                                                 <div class="contact-three__input-box">
-                                                   <select name="purpose" id="purpose">
-                                                    <option value="">Select</option>
-                                                    <option value="Enquiry">Enquiry</option>
-                                                    <option value="Feedback">Feedback</option>
-                                                   </select>
+                                                    <select name="purpose" required>
+                                                        <option value="">Select</option>
+                                                        <option value="Enquiry">Enquiry</option>
+                                                        <option value="Feedback">Feedback</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
                                                 <h4 class="contact-three__input-title">Message *</h4>
                                                 <div class="contact-three__input-box text-message-box">
-                                                    <textarea name="message"
-                                                        placeholder="Write Your Message"></textarea>
+                                                    <textarea name="message" placeholder="Write Your Message" required></textarea>
                                                 </div>
                                                 <div class="contact-three__btn-box">
-                                                    <button type="submit"
-                                                        class="thm-btn-two contact-three__btn"><span>Submit</span><i
-                                                            class="icon-angles-right"></i></button>
+                                                    <button type="submit" id="formBtn" class="thm-btn-two contact-three__btn">
+                                                        <span>Submit</span><i class="icon-angles-right"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
+
                                     <div class="result"></div>
                                 </div>
                             </div>
@@ -152,7 +147,9 @@
 
     <?php include 'php/scripts.php'; ?>
 
+    <?php include 'php/config-js.php'; ?>
 
+    <script src="assets/js/module/contact-us.js"></script>
 
 </body>
 

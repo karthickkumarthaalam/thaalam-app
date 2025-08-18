@@ -127,10 +127,10 @@
     line-height: 43px;
     font-weight: 600;
     color: var(--fistudy-white);
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     counter-increment: count;
-    content: "0"counter(count);
+    content: "0" counter(count);
 }
 
 .category-one__count-content {
@@ -154,7 +154,7 @@
 .category-one__count-content p {
     font-size: 20px;
     line-height: 20px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-white);
     font-weight: 300;
@@ -252,7 +252,7 @@
 .category-one__hover-content p {
     font-size: 20px;
     line-height: 20px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-gray);
     font-weight: 300;
@@ -331,7 +331,7 @@
     font-size: 30px;
     font-weight: 500;
     line-height: 40px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-white);
 }
@@ -403,7 +403,7 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 26px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-base);
     font-style: italic;
 }

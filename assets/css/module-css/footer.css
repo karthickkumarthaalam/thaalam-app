@@ -551,7 +551,7 @@
     color: var(--fistudy-white);
     font-weight: 500;
     line-height: 24px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     margin-bottom: 12px;
 }
 
@@ -693,7 +693,11 @@
 
 
 
-
+@media (max-width: 679px) {
+    .site-footer__logo img {
+        width: 120px;
+    }
+}
 
 
 

@@ -93,7 +93,7 @@
     font-weight: 500;
     line-height: 20px;
     color: var(--fistudy-black);
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     -webkit-transition: all 500ms ease;
     transition: all 500ms ease;
@@ -338,7 +338,7 @@
     font-weight: 500;
     line-height: 20px;
     color: var(--fistudy-black);
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     -webkit-transition: all 500ms ease;
     transition: all 500ms ease;
@@ -511,7 +511,7 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 24px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-black);
 }
@@ -590,7 +590,7 @@
     font-size: 20px;
     font-weight: 500;
     line-height: 30px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-black);
     border-bottom: 1px solid var(--fistudy-bdr-color);
@@ -1355,7 +1355,7 @@
     gap: 6px;
     font-size: 12px;
     font-weight: 500;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
 }
 
@@ -1688,7 +1688,7 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 24px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-black);
 }

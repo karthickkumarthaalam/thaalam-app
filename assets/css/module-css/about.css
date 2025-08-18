@@ -126,7 +126,7 @@
 }
 
 .about-one__awards-count-box h3 {
-    font-family: var(--fistudy-font-two) !important;
+    font-family: var(--fistudy-font) !important;
     font-size: 48px;
     font-weight: 700;
     font-style: italic;
@@ -134,7 +134,7 @@
 }
 
 .about-one__awards-count-box span {
-    font-family: var(--fistudy-font-two) !important;
+    font-family: var(--fistudy-font) !important;
     font-size: 48px;
     font-weight: 700;
     font-style: italic;
@@ -146,7 +146,7 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 14px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-base);
     margin-top: 2px;
@@ -217,20 +217,20 @@
     font-size: 24px;
     font-weight: 600;
     line-height: 24px !important;
-    font-family: var(--fistudy-font-two) !important;
+    font-family: var(--fistudy-font) !important;
 }
 
 .about-one__experience-count span {
     font-size: 24px;
     font-weight: 600;
     line-height: 24px !important;
-    font-family: var(--fistudy-font-two) !important;
+    font-family: var(--fistudy-font) !important;
     color: var(--fistudy-black);
 }
 
 .about-one__experience-count>p {
     font-weight: 600;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-black);
     text-transform: capitalize;
     position: relative;
@@ -242,7 +242,7 @@
 
 .about-one__experience-count-box>p {
     font-weight: 600;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-black);
     text-transform: lowercase;
     font-size: 16px;
@@ -357,7 +357,7 @@
     font-size: 24px;
     font-weight: 600;
     line-height: 34px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     text-transform: capitalize;
     font-style: italic;
 }
@@ -380,7 +380,7 @@
     font-size: 32px;
     font-weight: 600;
     line-height: 32px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: #FFC224;
     -webkit-text-stroke: 1px var(--fistudy-black);
 }
@@ -579,7 +579,7 @@
     font-size: 18px;
     font-weight: 600;
     line-height: 28px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-white);
     border-bottom: 1px dashed var(--fistudy-bdr-color);
     padding-bottom: 7px;
@@ -741,7 +741,7 @@
     font-size: 18px;
     font-weight: 600;
     line-height: 28px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     margin-bottom: 9px;
 }
 
@@ -995,20 +995,20 @@
     font-size: 24px;
     font-weight: 600;
     line-height: 24px !important;
-    font-family: var(--fistudy-font-two) !important;
+    font-family: var(--fistudy-font) !important;
 }
 
 .about-three__experience-count span {
     font-size: 24px;
     font-weight: 600;
     line-height: 24px !important;
-    font-family: var(--fistudy-font-two) !important;
+    font-family: var(--fistudy-font) !important;
     color: var(--fistudy-base);
 }
 
 .about-three__experience-count>p {
     font-weight: 600;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-black);
     text-transform: capitalize;
     position: relative;
@@ -1020,7 +1020,7 @@
 
 .about-three__experience-count-box>p {
     font-weight: 600;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     color: var(--fistudy-black);
     text-transform: lowercase;
     font-size: 16px;
@@ -1188,7 +1188,7 @@
 .about-three__mission-vission-title {
     font-size: 18px;
     font-weight: 600;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     line-height: 28px;
     margin-bottom: 7px;
 }

@@ -17,11 +17,8 @@
 
     <div class="page-wrapper">
         <div class="row">
-            <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div>
 
-            <div class="col-lg-80">
+            <div>
                 <?php include 'php/header.php'; ?>
                 <!--Blog Page Start-->
                 <section class="blog-page" style="background-image: 

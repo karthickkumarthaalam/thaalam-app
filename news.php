@@ -17,11 +17,7 @@
 
     <div class="page-wrapper">
         <div class="row">
-            <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div>
-
-            <div class="col-lg-80">
+            <div>
                 <?php include 'php/header.php'; ?>
 
                 <!--Course List Start-->
@@ -44,7 +40,7 @@
                                             <div class="course-list__doller-and-heart">
                                                 <div class="course-list__doller">
                                                     <p>Event</p>
-                                                </div>                                               
+                                                </div>
                                             </div>
                                             <h3 class="course-list__title"><a href="news-details.php">Upcoming Jazz
                                                     Night Announced</a></h3>
@@ -71,7 +67,7 @@
                                                         <i class="icon-angles-right"></i>
                                                     </a>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -114,7 +110,7 @@
                                                         <i class="icon-angles-right"></i>
                                                     </a>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>

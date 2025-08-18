@@ -43,7 +43,7 @@
     color: rgba(var(--fistudy-white-rgb), .40);
     font-weight: 700;
     text-transform: uppercase;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
 }
 
 .main-slider__social a:hover {
@@ -165,7 +165,7 @@
     font-weight: 600;
     font-style: italic;
     line-height: 24px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
 }
 
 .main-slider__title {

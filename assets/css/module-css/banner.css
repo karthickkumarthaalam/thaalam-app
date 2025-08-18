@@ -146,7 +146,7 @@
   color: var(--fistudy-black);
   font-weight: 500;
   font-style: italic;
-  font-family: var(--fistudy-font-two);
+  font-family: var(--fistudy-font);
   border: 1px solid var(--fistudy-bdr-color);
   background-color: var(--fistudy-white);
   padding: 9px 20px 8px;
@@ -398,7 +398,7 @@
   font-weight: 700;
   line-height: 30px;
   font-style: italic;
-  font-family: var(--fistudy-font-two);
+  font-family: var(--fistudy-font);
 }
 
 .banner-one__student-trained-count-box-inner span {
@@ -407,7 +407,7 @@
   font-weight: 700;
   line-height: 30px;
   font-style: italic;
-  font-family: var(--fistudy-font-two);
+  font-family: var(--fistudy-font);
 }
 
 .banner-one__student-trained-text {
@@ -415,7 +415,7 @@
   font-weight: 500;
   color: var(--fistudy-black);
   font-style: italic;
-  font-family: var(--fistudy-font-two);
+  font-family: var(--fistudy-font);
 }
 
 .banner-one__category-search-box {
@@ -688,7 +688,7 @@
   font-weight: 600;
   font-style: italic;
   line-height: 30px;
-  font-family: var(--fistudy-font-two);
+  font-family: var(--fistudy-font);
 }
 
 .banner-two__title {
@@ -705,7 +705,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
-  font-family: var(--fistudy-font-two);
+  font-family: var(--fistudy-font);
   font-weight: 400;
   font-style: italic;
 }
@@ -804,7 +804,7 @@
   color: var(--fistudy-base);
   font-weight: 600;
   line-height: 24px !important;
-  font-family: var(--fistudy-font-two) !important;
+  font-family: var(--fistudy-font) !important;
 }
 
 .banner-two__success-student-count-box span {
@@ -812,7 +812,7 @@
   color: var(--fistudy-base);
   font-weight: 600;
   line-height: 24px;
-  font-family: var(--fistudy-font-two);
+  font-family: var(--fistudy-font);
 }
 
 .banner-two__success-student-text {
@@ -1225,20 +1225,20 @@
   color: var(--fistudy-base);
   font-weight: 600;
   line-height: 24px !important;
-  font-family: var(--fistudy-font-two) !important;
+  font-family: var(--fistudy-font) !important;
 }
 
 .banner-two__experience-count span {
   font-size: 24px;
   font-weight: 600;
   line-height: 24px !important;
-  font-family: var(--fistudy-font-two) !important;
+  font-family: var(--fistudy-font) !important;
   color: var(--fistudy-base);
 }
 
 .banner-two__experience-count>p {
   font-weight: 600;
-  font-family: var(--fistudy-font-two);
+  font-family: var(--fistudy-font);
   color: var(--fistudy-black);
   text-transform: capitalize;
   position: relative;
@@ -1250,7 +1250,7 @@
 
 .banner-two__experience-count-box>p {
   font-weight: 600;
-  font-family: var(--fistudy-font-two);
+  font-family: var(--fistudy-font);
   color: var(--fistudy-black);
   text-transform: lowercase;
   font-size: 16px;

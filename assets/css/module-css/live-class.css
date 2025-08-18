@@ -134,7 +134,7 @@
     color: var(--fistudy-black);
     font-weight: 500;
     font-style: italic;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     line-height: 14px;
 }
 
@@ -409,7 +409,9 @@
 
 .live-class-two__img-box {
     position: relative;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 40px;
     overflow: hidden;
 }
@@ -421,12 +423,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border: 3px solid var(--fistudy-base);
     border-radius: 40px;
 }
 
 .live-class-two__img-box img {
-    width: 100%;
+    width: 80%;
+    border: 3px solid var(--fistudy-base);
     border-radius: 40px;
 }
 

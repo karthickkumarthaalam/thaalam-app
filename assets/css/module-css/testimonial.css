@@ -158,7 +158,7 @@
 .testimonial-one__text {
     font-size: 24px;
     line-height: 36px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-black);
     text-transform: math-auto;
@@ -430,7 +430,7 @@
 .testimonial-two__text {
     font-size: 30px;
     line-height: 45px;
-    font-family: var(--fistudy-font-two);
+    font-family: var(--fistudy-font);
     font-style: italic;
     color: var(--fistudy-black);
     margin-top: 24px;

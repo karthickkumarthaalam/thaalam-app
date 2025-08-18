@@ -28,11 +28,7 @@
 
     <div class="page-wrapper">
         <div class="row">
-            <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div>
-
-            <div class="col-lg-80">
+            <div>
                 <?php include 'php/header.php'; ?>
 
                 <section class="marketting-bnr">
@@ -971,13 +967,13 @@
     <?php include 'php/scripts.php'; ?>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Tab functionality
             const tabBtns = document.querySelectorAll('.tab-btn');
             const tabPanes = document.querySelectorAll('.tab-pane');
 
             tabBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
+                btn.addEventListener('click', function() {
                     const tabId = this.getAttribute('data-tab');
 
                     // Update active tab button
@@ -994,7 +990,7 @@
             const accordionHeaders = document.querySelectorAll('.accordion-header');
 
             accordionHeaders.forEach(header => {
-                header.addEventListener('click', function () {
+                header.addEventListener('click', function() {
                     const item = this.parentElement;
                     const isActive = item.classList.contains('active');
 
