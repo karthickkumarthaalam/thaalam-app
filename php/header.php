@@ -142,10 +142,23 @@
 
         if (username && token) {
             menuHtml = `
-            <div class="main-menu-two__support-box user-dropdown">
+            <div class="main-menu-two__support-box user-dropdown desktop-menu">
                 <div class="thm-btn btn-clr2 user-greeting" id="userGreeting">
                     <div><i class="fas fa-users me-2"></i>${username}</div> 
                     <i class="dropdown-arrow">▼</i>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="my-account.php" class="dropdown-item">
+                        <i class="fas fa-user me-2"></i>Profile
+                    </a>
+                    <a href="javascript:;" id="logoutBtn" class="dropdown-item">
+                        <i class="fas fa-sign-out me-2"></i>Logout
+                    </a>
+                </div>
+            </div>
+             <div class="main-menu-two__support-box user-dropdown only-mob">
+                <div class="user-greetings" id="userGreeting">
+                    <div class="dropdown-arrow"><i class="fas fa-users-crown"></i></div> 
                 </div>
                 <div class="dropdown-menu">
                     <a href="my-account.php" class="dropdown-item">
@@ -171,8 +184,8 @@
                     </a>
                 </div>
             </div>
-            <div class="main-menu__btn-box-2 only-mob">
-                <a href="login.php" class="thm-btn">
+            <div class="main-menu__btn-box-2 only-mob" >
+                <a href="login.php" class="thm-btn" >
                     <i class="fas fa-arrow-right"></i>Login
                 </a>
             </div>

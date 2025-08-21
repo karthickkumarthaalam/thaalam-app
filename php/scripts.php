@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/jarallax.min.js"></script>

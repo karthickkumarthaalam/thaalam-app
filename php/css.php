@@ -11,6 +11,7 @@
  <link
      href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&amp;display=swap"
      rel="stylesheet">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 
  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />

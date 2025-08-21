@@ -3512,6 +3512,23 @@ ul {
   box-shadow: 0 0 12px rgba(213, 0, 0, 0.5);
 }
 
+
+@media (max-width: 768px) {
+  .user-greetings {
+    color: white;
+    border-radius: 6px;
+    padding: 6px 10px;
+    text-align: center;
+    background: #000;
+  }
+
+  .dropdown-arrow {
+    font-size: 13px;
+    transform: none;
+  }
+
+}
+
 /*--------------------------------------------------------------
 # End
 --------------------------------------------------------------*/

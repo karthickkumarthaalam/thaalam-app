@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(res => {
 
                 const data = res.data || [];
-                console.log("RJs Data:", data);
                 if (data && data.length > 0) {
                     data.forEach(rj => {
                         const rjItem = document.createElement("div");

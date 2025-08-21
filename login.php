@@ -55,9 +55,6 @@
 
                             <div class="form-options">
                                 <label class="remember-me">
-                                    <input type="checkbox" name="remember">
-                                    <span class="checkmark"></span>
-                                    Remember me
                                 </label>
                                 <a href="forget-password.php" class="forgot-password">Forgot password?</a>
                             </div>

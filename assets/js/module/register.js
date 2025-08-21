@@ -66,7 +66,6 @@ $(document).ready(function () {
 
     // Form validation
     $('#signupForm').on('submit', function (e) {
-        console.log("form submitting 1");
         e.preventDefault();
         let isValid = true;
 
@@ -98,7 +97,6 @@ $(document).ready(function () {
         });
 
         if (isValid) {
-            console.log("form Submitting 2");
             const payload = {
                 name: $('#name').val().trim(),
                 gender: $('input[name="gender"]:checked').val(),
