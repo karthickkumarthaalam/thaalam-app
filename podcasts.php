@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Podcasts - Thaalam Radio Station </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcats - Thaalam Radio Station</title>
 
-    <?php include 'php/css.php'; ?>
-    <link rel="stylesheet" href="assets/css/module-css/podcast.css">
+    <?php include 'php/css.php' ?>
 
+    <link rel="stylesheet" href="assets/css/module-css/podcast2.css">
 </head>
 
 <body class="custom-cursor">
@@ -19,62 +19,44 @@
     <?php include 'php/toast.php'; ?>
 
     <div class="page-wrapper">
-        <div class="row">
-            <!-- <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div> -->
+        <?php include 'php/header.php'; ?>
 
-            <div>
-                <?php include 'php/header.php'; ?>
-                <section class="podcast-list">
-                    <div class="container">
-                        <div class="home-page__header podcast-header">
-                            <h2 class="home-page__title">Thaalam Podcasts</h2>
-                            <p class="home-page__subtitle">Where Every Beat Tells a Story</p>
-                        </div>
-                        <div class="home-page__search">
-                            <input type="text" placeholder="Search what you want...">
-                            <button class="home-page__search-btn">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-4.png');background-size: contain;">
+        <div class="home-page__header podcast-header">
+            <h2 class=" home-page__title">Thaalam <span style="color: #000">Podcasts</span></h2>
+            <p class="home-page__subtitle">Where Every Beat Tells a Story</p>
+        </div>
+        <div class="row" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg'); ">>
+            <section class="container details-right">
 
-
-                                    <!-- Podcast Single Start -->
-                                    <div id="podcast-list"></div>
-
-                                    <!-- Podcast Single End -->
-
-
-                                    <div id="pagination" class="blog-list__pagination"></div>
-
-                                </div>
-                            </div>
-                        </div>
+                <div class="search-bar">
+                    <div class="home-page__search podcast-search">
+                        <input type="text" placeholder="Search stories, topics, voices..." />
+                        <button class="home-page__search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
-                </section>
+                </div>
+                <div class="podcast-listing">
+                    <div id="podcast-list">
+                    </div>
+                </div>
 
-
-                <?php include 'php/footer.php'; ?>
-
-            </div>
+                <div id="pagination" class="blog-list__pagination"></div>
+            </section>
         </div>
 
-    </div><!-- /.page-wrapper -->
+        <?php include 'php/footer.php'; ?>
+    </div>
 
-    <?php include 'php/mob-nav.php'; ?>
+    <?php include 'php/mob-nav.php' ?>
 
-    <?php include 'php/config-js.php'; ?>
+    <?php include 'php/config-js.php' ?>
 
-    <?php include 'php/scripts.php'; ?>
+    <?php include 'php/scripts.php' ?>
 
     <script src="assets/js/module/podcast.js"></script>
-
 </body>
 
 </html>

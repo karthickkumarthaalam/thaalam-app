@@ -1,12 +1,11 @@
 const API_URL = `${window.API_BASE_URL}/podcasts`;
-const podcastsPerPage = 6;
+const podcastsPerPage = 10;
 let podcastData = [];
 let currentPage = 1;
 
 $(document).ready(function () {
     fetchAllPodcasts();
 
-    // Search listener
     $(document).on("keyup", ".podcast-search input", function () {
         const searchValue = $(this).val().trim().toLowerCase();
         if (searchValue === "") {
@@ -26,7 +25,6 @@ $(document).ready(function () {
         $("#pagination").html("");
     });
 
-    // Pagination click
     $(document).on("click", ".pg-pagination li.count a", function (e) {
         e.preventDefault();
         const page = parseInt($(this).text());
@@ -43,7 +41,15 @@ $(document).ready(function () {
         const totalPages = Math.ceil(podcastData.length / podcastsPerPage);
         if (currentPage < totalPages) changePage(currentPage + 1);
     });
+
+    $(document).on("click", ".podcast", function () {
+        const podcastId = $(this).data("id");
+        if (podcastId) {
+            window.location.href = `podcast-details.php?id=${podcastId}`;
+        }
+    });
 });
+
 
 function fetchAllPodcasts() {
     $.get(`${API_URL}?status=active&limit=1000`, function (result) {
@@ -55,6 +61,7 @@ function fetchAllPodcasts() {
     });
 }
 
+
 function renderPaginatedPodcasts(page) {
     const startIndex = (page - 1) * podcastsPerPage;
     const endIndex = startIndex + podcastsPerPage;
@@ -62,10 +69,12 @@ function renderPaginatedPodcasts(page) {
     renderPodcasts(paginated);
 }
 
+
 function renderPodcasts(podcasts) {
     const $list = $("#podcast-list");
+
     if (podcasts.length === 0) {
-        $list.html(`<div class="no-results"><h3>No podcasts found</h3></div>`);
+        $list.html(`<div class="no-results> <h3> No Podcasts found</h3></div>`);
         $("#pagination").html("");
         return;
     }
@@ -78,60 +87,25 @@ function renderPodcasts(podcasts) {
             day: "numeric"
         });
 
-        return `
-                <div class="podcast-list__single">
-                    <div class="podcast-list__img-box">
-                        <div class="podcast-list__img">
-                        <img src="${podcast?.image_url
-                ? `${window.API_BASE_URL}/${podcast?.image_url.replace(/\\/g, "/")}`
-                : 'assets/img/common/podcast-details/podcast-banner.jpg'}" 
-                alt="${podcast.title}">                            
-                <div class="podcast-list__play-btn">
-                                <span class="fas fa-microphone"></span>
+        const podcastImage = podcast?.image_url ? `${window.API_BASE_URL}/${podcast.image_url.replace(/\\/g, "/")}` : "assets/img/common/podcast-details/podcast-banner.jpg";
+
+        return `<div class="podcast" data-id="${podcast.id}">
+                            <div class="podcast-image">
+                                <img src=${podcastImage} alt=${podcast.title}/>
                             </div>
-                        </div>
-                    </div>
-                    <div class="podcast-list__content">
-                        <div class="podcast-list__date-and-download">
-                            <div class="podcast-list__date"><p>${formattedDate}</p></div>
-                            <div class="podcast-list__download">
-                                <a href="${podcast.audio_url || '#'}"><span class="icon-download"></span></a>
-                            </div>
-                        </div>
-                        <h3 class="podcast-list__title">
-                            <a href="podcast-details.php?id=${podcast.id}">${podcast.title}</a>
-                        </h3>
-                        <div class="podcast-list__stats-box">
-                            <div class="podcast-list__duration">
-                                <span class="icon-clock"></span>
-                                <p>${podcast.duration || "00:00"}</p>
-                            </div>
-                            <p class="podcast-list__stats-text">(${podcast.listens || 0} listens)</p>
-                        </div>
-                        <ul class="podcast-list__meta list-unstyled">
-                            <li><p><span class="icon-microphone"></span>${podcast.rjname}</p></li>
-                            <li><p><span class="icon-headphones"></span>${podcast.content}</p></li>
-                            <li><p><span class="icon-share-from"></span>Share</p></li>
-                        </ul>
-                        <div class="podcast-list__btn-and-host-info">
-                            <div class="podcast-list__btn-box">
-                                <a href="podcast-details.php?id=${podcast.id}" class="thm-btn-two">
-                                    <span>Listen Now</span>
-                                    <i class="icon-angles-right"></i>
-                                </a>
-                            </div>
-                            <div class="podcast-list__host-box">
-                                <div class="podcast-list__host-img">
-                                    <img src="${podcast.host_image || 'assets/img/common/podcasts/rj1.jpg'}" alt="${podcast.rjname}">
+                            <div class="podcast-details">
+                                <div class="podcast-content">
+                                    <p class="released-stamp">${formattedDate}</p>
+                                    <h5 class="podcast-heading">${podcast.title}</h5>
+                                    <p class="podcast-desc">
+                                        ${podcast.description}
+                                    </p>
                                 </div>
-                                <div class="podcast-list__host-content">
-                                    <h4>${podcast.rjname}</h4>
+                                <div class="audio-details">
+                                    <p class="audio-duration">${podcast.duration}  MIN</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+                        </div>`;
     }).join("");
 
     $list.html(html);
@@ -156,4 +130,9 @@ function changePage(page) {
     currentPage = page;
     renderPaginatedPodcasts(page);
     renderPagination(Math.ceil(podcastData.length / podcastsPerPage), page);
+
+    const podcastList = document.querySelector(".page-wrapper");
+    if (podcastList) {
+        podcastList.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 }

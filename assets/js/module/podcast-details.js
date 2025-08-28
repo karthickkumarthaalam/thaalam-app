@@ -1,63 +1,55 @@
-// Audio Player Functionality
+
 document.addEventListener('DOMContentLoaded', function () {
     const player = document.getElementById('thaalam-player');
     const playPauseBtn = document.getElementById('thaalam-play-pause-btn');
     const progressBar = document.getElementById('thaalam-progress-bar');
-    const progressSlider = document.getElementById('thaalam-progress-slider');
+    const progressFill = document.getElementById('thaalam-progress-fill');
     const currentTimeDisplay = document.getElementById('thaalam-current-time');
     const durationDisplay = document.getElementById('thaalam-duration');
     const volumeBtn = document.getElementById('thaalam-volume-btn');
     const volumeSlider = document.getElementById('thaalam-volume-slider');
 
-    // Initialize player
-    player.volume = volumeSlider.value;
+    // Initialize volume
+    player.volume = parseFloat(volumeSlider.value || 1);
     updateVolumeIcon();
 
-    // Play/Pause functionality
+    // Play / Pause
     playPauseBtn.addEventListener('click', function () {
         if (player.paused) {
-            player.play()
-                .then(() => {
-                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                })
-                .catch(error => {
-                    console.error("Playback failed:", error);
-                });
+            player.play().then(() => {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }).catch(error => {
+                console.error("Playback failed:", error);
+            });
         } else {
             player.pause();
             playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
         }
     });
 
-    // Update progress bar
+    // Update progress
     player.addEventListener('timeupdate', function () {
         if (player.duration) {
             const percent = (player.currentTime / player.duration) * 100;
-            progressBar.style.width = percent + '%';
-            if (progressSlider) {
-                progressSlider.value = percent;
-            }
+            progressFill.style.width = percent + '%';
 
-            // Update time display
             currentTimeDisplay.textContent = formatTime(player.currentTime);
-            if (!isNaN(player.duration)) {
-                durationDisplay.textContent = formatTime(player.duration);
-            }
+            durationDisplay.textContent = formatTime(player.duration);
         }
     });
 
-    // Handle audio loaded metadata
+    // Load metadata (duration)
     player.addEventListener('loadedmetadata', function () {
         durationDisplay.textContent = formatTime(player.duration);
     });
 
-    // Seek functionality
-    if (progressSlider) {
-        progressSlider.addEventListener('input', function () {
-            const seekTime = (progressSlider.value / 100) * player.duration;
-            player.currentTime = seekTime;
-        });
-    }
+    // Seek on progress bar click
+    progressBar.addEventListener('click', function (e) {
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percent = clickX / rect.width;
+        player.currentTime = percent * player.duration;
+    });
 
     // Volume control
     volumeSlider.addEventListener('input', function () {
@@ -77,8 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function updateVolumeIcon() {
-        if (!volumeBtn) return;
-
         if (player.volume === 0) {
             volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
         } else if (player.volume < 0.5) {
@@ -88,245 +78,149 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Format time (seconds to MM:SS)
     function formatTime(seconds) {
         if (isNaN(seconds)) return "00:00";
         const minutes = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
-});
 
-// Podcast Details and Interactions
-document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".accordion-toggle").forEach(toggleBtn => {
+        const content = toggleBtn.nextElementSibling;
+        toggleBtn.addEventListener("click", () => {
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+    });
+
+
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const podcastId = urlParams.get("id");
     const memberId = localStorage.getItem("memberId");
-    const currentURL = window.location.href;
 
     if (!podcastId) {
-        console.error("No podcast ID found in URL");
         return;
     }
 
-    // Initialize elements
-    const likeBtn = document.querySelector("[data-reaction='like']");
-    const likeCountElem = document.getElementById("likeCount");
-    let isLiked = false;
+    loadPodCastData(podcastId);
+    fetchComments(podcastId);
+    fetchUserReaction(podcastId, memberId);
 
-    const commentBtn = document.querySelector(".reaction-btn i.fa-comment").parentElement;
-    const commentSection = document.querySelector(".podcast-details__comments");
+    const likeBtn = document.getElementById("like-btn");
+    const likeCountElem = document.getElementById("like-count");
 
-    const shareBtn = document.getElementById("shareButton");
-    const shareOptions = document.getElementById("shareOptions");
-
-    // UI Event Listeners
-    likeBtn?.addEventListener("click", handleLike);
-    commentBtn?.addEventListener("click", toggleCommentSection);
-    shareBtn?.addEventListener("click", toggleShareOptions);
-
-    // Load podcast data
-    loadPodcastData(podcastId);
-
-    function handleLike() {
-        if (!memberId) {
-            window.location.href = `/login.php?redirect_url=${encodeURIComponent(window.location.href)}`;
-            return;
-        }
-
-        if (likeBtn.classList.contains("active")) {
-            showToast("You've already liked this podcast", "info");
-            return;
-        }
-
-        const currentLikes = parseInt(likeCountElem.textContent) || 0;
-        likeCountElem.textContent = currentLikes + 1;
-        likeBtn.classList.add("active");
-
-        sendLikeToServer();
-    }
-
-    function sendLikeToServer() {
-        fetch(`${window.API_BASE_URL}/podcasts/reaction`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                podcast_id: podcastId,
-                member_id: memberId,
-                reaction: "like"
-            })
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status === "error" && data.already_liked) {
-                    likeBtn.classList.add("active");
-                    showToast("You've already liked this podcast", "info");
-                } else if (data.status === "success") {
-                    likeCountElem.textContent = data.like_count ||
-                        (parseInt(likeCountElem.textContent) || 0) + 1;
-                }
-            })
-            .catch(error => {
-                console.error("Error sending reaction:", error);
-                // Revert UI if API fails
-                const currentLikes = parseInt(likeCountElem.textContent) || 0;
-                likeCountElem.textContent = Math.max(0, currentLikes - 1);
-                likeBtn.classList.remove("active");
-                showToast("Failed to send like. Please try again.", "error");
-            });
-    }
-
-    function toggleCommentSection() {
-        commentSection.classList.toggle("active");
-        commentSection.style.display = commentSection.classList.contains("active") ? "block" : "none";
-
-        // Load comments if opening
-        if (commentSection.classList.contains("active")) {
-            fetchComments(podcastId);
-        }
-    }
-
-    function toggleShareOptions() {
-        shareOptions.classList.toggle("active");
-        shareOptions.style.display = shareOptions.classList.contains("active") ? "flex" : "none";
-    }
-
-    function loadPodcastData(podcastId) {
-        fetch(`${window.API_BASE_URL}/podcasts/${podcastId}`)
-            .then(res => {
-                if (!res.ok) throw new Error("Network response was not ok");
-                return res.json();
-            })
-            .then(result => {
-                const data = result.podcast;
-                if (!data) {
-                    throw new Error("Podcast data not found");
-                }
-
-                updatePodcastUI(result);
-                fetchRelatedPodcasts(data.rjname, data.id);
-                setupReactionHandlers(podcastId, memberId);
-            })
-            .catch(err => {
-                console.error("Error loading podcast:", err);
-                showErrorUI();
-            });
-    }
-
-    function updatePodcastUI(result) {
-        const data = result.podcast;
-
-        // Update main podcast image
-        const podcastImage = document.getElementById("podcastImage");
-        podcastImage.src = data.image_url
-            ? `${window.API_BASE_URL}/${data.image_url.replace(/\\/g, "/")}`
-            : "assets/img/common/podcast-details/podcast-banner.jpg";
-
-        // Basic info
-        document.getElementById("podcastTitle").textContent = data.title;
-        document.getElementById("rjName").textContent = data.rjname;
-        document.getElementById("publishedDate").textContent = new Date(data.date).toLocaleDateString('en-US', {
-            year: 'numeric', month: 'short', day: 'numeric'
-        });
-        document.getElementById("podcastDescription").textContent = data.description;
-
-        // Audio source
-        const audioSource = document.getElementById("audioSource");
-        if (data.audio_drive_file_link) {
-            audioSource.src = data.audio_drive_file_link;
-            document.getElementById("thaalam-player").load();
-        }
-
-        // Tags
-        const tagsContainer = document.getElementById("podcastTags");
-        tagsContainer.innerHTML = Array.isArray(data.tags)
-            ? data.tags.map(tag => `<span>${tag}</span>`).join(' ')
-            : '';
-
-        // Reactions and Comments count - UPDATED FOR YOUR API STRUCTURE
-        if (result.reaction) {
-            document.getElementById("likeCount").textContent = result.reaction.like || 0;
-        }
-
-        // Get comment count from PodcastComments array length
-        const commentCount = data.PodcastComments?.length || 0;
-        document.getElementById("commentCount").textContent = commentCount;
-
-        // Share links
-        const shareLink = `https://api.demoview.ch/share/podcast/${data.id}`;
-        document.getElementById("fb-share").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareLink)}`;
-        document.getElementById("x-share").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareLink)}&text=${encodeURIComponent(data.title)}`;
-        document.getElementById("whatsapp-share").href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareLink)}`;
-
-        window.currentShareLink = shareLink;
-    }
-
-    function showErrorUI() {
-        // Show error message to user
-        const container = document.querySelector(".blog-details__left");
-        if (container) {
-            container.innerHTML = `
-                <div class="error-message">
-                    <h3>Podcast Not Found</h3>
-                    <p>We couldn't find the podcast you're looking for.</p>
-                    <a href="/podcasts.php" class="btn">Browse Podcasts</a>
-                </div>
-            `;
-        }
+    if (likeBtn) {
+        likeBtn.addEventListener("click", () => handleLike(likeBtn, likeCountElem, podcastId, memberId));
     }
 });
 
-// Related Podcasts
-function fetchRelatedPodcasts(rjName, excludeId) {
-    if (!rjName) return;
 
-    const relatedRJElement = document.getElementById("relatedRJ");
-    if (relatedRJElement) {
-        relatedRJElement.textContent = `More by ${rjName}`;
-    }
-
-    fetch(`${window.API_BASE_URL}/podcasts?page=1&search=${encodeURIComponent(rjName)}`)
+function loadPodCastData(podcastId) {
+    fetch(`${window.API_BASE_URL}/podcasts/${podcastId}`)
         .then(res => {
-            if (!res.ok) throw new Error("Network response was not ok");
             return res.json();
         })
         .then(result => {
-            const container = document.querySelector(".sidebar__post-list");
+            const data = result.podcast;
+            if (!data) {
+                throw new Error("Podcast Data not found");
+            }
+
+            updatePodcastUI(result);
+            fetchRelatedPodcasts(data.rjname, data.id);
+        })
+        .catch(err => {
+            showErrorUI();
+        });
+}
+
+function updatePodcastUI(result) {
+
+    const data = result?.podcast;
+    const podcastImage = document.getElementById("podcastImage");
+    podcastImage.src = data.image_url
+        ? `${window.API_BASE_URL}/${data.image_url.replace(/\\/g, "/")}`
+        : "assets/img/common/podcast-details/podcast-banner.jpg";
+
+    const formattedDate = new Date(data.date).toLocaleDateString("en-US", {
+        year: 'numeric',
+        month: "short",
+        day: "numeric"
+    });
+
+    document.getElementById("podcastTitle").textContent = data.title;
+    document.getElementById("publishedDate").innerHTML = `${formattedDate} <span>${data.duration} MIN</span>`;
+
+    document.getElementById("podcastDescription").textContent = data.description;
+
+    const audioSource = document.getElementById("audioSource");
+    if (data.audio_drive_file_link) {
+        audioSource.src = data.audio_drive_file_link;
+        document.getElementById("thaalam-player").load();
+    }
+
+    //podcast information tab
+    document.getElementById("published-name").textContent = data.rjname;
+    document.getElementById("content-creator").textContent = data.content;
+    document.getElementById("published-date").textContent = formattedDate;
+    document.getElementById("duration").textContent = `${data.duration} MIN`;
+
+    const likeCountElem = document.getElementById("like-count");
+    if (likeCountElem) {
+        likeCountElem.textContent = result.reaction.like || 0;
+    }
+}
+
+$(document).on("click", ".podcast", function () {
+    const podcastId = $(this).data("id");
+    if (podcastId) {
+        window.location.href = `podcast-details.php?id=${podcastId}`;
+    }
+});
+
+function fetchRelatedPodcasts(name, excludedId) {
+    if (!name) return;
+
+    fetch(`${window.API_BASE_URL}/podcasts?page=1&search=${encodeURIComponent(name)}&limit=4`)
+        .then(res => res.json())
+        .then(result => {
+            const container = document.querySelector(".podcast-list");
             if (!container) return;
 
             container.innerHTML = "";
 
-
             if (result?.data?.data && result.data.data.length > 1) {
-                result.data.data.forEach(p => {
-                    if (p.id === parseInt(excludeId)) return;
+                result?.data?.data.forEach(p => {
+                    if (p.id === parseInt(excludedId)) return;
 
                     let formattedDate = new Date(p.date).toLocaleDateString('en-US', {
                         year: 'numeric', month: 'short', day: 'numeric'
                     });
 
-                    const listItem = document.createElement("li");
-                    listItem.className = "sidebar__post-list-item";
+                    const listItem = document.createElement("div");
+                    listItem.className = 'podcast';
+                    listItem.setAttribute("data-id", p.id);
                     listItem.innerHTML = `
-                        <div class="sidebar__post-content">
-                            <h4>
-                                <a href="podcast-details.php?id=${p.id}">${p.title}</a>
-                            </h4>
-                            <p>${formattedDate}</p>
+                        <div class="related-podcast-image">
+                            <img src="assets/img/common/podcast-details/podcast-banner.jpg" alt="">
+                        </div>
+                        <div class="podcast-details">
+                            <div class="podcast-content">
+                                <p class="released-stamp">${formattedDate}</p>
+                                <h5 class="podcast-heading">${p.title}</h5>
+                                <p class="podcast-desc">
+                                   ${p.description}
+                                </p>
+                            </div>
+                            <div class="audio-details">
+                                <p class="audio-duration">${p.duration} MIN</p>
+                            </div>
                         </div>
                     `;
                     container.appendChild(listItem);
                 });
             } else {
-                container.innerHTML = `<li class="no-related">No other podcasts by ${rjName} found.</li>`;
+                container.innerHTML = `<div class="no-related">No other podcasts by ${name} found.</div>`;
             }
         })
         .catch(error => {
@@ -338,24 +232,84 @@ function fetchRelatedPodcasts(rjName, excludeId) {
         });
 }
 
-// Comments System
+function showErrorUI() {
+    const container = document.querySelector(".podcast-details-page");
+
+    if (container) {
+        container.innerHTML = `
+             <div class="error-message">
+                    <h3>Podcast Not Found</h3>
+                    <p>We couldn't find the podcast you're looking for.</p>
+                    <a href="/podcasts.php" class="btn">Browse Podcasts</a>
+                </div>
+        `;
+    }
+}
+
+function submitComment(e) {
+    e.preventDefault();
+
+    const podcastId = new URLSearchParams(window.location.search).get("id");
+    const memberId = localStorage.getItem("memberId");
+    const commentInput = document.getElementById("commentInput");
+
+    if (!memberId) {
+        window.location.href = `/login.php?redirect_url=${encodeURIComponent(window.location.href)}`;
+        return;
+    }
+
+    const commentText = commentInput.value.trim();
+    if (!commentText) {
+        showToast("Please write a comment before submitting", "error");
+        return;
+    }
+
+    fetch(`${window.API_BASE_URL}/podcasts/comments`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                podcast_id: podcastId,
+                member_id: memberId,
+                comment: commentText
+            })
+        }
+    ).then(res => res.json())
+        .then(result => {
+            if (result.status === "success") {
+                commentInput.value = "";
+                fetchComments(podcastId);
+                showToast("Comment has been posted successfully, it will be reflected soon", "success");
+            } else {
+                throw new Error(result.message || "Failed to post comment");
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            showToast("Failed to post comment, please try again", "error");
+        });
+}
+
 const commentsList = document.getElementById("commentsList");
 let currentPage = 1;
 let totalPages = 1;
+let totalComments = 1;
+const COMMENTS_LIMIT = 10;
 
 function fetchComments(podcastId, page = 1) {
     if (!podcastId) return;
 
-    fetch(`${window.API_BASE_URL}/podcasts/${podcastId}/comments?page=${page}&limit=10`)
-        .then(res => {
-            if (!res.ok) throw new Error("Network response was not ok");
-            return res.json();
-        })
+    fetch(`${window.API_BASE_URL}/podcasts/${podcastId}/comments?page=${page}&limit=${COMMENTS_LIMIT}`)
+        .then(res => res.json())
         .then(result => {
-            const { data, pagination } = result.result;
+            const { data, pagination } = result.result || {};
             totalPages = pagination?.totalPages || 1;
             currentPage = pagination?.currentPage || 1;
-            renderComments(data);
+            totalComments = pagination?.totalRecords || 0;
+
+            renderComments(data || []);
             renderPagination(podcastId);
         })
         .catch(err => {
@@ -369,35 +323,26 @@ function renderComments(comments) {
 
     commentsList.innerHTML = "";
 
+    // Update comment count
+    const commentCountElem = document.getElementById("commentCount");
+    if (commentCountElem) commentCountElem.textContent = `(${totalComments})`;
+
     if (!comments.length) {
-        commentsList.innerHTML = `<p class="no-comments">No comments yet. Be the first to comment!</p>`;
+        commentsList.innerHTML = `<p class="no-comments"> No Comments yet. Be the first to comment! </p>`;
         return;
     }
 
-    document.getElementById("commentCount").textContent = comments.length;
-
     comments.forEach(comment => {
         const commentDiv = document.createElement("div");
-        commentDiv.classList.add("comment-item");
+        commentDiv.className = "comment";
 
-        const initials = comment.Member?.name?.charAt(0)?.toUpperCase() || "U";
         const fullComment = comment.comment || "";
         const shortComment = fullComment.length > 200 ? fullComment.slice(0, 200) + "..." : fullComment;
         const needsToggle = fullComment.length > 200;
 
         commentDiv.innerHTML = `
-            <div class="comment-avatar">${initials}</div>
-            <div class="comment-content">
-                <div class="comment-author">
-                    <strong>${comment.Member?.name || "User"}</strong>
-                    <span class="comment-date">• ${timeAgo(comment.created_at)}</span>
-                </div>
-                <div class="comment-bottom">
-                    <p class="comment-text">${shortComment}
-                        ${needsToggle ? `<span class="more-link">More</span>` : ""}
-                    </p>
-                </div>
-            </div>
+            <p class="comment-author">${comment.Member?.name || "Anonymous"} <span>• ${timeAgo(comment.created_at)}</span></p>
+            <p class="comment-text">${shortComment} ${needsToggle ? "<span class='more-link'>More</span>" : ""}</p>
         `;
 
         if (needsToggle) {
@@ -442,7 +387,6 @@ function renderPagination(podcastId) {
     const paginationContainer = document.createElement("div");
     paginationContainer.className = "comment-pagination";
 
-    // Clear existing pagination
     const existingPagination = commentsList.nextElementSibling;
     if (existingPagination && existingPagination.classList.contains("comment-pagination")) {
         existingPagination.remove();
@@ -452,17 +396,14 @@ function renderPagination(podcastId) {
 
     let buttons = "";
 
-    // Previous button
     if (currentPage > 1) {
         buttons += `<button class="page-btn prev" data-page="${currentPage - 1}">Previous</button>`;
     }
 
-    // Page buttons
     for (let i = 1; i <= totalPages; i++) {
         buttons += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
     }
 
-    // Next button
     if (currentPage < totalPages) {
         buttons += `<button class="page-btn next" data-page="${currentPage + 1}">Next</button>`;
     }
@@ -480,26 +421,23 @@ function renderPagination(podcastId) {
     });
 }
 
-// Comment Submission
-function submitComment(event) {
-    event.preventDefault();
 
-    const podcastId = new URLSearchParams(window.location.search).get("id");
-    const memberId = localStorage.getItem("memberId");
-    const commentInput = document.getElementById("commentInput");
-
+function handleLike(likeBtn, likeCountElem, podcastId, memberId) {
     if (!memberId) {
         window.location.href = `/login.php?redirect_url=${encodeURIComponent(window.location.href)}`;
         return;
     }
 
-    const commentText = commentInput.value.trim();
-    if (!commentText) {
-        alert("Please write a comment before submitting.");
+    if (likeBtn.classList.contains("active")) {
+        showToast("You have already liked this podcast", "warning");
         return;
     }
 
-    fetch(`${window.API_BASE_URL}/podcasts/comments`, {
+    sendLikeToServer(podcastId, memberId, likeBtn, likeCountElem);
+}
+
+function sendLikeToServer(podcastId, memberId, likeBtn, likeCountElem) {
+    fetch(`${window.API_BASE_URL}/podcasts/reaction`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -507,104 +445,83 @@ function submitComment(event) {
         body: JSON.stringify({
             podcast_id: podcastId,
             member_id: memberId,
-            comment: commentText
+            reaction: "like"
         })
-    })
-        .then(res => {
-            if (!res.ok) throw new Error("Network response was not ok");
-            return res.json();
-        })
+    }).then(res => res.json())
         .then(result => {
-            if (result.status === "success") {
-                commentInput.value = "";
-                fetchComments(podcastId);
-                showToast("Comment has been posted successfully, it will be reflected soon", "success");
-            } else {
-                throw new Error(result.message || "Failed to post comment");
+            if (result.status !== "success") {
+                throw new Error(result.message || "Failed to like podcast");
             }
-        })
-        .catch(error => {
-            console.error("Error posting comment:", error);
-            alert("Failed to post comment. Please try again.");
-        });
-}
 
-// Share Functionality
-function copyLink() {
-    if (!window.currentShareLink) {
-        alert("Share link not available");
-        return;
-    }
+            let likeCount = parseInt(likeCountElem.textContent, 10) || 0;
+            likeCountElem.textContent = likeCount + 1;
+            likeBtn.classList.add("active");
+            showToast("You liked this podcast!", "success");
 
-    navigator.clipboard.writeText(window.currentShareLink)
-        .then(() => {
-            alert("Link copied to clipboard!");
         })
         .catch(err => {
-            console.error("Failed to copy:", err);
-            alert("Failed to copy link. Please try again.");
+            console.error(err);
+            showToast("Failed to like podcast, please try again", "error");
         });
 }
 
-// Initialize reactions
-function setupReactionHandlers(podcastId, memberId) {
-    document.querySelectorAll(".reaction-btn:not([data-reaction='like'])").forEach(btn => {
-        const reactionType = btn.dataset.reaction;
-        if (!reactionType) return;
 
-        if (!btn.hasAttribute('data-listener-added')) {
-            btn.addEventListener("click", () => {
-                if (!memberId) {
-                    window.location.href = `/login.php?redirect_url=${encodeURIComponent(window.location.href)}`;
-                    return;
-                }
-
-                fetch(`${window.API_BASE_URL}/podcasts/reaction`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        podcast_id: podcastId,
-                        member_id: memberId,
-                        reaction: reactionType
-                    })
-                })
-                    .then(res => {
-                        if (!res.ok) throw new Error("Network response was not ok");
-                        return res.json();
-                    })
-                    .then(result => {
-                        if (result.status === "success") {
-                            refreshReactionCounts(podcastId);
-                            showToast("Reaction updated successfully", "success");
-                        } else {
-                            throw new Error(result.message || "Failed to update reaction");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error updating reaction:", error);
-                        showToast("Failed to update reaction", "error");
-                    });
-            });
-
-            btn.setAttribute('data-listener-added', 'true');
-        }
-    });
-}
-function refreshReactionCounts(podcastId) {
-    fetch(`${window.API_BASE_URL}/podcasts/${podcastId}/reactions`)
+function fetchUserReaction(podcast_id, member_id) {
+    fetch(`${window.API_BASE_URL}/podcasts/${podcast_id}/reaction/${member_id}`)
         .then(res => res.json())
-        .then(result => {
-            if (result.status === "success") {
-                document.querySelectorAll(".reaction-btn").forEach(btn => {
-                    const type = btn.dataset.reaction;
-                    const countSpan = btn.querySelector(".count");
-                    if (type && countSpan && result.reactions[type] !== undefined) {
-                        countSpan.textContent = result.reactions[type];
-                    }
-                });
+        .then(data => {
+            if (data.status === "success" && data.reaction === "like") {
+                const likeBtn = document.getElementById("like-btn");
+                if (likeBtn) likeBtn.classList.add("active");
             }
-        })
-        .catch(console.error);
+        });
 }
+
+const shareBtn = document.getElementById("share-btn");
+const shareModal = document.getElementById("share-modal");
+const closeShare = document.getElementById("close-share");
+const copyLink = document.getElementById("copy-link");
+const podcastLink = document.getElementById("podcast-link");
+
+// Open modal
+shareBtn.addEventListener("click", () => {
+    shareModal.style.display = "block";
+
+    // Get current podcast URL
+    const currentUrl = window.location.href;
+    podcastLink.value = currentUrl; // fill input field
+
+    // Update share links dynamically
+    document.getElementById("share-whatsapp").href =
+        `https://wa.me/?text=${encodeURIComponent(currentUrl)}`;
+    document.getElementById("share-facebook").href =
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+    document.getElementById("share-twitter").href =
+        `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}`;
+    document.getElementById("share-instagram").href =
+        `https://www.instagram.com/?url=${encodeURIComponent(currentUrl)}`;
+    document.getElementById("share-tiktok").href = `https://www.tiktok.com/share?url=${encodeURIComponent(currentUrl)}`;
+
+});
+
+// Close modal
+closeShare.addEventListener("click", () => {
+    shareModal.style.display = "none";
+});
+
+// Close modal if clicked outside
+window.addEventListener("click", (e) => {
+    if (e.target === shareModal) {
+        shareModal.style.display = "none";
+    }
+});
+
+// Copy link
+copyLink.addEventListener("click", () => {
+    navigator.clipboard.writeText(podcastLink.value).then(() => {
+        copyLink.innerHTML = `<i class="fas fa-check"></i>`;
+        setTimeout(() => {
+            copyLink.innerHTML = `<i class="fas fa-copy"></i>`;
+        }, 2000);
+    });
+});

@@ -1770,9 +1770,8 @@
 
 .blog-list__pagination .pg-pagination li:hover a,
 .blog-list__pagination .pg-pagination li.active a {
-    border: 1px solid var(--fistudy-base);
-    background-color: var(--fistudy-base);
-    color: var(--fistudy-white);
+    background-color: #000;
+    color: #fff
 }
 
 

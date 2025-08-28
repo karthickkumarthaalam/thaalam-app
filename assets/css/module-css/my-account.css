@@ -1,0 +1,569 @@
+:root {
+    --primary: #E53935;
+    /* Main Red */
+    --primary-light: #FFEBEE;
+    /* Lightest red background */
+    --primary-dark: #B71C1C;
+    /* Dark Red */
+
+    --secondary: #757575;
+    /* Neutral gray for text */
+    --success: #43A047;
+    /* Green success */
+    --danger: #D32F2F;
+    /* Strong red for errors */
+    --warning: #FB8C00;
+    /* Orange warning */
+    --info: #1E88E5;
+    /* Blue info */
+
+    --dark: #212121;
+    /* Dark text */
+    --light: #FAFAFA;
+    /* Page background */
+    --white: #FFFFFF;
+    /* Pure white */
+
+    --gray-100: #F5F5F5;
+    --gray-200: #EEEEEE;
+    --gray-300: #E0E0E0;
+    --gray-400: #BDBDBD;
+    --gray-500: #9E9E9E;
+    --gray-600: #757575;
+    --gray-700: #616161;
+    --gray-800: #424242;
+    --gray-900: #212121;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+    --border-radius-lg: 16px;
+
+    --transition: all 0.25s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F7F9FC;
+    color: var(--gray-800);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Account Tabs Container */
+.account-tabs {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    margin: 40px auto;
+    max-width: 90%;
+}
+
+/* User Info Bar */
+.user-info-bar {
+    padding: 30px;
+    background: transparent;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.user-info-bar::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgb(255, 241, 241);
+    border-radius: 50%;
+}
+
+.user-info-bar::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: -60px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 243, 243);
+    border-radius: 50%;
+}
+
+.user-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 1;
+}
+
+.user-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.member-id {
+    font-size: 16px;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.member-id::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--dark);
+    border-radius: 50%;
+}
+
+/* Tabs Header */
+.tabs-header {
+    display: flex;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 20px;
+}
+
+.tab {
+    padding: 18px 24px;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--gray-600);
+    border-bottom: 3px solid transparent;
+    transition: var(--transition);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.tab:hover {
+    color: #F90000;
+}
+
+.tab.active {
+    border-color: var(--primary);
+    color: #F90000;
+    background: var(--white);
+}
+
+.tab.signout {
+    margin-left: auto;
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.tab.signout:hover {
+    color: var(--danger);
+}
+
+.tab.signout a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Tabs Content */
+.tabs-content {
+    padding: 30px;
+}
+
+/* Tab Panels */
+.tab-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* Active Plan */
+.active-plan {
+    background: linear-gradient(135deg, var(--white) 0%, var(--primary-light) 100%);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+    position: relative;
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.active-plan:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.active-plan p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin: 0;
+}
+
+.active-plan .plan-name {
+    font-size: 24px;
+    color: #F90000;
+    font-weight: 700;
+    margin: 0;
+}
+
+.active-plan .price {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+.active-plan .expire {
+    font-size: 14px;
+    color: var(--gray-600);
+}
+
+.btn-upgrade {
+    align-self: flex-start;
+    padding: 12px 24px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.btn-upgrade:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Orders Section */
+.orders-section h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.orders-table th {
+    background: var(--gray-100);
+    text-align: left;
+    font-weight: 600;
+    color: var(--dark);
+    padding: 16px;
+    font-size: 14px;
+}
+
+.orders-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.orders-table tr:last-child td {
+    border-bottom: none;
+}
+
+.orders-table tr:hover td {
+    background: var(--primary-light);
+}
+
+.orders-table .paid {
+    color: var(--success);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.orders-table .paid::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+}
+
+/* Settings Section */
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.form-section {
+    background: var(--white);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.form-section:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.form-section h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--gray-700);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius-sm);
+    background: var(--white);
+    outline: none;
+    font-size: 15px;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+}
+
+.form-group i {
+    position: absolute;
+    left: 16px;
+    top: 42px;
+    color: var(--gray-500);
+}
+
+.otp-content {
+    display: none;
+
+}
+
+.btn-refund {
+    color: var(--info);
+    border: none;
+    background: transparent;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 14px 24px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Coupon Box */
+.coupon-box {
+    padding: 40px;
+    text-align: center;
+    border: 2px dashed var(--gray-300);
+    border-radius: var(--border-radius);
+    background: var(--white);
+    transition: var(--transition);
+}
+
+.coupon-box:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.coupon-box h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.coupon-box p {
+    color: var(--gray-600);
+    margin-bottom: 24px;
+    font-size: 15px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .tabs-header {
+        flex-wrap: wrap;
+    }
+
+    .tab {
+        flex: 1 0 auto;
+        text-align: center;
+        padding: 16px;
+        justify-content: center;
+    }
+
+    .tab.signout {
+        margin-left: 0;
+        flex-basis: 100%;
+        justify-content: center;
+        border-top: 1px solid var(--gray-200);
+        padding: 16px;
+    }
+
+    .user-info-bar {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .user-meta {
+        align-items: center;
+    }
+
+    .orders-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .tabs-content {
+        padding: 20px;
+    }
+
+    .active-plan {
+        padding: 20px;
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+
+    .coupon-box {
+        padding: 30px 20px;
+    }
+}

@@ -1,0 +1,917 @@
+/* ===== Page Wrapper & Container ===== */
+.podcast-details-page {
+    padding: 50px 0;
+    background: #fff;
+    /* White background for a clean look */
+    color: #111;
+    /* Default text color */
+}
+
+.podcast-details-page .container {
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.podcast-header {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 50px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    flex-wrap: wrap;
+}
+
+.podcast-image {
+    width: 100%;
+    max-width: 500px;
+    /* bigger image */
+    flex-shrink: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+.podcast-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.podcast-image:hover img {
+    transform: scale(1.04);
+}
+
+.podcast-header-details {
+    flex: 1;
+    max-width: 600px;
+}
+
+.podcast-header-details p {
+    font-size: 16px;
+    /* smaller text */
+    color: #F90000;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.podcast-header-details p span {
+    margin-left: 8px;
+    color: #111;
+    font-weight: 600;
+}
+
+.podcast-timings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.podcast-header-details h4 {
+    font-size: 1.5rem;
+    /* smaller title */
+    color: #111;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+
+.podcast-description p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #1d1d1d;
+    margin-bottom: 40px;
+}
+
+/* Podcast Features */
+
+.podcast-features {
+    display: flex;
+    gap: 15px;
+}
+
+.feature-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    /* black background */
+    color: #333;
+    /* white text */
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.feature-btn.active {
+    color: #f90000;
+}
+
+.feature-btn i {
+    font-size: 16px;
+}
+
+.feature-btn:hover {
+    background: #333;
+    color: #fff;
+    /* minimal red highlight */
+}
+
+#like-count {
+    font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .feature-btn {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+    .feature-btn i {
+        font-size: 14px;
+    }
+}
+
+
+/* podcast information */
+
+.podcast-informations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.info-title {
+    width: 100%;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #f90000;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+.podcast-informations .information {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 200px;
+}
+
+.podcast-informations .information i {
+    color: #111;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111;
+}
+
+/* Separator line between info items */
+.podcast-informations .information:not(:last-child) {
+    border-right: 1px solid #eee;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .podcast-informations {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .podcast-informations .information {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+    }
+}
+
+
+
+
+
+
+
+/* ===== Container ===== */
+
+#thaalam-audio-player audio {
+    display: none;
+    /* Hide default player */
+}
+
+/* ===== Track Section ===== */
+#thaalam-track-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+#thaalam-thumbnail img {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#thaalam-track-info h5 {
+    font-size: 1rem;
+    margin: 0;
+    color: #111;
+    font-weight: 600;
+}
+
+#thaalam-track-info span {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* ===== Controls Section ===== */
+#thaalam-audio-player {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Play/Pause Button */
+#thaalam-play-pause-btn {
+    width: 60px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f90000, #ff4e50);
+    color: #fff;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: none;
+    outline: none;
+}
+
+/* ===== Progress Bar ===== */
+
+.thaalam-prograss-controller {
+    display: flex;
+    width: 100%;
+}
+
+#thaalam-progress-wrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+}
+
+
+
+#thaalam-current-time,
+#thaalam-duration {
+    font-size: 0.8rem;
+    color: #555;
+    width: 40px;
+    text-align: center;
+}
+
+#thaalam-progress-bar {
+    flex: 1;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+#thaalam-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #f90000, #ff4e50);
+    border-radius: 6px;
+    transition: width 0.2s ease;
+}
+
+#thaalam-progress-slider {
+    width: 100%;
+    position: absolute;
+    top: -5px;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+#thaalam-progress-slider::-webkit-slider-thumb {
+    width: 14px;
+    height: 14px;
+    background: #f90000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Volume ===== */
+#thaalam-volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#thaalam-volume-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 18px;
+}
+
+#thaalam-volume-slider {
+    width: 80px;
+    accent-color: #555;
+    height: 4px;
+    border-radius: 4px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+
+    #thaalam-play-pause-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .thaalam-prograss-controller {
+        flex-direction: column;
+    }
+
+    #thaalam-audio-player {
+        padding: 15px;
+    }
+
+    #thaalam-audio-player {
+        gap: 12px;
+    }
+
+    #thaalam-progress-wrapper {
+        width: 100%;
+        gap: 5px;
+    }
+
+    #thaalam-volume-slider {
+        width: 30%;
+    }
+}
+
+
+
+/* related podcasts */
+
+.related-title {
+    margin: 25px 0;
+    width: 100%;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #f90000;
+}
+
+.related-podcast-image {
+    width: 200px;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.related-podcast-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.podcast {
+    display: flex;
+    gap: 5px;
+    padding: 8px;
+    border-radius: 14px;
+    background: #fff;
+    transition: all 0.2s ease;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.podcast:hover {
+    background: #fef7f7;
+    transform: translateX(4px)
+}
+
+.podcast button {
+    background: #F90000;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    display: none;
+}
+
+.podcast button:hover {
+    background: #d00;
+}
+
+.released-stamp {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #f90000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 4px;
+}
+
+
+.podcast-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111;
+    margin: 0 0 4px;
+}
+
+.podcast-desc {
+    font-size: 16px;
+    color: #444;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.audio-details {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.audio-details i {
+    color: #333;
+    cursor: pointer;
+}
+
+.audio-details i:hover {
+    color: #b00;
+}
+
+
+@media (max-width: 768px) {
+    .podcast {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 8px;
+    }
+
+    .related-podcast-image {
+        width: 90px;
+        /* smaller thumbnail */
+        height: 60px;
+        /* rectangle ratio */
+        border-radius: 8px;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+
+    .related-podcast-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .podcast-details {
+        flex: 1;
+    }
+
+    /* Hide unnecessary elements */
+    .released-stamp,
+    .podcast-desc,
+    .audio-details i {
+        display: none;
+    }
+
+
+    /* Title styling */
+    .podcast-heading {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /* max 2 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 16px;
+        font-weight: 600;
+        color: #111;
+        margin: 0 0 4px;
+        line-height: 1.2;
+    }
+
+
+    /* Show duration only */
+    .audio-details {
+        display: block;
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+    .audio-details p {
+        margin: 0;
+    }
+}
+
+
+
+
+
+
+/* ===== Podcast Comments ===== */
+.podcast-comments {
+    margin-top: 30px;
+    padding-top: 20px;
+}
+
+.comment-title {
+    color: #f90000;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Comment Input (Inline Row) */
+.add-comment {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.add-comment textarea {
+    flex: 1;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 10px 12px;
+    resize: none;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border 0.2s ease;
+    height: 42px;
+    /* keep height consistent with button */
+}
+
+.add-comment textarea:focus {
+    border-color: #f90000;
+    outline: none;
+}
+
+.add-comment .submit-comment {
+    background: #f90000;
+    /* solid red, no gradient */
+    border: none;
+    padding: 0 16px;
+    height: 42px;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.add-comment .submit-comment:hover {
+    background: #cc0000;
+    /* darker red on hover */
+}
+
+
+/* Accordion Button */
+.accordion-toggle {
+    max-width: 100%;
+    background: transparent;
+    color: #111;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+}
+
+.accordion-toggle i {
+    color: #f90000;
+}
+
+
+/* Accordion Content */
+.accordion-content {
+    display: none;
+    margin-top: 8px;
+}
+
+/* Individual Comment */
+.comment {
+    background: #fafafa;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.comment-author {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    color: #111;
+}
+
+.comment-author span {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: #777;
+    margin-left: 6px;
+}
+
+.comment-text {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+.comment-pagination {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.comment-pagination .page-btn {
+    padding: 8px 14px;
+    background: #fff;
+    color: #000;
+    border-radius: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.comment-pagination .page-btn.active {
+    background: #ff3333;
+    /* Red for active */
+    color: #fff;
+    font-weight: 600;
+}
+
+.comment-pagination .page-btn:hover:not(.active) {
+    background: #f0f0f0;
+    /* Light grey on hover */
+}
+
+.comment-pagination .page-btn.prev,
+.comment-pagination .page-btn.next {
+    font-weight: 500;
+    border-radius: 50px;
+}
+
+
+.more-link {
+    color: #ff3333;
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.more-link:hover {
+    text-decoration: underline;
+}
+
+
+.no-comments {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 14.5px;
+}
+
+/* Modal overlay */
+.share-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.10);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Content card */
+.share-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 25px;
+    width: 90%;
+    height: 250px;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-in-out;
+    position: relative;
+    margin: 15% auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #444;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #f44336;
+}
+
+/* Heading */
+.share-content h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+/* Share link input */
+.share-link-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#podcast-link {
+    flex: 1;
+    padding: 10px 12px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+}
+
+.copy-btn {
+    background: #000;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.copy-btn:hover {
+    opacity: 0.8;
+}
+
+/* Social icons */
+.share-options {
+    display: flex;
+    justify-content: space-around;
+    gap: 18px;
+}
+
+.share-options a {
+    font-size: 26px;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.share-options a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Brand colors */
+#share-whatsapp {
+    background: #25d366;
+}
+
+#share-facebook {
+    background: #1877f2;
+}
+
+#share-twitter {
+    background: #1e1e1f;
+}
+
+#share-instagram {
+    background: linear-gradient(45deg, #fd1d1d, #e1306c, #c13584, #833ab4, #5851db);
+}
+
+#share-tiktok {
+    background: #010101;
+    color: #fff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .share-modal {
+        padding: 15px;
+
+    }
+
+    .share-content {
+        position: relative;
+        margin: 100% auto;
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+    }
+}

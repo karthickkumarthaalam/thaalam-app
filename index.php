@@ -41,7 +41,7 @@
 
                     <div class="col-xl-12">
                         <div class="home-page__header">
-                            <h2 class="home-page__title">Thaalam Audio Library</h2>
+                            <h2 class="home-page__title">Thaalam <span style="color:#000">BroadCasting</span></h2>
                             <p class="home-page__subtitle">Live Streaming & Audio Collection</p>
                         </div>
 

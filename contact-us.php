@@ -23,51 +23,47 @@
             <div>
                 <?php include 'php/header.php'; ?>
 
-                <!--Contact Two Start-->
-                <section class="contact-two" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-4.png');background-size: contain;">
+                <section class="contact-three" style="background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            min-height: 200px;">
                     <div class="container">
-                        <ul class="row list-unstyled">
-                            <li class="col-xl-4 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
-                                <div class="contact-two__single">
-                                    <div class="contact-two__icon">
-                                        <img src="assets/img/common/contact/0.3.png" alt="">
-                                    </div>
+                        <div class="col-xl-12 col-lg-12 contact-sidebar">
+                            <div class="contact-box">
+                                <div class="contact-header">
+                                    <i class="fas fa-map-marker-alt"></i>
                                     <h3 class="contact-two__title">Our Address</h3>
+                                </div>
+                                <div class="contact-content">
                                     <p>Talacker 41, <br>8001 Zürich</p>
                                 </div>
-                            </li>
-                            <li class="col-xl-4 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
-                                <div class="contact-two__single">
-                                    <div class="contact-two__icon">
-                                        <img src="assets/img/common/contact/0.2.png" alt="">
-                                    </div>
-                                    <h3 class="contact-two__title">Contact Number</h3>
-                                    <p><a href="tel:+41792882271">+41 79 288 22 71</a></p>
-                                    <p><a href="tel:+41415627944">+41 41 562 79 44</a></p>
-                                </div>
-                            </li>
-                            <li class="col-xl-4 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="300ms">
-                                <div class="contact-two__single">
-                                    <div class="contact-two__icon">
-                                        <img src="assets/img/common/contact/0.1.png" alt="">
-                                    </div>
-                                    <h3 class="contact-two__title">Email Addresss</h3>
-                                    <p><a href="mailto:info@thaalam.ch">info@thaalam.ch</a></p>
-                                    <p><a href="mailto:marketing@thaalam.ch">marketing@thaalam.ch</a></p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-                <!--Contact Two End-->
+                            </div>
 
-                <!--Contact Three Start-->
-                <section class="contact-three" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-3.png');background-size: contain;">
-                    <div class="container">
+                            <div class="contact-box">
+                                <div class="contact-header">
+                                    <i class="fas fa-phone"></i>
+                                    <h3 class="contact-two__title">Contact Number</h3>
+                                </div>
+                                <div class="contact-content">
+
+                                    <p><a href="tel:+41792882271" style="color: #333">+41 79 288 22 71</a></p>
+                                    <p><a href="tel:+41415627944" style="color: #333">+41 41 562 79 44</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-box">
+                                <div class="contact-header">
+                                    <i class="fas fa-envelope"></i>
+                                    <h3 class="contact-two__title">Email Address</h3>
+                                </div>
+                                <div class="contact-content">
+                                    <p><a href="mailto:info@thaalam.ch" style="color: #333">info@thaalam.ch</a></p>
+                                    <p><a href="mailto:marketing@thaalam.ch" style="color: #333">marketing@thaalam.ch</a></p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-xl-12 col-lg-12">
                                 <div class="contact-three__right">
@@ -83,53 +79,116 @@
                                             Hear from You
                                         </h2>
                                     </div>
-                                    <form id="contactForm" class="contact-form-validated contact-three__form" novalidate>
-                                        <div class="row">
-                                            <div class="col-xl-6 col-lg-6">
-                                                <h4 class="contact-three__input-title">Full Name *</h4>
-                                                <div class="contact-three__input-box">
-                                                    <input type="text" name="name" placeholder="John Doe" required>
+                                    <div class="tab-buttons ">
+                                        <button class="tab-btn active" data-target="#feedback">Feedback</button>
+                                        <button class="tab-btn" data-target="#advertisement">Advertisement</button>
+                                    </div>
+
+                                    <div class="tab-content contact-us_container">
+                                        <div id="feedback" class="tab-pane active wow fadeInUp">
+                                            <form id="contactForm" class="contact-form-validated contact-three__form" novalidate>
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <h4 class="contact-three__input-title">Full Name *</h4>
+                                                        <div class="contact-three__input-box">
+                                                            <input type="text" name="name" placeholder="John Doe" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <h4 class="contact-three__input-title">Email Address *</h4>
+                                                        <div class="contact-three__input-box">
+                                                            <input type="email" name="email" placeholder="john@domain.com" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <h4 class="contact-three__input-title">Subject *</h4>
+                                                        <div class="contact-three__input-box">
+                                                            <input type="text" name="subject" placeholder="Write about your enquiry" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <h4 class="contact-three__input-title">Purpose *</h4>
+                                                        <div class="contact-three__input-box">
+                                                            <select name="purpose" required>
+                                                                <option value="">Select</option>
+                                                                <option value="Enquiry">Enquiry</option>
+                                                                <option value="Feedback">Feedback</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-12">
+                                                        <h4 class="contact-three__input-title">Message *</h4>
+                                                        <div class="contact-three__input-box text-message-box">
+                                                            <textarea name="message" placeholder="Write Your Message" required></textarea>
+                                                        </div>
+                                                        <div class="contact-three__btn-box">
+                                                            <button type="submit" id="formBtn" class="thm-btn-two contact-three__btn">
+                                                                <span>Submit</span><i class="icon-angles-right"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6">
-                                                <h4 class="contact-three__input-title">Email Address *</h4>
-                                                <div class="contact-three__input-box">
-                                                    <input type="email" name="email" placeholder="john@domain.com" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <h4 class="contact-three__input-title">Subject *</h4>
-                                                <div class="contact-three__input-box">
-                                                    <input type="text" name="subject" placeholder="Write about your enquiry" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <h4 class="contact-three__input-title">Purpose *</h4>
-                                                <div class="contact-three__input-box">
-                                                    <select name="purpose" required>
-                                                        <option value="">Select</option>
-                                                        <option value="Enquiry">Enquiry</option>
-                                                        <option value="Feedback">Feedback</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-12">
-                                                <h4 class="contact-three__input-title">Message *</h4>
-                                                <div class="contact-three__input-box text-message-box">
-                                                    <textarea name="message" placeholder="Write Your Message" required></textarea>
-                                                </div>
-                                                <div class="contact-three__btn-box">
-                                                    <button type="submit" id="formBtn" class="thm-btn-two contact-three__btn">
-                                                        <span>Submit</span><i class="icon-angles-right"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
-                                    </form>
+
+                                        <div id="advertisement" class="tab-pane  wow fadeInUp">
+                                            <form id="advertisementForm" class="contact-three_from" novalidate>
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <h4 class="contact-three__input-title">Company Name *</h4>
+                                                        <div class="contact-three__input-box">
+                                                            <input type="text" name="company_name" placeholder="Company Name" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <h4 class="contact-three__input-title">Contact Person *</h4>
+                                                        <div class="contact-three__input-box">
+                                                            <input type="text" name="contact_person" placeholder="Contact Person" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <h4 class="contact-three__input-title">Email *</h4>
+                                                        <div class="contact-three__input-box">
+                                                            <input type="email" name="email" placeholder="john@domain.com" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-6 col-lg-6">
+                                                        <h4 class="contact-three__input-title">Phone *</h4>
+                                                        <div class="contact-three__input-box">
+                                                            <input type="text" name="phone" placeholder="+41 79 288 22 71" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-12 ">
+                                                        <h4 class="contact-three__input-title">Company website Address </h4>
+                                                        <div class="contact-three__input-box">
+                                                            <input type="text" name="site_address" placeholder="www.thaalam.ch">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-12">
+                                                        <h4 class="contact-three__input-title">Requirement *</h4>
+                                                        <div class="contact-three__input-box text-message-box">
+                                                            <textarea name="requirement" placeholder="Tell me about your requirement" required></textarea>
+                                                        </div>
+                                                        <div class="contact-three__btn-box">
+                                                            <button type="submit" id="advertiseBtn" class="thm-btn-two contact-three__btn">
+                                                                <span>Submit</span><i class="icon-angles-right"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
 
                                     <div class="result"></div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </section>

@@ -2,136 +2,137 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pricing - Thaalam Radio Station </title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing - Thaalam Radio Station </title>
 
-    <?php include 'php/css.php'; ?>
-    <link rel="stylesheet" href="assets/css/module-css/pricing.css">
+  <?php include 'php/css.php'; ?>
+  <link rel="stylesheet" href="assets/css/module-css/pricing.css">
 </head>
 
 <body class="custom-cursor">
-    <?php $pagename = 'pricing'; ?>
+  <?php $pagename = 'pricing'; ?>
 
-    <?php include 'php/toast.php'; ?>
+  <?php include 'php/toast.php'; ?>
 
-    <?php include 'php/preloader.php'; ?>
+  <?php include 'php/preloader.php'; ?>
 
-    <div class="page-wrapper">
-        <div class="row">
-            <div>
-                <?php include 'php/header.php'; ?>
+  <div class="page-wrapper">
+    <?php include 'php/header.php'; ?>
 
-                <!-- Pricing Accordion Section -->
-                <section class="pricing-accordion" style="background-image: 
+    <div class="row">
+      <div>
+
+        <!-- Pricing Accordion Section -->
+        <section class="pricing-accordion" style="background-image: 
         linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
         url('assets/img/home/pattern/banner-2.png');background-size: contain;">
-                    <div class="container">
-                        <h2 class="section-title">Choose Your Plan</h2>
-                        <p class="section-subtitle">Select the package that fits your needs</p>
-                        <div class="pricing-toggle">
-                            <button id="yearlyBtn" class="toggle-btn active" onclick="setBillingDuration(`yearly`)">
-                                Yearly
-                            </button>
-                            <button id="monthlyBtn" class="toggle-btn" onclick="setBillingDuration(`monthly`)">
-                                Monthly
-                            </button>
-                        </div>
-                        <div class="accordion">
-
-                        </div>
-                    </div>
-                </section>
-
-
-                <?php include 'php/footer.php'; ?>
+          <div class="pricing-container">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <p class="section-subtitle">Select the package that fits your needs</p>
+            <div class="pricing-toggle">
+              <button id="yearlyBtn" class="toggle-btn active" onclick="setBillingDuration(`yearly`)">
+                Yearly
+              </button>
+              <button id="monthlyBtn" class="toggle-btn" onclick="setBillingDuration(`monthly`)">
+                Monthly
+              </button>
+            </div>
+            <div class="accordion">
 
             </div>
-        </div>
+          </div>
+        </section>
 
-    </div><!-- /.page-wrapper -->
 
-    <?php include 'php/mob-nav.php'; ?>
+        <?php include 'php/footer.php'; ?>
 
-    <?php include 'php/config-js.php'; ?>
+      </div>
+    </div>
 
-    <?php include 'php/scripts.php'; ?>
+  </div><!-- /.page-wrapper -->
 
-    <script>
-        let items = [];
-        let selectedDuration = "yearly";
+  <?php include 'php/mob-nav.php'; ?>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            getPackage();
-        });
+  <?php include 'php/config-js.php'; ?>
 
-        function initAccordion() {
-            const accordionItems = document.querySelectorAll('.accordion-item');
+  <?php include 'php/scripts.php'; ?>
 
-            accordionItems.forEach(item => {
-                const header = item.querySelector('.accordion-header');
-                const content = item.querySelector('.accordion-content');
+  <script>
+    let items = [];
+    let selectedDuration = "yearly";
 
-                header.addEventListener('click', () => {
-                    // Close all others
-                    accordionItems.forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
+    document.addEventListener('DOMContentLoaded', function() {
+      getPackage();
+    });
 
-                    // Toggle current
-                    item.classList.toggle('active');
-                });
-            });
-        }
+    function initAccordion() {
+      const accordionItems = document.querySelectorAll('.accordion-item');
 
-        function setBillingDuration(duration) {
-            selectedDuration = duration;
+      accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        const content = item.querySelector('.accordion-content');
 
-            document.getElementById("yearlyBtn").classList.remove("active");
-            document.getElementById("monthlyBtn").classList.remove("active");
-
-            if (duration === "yearly") {
-                document.getElementById("yearlyBtn").classList.add("active");
-            } else {
-                document.getElementById("monthlyBtn").classList.add("active");
+        header.addEventListener('click', () => {
+          // Close all others
+          accordionItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
             }
-            getPackage();
-        }
+          });
 
-        function getPackage() {
-            const token = localStorage.getItem("token") || "";
-            const queryParams = new URLSearchParams({
-                page: 1,
-                limit: 50,
-                status: "active"
-            });
+          // Toggle current
+          item.classList.toggle('active');
+        });
+      });
+    }
 
-            fetch(`${window.API_BASE_URL}/package?${queryParams.toString()}`)
-                .then(res => res.json())
-                .then(response => {
-                    items = response.data || [];
-                    renderPackages();
-                })
-                .catch(err => console.error("Error loading packages", err));
-        }
+    function setBillingDuration(duration) {
+      selectedDuration = duration;
 
-        function renderPackages() {
-            const accordion = document.querySelector(".accordion");
-            accordion.innerHTML = "";
+      document.getElementById("yearlyBtn").classList.remove("active");
+      document.getElementById("monthlyBtn").classList.remove("active");
 
-            items.forEach((pkg, index) => {
-                let features = pkg.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join("");
+      if (duration === "yearly") {
+        document.getElementById("yearlyBtn").classList.add("active");
+      } else {
+        document.getElementById("monthlyBtn").classList.add("active");
+      }
+      getPackage();
+    }
 
-                let priceLabel = (selectedDuration === "yearly" && pkg.yearly_price) ?
-                    `<div class="yearly-price">
+    function getPackage() {
+      const token = localStorage.getItem("token") || "";
+      const queryParams = new URLSearchParams({
+        page: 1,
+        limit: 50,
+        status: "active"
+      });
+
+      fetch(`${window.API_BASE_URL}/package?${queryParams.toString()}`)
+        .then(res => res.json())
+        .then(response => {
+          items = response.data || [];
+          renderPackages();
+        })
+        .catch(err => console.error("Error loading packages", err));
+    }
+
+    function renderPackages() {
+      const accordion = document.querySelector(".accordion");
+      accordion.innerHTML = "";
+
+      items.forEach((pkg, index) => {
+        let features = pkg.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join("");
+
+        let priceLabel = (selectedDuration === "yearly" && pkg.yearly_price) ?
+          `<div class="yearly-price">
                         <span class="old-price">${pkg.symbol || "CHF"} ${pkg.price.toFixed(2)} / month</span>
                         <span>${pkg.symbol || "CHF"} ${pkg.yearly_price.toFixed(2)} / month</span>
                     </div>` :
-                    `<span>${pkg.symbol || "CHF"} ${pkg.price.toFixed(2)} / ${pkg.duration}</span>`;
+          `<span>${pkg.symbol || "CHF"} ${pkg.price.toFixed(2)} / ${pkg.duration}</span>`;
 
-                accordion.innerHTML += `
+        accordion.innerHTML += `
                 <div class="accordion-item ${index === 0 ? "active" : ""}">
                     <div class="accordion-header">
                         <div class="plan-icon desktop-menu"><i class="fas fa-music"></i></div>
@@ -150,29 +151,29 @@
                     </div>
                 </div>
             `;
-            });
+      });
 
-            initAccordion();
-        }
+      initAccordion();
+    }
 
-        async function buyPackage(packageId) {
-            const packageDetails = items[packageId];
-            const memberId = localStorage.getItem("memberId");
-            const token = localStorage.getItem("token");
+    async function buyPackage(packageId) {
+      const packageDetails = items[packageId];
+      const memberId = localStorage.getItem("memberId");
+      const token = localStorage.getItem("token");
 
-            const isYearly = selectedDuration === "yearly";
-            const unitPrice = isYearly ? packageDetails.yearly_price.toFixed(2) : packageDetails.price.toFixed(2);
-            const totalPrice = isYearly ? (packageDetails.yearly_price * 12).toFixed(2) : packageDetails.price;
-            const durationLabel = isYearly ? "per Year" : `per ${packageDetails.duration}`;
-            const totalLabel = isYearly ?
-                `<p style="color:#e53935; font-size:18px; margin-top:10px;">
+      const isYearly = selectedDuration === "yearly";
+      const unitPrice = isYearly ? packageDetails.yearly_price.toFixed(2) : packageDetails.price.toFixed(2);
+      const totalPrice = isYearly ? (packageDetails.yearly_price * 12).toFixed(2) : packageDetails.price;
+      const durationLabel = isYearly ? "per Year" : `per ${packageDetails.duration}`;
+      const totalLabel = isYearly ?
+        `<p style="color:#e53935; font-size:18px; margin-top:10px;">
                     <strong>Total:</strong> CHF ${totalPrice} / year
                </p>` :
-                "";
+        "";
 
-            const result = await Swal.fire({
-                title: '',
-                html: `
+      const result = await Swal.fire({
+        title: '',
+        html: `
     <div style="
       font-family: 'Inter', sans-serif;
       background: #fff;
@@ -239,43 +240,43 @@
       </div>
     </div>
   `,
-                showCancelButton: true,
-                confirmButtonText: "Continue Payment",
-                cancelButtonText: "Cancel Payment",
-                customClass: {
-                    confirmButton: 'swal2-confirm-custom',
-                    cancelButton: 'swal2-cancel-custom'
-                },
-                buttonsStyling: false,
-                width: 480,
-                padding: "1.5rem"
-            });
+        showCancelButton: true,
+        confirmButtonText: "Continue Payment",
+        cancelButtonText: "Cancel Payment",
+        customClass: {
+          confirmButton: 'swal2-confirm-custom',
+          cancelButton: 'swal2-cancel-custom'
+        },
+        buttonsStyling: false,
+        width: 480,
+        padding: "1.5rem"
+      });
 
-            const duration = selectedDuration === "yearly" ? "year" : "month";
+      const duration = selectedDuration === "yearly" ? "year" : "month";
 
-            if (result.isConfirmed) {
-                try {
-                    const paymentIntentRes = await fetch(`${window.API_BASE_URL}/payments/initiate`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify({
-                            member_id: memberId,
-                            package_id: packageDetails.id,
-                            currency: "chf",
-                            duration: duration
-                        })
-                    });
+      if (result.isConfirmed) {
+        try {
+          const paymentIntentRes = await fetch(`${window.API_BASE_URL}/payments/initiate`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              member_id: memberId,
+              package_id: packageDetails.id,
+              currency: "chf",
+              duration: duration
+            })
+          });
 
-                    const data = await paymentIntentRes.json();
+          const data = await paymentIntentRes.json();
 
-                    if (data.success) {
-                        window.location.href = data.session_url;
-                    } else {
-                        Swal.fire({
-                            html: `
+          if (data.success) {
+            window.location.href = data.session_url;
+          } else {
+            Swal.fire({
+              html: `
     <div style="
       text-align:center; 
       padding: 15px 10px;
@@ -300,20 +301,20 @@
       </p>
     </div>
   `,
-                            showConfirmButton: true,
-                            confirmButtonText: "Close",
-                            customClass: {
-                                popup: "swal2-popup-custom",
-                                confirmButton: "swal2-confirm-custom"
-                            },
-                            buttonsStyling: false
-                        });
+              showConfirmButton: true,
+              confirmButtonText: "Close",
+              customClass: {
+                popup: "swal2-popup-custom",
+                confirmButton: "swal2-confirm-custom"
+              },
+              buttonsStyling: false
+            });
 
-                    }
-                } catch (error) {
-                    console.error(error);
-                    Swal.fire({
-                        html: `
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            html: `
     <div style="
       text-align:center; 
       padding: 15px 10px;
@@ -338,19 +339,19 @@
       </p>
     </div>
   `,
-                        showConfirmButton: true,
-                        confirmButtonText: "Close",
-                        customClass: {
-                            popup: "swal2-popup-custom",
-                            confirmButton: "swal2-confirm-custom"
-                        },
-                        buttonsStyling: false
-                    });
+            showConfirmButton: true,
+            confirmButtonText: "Close",
+            customClass: {
+              popup: "swal2-popup-custom",
+              confirmButton: "swal2-confirm-custom"
+            },
+            buttonsStyling: false
+          });
 
-                }
-            }
         }
-    </script>
+      }
+    }
+  </script>
 </body>
 
 </html>
