@@ -20,9 +20,9 @@
             <div>
                 <?php include 'php/header.php'; ?>
 
-                <section class="team-page" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), 
-        url('assets/img/home/pattern/banner-4.png');background-size: contain;">
+                <section class="team-page" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg'); ">
                     <div class="container">
                         <div class="row" id="rj-list">
                         </div>

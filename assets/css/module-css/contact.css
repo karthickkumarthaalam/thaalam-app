@@ -369,6 +369,7 @@
 
 .contact-header i {
     font-size: 24px;
+    padding-top: 6px;
     color: #f90000;
 }
 
@@ -437,18 +438,22 @@
 @media (max-width:768px) {
     .contact-sidebar {
         flex-direction: column;
+        border: none;
     }
 
     .contact-box {
         width: 100%;
+        padding: 10px 20px;
+        margin: 0;
     }
 
     .contact-header i {
+        padding-top: 7px;
         font-size: 20px;
     }
 
     .contact-two__title {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .contact-content p {

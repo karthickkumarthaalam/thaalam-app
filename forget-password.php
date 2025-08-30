@@ -21,9 +21,9 @@
             <div>
                 <?php include 'php/header.php'; ?>
 
-                <section class="forgot-password-section" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
-        url('assets/img/home/pattern/banner-4.png');background-size: contain;">
+                <section class="forgot-password-section" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg');">
                     <div class="forgot-password-container">
                         <div class="forgot-password-header">
                             <h2>Reset Your Password</h2>

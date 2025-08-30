@@ -229,7 +229,6 @@ input:hover {
 
 .login-link {
     text-align: center;
-    margin-top: 1.5rem;
     font-size: 0.875rem;
     color: var(--text-light);
 }
@@ -248,6 +247,11 @@ input:hover {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+
+    .signup-section {
+        padding: 0;
+    }
+
     .signup-container {
         padding: 1.5rem;
     }

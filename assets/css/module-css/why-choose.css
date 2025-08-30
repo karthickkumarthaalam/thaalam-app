@@ -408,9 +408,6 @@
     display: block;
 }
 
-.why-choose-two__left .section-title-two__title span {
-    background-color: var(--fistudy-primary);
-}
 
 .why-choose-two__left-content-box {
     position: relative;

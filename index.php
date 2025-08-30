@@ -42,7 +42,7 @@
                     <div class="col-xl-12">
                         <div class="home-page__header">
                             <h2 class="home-page__title">Thaalam <span style="color:#000">BroadCasting</span></h2>
-                            <p class="home-page__subtitle">Live Streaming & Audio Collection</p>
+                            <p class="home-page__subtitle">Streaming & Audio</p>
                         </div>
 
                         <div class="home-page__filter">
@@ -56,14 +56,14 @@
                             <div class="home-page__categories">
                                 <ul class="list-unstyled nav" role="tablist">
                                     <li class="active nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#liveStream" role="tab">Live Stream</a>
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#liveStream" role="tab">Radio</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-bs-toggle="tab" href="#podcasts" role="tab">Podcasts</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="https://thaalamsummerfestival.com" target="_blank" rel="noopener">
-                                            Summer Festival
+                                            Event
                                         </a>
                                     </li>
                                 </ul>
@@ -75,9 +75,9 @@
 
                 <div class="tab-content" style="margin-bottom: 50px;">
                     <div class="tab-pane fade show active" id="liveStream" role="tabpanel">
-                        <section style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-4.png');background-size: contain;">
+                        <section style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg');">
                             <div class="container">
                                 <div class="row">
                                     <div class="audio-page__player">
@@ -94,7 +94,7 @@
                                             </div>
                                             <div class="audio-page__player-controls">
                                                 <button class="audio-page__play-btn" id="mainPlayBtn">
-                                                    <i class="fas fa-pause" id="mainPlayIcon"></i>
+                                                    <i class="fas fa-play" id="mainPlayIcon"></i>
                                                 </button>
                                                 <button class="audio-page__player-btn" id="volumeBtn">
                                                     <i class="fas fa-volume-up" id="volumeIcon"></i>
@@ -115,9 +115,9 @@
                     </div>
 
                     <div class="tab-pane fade" id="podcasts" role="tabpanel">
-                        <section class="live-class-two" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-4.png');background-size: contain;">
+                        <section class="live-class-two" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg');">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6">
@@ -129,7 +129,7 @@
                                                     </div>
                                                     <span class="section-title-two__tagline">Podcasts</span>
                                                 </div>
-                                                <h2 class="section-title-two__title title-animation">Discover Our Latest<br>
+                                                <h2 class="section-title-two__title title-animation">Discover Our Latest <br>
                                                     <span>Podcasts</span>
                                                 </h2>
                                             </div>

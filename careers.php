@@ -23,9 +23,9 @@
             <div>
                 <?php include 'php/header.php'; ?>
 
-                <section class="career-sec" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), 
-        url('assets/img/home/pattern/banner-4.png');background-size: contain;">
+                <section class="career-sec" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg');">
                     <div class="career-form-container container">
                         <h2 class="form-title"><i class="fas fa-microphone-alt"></i> Join Our Team</h2>
                         <p class="form-subtitle">Opportunity to work at Switzerland's first official Tamil radio station

@@ -24,9 +24,9 @@
             <div>
                 <?php include 'php/header.php'; ?>
 
-                <section class="login-section" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-2.png');background-size: contain;">
+                <section class="login-section" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg');">
                     <div class="login-container">
                         <div class="login-header">
                             <h2>Member Sign In</h2>

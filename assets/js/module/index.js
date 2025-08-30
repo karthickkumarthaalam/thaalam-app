@@ -1,32 +1,29 @@
 $(document).ready(function () {
-    const $carousel = $('.main-slider__carousel');
 
-    $.ajax({
-        url: `${window.API_BASE_URL}/banners?status=active`,
-        method: "GET",
-        success: function (response) {
-            const banners = response?.data?.data || [];
+    function updateCarousel(program) {
+        const $carousel = $('.main-slider__carousel');
 
-            if ($carousel.hasClass('owl-loaded')) {
-                $carousel.trigger('destroy.owl.carousel');
-                $carousel.removeClass('owl-loaded owl-hidden');
-                $carousel.find('.owl-stage-outer').children().unwrap();
-            }
+        // Destroy existing carousel instance if exists
+        if ($carousel.hasClass('owl-loaded')) {
+            $carousel.trigger('destroy.owl.carousel');
+            $carousel.removeClass('owl-loaded owl-hidden');
+            $carousel.find('.owl-stage-outer').children().unwrap();
+        }
 
-            $carousel.empty();
+        $carousel.empty();
 
-            banners.forEach(banner => {
-                const fixedPath = banner.website_image.replace(/\\/g, "/");
-                const slide = `
-                    <div class="item">
-                        <div class="main-slider__bg" 
-                             style="background-image: url(${window.API_BASE_URL}/${fixedPath})"></div>
-                    </div>
-                `;
-                $carousel.append(slide);
-            });
+        // Check if current program has an image
+        const programImage = program?.program_category?.image_url;
 
-            // Reinitialize carousel
+        if (programImage) {
+            const slide = `
+            <div class="item">
+                <div class="main-slider__bg" 
+                     style="background-image: url(${programImage})"></div>
+            </div>
+        `;
+            $carousel.append(slide);
+
             $carousel.owlCarousel({
                 items: 1,
                 loop: true,
@@ -35,11 +32,39 @@ $(document).ready(function () {
                 dots: true,
                 nav: false
             });
-        },
-        error: function () {
-            showToast('Failed to load banners', 'error');
+        } else {
+            // Fallback: load banners as before
+            $.ajax({
+                url: `${window.API_BASE_URL}/banners?status=active`,
+                method: "GET",
+                success: function (response) {
+                    const banners = response?.data?.data || [];
+                    banners.forEach(banner => {
+                        const fixedPath = banner.website_image.replace(/\\/g, "/");
+                        const slide = `
+                        <div class="item">
+                            <div class="main-slider__bg" 
+                                 style="background-image: url(${window.API_BASE_URL}/${fixedPath})"></div>
+                        </div>
+                    `;
+                        $carousel.append(slide);
+                    });
+
+                    $carousel.owlCarousel({
+                        items: 1,
+                        loop: true,
+                        autoplay: true,
+                        autoplayTimeout: 5000,
+                        dots: true,
+                        nav: false
+                    });
+                },
+                error: function () {
+                    showToast('Failed to load banners', 'error');
+                }
+            });
         }
-    });
+    }
 
     const $audio = $("#audioPlayer");
     const $playBtn = $("#mainPlayBtn");
@@ -51,9 +76,15 @@ $(document).ready(function () {
 
     let isMuted = false;
 
-    $audio[0].play().catch(function (err) {
-        console.log("Autoplay blocked by browser, will require user interaction:", err);
-    });
+    $audio[0].play()
+        .then(function () {
+            $playIcon.removeClass("fa-play").addClass("fa-pause");
+        })
+        .catch(function (err) {
+            console.log("Autoplay blocked by browser, will require user interaction:", err);
+            $playIcon.removeClass("fa-pause").addClass("fa-play");
+        });
+
 
     $playBtn.on("click", function () {
         if ($audio[0].paused) {
@@ -101,6 +132,8 @@ $(document).ready(function () {
                     return;
                 }
 
+                updateCarousel(program);
+
                 // Current program info
                 $('#programTitle').text(program?.program_category?.category);
                 $('#programArtist').text(program?.system_users?.name);
@@ -145,7 +178,7 @@ $(document).ready(function () {
     podcastList.empty();
 
     $.ajax({
-        url: `${window.API_BASE_URL}/podcasts?status=active&limit=2`,
+        url: `${window.API_BASE_URL}/podcasts?status=active&limit=4`,
         method: "GET",
         success: function (response) {
 
@@ -161,28 +194,9 @@ $(document).ready(function () {
                         <a href="podcast-details.php?id=${podcast.id}"  class="video-popup">
                             <div class="live-class-two__icon"></div>
                         </a>
-                        <div class="live-class-two__content">
-                            <ul class="live-class-two__content-meta-list list-unstyled">
-                                <li>
-                                    <div class="icon">
-                                        <span class="icon-microphone"></span>
-                                    </div>
-                                    <p>${podcast.rjname}</p>
-                                </li>
-                                <li>
-                                    <div class="icon">
-                                        <span class="icon-clock"></span>
-                                    </div>
-                                    <p>${new Date(podcast.date).toLocaleDateString()}</p>
-                                </li>
-                            </ul>
                             <h3 class="live-class-two__content-title">
                                 <a href="#">${podcast.title}</a>
                             </h3>
-                            <div class="live-class-two__tags">
-                                ${tagsHtml}
-                            </div>
-                        </div>
                     </li>
                 `;
                 podcastList.append(item);

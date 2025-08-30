@@ -356,14 +356,7 @@ ul {
 }
 
 .section-title-two__title span {
-  position: relative;
-  display: inline-block;
-  color: var(--fistudy-white);
-  font-size: 24px;
-  line-height: 28px;
-  padding: 6px 10px 6px;
-  border-radius: 21px;
-  background-color: var(--fistudy-base);
+  color: #f90000
 }
 
 .section-title-two__title .split-line {
@@ -1201,6 +1194,7 @@ ul {
 
 .stricky-header.main-menu {
   background-color: var(--fistudy-white);
+  padding: 6px;
 }
 
 .main-menu .main-menu__list,
@@ -3180,6 +3174,43 @@ ul {
   text-align: center;
 }
 
+.login-style {
+  position: relative;
+  color: #000;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  text-decoration: none;
+  padding-bottom: 4px;
+  transition: 500ms;
+}
+
+.login-style i {
+  padding-top: 3px;
+  padding-right: 8px;
+}
+
+.login-style:hover {
+  color: #f90000;
+}
+
+.login-style::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--fistudy-base);
+  transition: width 0.5s ease, right 0.3s ease;
+}
+
+.login-style:hover::after {
+  width: 100%;
+  right: 0;
+  /* keeps it aligned while animating */
+}
+
 /* .sidebar-menu a:hover,
                     .sidebar-menu a:focus {
                         background: linear-gradient(90deg, #fff 0%, #f9d3d3 100%);
@@ -3226,6 +3257,14 @@ ul {
 
   .mob-top2 {
     margin-top: 20px !important;
+  }
+}
+
+@media (max-width: 991px) {
+
+  .custom-cursor__cursor,
+  .custom-cursor__cursor-two {
+    display: none !important;
   }
 }
 

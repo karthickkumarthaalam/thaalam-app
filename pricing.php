@@ -24,9 +24,9 @@
       <div>
 
         <!-- Pricing Accordion Section -->
-        <section class="pricing-accordion" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-2.png');background-size: contain;">
+        <section class="pricing-accordion" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg'); min-height:75vh;">
           <div class="pricing-container">
             <h2 class="section-title">Choose Your Plan</h2>
             <p class="section-subtitle">Select the package that fits your needs</p>

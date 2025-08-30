@@ -21,9 +21,9 @@
                 <?php include 'php/header.php'; ?>
 
                 <!--Team Details Start-->
-                <section class="team-details" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-4.png');background-size: contain;">
+                <section class="team-details" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg'); ">
                     <div class="container">
                         <div class="row">
                             <div class="col-xl-5">

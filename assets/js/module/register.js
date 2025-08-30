@@ -78,7 +78,7 @@ $(document).ready(function () {
             if ($field.is('select') && $field.val() === '') {
                 $error.text('This field is required');
                 isValid = false;
-            } else if ($field.is(':radio') && !$('[name="' + $field.attr('name') + '"]:checked').length) {
+            } else if ($field.attr('id') === 'gender' && $field.val() === '') {
                 $error.text('Please select a gender');
                 isValid = false;
             } else if ($field.val().trim() === '') {
@@ -99,7 +99,7 @@ $(document).ready(function () {
         if (isValid) {
             const payload = {
                 name: $('#name').val().trim(),
-                gender: $('input[name="gender"]:checked').val(),
+                gender: $('#gender').val(),
                 country: $('#country').val(),
                 state: $('#state').val(),
                 city: $('#city').val(),

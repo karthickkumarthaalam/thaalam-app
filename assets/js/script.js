@@ -716,7 +716,7 @@
 
 
   // custom coursor
-  if ($(".custom-cursor").length) {
+  if ($(".custom-cursor").length && window.innerWidth > 991) {
 
     var cursor = document.querySelector('.custom-cursor__cursor');
     var cursorinner = document.querySelector('.custom-cursor__cursor-two');

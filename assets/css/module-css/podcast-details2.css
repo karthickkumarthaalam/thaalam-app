@@ -91,7 +91,6 @@
 
 .podcast-features {
     display: flex;
-    gap: 15px;
 }
 
 .feature-btn {
@@ -902,6 +901,11 @@
 }
 
 @media (max-width: 768px) {
+
+    #thaalam-volume-control {
+        display: none;
+    }
+
     .share-modal {
         padding: 15px;
 

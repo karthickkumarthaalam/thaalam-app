@@ -226,9 +226,6 @@
     display: block;
 }
 
-.live-class-two__left .section-title-two__title span {
-    background-color: var(--fistudy-primary);
-}
 
 .live-class-two__list {
     position: relative;
@@ -238,12 +235,12 @@
 .live-class-two__list>li {
     position: relative;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     gap: 35px;
 }
 
 .live-class-two__list>li+li {
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .live-class-two__icon {
@@ -255,7 +252,7 @@
     height: 60px;
     background-color: var(--fistudy-base);
     border-radius: 50%;
-    top: 13px;
+    top: 5px;
     -webkit-transition: all 500ms ease;
     transition: all 500ms ease;
 }

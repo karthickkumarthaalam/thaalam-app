@@ -197,12 +197,16 @@ function fetchRelatedPodcasts(name, excludedId) {
                         year: 'numeric', month: 'short', day: 'numeric'
                     });
 
+                    let imagePath = p.image_url
+                        ? `${window.API_BASE_URL}/${p.image_url.replace(/\\/g, "/")}`
+                        : "assets/img/common/podcast-details/podcast-banner.jpg";
+
                     const listItem = document.createElement("div");
                     listItem.className = 'podcast';
                     listItem.setAttribute("data-id", p.id);
                     listItem.innerHTML = `
                         <div class="related-podcast-image">
-                            <img src="assets/img/common/podcast-details/podcast-banner.jpg" alt="">
+                            <img src=${imagePath} alt=${p.title}>
                         </div>
                         <div class="podcast-details">
                             <div class="podcast-content">

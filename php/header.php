@@ -103,14 +103,14 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="https://thaalamsummerfestival.com/tickets" target="_blank">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-ticket-alt pe-2"></i>
                                         <p>Book Now</p>
                                     </div>
                                 </a>
-                            </li>
+                            </li> -->
 
                         </ul>
                     </div>
@@ -143,9 +143,8 @@
         if (username && token) {
             menuHtml = `
             <div class="main-menu-two__support-box user-dropdown desktop-menu">
-                <div class="thm-btn btn-clr2 user-greeting" id="userGreeting">
+                <div class="login-style" id="userGreeting">
                     <div><i class="fas fa-users me-2"></i>${username}</div> 
-                    <i class="dropdown-arrow">▼</i>
                 </div>
                 <div class="dropdown-menu">
                     <a href="my-account.php" class="dropdown-item">
@@ -173,20 +172,19 @@
         } else {
             menuHtml = `
             <div class="main-menu__btn-box-2  desktop-menu">
-                <a href="login.php" class="thm-btn">
-                    <i class="fas fa-arrow-right"></i>Login
+                <a href="login.php"  class="login-style">
+                    <i class="fas fa-sign-in"></i> Login
                 </a>
             </div>
             <div class="main-menu-two__support-box  desktop-menu">
-                <div class="main-menu__btn-box-2">
-                    <a href="register.php" class="thm-btn btn-clr2">
-                        <i class="fas fa-arrow-right"></i>Member SignUp
+                    <a href="register.php" class="login-style">
+                    <i class="fas fa-user-tie"></i>
+                    Become a Member
                     </a>
-                </div>
             </div>
             <div class="main-menu__btn-box-2 only-mob" >
-                <a href="login.php" class="thm-btn" >
-                    <i class="fas fa-arrow-right"></i>Login
+                <a href="login.php" class="thm-btn" style="padding:10px 15px;" >
+                    <i class="fas fa-user-alt" style="font-size: 13px;"></i>
                 </a>
             </div>
         `;
