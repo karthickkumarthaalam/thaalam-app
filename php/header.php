@@ -2,8 +2,9 @@
     <nav class="main-menu main-menu-two">
         <div class="main-menu-two__wrapper">
             <div class="main-menu-top__header">
-                <div class="container">
+                <div>
                     <ul class="top__header">
+                        <li id="swiss-time"> </li>
                         <li>
                             <div class="d-flex align-items-center gap-2">
                                 <i class="fas fa-phone"></i>
@@ -13,9 +14,9 @@
                         </li>
                         <li>
                             <select class="language-select">
-                                <option value="en">English</option>
-                                <option value="de">German</option>
-                                <option value="fr">French</option>
+                                <option value="en">EN</option>
+                                <option value="de">DE</option>
+                                <option value="fr">FR</option>
                             </select>
                         </li>
                     </ul>
@@ -36,7 +37,7 @@
                     </div>
                     <div class="main-menu-two__main-menu-box">
                         <ul class="main-menu__list desktop-menu">
-                            <li class="desktop-main__logo" style="margin-right:100px; margin-left: 40px; ">
+                            <li class="desktop-main__logo">
                                 <a href="index.php">
                                     <img src="assets/img/logo/thalam-logo.png" alt="" class="main-menu__logo2">
                                 </a>
@@ -202,5 +203,26 @@
                 window.location.href = "index.php";
             }
         });
+
+
+        function updateSiwssTime() {
+            const swissTimeElement = document.getElementById("swiss-time");
+            if (!swissTimeElement) return;
+
+            const now = new Date();
+            const options = {
+                timeZone: "Europe/Zurich",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            };
+
+            swissTimeElement.innerHTML = `<div class="swiss-timmer"><i class="fas fa-clock"></i> <p> ${now.toLocaleTimeString("en-GB", options)}</p></div>`
+        }
+
+        updateSiwssTime();
+
+        setInterval(updateSiwssTime, 1000);
+
     });
 </script>

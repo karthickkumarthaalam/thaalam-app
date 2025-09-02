@@ -30,7 +30,7 @@
                                 <div class="team-details__left wow slideInLeft" data-wow-delay="100ms"
                                     data-wow-duration="2500ms">
                                     <div class="team-details__img">
-                                        <img src="assets/img/common/about/about-img.png" alt="">
+                                        <img src="assets/images/site-images/side-view-young-man-recording-podcast.jpg" alt="">
                                     </div>
                                 </div>
                             </div>

@@ -24,12 +24,11 @@
                 <section class="forgot-password-section" style=" 
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
                         url('./assets/images/backgrounds/background_image.jpg');">
+                    <div class="forgot-password-header">
+                        <h2>Reset Your Password</h2>
+                        <p class="subtext" id="subtext">Enter your email to receive a password reset OTP</p>
+                    </div>
                     <div class="forgot-password-container">
-                        <div class="forgot-password-header">
-                            <h2>Reset Your Password</h2>
-                            <p class="subtext" id="subtext">Enter your email to receive a password reset OTP</p>
-                        </div>
-
                         <form id="forgotPasswordForm" class="forgot-password-form">
                             <div class="form-group">
                                 <label for="email">Email Address</label>
@@ -48,8 +47,8 @@
                             </div>
 
                             <button type="submit" class="btn-primary" id="submitBtn">
-                                Send OTP
                                 <i class="fas fa-paper-plane"></i>
+                                Send OTP
                             </button>
 
                             <div class="auth-footer">
@@ -162,7 +161,7 @@
                             showToast(res?.message || "Invalid OTP", "error");
                         },
                         complete: function() {
-                            submitBtn.prop('disabled', false).text("Verify OTP");
+                            submitBtn.prop('disabled', false).append($('<i>').addClass('fas fa-paper-plane')).text("Verify OTP");
                         }
                     });
                 }

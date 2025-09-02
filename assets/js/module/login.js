@@ -61,7 +61,7 @@ $(document).ready(function () {
 
                 },
                 complete: function () {
-                    $submitBtn.prop('disabled', false).text('Log In');
+                    $submitBtn.prop('disabled', false).append($('<i>').addClass('fas fa-paper-plane')).text('Log In');
                 }
             });
         }

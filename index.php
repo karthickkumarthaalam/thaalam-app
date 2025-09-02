@@ -143,7 +143,7 @@
                                     <div class="col-xl-6 col-lg-6">
                                         <div class="live-class-two__right">
                                             <div class="live-class-two__img-box mob-top3">
-                                                <img src="assets/img/home/podcast-img.jpg" alt="">
+                                                <img src="assets/images/site-images/WhatsApp Image 2025-09-01 at 15.08.44_fc10e7a5.jpg" alt="">
                                             </div>
                                         </div>
                                     </div>

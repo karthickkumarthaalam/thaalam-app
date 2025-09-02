@@ -26,22 +26,22 @@
                 <section class="login-section" style=" 
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
                         url('./assets/images/backgrounds/background_image.jpg');">
+                    <div class="login-header">
+                        <h2>Verification required</h2>
+                        <p class="subtext">OTP sent to your registered Email Address</p>
+                    </div>
                     <div class="login-container">
-                        <div class="login-header">
-                            <h2>Verification required</h2>
-                            <p class="subtext">OTP sent to your registered Email Address</p>
-                        </div>
-
                         <form id="otpForm" class="login-form">
                             <div class="form-group">
+                                <label for="otp">Enter your OTP</label>
                                 <div class="input-container">
                                     <input type="text" id="otp" name="otp" required>
                                 </div>
                             </div>
 
                             <button type="submit" id="submitBtn" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i>
                                 Verify OTP
-                                <i class="fas fa-arrow-right"></i>
                             </button>
                         </form>
 

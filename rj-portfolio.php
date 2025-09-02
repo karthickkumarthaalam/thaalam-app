@@ -24,6 +24,10 @@
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
                         url('./assets/images/backgrounds/background_image.jpg'); ">
                     <div class="container">
+                        <div class="rj-header">
+                            <h2><span style="color:#f90000;">Our RJ </span>Profiles</h2>
+                            <p>Meet our talented radio jockeys and explore their shows below.</p>
+                        </div>
                         <div class="row" id="rj-list">
                         </div>
                     </div>

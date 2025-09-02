@@ -1369,6 +1369,15 @@
         gap: 15px;
     }
 
+    .live-class-two__list>li+li {
+        margin-top: 20px;
+    }
+
+    .live-class-two__img-box img {
+        width: 100%;
+        border: 2px solid var(--fistudy-base);
+        border-radius: 20px;
+    }
 
     .live-class-two__icon {
         position: relative;

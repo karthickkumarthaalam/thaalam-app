@@ -128,7 +128,8 @@
                             <!-- Submit Section -->
                             <div class="form-actions">
                                 <button type="submit" id="submitBtn" class="submit-btn">
-                                    <i class="fas fa-arrow-right"></i> Create Account
+                                    <i class="fas fa-paper-plane"></i>
+                                    Create Account
                                 </button>
                             </div>
                             <p class="login-link">Already have an account? <a href="login.php">Log in</a></p>

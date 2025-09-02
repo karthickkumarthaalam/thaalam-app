@@ -27,12 +27,11 @@
                 <section class="login-section" style=" 
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
                         url('./assets/images/backgrounds/background_image.jpg');">
+                    <div class="login-header">
+                        <h2>Member Sign In</h2>
+                        <p class="subtext">Welcome back! Please enter your details</p>
+                    </div>
                     <div class="login-container">
-                        <div class="login-header">
-                            <h2>Member Sign In</h2>
-                            <p class="subtext">Welcome back! Please enter your details</p>
-                        </div>
-
                         <form id="loginForm" class="login-form">
                             <div class="form-group">
                                 <label for="loginId">Email / Mobile Number</label>
@@ -60,8 +59,8 @@
                             </div>
 
                             <button type="submit" id="submitBtn" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i>
                                 Sign In
-                                <i class="fas fa-arrow-right"></i>
                             </button>
 
                             <div class="auth-footer">

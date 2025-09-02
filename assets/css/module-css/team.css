@@ -508,11 +508,13 @@
 
 .team-details__img {
     position: relative;
-    display: block;
+    display: flex;
+    justify-content: end;
 }
 
 .team-details__img img {
-    width: 100%;
+    width: 80%;
+    height: 500px;
     border-radius: 20px;
     border: 1px solid var(--fistudy-base);
 }
@@ -1042,56 +1044,242 @@
     margin-bottom: 0;
 }
 
-/* Flip card container */
-.rj-card {
-    perspective: 1000px;
-    /* 3D perspective */
-}
-
-.rj-card-inner {
-    position: relative;
-    width: 100%;
-    transition: transform 0.8s ease;
-    transform-style: preserve-3d;
-    min-height: 420px;
-    /* Or match your image height */
-}
-
-/* Flip on hover */
-.rj-card:hover .rj-card-inner {
-    transform: rotateY(180deg);
-}
-
-/* Front and back faces */
-.rj-card-front,
-.rj-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    backface-visibility: hidden;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-/* Back face rotated initially */
-.rj-card-back {
-    transform: rotateY(180deg);
-    padding: 15px;
-    overflow-y: auto;
-    text-align: center;
-}
-
-.rj-card-back h3 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #000;
+/* ---------------- Desktop / Default ---------------- */
+.rj-portfolio-box {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    background: transparent;
+    padding: 24px;
     margin: 20px 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.rj-card-back p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 15px;
+.rj-portfolio-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.rj-profile {
+    flex: 0 0 230px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 10px;
+}
+
+.rj-profile img {
+    width: 100%;
+    max-width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease;
+}
+
+.rj-profile img:hover {
+    transform: scale(1.05);
+}
+
+.rj-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rj-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.rj-description {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.rj-shows {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.rj-show {
+    background: #ffeeee;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    color: #f90000;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 10px;
+}
+
+.no-shows {
+    font-style: italic;
+    color: #888;
+}
+
+.accordion-toggle {
+    display: none;
+}
+
+/* ---------------- Mobile Accordion / Card (<768px) ---------------- */
+@media (max-width: 768px) {
+
+    .team-details__img {
+        display: block;
+    }
+
+    .team-details__img img {
+        width: 100%;
+    }
+
+    .rj-portfolio-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+        margin: 12px 0;
+        background: transparent;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .rj-profile {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .rj-profile img {
+        width: 250px;
+        /* slightly bigger for mobile */
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .rj-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .rj-name {
+        width: 100%;
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* Accordion toggle with chevron arrow */
+    .accordion-toggle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        /* space between text and arrow */
+        margin-top: 8px;
+        color: #4338ca;
+        background: transparent;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-weight: 600;
+        width: 100%;
+        text-align: center;
+        position: relative;
+    }
+
+    /* Create the arrow using a small div */
+    .accordion-toggle::after {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid #4338ca;
+        border-bottom: 2px solid #4338ca;
+        transform: rotate(45deg);
+        /* pointing down */
+        transition: transform 0.3s ease;
+    }
+
+    /* Rotate arrow when active/open */
+    .accordion-toggle.active::after {
+        transform: rotate(-135deg);
+        /* pointing up */
+    }
+
+
+    /* Accordion content hidden by default */
+    .accordion-content {
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        margin-top: 6px;
+    }
+
+    .accordion-content.active {
+        max-height: 1000px;
+        /* enough for content */
+    }
+
+    .rj-description {
+        font-size: 0.95rem;
+        color: #333;
+        text-align: left;
+        margin: 0 0 8px 0;
+    }
+
+    .rj-shows {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: flex-start;
+    }
+
+    .rj-show {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+    }
+
+    .no-shows {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+.rj-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.rj-header h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.rj-header p {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 8px 0 0 0;
+}
+
+@media (max-width: 768px) {
+    .rj-header h2 {
+        font-size: 28px;
+    }
 }

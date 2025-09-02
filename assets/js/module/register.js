@@ -135,8 +135,8 @@ $(document).ready(function () {
                 complete: function () {
                     $('#submitBtn')
                         .prop('disabled', false)
-                        .text('Create Account ')
-                        .append($('<i>').addClass('fas fa-arrow-right'));
+                        .append($('<i>').addClass('fas fa-paper-plane'))
+                        .text('Create Account ');
                 }
             });
         }

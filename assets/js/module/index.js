@@ -148,7 +148,7 @@ $(document).ready(function () {
                 $("#programImage").attr("src", imagePath);
 
                 // Next program notice (only if minutesLeft <= 15)
-                if (response.minutesLeft <= 15 && response.next?.program_category) {
+                if (response.minutesLeft <= 30 && response.next?.program_category) {
                     if (!$("#nextProgramNotice").length) {
                         $("#showTime").after('<div id="nextProgramNotice" class="blinking"></div>');
                     }
@@ -185,18 +185,15 @@ $(document).ready(function () {
             const podcasts = response?.data?.data;
 
             podcasts.forEach(podcast => {
-                const tagsHtml = podcast.tags && podcast.tags.length > 0
-                    ? podcast.tags.map(tag => `<span class="tag">${tag}</span>`).join(" ")
-                    : "";
-
                 const item = `
                     <li>
                         <a href="podcast-details.php?id=${podcast.id}"  class="video-popup">
                             <div class="live-class-two__icon"></div>
-                        </a>
                             <h3 class="live-class-two__content-title">
-                                <a href="#">${podcast.title}</a>
+                                <a href="podcast-details.php?id=${podcast.id}" >${podcast.title}</a>
                             </h3>
+                        </a>
+                           
                     </li>
                 `;
                 podcastList.append(item);

@@ -12,13 +12,15 @@
 
        .login-section {
            display: flex;
-           justify-content: center;
+           flex-direction: column;
+           gap: 15px;
            align-items: center;
            min-height: 100vh;
            padding: 1rem;
        }
 
        .login-container {
+           padding-top: 40px;
            background: transparent;
            border-radius: 12px;
            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
@@ -28,7 +30,7 @@
            position: relative;
        }
 
-       .login-container::before {
+       /* .login-container::before {
            content: '';
            position: absolute;
            top: 0;
@@ -36,7 +38,7 @@
            width: 100%;
            height: 4px;
            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
-       }
+       } */
 
        .login-header {
            padding: 2.5rem 2.5rem 1.5rem;
@@ -57,15 +59,15 @@
        }
 
        .login-header h2 {
-           font-size: 1.75rem;
-           font-weight: 600;
-           margin-bottom: 0.5rem;
-           color: var(--text);
+           font-size: 28px;
+           font-weight: 500;
+           margin-bottom: 0.4rem;
+           color: #d50000;
        }
 
        .subtext {
-           color: var(--text-light);
-           font-size: 0.95rem;
+           color: #555555;
+           font-size: 16px;
        }
 
        .login-form {
@@ -135,7 +137,7 @@
            display: flex;
            justify-content: space-between;
            align-items: center;
-           margin: .85rem 0;
+           margin: .45rem 0;
        }
 
        .remember-me {
@@ -266,10 +268,6 @@
 
            .login-header {
                padding: 1.5rem 1rem 1rem;
-           }
-
-           .login-header h2 {
-               font-size: 1.5rem;
            }
 
            label {
