@@ -37,7 +37,7 @@
                             <div class="tab active" data-tab="orders"><i class="fas fa-receipt"></i> Orders</div>
                             <div class="tab" data-tab="settings"><i class="fas fa-user-cog"></i> Settings</div>
                             <div class="tab" data-tab="coupons"><i class="fas fa-tag"></i> Coupons</div>
-                            <div class="tab signout"> <a href="index.php"><i class="fas fa-sign-out-alt"></i> Sign out</a></div>
+                            <div class="tab signout"> <a href="index"><i class="fas fa-sign-out-alt"></i> Sign out</a></div>
                         </div>
 
                         <div class="tabs-content">
@@ -213,14 +213,14 @@
                     if (!item.package_name) {
                         planBox.innerHTML = `
               <p>No active plan</p>
-              <button class="btn-upgrade" onclick="window.location.href='/pricing.php'">Buy Plan</button>`;
+              <button class="btn-upgrade" onclick="window.location.href='/pricing'">Buy Plan</button>`;
                     } else {
                         planBox.innerHTML = `
               <p>Active Plan</p>
               <h4 class="plan-name">${item.package_name}</h4>
               <p class="price">${item.symbol}${item.price.toFixed(2)} / ${item.duration || "month"}</p>
               <p class="expire">Expires on: ${new Date(item.valid_till).toLocaleDateString("en-GB")}</p>
-              <button class="btn-upgrade" onclick="window.location.href='/pricing.php'">${item.package_status === "grace_period" ? "Renew Plan" : "Upgrade Plan"}</button>`;
+              <button class="btn-upgrade" onclick="window.location.href='/pricing'">${item.package_status === "grace_period" ? "Renew Plan" : "Upgrade Plan"}</button>`;
                     }
                 })
                 .catch(err => console.error(err));

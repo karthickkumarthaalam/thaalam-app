@@ -2,9 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Terms and Conditions - Thaalam Radio Station </title>
+    <?php
+    $page_title = "Terms and Conditions - Thaalam Radio Station";
+    $page_description = "Read the Terms and Conditions for using Thaalam Radio Station website. Understand your rights and responsibilities while accessing our services.";
+    $page_url = "https://demoview.ch/summerfest/thaalam-main/terms-conditions";
+    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    include 'php/meta.php';
+    ?>
 
     <?php include 'php/css.php'; ?>
 

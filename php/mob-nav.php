@@ -12,7 +12,7 @@
          <div class="mobile-nav__container">
              <ul class="main-menu__list mobile-menu">
                  <li>
-                     <a href="index.php">
+                     <a href="index">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-home pe-2"></i>
                              <p>Home</p>
@@ -20,7 +20,7 @@
                      </a>
                  </li>
                  <li>
-                     <a href="about-us.php">
+                     <a href="about-us">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-info-circle pe-2"></i>
                              <p>About Us</p>
@@ -28,22 +28,14 @@
                      </a>
                  </li>
                  <li>
-                     <a href="pricing.php">
-                         <div class="d-flex align-items-center">
-                             <i class="fas fa-tags pe-2"></i>
-                             <p>Pricing</p>
-                         </div>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="podcasts.php">
+                     <a href="podcasts">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-microphone pe-2"></i>
                              <p>Podcasts</p>
                          </div>
                      </a>
                  </li>
-                 <li>
+                 <!-- <li>
                      <a href="audio.php">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-music pe-2"></i>
@@ -58,32 +50,40 @@
                              <p>TV</p>
                          </div>
                      </a>
-                 </li>
-                 <li>
+                 </li> -->
+                 <!-- <li>
                      <a href="marketting.php">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-bullhorn pe-2"></i>
                              <p>Marketting</p>
                          </div>
                      </a>
-                 </li>
+                 </li> -->
                  <li>
-                     <a href="rj-portfolio.php">
+                     <a href="pricing">
                          <div class="d-flex align-items-center">
-                             <i class="fas fa-users pe-2"></i>
-                             <p>RJ Portfolio</p>
+                             <i class="fas fa-tags pe-2"></i>
+                             <p>Pricing</p>
                          </div>
                      </a>
                  </li>
                  <li>
-                     <a href="careers.php">
+                     <a href="rj-portfolio">
+                         <div class="d-flex align-items-center">
+                             <i class="fas fa-users pe-2"></i>
+                             <p>Our Team</p>
+                         </div>
+                     </a>
+                 </li>
+                 <li>
+                     <a href="careers">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-suitcase pe-2"></i>
                              <p>Careers</p>
                          </div>
                      </a>
                  </li>
-                 <li>
+                 <!-- <li>
                      <a href="news.php">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-newspaper pe-2"></i>
@@ -98,29 +98,29 @@
                              <p>Blogs</p>
                          </div>
                      </a>
-                 </li>
+                 </li> -->
                  <li>
-                     <a href="contact-us.php">
+                     <a href="contact-us">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-envelope pe-2"></i>
                              <p>Contact Us</p>
                          </div>
                      </a>
                  </li>
-                 <li>
+                 <!-- <li>
                      <a href="https://thaalamsummerfestival.com/tickets">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-ticket-alt pe-2"></i>
                              <p>Book Now</p>
                          </div>
                      </a>
-                 </li>
+                 </li> -->
 
              </ul>
          </div>
          <!-- /.mobile-nav__container -->
 
-         <ul class="mobile-nav__contact list-unstyled">
+         <!-- <ul class="mobile-nav__contact list-unstyled">
              <li>
                  <i class="fa fa-envelope"></i>
                  <a href="mailto:info@thaalam.ch">info@thaalam.ch</a>
@@ -129,15 +129,15 @@
                  <i class="fas fa-phone"></i>
                  <a href="tel:+41792882271">+41 79 288 22 71</a>
              </li>
-         </ul><!-- /.mobile-nav__contact -->
-         <div class="mobile-nav__top">
+         </ul> -->
+         <!-- <div class="mobile-nav__top">
              <div class="mobile-nav__social">
                  <a href="https://www.facebook.com/Thaalammediaofficiall" target="_blank"><span class="fab fa-facebook-f"></span></a>
                  <a href="https://www.instagram.com/thaalammediaofficial/" target="_blank"><span class="fab fa-instagram"></span></a>
                  <a href="https://twitter.com/thaalamofficial" target="_blank"><span class="fab fa-twitter"></span></a>
                  <a href="https://m.youtube.com/@thaalammediaofficial" target="_blank"><span class="fab fa-youtube"></span></a>
-             </div><!-- /.mobile-nav__social -->
-         </div><!-- /.mobile-nav__top -->
+             </div>
+         </div> -->
 
 
 

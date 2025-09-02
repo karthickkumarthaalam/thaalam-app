@@ -2,9 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy Policy - Thaalam Radio Station </title>
+    <?php
+    $page_title = "Privacy Policy - Thaalam Radio Station";
+    $page_description = "Read the Privacy Policy of Thaalam Radio Station to learn how we collect, use, and protect your information, including cookies, data protection, and third-party disclosures.";
+    $page_url = "https://demoview.ch/summerfest/thaalam-main/privacy-policy";
+    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    include 'php/meta.php';
+    ?>
 
     <?php include 'php/css.php'; ?>
 

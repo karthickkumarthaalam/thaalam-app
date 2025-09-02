@@ -2,14 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Thaalam Radio Station </title>
+    <?php
+    $page_title = "Login - Thaalam Radio Station";
+    $page_description = "Login to Thaalam Radio Station to manage your membership, access exclusive content, and enjoy personalized experiences.";
+    $page_url = "https://demoview.ch/summerfest/thaalam-main/login";
+    include 'php/meta.php';
+    ?>
 
     <?php include 'php/css.php'; ?>
     <link rel="stylesheet" href="assets/css/module-css/login.css">
-
 </head>
+
 
 <body class="custom-cursor">
     <?php $pagename = 'login'; ?>
@@ -55,7 +58,7 @@
                             <div class="form-options">
                                 <label class="remember-me">
                                 </label>
-                                <a href="forget-password.php" class="forgot-password">Forgot password?</a>
+                                <a href="forget-password" class="forgot-password">Forgot password?</a>
                             </div>
 
                             <button type="submit" id="submitBtn" class="btn-primary">
@@ -64,7 +67,7 @@
                             </button>
 
                             <div class="auth-footer">
-                                <p>New to thaalam? <a href="register.php">Sign up</a></p>
+                                <p>New to thaalam? <a href="register">Sign up</a></p>
                             </div>
                         </form>
                     </div>

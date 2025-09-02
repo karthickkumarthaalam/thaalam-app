@@ -2,9 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register - Thaalam Radio Station </title>
+    <?php
+    $page_title = "Register - Thaalam Radio Station";
+    $page_description = "Create your account at Thaalam Radio Station and join our music community. Get access to Podcast interactions";
+    $page_url = "https://demoview.ch/summerfest/thaalam-main/register";
+    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    include 'php/meta.php';
+    ?>
 
     <?php include 'php/css.php'; ?>
     <link rel="stylesheet" href="assets/css/module-css/register.css">
@@ -132,7 +136,7 @@
                                     Create Account
                                 </button>
                             </div>
-                            <p class="login-link">Already have an account? <a href="login.php">Log in</a></p>
+                            <p class="login-link">Already have an account? <a href="login">Log in</a></p>
 
                         </form>
                     </div>

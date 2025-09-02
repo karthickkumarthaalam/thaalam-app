@@ -45,7 +45,7 @@ $(document).ready(function () {
     $(document).on("click", ".podcast", function () {
         const podcastId = $(this).data("id");
         if (podcastId) {
-            window.location.href = `podcast-details.php?id=${podcastId}`;
+            window.location.href = `podcast-details?id=${podcastId}`;
         }
     });
 });

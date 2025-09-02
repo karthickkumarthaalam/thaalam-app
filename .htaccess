@@ -1,0 +1,26 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+# -----------------------------
+# Hide .php extension
+# -----------------------------
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ $1.php [L]
+
+# -----------------------------
+# Dynamic Podcast Slug Handling
+# Example: /podcasts/episode-name → podcasts.php?slug=episode-name
+# -----------------------------
+# RewriteRule ^podcast-details/([0-9]+)/([a-zA-Z0-9_-]+)/?$ podcast-details.php?id=$1 [L,QSA]
+
+# -----------------------------
+# Redirect trailing slash for non-directory URLs
+# -----------------------------
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# -----------------------------
+# Security: Prevent directory browsing
+# -----------------------------
+Options -Indexes

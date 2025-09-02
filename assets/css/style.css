@@ -2031,6 +2031,7 @@ ul {
 }
 
 .home-page__title {
+  font-size: 32px;
   font-weight: 500;
   line-height: 34px;
   color: var(--fistudy-base);
@@ -3468,9 +3469,9 @@ ul {
   cursor: pointer;
 }
 
-.user-dropdown:hover .dropdown-arrow {
+/* .user-dropdown:hover .dropdown-arrow {
   transform: rotate(180deg);
-}
+} */
 
 
 .user-dropdown:hover .dropdown-menu {

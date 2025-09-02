@@ -2,9 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password - Thaalam Radio Station</title>
+    <?php
+    $page_title = "Reset Password - Thaalam Radio Station";
+    $page_description = "Securely reset your Thaalam Radio Station account password. Enter a new password to continue enjoying music, shows, and community features.";
+    $page_url = "https://demoview.ch/summerfest/thaalam-main/reset-password";
+    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    include 'php/meta.php';
+    ?>
 
     <?php include 'php/css.php' ?>
     <link rel="stylesheet" href="assets/css/module-css/forgor-password.css">
@@ -57,7 +61,7 @@
                             </button>
 
                             <div class="auth-footer">
-                                <p>Remember your password? <a href="login.php">Sign in</a></p>
+                                <p>Remember your password? <a href="login">Sign in</a></p>
                             </div>
                         </form>
                     </div>

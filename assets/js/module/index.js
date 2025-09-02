@@ -115,6 +115,20 @@ $(document).ready(function () {
         }
     });
 
+    const shareBtn = $("#shareBtn");
+
+    shareBtn.on("click", function () {
+        const currentUrl = window.location.href;
+
+        navigator.clipboard.writeText(currentUrl)
+            .then(() => {
+                showToast("Link Copied", "success");
+            })
+            .catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+    });
+
 
     function loadCurrentProgram() {
         $.ajax({

@@ -2,9 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RJ Portfolio - Thaalam Radio Station </title>
+    <?php
+    $page_title = "RJ Portfolio - Thaalam Radio Station";
+    $page_description = "Meet the talented radio jockeys of Thaalam Radio Station. Explore their profiles, shows, and connect with your favorite RJ.";
+    $page_url = "https://demoview.ch/summerfest/thaalam-main/rj-portfolio";
+    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    include 'php/meta.php';
+    ?>
 
     <?php include 'php/css.php'; ?>
 

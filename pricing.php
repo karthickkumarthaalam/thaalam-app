@@ -2,9 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing - Thaalam Radio Station </title>
+  <?php
+  $page_title = "Pricing - Thaalam Radio Station";
+  $page_description = "Choose the best Thaalam Radio Station subscription plan. Explore monthly and yearly packages tailored for music lovers and podcast enthusiasts.";
+  $page_url = "https://demoview.ch/summerfest/thaalam-main/pricing";
+  $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+  include 'php/meta.php';
+  ?>
 
   <?php include 'php/css.php'; ?>
   <link rel="stylesheet" href="assets/css/module-css/pricing.css">

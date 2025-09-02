@@ -2,12 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us - Thaalam Radio Station </title>
+    <?php
+    $page_title = "Contact Us - Thaalam Radio Station";
+    $page_description = "Have questions, feedback, or advertising inquiries? Get in touch with Thaalam Radio Station via our contact form, email, or phone numbers. We’re here to help.";
+    $page_url = "https://demoview.ch/summerfest/thaalam-main/contact-us";
+    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    include 'php/meta.php';
+    ?>
 
     <?php include 'php/css.php'; ?>
-
 </head>
 
 <body class="custom-cursor">

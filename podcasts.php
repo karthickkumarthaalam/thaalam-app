@@ -2,9 +2,13 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Podcats - Thaalam Radio Station</title>
+    <?php
+    $page_title = "Podcasts - Thaalam Radio Station";
+    $page_description = "Explore Thaalam Radio Station podcasts. Listen to stories, music, and shows that connect you with our vibrant community.";
+    $page_url = "https://demoview.ch/summerfest/thaalam-main/podcasts";
+    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    include 'php/meta.php';
+    ?>
 
     <?php include 'php/css.php' ?>
 

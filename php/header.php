@@ -26,7 +26,7 @@
                 <div class="main-menu-two__wrapper-inner">
                     <div class="only-mob mobile-header__first">
                         <div class="main-menu__logo only-mob">
-                            <a href="index.php"><img src="assets/img/logo/thalam-logo.png" alt=""></a>
+                            <a href="index"><img src="assets/img/logo/thalam-logo.png" alt=""></a>
                         </div>
                         <div class="mobile-header__inner">
                             <div class="mobile-menu-right">
@@ -38,12 +38,12 @@
                     <div class="main-menu-two__main-menu-box">
                         <ul class="main-menu__list desktop-menu">
                             <li class="desktop-main__logo">
-                                <a href="index.php">
+                                <a href="index">
                                     <img src="assets/img/logo/thalam-logo.png" alt="" class="main-menu__logo2">
                                 </a>
                             </li>
                             <li>
-                                <a href="index.php">
+                                <a href="index">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-music pe-2"></i>
                                         <p>Audio</p>
@@ -51,7 +51,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="podcasts.php">
+                                <a href="podcasts">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-microphone pe-2"></i>
                                         <p>Podcast</p>
@@ -79,8 +79,8 @@
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="marketting.php"><i class="fas fa-bullhorn pe-2"></i>Marketing</a></li>
-                                    <li><a href="pricing.php"><i class="fas fa-tags pe-2"></i>Pricing</a></li>
+                                    <li><a href="marketting"><i class="fas fa-bullhorn pe-2"></i>Marketing</a></li>
+                                    <li><a href="pricing"><i class="fas fa-tags pe-2"></i>Pricing</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -91,13 +91,13 @@
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="about-us.php"><i class="fas fa-info-circle pe-2"></i>About Us</a></li>
-                                    <li><a href="rj-portfolio.php"><i class="fas fa-users pe-2"></i>RJ Portfolio</a></li>
-                                    <li><a href="careers.php"><i class="fas fa-suitcase pe-2"></i>Careers</a></li>
+                                    <li><a href="about-us"><i class="fas fa-info-circle pe-2"></i>About Us</a></li>
+                                    <li><a href="rj-portfolio"><i class="fas fa-users pe-2"></i>Our Team</a></li>
+                                    <li><a href="careers"><i class="fas fa-suitcase pe-2"></i>Careers</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="contact-us.php">
+                                <a href="contact-us">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-envelope pe-2"></i>
                                         <p> Contact Us</p>
@@ -148,7 +148,7 @@
                     <div><i class="fas fa-users me-2"></i>${username}</div> 
                 </div>
                 <div class="dropdown-menu">
-                    <a href="my-account.php" class="dropdown-item">
+                    <a href="my-account" class="dropdown-item">
                         <i class="fas fa-user me-2"></i>Profile
                     </a>
                     <a href="javascript:;" id="logoutBtn" class="dropdown-item">
@@ -158,10 +158,10 @@
             </div>
              <div class="main-menu-two__support-box user-dropdown only-mob">
                 <div class="user-greetings" id="userGreeting">
-                    <div class="dropdown-arrow"><i class="fas fa-users-crown"></i></div> 
+                    <div class="dropdown-arrow"><i class="fas fa-user-tie p-1"></i></div> 
                 </div>
                 <div class="dropdown-menu">
-                    <a href="my-account.php" class="dropdown-item">
+                    <a href="my-account" class="dropdown-item">
                         <i class="fas fa-user me-2"></i>Profile
                     </a>
                     <a href="javascript:;" id="logoutBtn" class="dropdown-item">
@@ -173,18 +173,18 @@
         } else {
             menuHtml = `
             <div class="main-menu__btn-box-2  desktop-menu">
-                <a href="login.php"  class="login-style">
+                <a href="login"  class="login-style">
                     <i class="fas fa-sign-in"></i> Login
                 </a>
             </div>
             <div class="main-menu-two__support-box  desktop-menu">
-                    <a href="register.php" class="login-style">
+                    <a href="register" class="login-style">
                     <i class="fas fa-user-tie"></i>
                     Become a Member
                     </a>
             </div>
             <div class="main-menu__btn-box-2 only-mob" >
-                <a href="login.php" class="thm-btn" style="padding:10px 15px;" >
+                <a href="login" class="thm-btn" style="padding:10px 15px;" >
                     <i class="fas fa-user-alt" style="font-size: 13px;"></i>
                 </a>
             </div>
