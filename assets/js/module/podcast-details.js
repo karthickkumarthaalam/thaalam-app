@@ -87,10 +87,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll(".accordion-toggle").forEach(toggleBtn => {
         const content = toggleBtn.nextElementSibling;
+
         toggleBtn.addEventListener("click", () => {
-            content.style.display = content.style.display === "block" ? "none" : "block";
+            const isOpen = content.style.display === "block";
+            content.style.display = isOpen ? "none" : "block";
+
+            content.classList.toggle("active", !isOpen);
         });
     });
+
 
 
     const queryString = window.location.search;
@@ -244,7 +249,7 @@ function showErrorUI() {
              <div class="error-message">
                     <h3>Podcast Not Found</h3>
                     <p>We couldn't find the podcast you're looking for.</p>
-                    <a href="/podcasts.php" class="btn">Browse Podcasts</a>
+                    <a href="podcasts.php" class="btn">Browse Podcasts</a>
                 </div>
         `;
     }

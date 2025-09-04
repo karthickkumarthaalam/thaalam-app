@@ -39,7 +39,7 @@
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
 }
 
 .accordion-item {
@@ -48,6 +48,7 @@
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .accordion-item:last-child {
@@ -398,6 +399,54 @@
     .btn-purchase {
         font-size: 0.85rem;
         padding: 10px;
+    }
+}
+
+.no-packages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    border: 2px dashed #ddd;
+    border-radius: 12px;
+    background: #fafafa;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin: 2rem auto;
+    max-width: 500px;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.no-packages .empty-icon {
+    font-size: 3rem;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+}
+
+.no-packages h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    color: #333;
+}
+
+.no-packages p {
+    font-size: 0.95rem;
+    color: #666;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

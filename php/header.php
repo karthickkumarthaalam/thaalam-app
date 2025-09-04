@@ -115,7 +115,7 @@
 
                         </ul>
                     </div>
-                    <div class="main-menu-two__right">
+                    <div class="main-menu-two__right desktop-menu">
 
                     </div>
                 </div>

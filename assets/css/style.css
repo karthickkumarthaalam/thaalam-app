@@ -2951,11 +2951,52 @@ ul {
   background-color: #D50000 !important;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1320px) {
+
+.main-slider .item {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  max-height: 85vh;
+}
+
+.main-slider .main-slider__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+
+/* 992px - 1199px (Laptop / small desktop) */
+/* @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .main-slider .item {
-    height: 60vh !important;
+    height: 55vh;
+  }
+} */
+
+/* 768px - 991px (Tablet) */
+/* @media only screen and (min-width: 768px) and (max-width: 991px) {
+  .main-slider .item {
+    height: 50vh;
+  }
+} */
+
+/* 576px - 767px (Large Mobile) */
+/* @media only screen and (min-width: 576px) and (max-width: 767px) {
+  .main-slider .item {
+    height: 35vh;
   }
 }
+
+@media only screen and (max-width: 575px) {
+  .main-slider .item {
+    height: 25vh;
+  }
+} */
 
 @media (min-width: 992px) {
   .col-lg-20 {
@@ -3255,9 +3296,9 @@ ul {
     display: none !important;
   }
 
-  .main-slider .item {
+  /* .main-slider .item {
     height: unset !important;
-  }
+  } */
 
   .mob-top3 {
     margin-top: 30px !important;
@@ -3380,24 +3421,30 @@ ul {
   }
 }
 
-@media(min-width:768px) {
+@media(min-width:1199px) {
 
   .only-mob,
   .mobile-menu {
     display: none !important;
   }
 
-}
 
-.only-mob img {
-  width: 80px;
 }
-
 
 /* Hide desktop menu on mobile */
-@media (max-width: 767px) {
+@media (max-width: 1199px) {
   .desktop-menu {
     display: none !important;
+  }
+
+  .only-mob img {
+    width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .only-mob img {
+    width: 80px;
   }
 }
 
@@ -3577,37 +3624,7 @@ ul {
 
 .desktop-main__logo {
   margin-left: 40px;
-  margin-right: 450px;
-}
-
-@media (max-width: 1700px) {
-  .desktop-main__logo {
-    margin-right: 350px;
-  }
-}
-
-@media (max-width: 1600px) {
-  .desktop-main__logo {
-    margin-right: 300px;
-  }
-}
-
-@media (max-width: 1500px) {
-  .desktop-main__logo {
-    margin-right: 250px;
-  }
-}
-
-@media (max-width: 1400px) {
-  .desktop-main__logo {
-    margin-right: 200px;
-  }
-}
-
-@media (max-width: 1300px) {
-  .desktop-main__logo {
-    margin-right: 100px;
-  }
+  margin-right: 100px;
 }
 
 .swiss-timmer {

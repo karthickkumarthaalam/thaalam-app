@@ -4,9 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Podcast Details - Thaalam Radio Station</title>
 
-    <?php include 'php/css.php' ?>
+    <?php
+    $podcastId = $_GET['id'] ?? null;
+
+    // API base URL
+    $baseUrl = "https://api.demoview.ch/api";
+    $metaUrl = "$baseUrl/podcasts/$podcastId/meta-data";
+
+    // Fetch API response
+    $response = @file_get_contents($metaUrl);
+    $meta = $response ? json_decode($response, true) : [];
+
+    // Title fallback
+    $title = !empty($meta['title']) ? $meta['title'] : "Thaalam Radio Station Podcast";
+
+    // Description fallback
+    $description = !empty($meta['description']) ? $meta['description'] : "Listen to Thaalam podcasts online";
+
+    // Image fallback
+    $image = !empty($meta['image'])
+        ? $baseUrl . '/' . str_replace("\\", "/", ltrim($meta['image'], '/'))
+        : "https://demoview.ch/summerfest/thaalam-main/assets/img/common/podcast-details/podcast-banner.jpg";
+
+    // Current page URL
+    $url = "https://demoview.ch/summerfest/podcast-details?id={$podcastId}";
+    ?>
+
+    <title><?php echo htmlspecialchars($title); ?></title>
+    <meta name="description" content="<?php echo htmlspecialchars($description); ?>">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="<?php echo htmlspecialchars($title); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($description); ?>">
+    <meta property="og:image" content="<?php echo htmlspecialchars($image); ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($url); ?>">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($title); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($description); ?>">
+    <meta name="twitter:image" content="<?php echo htmlspecialchars($image); ?>">
+
+    <!-- Debugging (remove in production) -->
+    <!-- DEBUG: Title=<?php echo $title; ?> | Image=<?php echo $image; ?> -->
+
+
+    <?php include 'php/css.php'; ?>
     <link rel="stylesheet" href="assets/css/module-css/podcast-details2.css">
 </head>
 

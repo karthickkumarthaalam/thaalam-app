@@ -126,6 +126,22 @@
       const accordion = document.querySelector(".accordion");
       accordion.innerHTML = "";
 
+      if (!items || items.length === 0) {
+        const pricingToggle = document.querySelector(".pricing-toggle");
+        if (pricingToggle) {
+          pricingToggle.style.display = "none";
+        }
+        accordion.innerHTML = `
+      <div class="no-packages">
+        <div class="empty-icon"><i class="fas fa-box-open"></i></div>
+        <h3>No Membership Plans Available</h3>
+        <p>Please check back later or contact support for more information.</p>
+      </div>
+    `;
+        return;
+      }
+
+
       items.forEach((pkg, index) => {
         let features = pkg.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join("");
 
