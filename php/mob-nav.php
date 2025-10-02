@@ -28,7 +28,7 @@
                      </a>
                  </li>
                  <li>
-                     <a href="podcasts">
+                     <a href="podcasts-list">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-microphone pe-2"></i>
                              <p>Podcasts</p>

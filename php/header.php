@@ -51,7 +51,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="podcasts">
+                                <a href="podcasts-list">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-microphone pe-2"></i>
                                         <p>Podcast</p>
@@ -200,7 +200,7 @@
         document.addEventListener("click", function(e) {
             if (e.target.closest("#logoutBtn")) {
                 localStorage.clear();
-                window.location.href = "index.php";
+                window.location.href = "index";
             }
         });
 

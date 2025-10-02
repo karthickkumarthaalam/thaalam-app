@@ -156,7 +156,7 @@
                                             <ul class="live-class-two__list list-unstyled">
                                             </ul>
                                             <div class="listen-more">
-                                                <a href="podcasts">Listen More</a>
+                                                <a href="podcasts-list">Listen More</a>
                                             </div>
                                         </div>
                                     </div>

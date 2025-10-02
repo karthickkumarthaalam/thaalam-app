@@ -259,7 +259,7 @@ function showErrorUI() {
              <div class="error-message">
                     <h3>Podcast Not Found</h3>
                     <p>We couldn't find the podcast you're looking for.</p>
-                    <a href="podcasts.php" class="btn">Browse Podcasts</a>
+                    <a href="podcasts-list" class="btn">Browse Podcasts</a>
                 </div>
         `;
   }
