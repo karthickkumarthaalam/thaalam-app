@@ -5,18 +5,19 @@
     <?php
     $page_title = "Privacy Policy - Thaalam Radio Station";
     $page_description = "Read the Privacy Policy of Thaalam Radio Station to learn how we collect, use, and protect your information, including cookies, data protection, and third-party disclosures.";
-    $page_url = "https://demoview.ch/summerfest/thaalam-main/privacy-policy";
-    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    $page_url = "https://thaalam.ch/privacy-policy";
+    $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php';
     ?>
 
     <?php include 'php/css.php'; ?>
-
+    <?php include 'php/analyticsHeader.php'; ?>
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'privacy'; ?>
 
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
 
     <div class="page-wrapper">

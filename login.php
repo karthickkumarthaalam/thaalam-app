@@ -5,17 +5,20 @@
     <?php
     $page_title = "Login - Thaalam Radio Station";
     $page_description = "Login to Thaalam Radio Station to manage your membership, access exclusive content, and enjoy personalized experiences.";
-    $page_url = "https://demoview.ch/summerfest/thaalam-main/login";
+    $page_url = "https://thaalam.ch/login";
     include 'php/meta.php';
     ?>
 
     <?php include 'php/css.php'; ?>
     <link rel="stylesheet" href="assets/css/module-css/login.css">
+    <?php include 'php/analyticsHeader.php'; ?>
 </head>
 
 
 <body class="custom-cursor">
     <?php $pagename = 'login'; ?>
+
+    <?php include 'php/analyticsBody.php'; ?>
 
     <?php include 'php/preloader.php'; ?>
 

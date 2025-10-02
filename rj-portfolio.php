@@ -5,18 +5,20 @@
     <?php
     $page_title = "RJ Portfolio - Thaalam Radio Station";
     $page_description = "Meet the talented radio jockeys of Thaalam Radio Station. Explore their profiles, shows, and connect with your favorite RJ.";
-    $page_url = "https://demoview.ch/summerfest/thaalam-main/rj-portfolio";
-    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    $page_url = "https://thaalam.ch/rj-portfolio";
+    $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php';
     ?>
 
     <?php include 'php/css.php'; ?>
+    <?php include 'php/analyticsHeader.php'; ?>
 
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'rj-portfolio'; ?>
 
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
 
     <div class="page-wrapper">

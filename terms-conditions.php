@@ -5,18 +5,20 @@
     <?php
     $page_title = "Terms and Conditions - Thaalam Radio Station";
     $page_description = "Read the Terms and Conditions for using Thaalam Radio Station website. Understand your rights and responsibilities while accessing our services.";
-    $page_url = "https://demoview.ch/summerfest/thaalam-main/terms-conditions";
-    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    $page_url = "https://thaalam.ch/terms-conditions";
+    $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php';
     ?>
 
     <?php include 'php/css.php'; ?>
+    <?php include 'php/analyticsHeader.php'; ?>
 
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'terms'; ?>
 
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
 
     <div class="page-wrapper">

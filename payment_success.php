@@ -133,11 +133,15 @@
             }
         }
     </style>
+    <?php include 'php/analyticsHeader.php'; ?>
+
 </head>
 
 <body class="custom-cursor">
 
     <?php $pagename = 'payment-success' ?>
+
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
 
     <div class="page-wrapper">

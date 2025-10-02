@@ -5,17 +5,21 @@
   <?php
   $page_title = "Pricing - Thaalam Radio Station";
   $page_description = "Choose the best Thaalam Radio Station subscription plan. Explore monthly and yearly packages tailored for music lovers and podcast enthusiasts.";
-  $page_url = "https://demoview.ch/summerfest/thaalam-main/pricing";
-  $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+  $page_url = "https://thaalam.ch/pricing";
+  $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
   include 'php/meta.php';
   ?>
 
   <?php include 'php/css.php'; ?>
   <link rel="stylesheet" href="assets/css/module-css/pricing.css">
+
+  <?php include 'php/analyticsHeader.php'; ?>
 </head>
 
 <body class="custom-cursor">
   <?php $pagename = 'pricing'; ?>
+
+  <?php include 'php/analyticsBody.php'; ?>
 
   <?php include 'php/toast.php'; ?>
 

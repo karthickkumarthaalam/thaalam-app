@@ -8,12 +8,14 @@
 
     <?php include 'php/css.php' ?>
     <link rel="stylesheet" href="assets/css/module-css/login.css">
+    <?php include 'php/analyticsHeader.php'; ?>
 
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'register-otp'; ?>
 
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php' ?>
 
     <?php include 'php/toast.php' ?>

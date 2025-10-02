@@ -25,7 +25,7 @@
     // Image fallback
     $image = !empty($meta['image'])
         ? $baseUrl . '/' . str_replace("\\", "/", ltrim($meta['image'], '/'))
-        : "https://demoview.ch/summerfest/thaalam-main/assets/img/common/podcast-details/podcast-banner.jpg";
+        : "https://thaalam.ch/assets/img/common/podcast-details/podcast-banner.jpg";
 
     // Current page URL
     $url = "https://demoview.ch/summerfest/podcast-details?id={$podcastId}";
@@ -53,11 +53,15 @@
 
     <?php include 'php/css.php'; ?>
     <link rel="stylesheet" href="assets/css/module-css/podcast-details2.css">
+
+    <?php include 'php/analyticsHeader.php'; ?>
+
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'podcasts details'; ?>
 
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
 
     <?php include 'php/toast.php'; ?>

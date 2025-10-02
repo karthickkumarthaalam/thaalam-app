@@ -5,19 +5,22 @@
     <?php
     $page_title = "Forgot Password - Thaalam Radio Station";
     $page_description = "Reset your Thaalam Radio Station account password. Enter your email to receive an OTP and securely reset your password.";
-    $page_url = "https://demoview.ch/summerfest/thaalam-main/forget-password";
-    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    $page_url = "https://thaalam.ch/forget-password";
+    $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php';
     ?>
 
     <?php include 'php/css.php'; ?>
     <link rel="stylesheet" href="assets/css/module-css/forgor-password.css">
 
+    <?php include 'php/analyticsHeader.php'; ?>
+
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'forget'; ?>
 
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
     <?php include 'php/toast.php'; ?>
     <div class="page-wrapper">

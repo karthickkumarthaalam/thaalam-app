@@ -7,10 +7,10 @@ if (!isset($page_description)) {
     $page_description = "Tune in to Thaalam Radio Station for music, news, and entertainment that connects communities worldwide.";
 }
 if (!isset($page_url)) {
-    $page_url = "https://demoview.ch/summerfest/thaalam-main/";
+    $page_url = "https://thaalam.ch/";
 }
 if (!isset($page_image)) {
-    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
 }
 ?>
 

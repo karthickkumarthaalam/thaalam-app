@@ -6,16 +6,17 @@
     $page_title = "About Us - Thaalam Radio Station";
     $page_description = "Discover the story of Thaalam Media, Switzerland's first official Tamil radio station, its legacy, achievements, and commitment to music and youth.";
     $page_url = "https://www.thaalamradio.com/about-us";
-    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php';
     ?>
 
     <?php include 'php/css.php'; ?>
-
+    <?php include 'php/analyticsHeader.php'; ?>
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'about-us'; ?>
+    <?php include 'php/analyticsBody.php'; ?>
 
     <?php include 'php/preloader.php'; ?>
 

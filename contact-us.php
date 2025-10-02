@@ -5,17 +5,21 @@
     <?php
     $page_title = "Contact Us - Thaalam Radio Station";
     $page_description = "Have questions, feedback, or advertising inquiries? Get in touch with Thaalam Radio Station via our contact form, email, or phone numbers. We’re here to help.";
-    $page_url = "https://demoview.ch/summerfest/thaalam-main/contact-us";
-    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    $page_url = "https://thaalam.ch/contact-us";
+    $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php';
     ?>
 
     <?php include 'php/css.php'; ?>
+
+    <?php include 'php/analyticsHeader.php'; ?>
+
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'contact-us'; ?>
 
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
 
     <?php include 'php/toast.php'; ?>

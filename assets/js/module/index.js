@@ -137,38 +137,33 @@ $(document).ready(function () {
             success: function (response) {
                 const program = response.current;
 
-                if (!program || !program.program_category) {
-                    $("#programTitle").text("No live program");
-                    $("#programArtist").text("");
-                    $("#showTime").text("");
-                    $("#nextProgramNotice").hide();
-                    $("#programImage").attr("src", "/images/default-cover.jpg");
-                    return;
-                }
-
-                updateCarousel(program);
-
-                // Current program info
-                $('#programTitle').text(program?.program_category?.category);
-                $('#programArtist').text(program?.system_users?.name);
-                $('#showTime').text(
-                    `Show Time: ${program?.program_category?.start_time?.substring(0, 5)} - ${program?.program_category?.end_time?.substring(0, 5)}`
-                );
-
+                const programTitle = program?.program_category?.category || "No live program";
+                const programArtist = program?.system_users?.name || "";
+                const showTime = program?.program_category
+                    ? `Show Time: ${program.program_category.start_time.substring(0, 5)} - ${program.program_category.end_time.substring(0, 5)}`
+                    : "";
                 const imagePath = program?.system_users?.image_url
-                    ? `${window.API_BASE_URL}/${program?.system_users?.image_url?.replace(/\\/g, "/")}`
+                    ? `${window.API_BASE_URL}/${program.system_users.image_url.replace(/\\/g, "/")}`
                     : "/images/default-cover.jpg";
 
-                $("#programImage").attr("src", imagePath);
+                // Only update if changed
+                if ($("#programTitle").text() !== programTitle) {
+                    updateCarousel(program);
+                    $("#programTitle").text(programTitle);
+                }
+                if ($("#programArtist").text() !== programArtist) $("#programArtist").text(programArtist);
+                if ($("#showTime").text() !== showTime) $("#showTime").text(showTime);
+                if ($("#programImage").attr("src") !== imagePath) $("#programImage").attr("src", imagePath);
 
-                // Next program notice (only if minutesLeft <= 15)
+                // Next program notice
                 if (response.minutesLeft <= 30 && response.next?.program_category) {
+                    const nextText = `Next Show : ${response.next.program_category.category}`;
                     if (!$("#nextProgramNotice").length) {
                         $("#showTime").after('<div id="nextProgramNotice" class="blinking"></div>');
                     }
-                    $("#nextProgramNotice")
-                        .text(`Next Show : ${response.next.program_category.category}`)
-                        .show();
+                    if ($("#nextProgramNotice").text() !== nextText) {
+                        $("#nextProgramNotice").text(nextText).show();
+                    }
                 } else {
                     $("#nextProgramNotice").hide();
                 }
@@ -182,7 +177,6 @@ $(document).ready(function () {
             }
         });
     }
-
 
     loadCurrentProgram();
     setInterval(loadCurrentProgram, 1 * 60 * 1000);

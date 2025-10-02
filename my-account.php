@@ -9,11 +9,14 @@
 
     <?php include 'php/css.php'; ?>
     <link rel="stylesheet" href="assets/css/module-css/my-account.css">
+
+    <?php include 'php/analyticsHeader.php'; ?>
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'my-account'; ?>
 
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/toast.php'; ?>
     <?php include 'php/preloader.php'; ?>
 

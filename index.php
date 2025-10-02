@@ -12,24 +12,26 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://demoview.ch/summerfest/thaalam-main/">
+    <meta property="og:url" content="https://thaalam.ch/">
     <meta property="og:title" content="Thaalam Radio | Online Tamil Radio, Podcasts & Live Streaming">
     <meta property="og:description" content="Stream 24/7 music, live radio shows, and podcasts from Thaalam Radio – Switzerland’s trusted Tamil radio platform.">
-    <meta property="og:image" content="https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png">
+    <meta property="og:image" content="https://thaalam.ch/assets/img/logo/thalam-logo.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://demoview.ch/summerfest/thaalam-main/">
+    <meta name="twitter:url" content="https://thaalam.ch/">
     <meta name="twitter:title" content="Thaalam Radio | Online Tamil Radio, Podcasts & Live Streaming">
     <meta name="twitter:description" content="Listen live to Thaalam Radio, enjoy RJ shows, podcasts, and more.">
-    <meta name="twitter:image" content="https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png">
+    <meta name="twitter:image" content="https://thaalam.ch/assets/img/logo/thalam-logo.png">
 
     <?php include 'php/css.php'; ?>
-
+    <?php include 'php/analyticsHeader.php'; ?>
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'home'; ?>
+
+    <?php include 'php/analyticsBody.php'; ?>
 
     <?php include 'php/preloader.php'; ?>
 
@@ -80,7 +82,7 @@
                                         <a class="nav-link" data-bs-toggle="tab" href="#podcasts" role="tab">Podcasts</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="https://thaalamsummerfestival.com" target="_blank" rel="noopener">
+                                        <a class="nav-link" href="#" target="_blank" rel="noopener">
                                             Event
                                         </a>
                                     </li>
@@ -158,10 +160,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6">
+                                    <div class="col-xl-6 col-lg-6" style="display: flex; align-items: center; justify-content: center;">
                                         <div class="live-class-two__right">
                                             <div class="live-class-two__img-box mob-top3">
-                                                <img src="assets/images/site-images/WhatsApp Image 2025-09-01 at 15.08.44_fc10e7a5.jpg" alt="Thaalam Podcast Banner">
+                                                <iframe
+                                                    width="100%"
+                                                    height="315"
+                                                    src="https://www.youtube.com/embed/D7EIkNH8NeU"
+                                                    title="Dunkin' Crowns Gavin Casalegno King Of Summer"
+                                                    frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen>
+                                                </iframe>
                                             </div>
                                         </div>
                                     </div>

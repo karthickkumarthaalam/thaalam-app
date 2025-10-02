@@ -5,20 +5,22 @@
     <?php
     $page_title = "Register - Thaalam Radio Station";
     $page_description = "Create your account at Thaalam Radio Station and join our music community. Get access to Podcast interactions";
-    $page_url = "https://demoview.ch/summerfest/thaalam-main/register";
-    $page_image = "https://demoview.ch/summerfest/thaalam-main/assets/img/logo/thalam-logo.png";
+    $page_url = "https://thaalam.ch/register";
+    $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php';
     ?>
 
     <?php include 'php/css.php'; ?>
     <link rel="stylesheet" href="assets/css/module-css/register.css">
     <link rel="stylesheet" href="assets/css/module-css/careers.css">
+    <?php include 'php/analyticsHeader.php'; ?>
 
 </head>
 
 <body class="custom-cursor">
     <?php $pagename = 'register'; ?>
 
+    <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
 
     <?php include 'php/toast.php'; ?>
