@@ -63,7 +63,7 @@
 
     <?php include 'php/scripts.php' ?>
 
-    <script src="assets/js/module/podcast.js"></script>
+    <script src="assets/js/module/podcast.js" defer></script>
 </body>
 
 </html>

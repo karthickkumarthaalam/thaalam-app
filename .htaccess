@@ -1,4 +1,6 @@
+# -------------------------------------------------
 # Enable Rewrite Engine
+# -------------------------------------------------
 RewriteEngine On
 
 # -----------------------------
@@ -7,12 +9,6 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([a-zA-Z0-9_-]+)/?$ $1.php [L]
-
-# -----------------------------
-# Dynamic Podcast Slug Handling
-# Example: /podcasts/episode-name → podcasts.php?slug=episode-name
-# -----------------------------
-# RewriteRule ^podcast-details/([0-9]+)/([a-zA-Z0-9_-]+)/?$ podcast-details.php?id=$1 [L,QSA]
 
 # -----------------------------
 # Redirect trailing slash for non-directory URLs
@@ -24,3 +20,68 @@ RewriteRule ^(.*)/$ /$1 [R=301,L]
 # Security: Prevent directory browsing
 # -----------------------------
 Options -Indexes
+
+# =================================================
+# 🚀 PERFORMANCE OPTIMIZATION
+# =================================================
+
+# -----------------------------
+# Browser Caching (Leverage Cache)
+# -----------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/json "access plus 1 month"
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresDefault "access plus 7 days"
+</IfModule>
+
+# -----------------------------
+# Compression (GZIP/Brotli if supported)
+# -----------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml
+</IfModule>
+
+# -----------------------------
+# Keep-Alive (faster connections)
+# -----------------------------
+<IfModule mod_headers.c>
+  Header set Connection keep-alive
+</IfModule>
+
+# =================================================
+# 🔒 SECURITY HARDENING (also helps GTmetrix score)
+# =================================================
+<IfModule mod_headers.c>
+  # Force HTTPS (if SSL is installed)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  
+  # Prevent MIME sniffing
+  Header set X-Content-Type-Options "nosniff"
+
+  # Prevent clickjacking
+  Header set X-Frame-Options "SAMEORIGIN"
+
+  # Enable XSS protection
+  Header set X-XSS-Protection "1; mode=block"
+
+  # Allow only secure referrers
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Basic Content Security Policy (optional, can be strict later)
+  Header set Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';"
+</IfModule>

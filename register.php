@@ -157,7 +157,7 @@
 
     <?php include 'php/scripts.php'; ?>
 
-    <script src="assets/js/module/register.js"></script>
+    <script src="assets/js/module/register.js" defer></script>
 
 </body>
 

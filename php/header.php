@@ -23,7 +23,9 @@
                 </div>
             </div>
             <div class="main-menu-two__wrapper-inside">
-                <div class="main-menu-two__wrapper-inner">
+                <div class="main-menu-two__wrapper-inner" style="background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
+        url('assets/img/home/pattern/banner-3.png');background-size: cover; background-position: center;">
                     <div class="only-mob mobile-header__first">
                         <div class="main-menu__logo only-mob">
                             <a href="index"><img src="assets/img/logo/thalam-logo.png" alt=""></a>

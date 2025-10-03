@@ -90,7 +90,7 @@
 
     <?php include 'php/scripts.php'; ?>
 
-    <script src="assets/js/module/login.js"></script>
+    <script src="assets/js/module/login.js" defer></script>
 </body>
 
 </html>

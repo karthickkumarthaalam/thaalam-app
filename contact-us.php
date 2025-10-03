@@ -215,7 +215,7 @@
 
     <?php include 'php/config-js.php'; ?>
 
-    <script src="assets/js/module/contact-us.js"></script>
+    <script src="assets/js/module/contact-us.js" defer></script>
 
 </body>
 

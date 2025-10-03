@@ -214,7 +214,7 @@
 
     <?php include 'php/scripts.php'; ?>
 
-    <script src="assets/js/module/careers.js"></script>
+    <script src="assets/js/module/careers.js" defer></script>
 </body>
 
 </html>

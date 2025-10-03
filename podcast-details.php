@@ -250,7 +250,7 @@
 
     <?php include 'php/scripts.php'; ?>
 
-    <script src="assets/js/module/podcast-details.js"></script>
+    <script src="assets/js/module/podcast-details.js" defer></script>
 
 </body>
 

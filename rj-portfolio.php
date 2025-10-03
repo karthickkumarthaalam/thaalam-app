@@ -52,7 +52,7 @@
 
     <?php include 'php/scripts.php'; ?>
 
-    <script src="assets/js/module/rj-portfolio.js"></script>
+    <script src="assets/js/module/rj-portfolio.js" defer></script>
 
 </body>
 

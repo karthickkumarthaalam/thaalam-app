@@ -63,7 +63,7 @@
 
     <?php include 'php/scripts.php'; ?>
 
-    <script src="assets/js/module/register-otp.js"></script>
+    <script src="assets/js/module/register-otp.js" defer></script>
 
 </body>
 

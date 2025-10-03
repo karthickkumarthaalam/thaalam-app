@@ -164,6 +164,7 @@ function updatePodcastUI(result) {
 
   const audioSource = document.getElementById("audioSource");
   if (data.audio_drive_file_link) {
+    console.log(data.audio_drive_file_link, "showing link");
     audioSource.src = data.audio_drive_file_link;
     document.getElementById("thaalam-player").load();
   }
