@@ -84,10 +84,10 @@
     z-index: -1;
 }
 
-.active .main-slider__bg {
+/* .active .main-slider__bg {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
-}
+} */
 
 .main-slider__shape-1 {
     position: absolute;

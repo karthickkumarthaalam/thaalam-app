@@ -2963,7 +2963,7 @@ ul {
   width: 100%;
   position: relative;
   overflow: hidden;
-  max-height: 85vh;
+  max-height: 90vh;
 }
 
 .main-slider .main-slider__bg {
@@ -3642,6 +3642,99 @@ ul {
   gap: 5px;
   align-items: center;
 }
+
+/* ------------------------------------------------------------
+# Popup Banner
+-------------------------------------------------------------*/
+
+/* Popup Overlay */
+#popupBanner {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+/* Popup Container */
+.popupBanner-container {
+  position: relative;
+  width: 90vw;
+  max-width: 60vw;
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Image */
+.popupBanner-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Close Button */
+#close-popupBanner {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+  z-index: 2;
+}
+
+#close-popupBanner:hover {
+  background: rgba(201, 184, 184, 0.7);
+}
+
+/* 📱 Mobile Adjustments */
+@media (max-width: 768px) {
+  .popupBanner-container {
+    width: 90vw;
+    max-width: 400px;
+  }
+
+  #close-popupBanner {
+    top: 8px;
+    right: 10px;
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .popupBanner-container {
+    width: 95vw;
+    max-width: 350px;
+  }
+
+  #close-popupBanner {
+    top: 6px;
+    right: 8px;
+    font-size: 16px;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # End

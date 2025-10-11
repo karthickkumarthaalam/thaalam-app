@@ -183,6 +183,13 @@
 
                 </div>
 
+                <div id="popupBanner">
+                    <div class="popupBanner-container">
+                        <img src="" alt="popup banner image" id="popupBanner-image">
+                        <p id="close-popupBanner">X</p>
+                    </div>
+                </div>
+
                 <?php include 'php/footer.php'; ?>
 
             </div>

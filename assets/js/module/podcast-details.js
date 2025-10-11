@@ -144,41 +144,101 @@ function loadPodCastData(podcastId) {
 
 function updatePodcastUI(result) {
   const data = result?.podcast;
+  if (!data) return;
+
+  // --------- Podcast Image ----------
   const podcastImage = document.getElementById("podcastImage");
-  podcastImage.src = data.image_url
-    ? `${window.API_BASE_URL}/${data.image_url.replace(/\\/g, "/")}`
-    : "assets/img/common/podcast-details/podcast-banner.jpg";
+  if (podcastImage) {
+    podcastImage.src = data.image_url
+      ? `${window.API_BASE_URL}/${data.image_url.replace(/\\/g, "/")}`
+      : "assets/img/common/podcast-details/podcast-banner.jpg";
+    podcastImage.alt = data.title || "Podcast banner";
+  }
 
-  const formattedDate = new Date(data.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  // --------- Formatted Date ----------
+  const formattedDate = data.date
+    ? new Date(data.date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : "Unknown";
 
-  document.getElementById("podcastTitle").textContent = data.title;
+  // --------- Basic Info ----------
+  document.getElementById("podcastTitle").textContent =
+    data.title || "Untitled";
   document.getElementById(
     "publishedDate"
-  ).innerHTML = `${formattedDate} <span>${data.duration} MIN</span>`;
+  ).innerHTML = `${formattedDate} <span>${data.duration || 0} MIN</span>`;
+  document.getElementById("podcastDescription").textContent =
+    data.description || "No description available";
 
-  document.getElementById("podcastDescription").textContent = data.description;
-
+  // --------- Audio Player ----------
+  const player = document.getElementById("thaalam-player");
   const audioSource = document.getElementById("audioSource");
+  const durationDisplay = document.getElementById("thaalam-duration");
+  const playPauseBtn = document.getElementById("thaalam-play-pause-btn");
   if (data.audio_drive_file_link) {
-    console.log(data.audio_drive_file_link, "showing link");
     audioSource.src = data.audio_drive_file_link;
-    document.getElementById("thaalam-player").load();
+    player.load();
+
+    // Show spinner while loading metadata
+    if (playPauseBtn) {
+      playPauseBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    }
+
+    player.addEventListener(
+      "loadedmetadata",
+      () => {
+        durationDisplay.textContent = formatTime(player.duration);
+        if (playPauseBtn) {
+          playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+      },
+      { once: true }
+    );
+
+    player.addEventListener("waiting", () => {
+      if (playPauseBtn) {
+        playPauseBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+      }
+    });
+
+    player.addEventListener("canplay", () => {
+      if (playPauseBtn) {
+        playPauseBtn.innerHTML = player.paused
+          ? '<i class="fas fa-play"></i>'
+          : '<i class="fas fa-pause"></i>';
+      }
+    });
+  } else {
+    player.style.display = "none";
+    if (playPauseBtn) playPauseBtn.style.display = "none";
   }
 
-  //podcast information tab
-  document.getElementById("published-name").textContent = data.rjname;
-  document.getElementById("content-creator").textContent = data.content;
+  // --------- Podcast Information Tab ----------
+  document.getElementById("published-name").textContent =
+    data.rjname || "Unknown";
+  document.getElementById("content-creator").textContent =
+    data.content || "Unknown";
   document.getElementById("published-date").textContent = formattedDate;
-  document.getElementById("duration").textContent = `${data.duration} MIN`;
+  document.getElementById("duration").textContent = `${data.duration || 0} MIN`;
 
+  // --------- Likes ----------
   const likeCountElem = document.getElementById("like-count");
   if (likeCountElem) {
-    likeCountElem.textContent = result.reaction.like || 0;
+    likeCountElem.textContent = result?.reaction?.like ?? 0;
   }
+}
+
+// Helper to format time
+function formatTime(seconds) {
+  if (isNaN(seconds)) return "00:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins.toString().padStart(2, "0")}:${secs
+    .toString()
+    .padStart(2, "0")}`;
 }
 
 $(document).on("click", ".podcast", function () {

@@ -160,7 +160,7 @@
                                         <div id="thaalam-progress-bar">
                                             <div id="thaalam-progress-fill"></div>
                                         </div>
-                                        <span id="thaalam-duration">30:00</span>
+                                        <span id="thaalam-duration">0:00</span>
                                     </div>
 
                                     <!-- Volume -->
