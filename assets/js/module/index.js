@@ -280,4 +280,40 @@ $(document).ready(function () {
   }
 
   popupbanner();
+
+  function loadFestivalGifs() {
+    const leftImg = document.getElementById("festivalLeft");
+    const rightImg = document.getElementById("festivalRight");
+
+    // Hide initially
+    leftImg.style.display = "none";
+    rightImg.style.display = "none";
+
+    $.ajax({
+      url: `${window.API_BASE_URL}/festival-gif?status=true`,
+      method: "GET",
+      success: function (response) {
+        const gifData = response?.data[0];
+        if (!gifData) return;
+
+        if (gifData.left_side_image) {
+          leftImg.src = `${
+            window.API_BASE_URL
+          }/${gifData.left_side_image.replace(/\\/g, "/")}`;
+          leftImg.style.display = "block"; // show only if image exists
+        }
+        if (gifData.right_side_image) {
+          rightImg.src = `${
+            window.API_BASE_URL
+          }/${gifData.right_side_image.replace(/\\/g, "/")}`;
+          rightImg.style.display = "block"; // show only if image exists
+        }
+      },
+      error: function () {
+        console.error("Failed to fetch festival GIFs");
+      },
+    });
+  }
+
+  loadFestivalGifs();
 });
