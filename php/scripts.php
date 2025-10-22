@@ -29,4 +29,5 @@
 <script src="assets/js/gsap/SplitText.js" defer></script>
 
 <!-- Your custom JS -->
+<script src="assets/js/utils.js" defer></script>
 <script src="assets/js/script.js" defer></script>

@@ -108,9 +108,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6">
-                                                        <h4 class="contact-three__input-title">Subject *</h4>
+                                                        <h4 class="contact-three__input-title">Phone Number *</h4>
                                                         <div class="contact-three__input-box">
-                                                            <input type="text" name="subject" placeholder="Write about your enquiry" required>
+                                                            <input type="text" name="phone" placeholder="+41 79 288 22 71" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6">
@@ -123,6 +123,13 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="col-xl-12">
+                                                        <h4 class="contact-three__input-title">Subject *</h4>
+                                                        <div class="contact-three__input-box">
+                                                            <input type="text" name="subject" placeholder="Write about your enquiry" required>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-xl-12">
                                                         <h4 class="contact-three__input-title">Message *</h4>
                                                         <div class="contact-three__input-box text-message-box">

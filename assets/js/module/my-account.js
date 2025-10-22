@@ -219,16 +219,19 @@ document.addEventListener("DOMContentLoaded", function () {
     "#settings .form-section:nth-child(2) .btn-primary"
   );
   updatePassBtn.addEventListener("click", function () {
-    const oldPass = document.querySelector(
+    const oldPassInput = document.querySelector(
       'input[placeholder="Old password"]'
-    ).value;
-    const newPass = document.querySelector(
+    );
+    const newPassInput = document.querySelector(
       'input[placeholder="New password"]'
-    ).value;
-    const confirmPass = document.querySelector(
+    );
+    const confirmPassInput = document.querySelector(
       'input[placeholder="Confirm new password"]'
-    ).value;
+    );
 
+    const oldPass = oldPassInput.value.trim();
+    const newPass = newPassInput.value.trim();
+    const confirmPass = confirmPassInput.value.trim();
     if (newPass !== confirmPass) {
       showToast("Passwords do not match", "error");
       return;
@@ -250,6 +253,9 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         if (data.status === "success") {
           showToast("Password updated successfully", "success");
+          oldPassInput.value = "";
+          newPassInput.value = "";
+          confirmPassInput.value = "";
         } else {
           showToast(data.message, "error");
         }

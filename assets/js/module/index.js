@@ -316,4 +316,41 @@ $(document).ready(function () {
   }
 
   loadFestivalGifs();
+
+  (async function trackVisitor() {
+    let visitorId = localStorage.getItem("visitor_id");
+    if (!visitorId) {
+      visitorId = crypto.randomUUID();
+      localStorage.setItem("visitor_id", visitorId);
+    }
+
+    let publicIp = localStorage.getItem("visitor_ip") || "";
+    if (!publicIp) {
+      try {
+        const res = await fetch("https://api.ipify.org?format=json");
+        const data = await res.json();
+        publicIp = data.ip;
+        localStorage.setItem("visitor_ip", publicIp);
+      } catch (err) {
+        console.warn("Failed to fetch public IP:", err);
+      }
+    }
+
+    const payload = {
+      visitor_id: visitorId,
+      page: window.location.pathname,
+      clientIp: publicIp,
+    };
+
+    try {
+      await fetch(`${window.API_BASE_URL}/visit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      });
+    } catch (err) {
+      console.error("Failed to send visitor tracking:", err);
+    }
+  })();
 });

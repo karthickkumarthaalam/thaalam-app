@@ -581,6 +581,38 @@
 }
 
 /* Comment Input (Inline Row) */
+.add-comment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+/* Guest input container */
+#guestFields {
+    display: none;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Guest input styling */
+.guest-input {
+    width: 48%;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guest-input:focus {
+    border-color: #f90000;
+    box-shadow: 0 0 0 2px rgba(249, 0, 0, 0.1);
+    outline: none;
+}
+
 .add-comment {
     display: flex;
     align-items: center;
@@ -590,14 +622,14 @@
 
 .add-comment textarea {
     flex: 1;
-    border: 1px solid #eee;
+    border: 1px solid #bbb;
     border-radius: 8px;
     padding: 10px 12px;
     resize: none;
     font-size: 0.9rem;
     font-family: inherit;
     transition: border 0.2s ease;
-    height: 42px;
+    height: 62px;
     /* keep height consistent with button */
 }
 
@@ -611,7 +643,7 @@
     /* solid red, no gradient */
     border: none;
     padding: 0 16px;
-    height: 42px;
+    height: 62px;
     border-radius: 8px;
     color: #fff;
     cursor: pointer;

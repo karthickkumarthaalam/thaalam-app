@@ -217,9 +217,23 @@
 
                     <div class="podcast-comments">
                         <h5 class="comment-title">Comment <span style="color:#000;">Section</span> </h5>
-                        <div class="add-comment">
-                            <textarea id="commentInput" placeholder="Write a comment..."></textarea>
-                            <button class="submit-comment" onclick="submitComment(event)"><i class="fas fa-paper-plane"></i></button>
+                        <div class="add-comment-section">
+                            <div id="guestFields" style="display: none; margin-bottom: 10px;">
+                                <input
+                                    type="text"
+                                    id="guestName"
+                                    placeholder="Your Name"
+                                    class="guest-input" />
+                                <input
+                                    type="email"
+                                    id="guestEmail"
+                                    placeholder="Your Email (optional)"
+                                    class="guest-input" />
+                            </div>
+                            <div class="add-comment">
+                                <textarea id="commentInput" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment" onclick="submitComment(event)"><i class="fas fa-paper-plane"></i></button>
+                            </div>
                         </div>
 
                         <button class="accordion-toggle">

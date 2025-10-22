@@ -104,6 +104,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(queryString);
   const podcastId = urlParams.get("id");
   const memberId = localStorage.getItem("memberId");
+  const guestFields = document.getElementById("guestFields");
+
+  if (!memberId) {
+    guestFields.style.display = "block";
+  }
 
   if (!podcastId) {
     return;
@@ -332,19 +337,19 @@ function submitComment(e) {
   const podcastId = new URLSearchParams(window.location.search).get("id");
   const memberId = localStorage.getItem("memberId");
   const commentInput = document.getElementById("commentInput");
-
-  if (!memberId) {
-    window.location.href = `/login.php?redirect_url=${encodeURIComponent(
-      window.location.href
-    )}`;
-    return;
-  }
+  const guestNameInput = document.getElementById("guestName");
+  const guestEmailInput = document.getElementById("guestEmail");
 
   const commentText = commentInput.value.trim();
+  const guestName = guestNameInput ? guestNameInput.value.trim() : null;
+  const guestEmail = guestEmailInput ? guestEmailInput.value.trim() : null;
+
   if (!commentText) {
     showToast("Please write a comment before submitting", "error");
     return;
   }
+
+  const guestId = memberId ? null : getGuestId();
 
   fetch(`${window.API_BASE_URL}/podcasts/comments`, {
     method: "POST",
@@ -353,7 +358,10 @@ function submitComment(e) {
     },
     body: JSON.stringify({
       podcast_id: podcastId,
-      member_id: memberId,
+      member_id: memberId || null,
+      guest_id: guestId || null,
+      guest_name: guestName || null,
+      guest_email: guestEmail || null,
       comment: commentText,
     }),
   })
@@ -361,9 +369,11 @@ function submitComment(e) {
     .then((result) => {
       if (result.status === "success") {
         commentInput.value = "";
+        if (guestNameInput) guestNameInput.value = "";
+        if (guestEmailInput) guestEmailInput.value = "";
         fetchComments(podcastId);
         showToast(
-          "Comment has been posted successfully, it will be reflected soon",
+          "Your comment was submitted and is pending approval",
           "success"
         );
       } else {
@@ -527,22 +537,30 @@ function renderPagination(podcastId) {
 }
 
 function handleLike(likeBtn, likeCountElem, podcastId, memberId) {
-  if (!memberId) {
-    window.location.href = `/login?redirect_url=${encodeURIComponent(
-      window.location.href
-    )}`;
-    return;
-  }
+  // if (!memberId) {
+  //   window.location.href = `/login?redirect_url=${encodeURIComponent(
+  //     window.location.href
+  //   )}`;
+  //   return;
+  // }
 
   if (likeBtn.classList.contains("active")) {
     showToast("You have already liked this podcast", "warning");
     return;
   }
 
-  sendLikeToServer(podcastId, memberId, likeBtn, likeCountElem);
+  const guestId = memberId ? null : getGuestId();
+
+  sendLikeToServer(podcastId, memberId, guestId, likeBtn, likeCountElem);
 }
 
-function sendLikeToServer(podcastId, memberId, likeBtn, likeCountElem) {
+function sendLikeToServer(
+  podcastId,
+  memberId,
+  guestId,
+  likeBtn,
+  likeCountElem
+) {
   fetch(`${window.API_BASE_URL}/podcasts/reaction`, {
     method: "POST",
     headers: {
@@ -550,7 +568,8 @@ function sendLikeToServer(podcastId, memberId, likeBtn, likeCountElem) {
     },
     body: JSON.stringify({
       podcast_id: podcastId,
-      member_id: memberId,
+      member_id: memberId || null,
+      guest_id: guestId || null,
       reaction: "like",
     }),
   })
@@ -567,7 +586,10 @@ function sendLikeToServer(podcastId, memberId, likeBtn, likeCountElem) {
     })
     .catch((err) => {
       console.error(err);
-      showToast("Failed to like podcast, please try again", "error");
+      showToast(
+        err.message || "Failed to like podcast, please try again",
+        "warning"
+      );
     });
 }
 
