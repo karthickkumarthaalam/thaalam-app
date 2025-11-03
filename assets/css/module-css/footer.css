@@ -12,15 +12,15 @@
 
 .site-footer__shape-bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    inset: 0;
     animation: topBottom 3s ease-in-out infinite;
     z-index: -1;
+}
+
+.site-footer__shape-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .site-footer__logo-and-contact-box {

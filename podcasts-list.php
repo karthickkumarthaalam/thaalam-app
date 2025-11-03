@@ -34,7 +34,7 @@
         </div>
         <div class="row" style=" 
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
-                        url('./assets/images/backgrounds/background_image.jpg'); ">>
+                        url('./assets/images/backgrounds/background_image.jpg'); ">
             <section class="container details-right">
 
                 <div class="search-bar">

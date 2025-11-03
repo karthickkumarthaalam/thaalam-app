@@ -19,8 +19,9 @@ $(document).ready(function () {
     if (programImage) {
       slides.push(`
             <div class="item">
-                <div class="main-slider__bg" 
-                     style="background-image: url(${programImage})"></div>
+              <div class="main-slider__bg">
+                <img src="${programImage}" alt="Program Image" loading="eager" />
+              </div>
             </div>
         `);
     }
@@ -36,8 +37,9 @@ $(document).ready(function () {
           const fixedPath = banner.website_image.replace(/\\/g, "/");
           slides.push(`
                     <div class="item">
-                        <div class="main-slider__bg" 
-                             style="background-image: url(${window.API_BASE_URL}/${fixedPath})"></div>
+                        <div class="main-slider__bg">
+                          <img src="${window.API_BASE_URL}/${fixedPath}" alt="Program Image" loading="eager" />
+                        </div>
                     </div>
                 `);
         });
@@ -318,28 +320,43 @@ $(document).ready(function () {
   loadFestivalGifs();
 
   (async function trackVisitor() {
-    let visitorId = localStorage.getItem("visitor_id");
+    let visitorId = localStorage.getItem("visitor_id_v2");
     if (!visitorId) {
-      visitorId = crypto.randomUUID();
-      localStorage.setItem("visitor_id", visitorId);
+      visitorId = Math.random().toString(36).substring(2, 10);
+      localStorage.setItem("visitor_id_v2", visitorId);
     }
 
     let publicIp = localStorage.getItem("visitor_ip") || "";
-    if (!publicIp) {
+    let country = localStorage.getItem("visitor_country") || "";
+    let city = localStorage.getItem("visitor_city") || "";
+    let region = localStorage.getItem("visitor_region") || "";
+
+    if (!publicIp || !country || !city || !region) {
       try {
-        const res = await fetch("https://api.ipify.org?format=json");
+        const res = await fetch("https://ipapi.co/json/");
         const data = await res.json();
+
         publicIp = data.ip;
+        country = data.country_name;
+        region = data.region;
+        city = data.city;
+
         localStorage.setItem("visitor_ip", publicIp);
+        localStorage.setItem("visitor_country", country);
+        localStorage.setItem("visitor_region", region);
+        localStorage.setItem("visitor_city", city);
       } catch (err) {
-        console.warn("Failed to fetch public IP:", err);
+        console.warn("Failed to fetch IP info:", err);
       }
     }
 
     const payload = {
       visitor_id: visitorId,
+      ip: publicIp,
+      country,
+      region,
+      city,
       page: window.location.pathname,
-      clientIp: publicIp,
     };
 
     try {

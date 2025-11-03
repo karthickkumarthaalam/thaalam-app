@@ -55,26 +55,17 @@
 }
 
 .main-slider .item {
-    position: relative;
     border-radius: 10px;
-    /* padding-top: 147px; */
-    /* padding-bottom: 150px; */
     background-color: var(--fistudy-black);
     overflow: hidden;
     z-index: 10;
 }
 
 .main-slider__bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 10px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     /* opacity: .20; */
+    display: flex;
+    align-items: center;
+    background-color: white;
     -webkit-transform: scale(1);
     transform: scale(1);
     -webkit-transition: opacity 1500ms ease-in, -webkit-transform 7000ms ease;

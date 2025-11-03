@@ -1,6 +1,7 @@
 <!--Site Footer Start-->
 <footer class="site-footer">
-    <div class="site-footer__shape-bg" style="background-image: url(assets/img/home/footer-bg.png);">
+    <div class="site-footer__shape-bg">
+        <img src="assets/img/home/footer-bg.png" alt="Footer Background" loading="lazy" />
     </div>
 
     <div class="site-footer__top">
@@ -42,15 +43,15 @@
                                             <li><a href="marketting.php"> <span class="icon-plus"></span>
                                                     Marketting</a></li>
                                             <li><a href="pricing.php"> <span class="icon-plus"></span>
-                                                   Pricing</a></li>
+                                                    Pricing</a></li>
                                             </li>
                                             <li><a href="news.php"> <span class="icon-plus"></span>
                                                     News</a></li>
                                             <li><a href="blogs.php"> <span class="icon-plus"></span>
                                                     Blogs</a>
                                             </li>
-                                            
-                                            
+
+
                                         </ul>
                                     </div>
                                 </div>

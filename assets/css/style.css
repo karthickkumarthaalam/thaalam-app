@@ -2964,6 +2964,7 @@ ul {
   position: relative;
   overflow: hidden;
   max-height: 90vh;
+  background-color: white;
 }
 
 .main-slider .main-slider__bg {
