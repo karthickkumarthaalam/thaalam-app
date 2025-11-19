@@ -10,9 +10,19 @@
     trialWarn: false,
   });
 
+  function hidePreloader() {
+    $(".js-preloader").fadeOut(200);
+  }
+
   // Preloader
-  $(window).on("load", function (event) {
-    $(".js-preloader").delay(100).fadeOut(200);
+  $(window).on("load", function () {
+    hidePreloader();
+  });
+
+  $(document).on("readystatechange", function () {
+    if (document.readyState === "complete") {
+      hidePreloader();
+    }
   });
 
   // AOS Animation
@@ -1413,8 +1423,6 @@
       clearInterval(update_time);
     });
   });
-
-  $("select:not(.ignore)").niceSelect();
 })(jQuery);
 
 function showToast(message, type = "success") {

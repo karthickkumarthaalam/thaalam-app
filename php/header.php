@@ -60,6 +60,15 @@
                                     </div>
                                 </a>
                             </li>
+                            <li>
+                                <a href="news-list">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-newspaper pe-2"></i>
+                                        <p>News</p>
+                                    </div>
+                                </a>
+                            </li>
+
                             <!-- <li class="dropdown">
                                 <a href="javascript:void(0)">
                                     <div class="d-flex align-items-center">

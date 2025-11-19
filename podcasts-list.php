@@ -5,7 +5,7 @@
     <?php
     $page_title = "Podcasts - Thaalam Radio Station";
     $page_description = "Explore Thaalam Radio Station podcasts. Listen to stories, music, and shows that connect you with our vibrant community.";
-    $page_url = "https://thaalam.ch/podcasts";
+    $page_url = "https://thaalam.ch/podcasts-list";
     $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php';
     ?>

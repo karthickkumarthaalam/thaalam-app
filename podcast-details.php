@@ -28,7 +28,7 @@
         : "https://thaalam.ch/assets/img/common/podcast-details/podcast-banner.jpg";
 
     // Current page URL
-    $url = "https://demoview.ch/summerfest/podcast-details?id={$podcastId}";
+    $url = "https://thaalam.ch/podcast-details?id={$podcastId}";
     ?>
 
     <title><?php echo htmlspecialchars($title); ?></title>

@@ -35,6 +35,14 @@
                          </div>
                      </a>
                  </li>
+                 <li>
+                     <a href="news-list">
+                         <div class="d-flex align-items-center">
+                             <i class="fas fa-newspaper pe-2"></i>
+                             <p>News</p>
+                         </div>
+                     </a>
+                 </li>
                  <!-- <li>
                      <a href="audio.php">
                          <div class="d-flex align-items-center">

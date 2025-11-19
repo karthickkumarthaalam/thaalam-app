@@ -1,0 +1,1105 @@
+/* ----------------------------------------------
+   THEME VARIABLES
+---------------------------------------------- */
+:root {
+    --primary: #1a365d;
+    --accent: #e53e3e;
+    --accent-light: #ffe0e0;
+    --text-dark: #1a202c;
+    --text-light: #1d1d1d;
+    --text-muted: #a0aec0;
+    --bg-light: #f7fafc;
+    --bg-white: #ffffff;
+    --border: #e2e8f0;
+    --radius: 10px;
+    --radius-lg: 16px;
+    --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ----------------------------------------------
+   PAGE LAYOUT
+---------------------------------------------- */
+.news-details-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ----------------------------------------------
+   BREADCRUMB
+---------------------------------------------- */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    padding: 10px 0px;
+    margin: 14px 0 20px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    color: var(--text-light);
+}
+
+.breadcrumb>*:not(:last-child)::after {
+    content: "›";
+    display: inline-block;
+    margin: 0 8px;
+    color: var(--text-muted, #9aa4b2);
+    transform: translateY(1px);
+}
+
+.breadcrumb a {
+    color: var(--primary, #1a365d);
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    white-space: nowrap;
+    max-width: 30vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color .2s ease;
+}
+
+.breadcrumb a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .2s ease;
+    opacity: .6;
+}
+
+.breadcrumb a:hover {
+    color: var(--accent, #e53e3e);
+}
+
+.breadcrumb a:hover::before {
+    transform: scaleX(1);
+}
+
+.breadcrumb span,
+.breadcrumb #breadcrumb-title {
+    color: var(--text-dark, #1a202c);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: clamp(140px, 48vw, 700px);
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+    .breadcrumb {
+        padding: 8px 10px;
+        font-size: 0.88rem;
+        gap: 6px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .breadcrumb::-webkit-scrollbar {
+        display: none;
+    }
+
+    .breadcrumb a {
+        max-width: 42vw;
+    }
+
+    .breadcrumb #breadcrumb-title {
+        max-width: 56vw;
+    }
+}
+
+.breadcrumb a:focus-visible {
+    outline: 2px solid var(--accent, #e53e3e);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ----------------------------------------------
+   MAIN CONTAINER
+---------------------------------------------- */
+.news-container {
+    background: transparent;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ----------------------------------------------
+   HEADER
+---------------------------------------------- */
+.news-header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0 10px;
+    margin-bottom: 20px;
+}
+
+.news-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.category {
+    color: var(--accent);
+    background-color: #fdeeee;
+    font-weight: 700;
+    padding: 3px 15px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-size: 0.8rem;
+}
+
+.subcategory {
+    background: #f3f2f2;
+    color: #000;
+    padding: 3px 15px;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.news-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+}
+
+.news-subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+/* ----------------------------------------------
+   NEWS INFO (ELEGANT UPGRADE)
+---------------------------------------------- */
+.news-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.93rem;
+    color: var(--text-light);
+    margin-bottom: 24px;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    position: relative;
+}
+
+/* Each info item (author, date, location) */
+.news-info span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f9f9f9;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    transition: all 0.25s ease;
+}
+
+
+/* Icons */
+.news-info i {
+    color: var(--accent);
+    font-size: 0.9rem;
+    transition: color 0.25s ease;
+}
+
+
+
+/* Compact for mobile */
+@media (max-width: 768px) {
+    .news-info {
+        gap: 10px;
+        font-size: 0.85rem;
+    }
+
+    .news-info span {
+        padding: 5px 10px;
+        border-radius: 6px;
+    }
+
+    .news-info span:not(:last-child)::after {
+        margin-left: 8px;
+    }
+}
+
+/* ----------------------------------------------
+   CAROUSEL - FIXED
+---------------------------------------------- */
+/* ----------------------------------------------
+   CAROUSEL - UPDATED
+---------------------------------------------- */
+/* ----------------------------------------------
+   RESPONSIVE CAROUSEL (FIXED VERSION)
+---------------------------------------------- */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: visible !important;
+    background: transparent;
+    border-radius: var(--radius);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+    will-change: transform;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slide img,
+.carousel-slide video {
+    width: 100%;
+    height: 450px;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    /* ✅ Keeps it consistent */
+    object-fit: contain;
+    display: block;
+}
+
+/* Navigation buttons */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: background 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.carousel-btn.prev {
+    left: 15px;
+}
+
+.carousel-btn.next {
+    right: 15px;
+}
+
+/* Indicators */
+.carousel-indicators {
+    position: absolute;
+    bottom: 12px;
+    left: 35%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+}
+
+.carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+    background: var(--accent);
+    transform: scale(1.2);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+
+    .carousel-slide img,
+    .carousel-slide video {
+        height: auto;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        /* ✅ Taller look for mobile */
+    }
+
+    .carousel-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* ----------------------------------------------
+   AUDIO PLAYER - UPDATED
+---------------------------------------------- */
+/* ------------------------------------------------
+   PREMIUM AUDIO PLAYER — OneIndia / BBC Inspired
+-------------------------------------------------- */
+.audio-player {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    background: linear-gradient(135deg, #ffffff, #f4f6f8);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 850px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.6s ease both;
+}
+
+.audio-player:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* 🎧 Header Section */
+.audio-player h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: 0.4px;
+}
+
+.audio-player h3 i {
+    color: var(--accent);
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+}
+
+/* 🎚️ Audio Control Styling */
+.audio-player audio {
+    width: 100%;
+    height: 42px;
+    border-radius: 10px;
+    outline: none;
+    background-color: #fff;
+    accent-color: var(--accent);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.25s ease-in-out;
+}
+
+.audio-player:hover::before {
+    opacity: 1;
+}
+
+/* ✨ Fade animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+    .audio-player {
+        padding: 18px 20px;
+        margin: 25px auto;
+    }
+
+    .audio-player h3 {
+        font-size: 1rem;
+    }
+
+    .audio-player h3 i {
+        font-size: 1rem;
+        padding: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .audio-player {
+        padding: 16px 16px;
+        border-radius: 10px;
+    }
+
+    .audio-player h3 {
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+
+    .audio-player audio {
+        height: 36px;
+    }
+}
+
+
+/* ----------------------------------------------
+   CONTENT
+---------------------------------------------- */
+.news-body {
+    padding: 30px 0;
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: var(--text-dark);
+}
+
+.news-body p {
+    margin-bottom: 1.5rem;
+}
+
+.news-body strong {
+    color: var(--primary);
+}
+
+/* ----------------------------------------------
+   FOOTER
+---------------------------------------------- */
+.news-footer {
+    padding: 25px 5px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.news-footer p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.news-footer strong {
+    color: var(--text-dark);
+}
+
+/* ----------------------------------------------
+   SHARE ICONS
+---------------------------------------------- */
+.social-share {
+    display: flex;
+    gap: 12px;
+}
+
+.social-share a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.social-share a:hover {
+    background: var(--accent);
+}
+
+/* ----------------------------------------------
+   ERROR MESSAGE
+---------------------------------------------- */
+.error-message {
+    padding: 80px 20px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--accent);
+}
+
+/* ----------------------------------------------
+   RESPONSIVE
+---------------------------------------------- */
+@media (max-width: 768px) {
+    .news-body {
+        padding: 20px 0;
+    }
+
+    .news-title {
+        font-size: 1.6rem;
+    }
+
+    .news-subtitle {
+        font-size: 1rem;
+    }
+
+    .carousel-container {
+        height: 300px;
+    }
+
+    .audio-player,
+    .news-footer {
+        padding: 20px;
+    }
+
+    .news-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-title {
+        font-size: 1.4rem;
+    }
+
+    .carousel-container {
+        height: 250px;
+    }
+
+    .carousel-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* ----------------------------------------------
+   RELATED NEWS - SIMPLE & ELEGANT (3 IN A ROW)
+---------------------------------------------- */
+.related-news-section {
+    margin-top: 60px;
+    padding: 50px 20px 30px;
+    border-top: 1px solid var(--border);
+}
+
+.related-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: left;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--accent);
+    padding-left: 10px;
+}
+
+/* Grid - 3 columns */
+.related-news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Each card */
+.related-card {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s ease-in-out;
+}
+
+.related-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Image section */
+.related-image {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+
+.related-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Content section */
+.related-content {
+    padding: 0.9rem 1rem 1.2rem;
+}
+
+.related-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.5;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+}
+
+/* Date line */
+.related-date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.related-date i {
+    color: var(--accent);
+}
+
+/* No related message */
+.no-related {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .related-news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .related-news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .related-image {
+        height: 180px;
+    }
+
+    .related-content h3 {
+        font-size: 0.95rem;
+    }
+}
+
+
+/* 🌐 General Layout */
+.news-details-page {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 🗨️ Comment Modal – White + Red Theme */
+.comment-modal {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 420px;
+    height: 100%;
+    background: #ffffff;
+    color: #222;
+    box-shadow: -5px 0 5px rgba(0, 0, 0, 0.9);
+    overflow-y: auto;
+    transition: right 0.35s ease;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px 0 0 16px;
+}
+
+.comment-modal.active {
+    right: 0;
+}
+
+/* Header / Close */
+.close-comment-modal {
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    float: right;
+    color: #e50914;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.close-comment-modal:hover {
+    transform: rotate(90deg);
+}
+
+
+
+/* 🌐 General Layout */
+.news-details-page {
+    position: relative;
+    overflow: hidden;
+}
+
+/* ================================
+   🗨️ Comment Modal (Desktop + Mobile)
+================================ */
+.comment-modal {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 420px;
+    height: 100%;
+    background: #fff;
+    color: #222;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: right 0.35s ease;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px 0 0 8px;
+}
+
+.comment-modal.active {
+    right: 0;
+}
+
+.comment-header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.comment-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem;
+}
+
+.comments-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.close-comment-modal {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    float: right;
+    color: #e50914;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.close-comment-modal:hover {
+    transform: rotate(90deg);
+}
+
+/* ================================
+   💬 Comment List
+================================ */
+.comment-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 1rem;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: #ffe0e0;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* ================================
+   💬 Simple & Clean Comment Item
+================================ */
+
+/* === Comment Item Wrapper === */
+.comment-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: transparent;
+    margin-bottom: 10px;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Soft hover effect */
+.comment-item:hover {
+    background: #fafafa;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* === Content Area === */
+.comment-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Header (Name + Time) */
+.comment-content div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+/* Author name */
+.comment-content strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Time ago */
+.comment-content small {
+    font-size: 0.78rem;
+    color: #6b7280;
+}
+
+/* Comment text */
+.comment-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #374151;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* === Responsive Tweak === */
+@media (max-width: 600px) {
+    .comment-item {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .comment-content strong {
+        font-size: 0.9rem;
+    }
+
+    .comment-content small {
+        font-size: 0.75rem;
+    }
+
+    .comment-content p {
+        font-size: 0.85rem;
+    }
+}
+
+
+.no-comments {
+    color: #777;
+    text-align: center;
+    margin-top: 1.2rem;
+    font-style: italic;
+}
+
+/* ================================
+   🧾 Comment Form – Fixed at Bottom (Refined)
+================================ */
+.comment-form {
+    background: #fff;
+    padding: 1rem 1.2rem;
+    border-top: 1px solid #eee;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.comment-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+/* 🧍‍♂️ Member label text */
+.comment-form p {
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* 🧾 Inputs (guest fields) */
+.comment-form input {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    color: #222;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.comment-form input:focus {
+    border-color: #e50914;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+    outline: none;
+}
+
+.comment-form input::placeholder {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+/* ✏️ Textarea */
+.comment-form textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: none;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    font-size: 0.9rem;
+    background: #fafafa;
+    color: #222;
+    line-height: 1.5;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.comment-form textarea:focus {
+    border-color: #e50914;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+    outline: none;
+}
+
+.comment-form textarea::placeholder {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+/* ================================
+   🔘 Submit Button (Red Accent)
+================================ */
+.submit-comment-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.3px;
+    box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);
+}
+
+.submit-comment-btn:hover {
+    background: linear-gradient(135deg, #b91c1c, #dc2626);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+    transform: translateY(-1px);
+}
+
+.submit-comment-btn:active {
+    transform: scale(0.97);
+    background: linear-gradient(135deg, #991b1b, #b91c1c);
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.25);
+}
+
+/* ================================
+   📱 Mobile Optimizations
+================================ */
+@media (max-width: 768px) {
+    .comment-form {
+        padding: 0.9rem 1rem;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        border-top: 2px solid #e50914;
+    }
+
+    .submit-comment-btn {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+
+    .comment-form input,
+    .comment-form textarea {
+        font-size: 0.88rem;
+    }
+}
+
+/* ================================
+   💬 Comment Trigger Icon
+================================ */
+.comment-trigger {
+    margin-left: auto;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #444;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.comment-trigger:hover {
+    color: #f90000;
+}
+
+.comment-trigger i {
+    color: #f90000;
+    font-size: 1.2rem;
+}
+
+/* ================================
+   📱 Mobile Responsive
+================================ */
+@media (max-width: 768px) {
+    .comment-modal {
+        width: 100%;
+        right: -100%;
+        bottom: 0;
+        height: 75vh;
+        border-radius: 22px 22px 0 0;
+        border-left: none;
+    }
+
+    .comment-modal.active {
+        right: 0;
+    }
+}

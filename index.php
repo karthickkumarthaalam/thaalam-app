@@ -86,7 +86,7 @@
                                             <a class="nav-link" data-bs-toggle="tab" href="#podcasts" role="tab">Podcasts</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" target="_blank" rel="noopener">
+                                            <a class="nav-link" href="/events-list" target="_blank" rel="noopener">
                                                 Event
                                             </a>
                                         </li>
@@ -106,7 +106,7 @@
                                     <div class="row">
                                         <div class="audio-page__player">
                                             <div class="audio-page__player-cover">
-                                                <img id="programImage" src="assets/img/common/audio/music-poster.jpg" alt="Thaalam Live">
+                                                <img id="programImage" alt="Thaalam Live">
                                                 <div class="audio-page__player-overlay">
                                                 </div>
                                             </div>

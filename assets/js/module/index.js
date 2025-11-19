@@ -76,55 +76,67 @@ $(document).ready(function () {
     });
   }
 
-  const $audio = $("#audioPlayer");
-  const $playBtn = $("#mainPlayBtn");
-  const $playIcon = $("#mainPlayIcon");
-  const $volumeBtn = $("#volumeBtn");
-  const $volumeIcon = $("#volumeIcon");
-  const $volumeSlider = $("#volumeSlider");
+  // Delay initializing the audio until the full page is loaded
+  $(window).on("load", function () {
+    const $audio = $("#audioPlayer");
+    const $playBtn = $("#mainPlayBtn");
+    const $playIcon = $("#mainPlayIcon");
+    const $volumeBtn = $("#volumeBtn");
+    const $volumeIcon = $("#volumeIcon");
+    const $volumeSlider = $("#volumeSlider");
 
-  let isMuted = false;
+    let isMuted = false;
 
-  $audio[0]
-    .play()
-    .then(function () {
-      $playIcon.removeClass("fa-play").addClass("fa-pause");
-    })
-    .catch(function (err) {
-      console.log(
-        "Autoplay blocked by browser, will require user interaction:",
-        err
-      );
-      $playIcon.removeClass("fa-pause").addClass("fa-play");
-    });
+    // Only start initializing once user can see everything
+    setTimeout(() => {
+      try {
+        // Prevent autoplay blocking issues
+        $audio[0].load();
 
-  $playBtn.on("click", function () {
-    if ($audio[0].paused) {
-      $audio[0].play();
-      $playIcon.removeClass("fa-play").addClass("fa-pause");
-    } else {
-      $audio[0].pause();
-      $playIcon.removeClass("fa-pause").addClass("fa-play");
-    }
-  });
+        // Try autoplay after short delay (if browser allows)
+        const playPromise = $audio[0].play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              $playIcon.removeClass("fa-play").addClass("fa-pause");
+              console.log("🔊 Audio stream loaded after page load");
+            })
+            .catch((err) => {
+              console.warn("Autoplay blocked until user interaction:", err);
+              $playIcon.removeClass("fa-pause").addClass("fa-play");
+            });
+        }
+      } catch (error) {
+        console.error("Failed to initialize audio:", error);
+      }
 
-  $volumeSlider.on("input", function () {
-    $audio[0].volume = $(this).val();
-    if ($audio[0].volume === 0) {
-      $volumeIcon.removeClass("fa-volume-up").addClass("fa-volume-mute");
-    } else {
-      $volumeIcon.removeClass("fa-volume-mute").addClass("fa-volume-up");
-    }
-  });
+      $playBtn.on("click", function () {
+        if ($audio[0].paused) {
+          $audio[0].play();
+          $playIcon.removeClass("fa-play").addClass("fa-pause");
+        } else {
+          $audio[0].pause();
+          $playIcon.removeClass("fa-pause").addClass("fa-play");
+        }
+      });
 
-  $volumeBtn.on("click", function () {
-    isMuted = !isMuted;
-    $audio[0].muted = isMuted;
-    if (isMuted) {
-      $volumeIcon.removeClass("fa-volume-up").addClass("fa-volume-mute");
-    } else {
-      $volumeIcon.removeClass("fa-volume-mute").addClass("fa-volume-up");
-    }
+      $volumeSlider.on("input", function () {
+        $audio[0].volume = $(this).val();
+        if ($audio[0].volume === 0) {
+          $volumeIcon.removeClass("fa-volume-up").addClass("fa-volume-mute");
+        } else {
+          $volumeIcon.removeClass("fa-volume-mute").addClass("fa-volume-up");
+        }
+      });
+
+      $volumeBtn.on("click", function () {
+        isMuted = !isMuted;
+        $audio[0].muted = isMuted;
+        $volumeIcon
+          .toggleClass("fa-volume-up", !isMuted)
+          .toggleClass("fa-volume-mute", isMuted);
+      });
+    }, 100);
   });
 
   const shareBtn = $("#shareBtn");
