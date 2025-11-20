@@ -10,7 +10,7 @@
     $newsSlug = $_GET['slug'] ?? null;
 
     // API base URL
-    $baseUrl = "http://localhost:5000/api";
+    $baseUrl = "https://api.demoview.ch/api";
     $metaUrl = "$baseUrl/news/per-slug/$newsSlug";
 
     // Fetch API response

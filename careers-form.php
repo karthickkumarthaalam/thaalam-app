@@ -5,7 +5,7 @@
     <?php
     $page_title = "Careers - Thaalam Radio Station";
     $page_description = "Explore exciting career opportunities at Thaalam Radio Station, Switzerland's first official Tamil radio station. Apply now to become an RJ, content creator, or media professional.";
-    $page_url = "https://www.thaalamradio.com/careers";
+    $page_url = "https://www.thaalamradio.com/careers-form";
     $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php';
     ?>

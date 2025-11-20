@@ -61,7 +61,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="news-list">
+                                <a href="news-list" target="_blank">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-newspaper pe-2"></i>
                                         <p>News</p>
@@ -104,7 +104,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="about-us"><i class="fas fa-info-circle pe-2"></i>About Us</a></li>
                                     <li><a href="rj-portfolio"><i class="fas fa-users pe-2"></i>Our Team</a></li>
-                                    <li><a href="careers"><i class="fas fa-suitcase pe-2"></i>Careers</a></li>
+                                    <li><a href="careers-form"><i class="fas fa-suitcase pe-2"></i>Careers</a></li>
                                 </ul>
                             </li>
                             <li>

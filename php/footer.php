@@ -65,18 +65,18 @@
                                     <div class="site-footer__links mob-top2">
                                         <h4 class="site-footer__title">Useful Links</h4>
                                         <ul class="site-footer__links-list list-unstyled">
-                                            <li><a href="careers.php"> <span class="icon-plus"></span>
+                                            <li><a href="careers-form"> <span class="icon-plus"></span>
                                                     Voice of Thaalam</a>
                                             </li>
-                                            <li><a href="contact-us.php"> <span class="icon-plus"></span>
+                                            <li><a href="contact-us"> <span class="icon-plus"></span>
                                                     Feedback</a>
                                             </li>
-                                            <li><a href="contact-us.php"> <span class="icon-plus"></span>
+                                            <li><a href="contact-us"> <span class="icon-plus"></span>
                                                     Enquiry</a>
                                             </li>
-                                            <li><a href="privacy-policy.php"> <span class="icon-plus"></span>
+                                            <li><a href="privacy-policy"> <span class="icon-plus"></span>
                                                     Privacy Policy</a></li>
-                                            <li><a href="terms-conditions.php"> <span class="icon-plus"></span>
+                                            <li><a href="terms-conditions"> <span class="icon-plus"></span>
                                                     Terms & Condition</a></li>
 
                                         </ul>
