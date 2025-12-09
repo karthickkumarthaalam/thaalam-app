@@ -27,7 +27,7 @@
 
     <div class="page-wrapper">
 
-        <?php include 'php/newsHeader.php'; ?>
+        <?php include 'php/header.php'; ?>
 
         <div style=" 
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 

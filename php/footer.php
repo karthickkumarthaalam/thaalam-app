@@ -45,9 +45,9 @@
                                             <li><a href="pricing.php"> <span class="icon-plus"></span>
                                                     Pricing</a></li>
                                             </li>
-                                            <li><a href="news.php"> <span class="icon-plus"></span>
+                                            <li><a href="news-list.php"> <span class="icon-plus"></span>
                                                     News</a></li>
-                                            <li><a href="blogs.php"> <span class="icon-plus"></span>
+                                            <li><a href="blogs-list.php"> <span class="icon-plus"></span>
                                                     Blogs</a>
                                             </li>
 

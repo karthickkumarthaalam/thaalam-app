@@ -23,9 +23,28 @@
     <meta name="twitter:title" content="Thaalam Radio | Online Tamil Radio, Podcasts & Live Streaming">
     <meta name="twitter:description" content="Listen live to Thaalam Radio, enjoy RJ shows, podcasts, and more.">
     <meta name="twitter:image" content="https://thaalam.ch/assets/img/logo/thalam-logo.png">
-
+    <link rel="canonical" href="https://thaalam.ch/">
     <?php include 'php/css.php'; ?>
     <?php include 'php/analyticsHeader.php'; ?>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Thaalam Radio",
+            "url": "https://thaalam.ch",
+            "description": "24/7 Tamil radio station with podcasts, RJ shows, and live streaming from Switzerland",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Thaalam Radio"
+            },
+            "potentialAction": {
+                "@type": "ListenAction",
+                "target": "https://thaalam.ch/"
+            }
+        }
+    </script>
+
 </head>
 
 <body class="custom-cursor">
@@ -48,6 +67,7 @@
 
                 <!-- Main Slider Start -->
                 <section class="main-slider">
+                    <h2 class="visually-hidden">24/7 Live Tamil radio streaming and shows from Switzerland</h2>
                     <div class="main-slider__carousel owl-carousel owl-theme">
 
                     </div>
@@ -78,6 +98,9 @@
                             </div> -->
 
                                 <div class="home-page__categories">
+                                    <ul class="visually-hidden">
+                                        <li>Latest Tamil podcasts, audio shows, and live streaming from Switzerland</li>
+                                    </ul>
                                     <ul class="list-unstyled nav" role="tablist">
                                         <li class="active nav-item">
                                             <a class="nav-link active" data-bs-toggle="tab" href="#liveStream" role="tab">Radio</a>

@@ -1,8 +1,18 @@
 $(document).ready(function () {
-  function updateCarousel(program) {
-    const $carousel = $(".main-slider__carousel");
+  let $loader = $("#globalLoader");
+  const $carousel = $(".main-slider__carousel");
+  const $podcastList = $(".live-class-two__list");
+  const $festivalLeft = $("#festivalLeft");
+  const $festivalRight = $("#festivalRight");
 
-    // Destroy existing carousel instance if exists
+  // Hide sections until content injected
+  $festivalLeft.hide();
+  $festivalRight.hide();
+  $podcastList.hide();
+
+  // ---------------- CAROUSEL + BANNERS ✅ ----------------
+
+  async function updateCarousel(program, firstLoad = false) {
     if ($carousel.hasClass("owl-loaded")) {
       $carousel.trigger("destroy.owl.carousel");
       $carousel.removeClass("owl-loaded owl-hidden");
@@ -10,326 +20,204 @@ $(document).ready(function () {
     }
 
     $carousel.empty();
-
-    // Step 1: Collect slides (program banner + banners)
     const slides = [];
-
-    // Add Program Banner (if exists)
     const programImage = program?.program_category?.image_url;
+
     if (programImage) {
       slides.push(`
-            <div class="item">
-              <div class="main-slider__bg">
-                <img src="${programImage}" alt="Program Image" loading="eager" />
-              </div>
-            </div>
-        `);
+        <div class="item"><div class="main-slider__bg">
+          <img src="${programImage}" loading="eager" alt="${programImage}" />
+        </div></div>
+      `);
     }
 
-    // Step 2: Fetch banners and append
-    $.ajax({
-      url: `${window.API_BASE_URL}/banners?status=active`,
-      method: "GET",
-      success: function (response) {
-        const banners = response?.data?.data || [];
+    try {
+      const bannerRes = await $.ajax({
+        url: `${window.API_BASE_URL}/banners?status=active`,
+        method: "GET",
+      });
+      const banners = bannerRes?.data?.data || [];
+      banners.forEach((b) => {
+        const path = b.website_image.replace(/\\/g, "/");
+        slides.push(`
+          <div class="item"><div class="main-slider__bg">
+            <img src="${window.API_BASE_URL}/${path}" loading="eager" alt="${path}" />
+          </div></div>
+        `);
+      });
+    } catch (err) {
+      console.error("Banner failed:", err);
+      showToast("Failed to load banners", "error");
+    }
 
-        banners.forEach((banner) => {
-          const fixedPath = banner.website_image.replace(/\\/g, "/");
-          slides.push(`
-                    <div class="item">
-                        <div class="main-slider__bg">
-                          <img src="${window.API_BASE_URL}/${fixedPath}" alt="Program Image" loading="eager" />
-                        </div>
-                    </div>
-                `);
-        });
+    if (!slides.length) {
+      slides.push(`
+        <div class="item"><div class="main-slider__bg">
+          <img src="assets/img/logo/thaalam-logo.png" loading="eager" alt="thaalam-logo" />
+        </div></div>
+      `);
+    }
 
-        // Step 3: Add all slides together (program + banners)
-        $carousel.html(slides.join(""));
+    $carousel.html(slides.join(""));
 
-        // Step 4: Initialize Owl Carousel
-        $carousel.owlCarousel({
-          items: 1,
-          loop: slides.length > 1,
-          autoplay: true,
-          autoplayTimeout: 5000,
-          dots: true,
-          nav: false,
-        });
-      },
-      error: function () {
-        showToast("Failed to load banners", "error");
-
-        // Still show program image if available
-        if (slides.length) {
-          $carousel.html(slides.join(""));
-          $carousel.owlCarousel({
-            items: 1,
-            loop: false,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            dots: true,
-            nav: false,
-          });
-        }
-      },
+    // Initialize Owl
+    $carousel.owlCarousel({
+      items: 1,
+      loop: slides.length > 1,
+      autoplay: true,
+      autoplayTimeout: 5000,
+      dots: true,
+      nav: false,
     });
   }
 
-  // Delay initializing the audio until the full page is loaded
-  $(window).on("load", function () {
-    const $audio = $("#audioPlayer");
-    const $playBtn = $("#mainPlayBtn");
-    const $playIcon = $("#mainPlayIcon");
-    const $volumeBtn = $("#volumeBtn");
-    const $volumeIcon = $("#volumeIcon");
-    const $volumeSlider = $("#volumeSlider");
+  // ---------------- LIVE PROGRAM API ✅ ----------------
 
-    let isMuted = false;
+  async function loadCurrentProgram(first = false) {
+    try {
+      const res = await $.ajax({
+        url: `${window.API_BASE_URL}/radio-program/live-program`,
+        method: "GET",
+      });
 
-    // Only start initializing once user can see everything
-    setTimeout(() => {
-      try {
-        // Prevent autoplay blocking issues
-        $audio[0].load();
+      const program = res.current;
+      const title = program?.program_category?.category || "No live program";
+      const rj = program?.system_users?.name || "";
+      const time = program?.program_category
+        ? `Show Time: ${program.program_category.start_time.substring(
+            0,
+            5
+          )} - ${program.program_category.end_time.substring(0, 5)}`
+        : "";
+      const imgURL = program?.system_users?.image_url
+        ? `${window.API_BASE_URL}/${program.system_users.image_url.replace(
+            /\\/g,
+            "/"
+          )}`
+        : "images/default-cover.png";
 
-        // Try autoplay after short delay (if browser allows)
-        const playPromise = $audio[0].play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              $playIcon.removeClass("fa-play").addClass("fa-pause");
-              console.log("🔊 Audio stream loaded after page load");
-            })
-            .catch((err) => {
-              console.warn("Autoplay blocked until user interaction:", err);
-              $playIcon.removeClass("fa-pause").addClass("fa-play");
-            });
-        }
-      } catch (error) {
-        console.error("Failed to initialize audio:", error);
+      if (first) updateCarousel(program, true);
+
+      $("#programTitle").text(title);
+      $("#programArtist").text(rj);
+      $("#showTime").text(time);
+      $("#programImage").attr("src", imgURL).attr("alt", title);
+
+      if (res.minutesLeft <= 30 && res.next?.program_category) {
+        $("#nextProgramNotice")
+          .text(`Next Show : ${res.next.program_category.category}`)
+          .fadeIn(300);
+      } else {
+        $("#nextProgramNotice").fadeOut(200);
       }
-
-      $playBtn.on("click", function () {
-        if ($audio[0].paused) {
-          $audio[0].play();
-          $playIcon.removeClass("fa-play").addClass("fa-pause");
-        } else {
-          $audio[0].pause();
-          $playIcon.removeClass("fa-pause").addClass("fa-play");
-        }
-      });
-
-      $volumeSlider.on("input", function () {
-        $audio[0].volume = $(this).val();
-        if ($audio[0].volume === 0) {
-          $volumeIcon.removeClass("fa-volume-up").addClass("fa-volume-mute");
-        } else {
-          $volumeIcon.removeClass("fa-volume-mute").addClass("fa-volume-up");
-        }
-      });
-
-      $volumeBtn.on("click", function () {
-        isMuted = !isMuted;
-        $audio[0].muted = isMuted;
-        $volumeIcon
-          .toggleClass("fa-volume-up", !isMuted)
-          .toggleClass("fa-volume-mute", isMuted);
-      });
-    }, 100);
-  });
-
-  const shareBtn = $("#shareBtn");
-
-  shareBtn.on("click", function () {
-    const currentUrl = window.location.href;
-
-    navigator.clipboard
-      .writeText(currentUrl)
-      .then(() => {
-        showToast("Link Copied", "success");
-      })
-      .catch((err) => {
-        console.error("Failed to copy: ", err);
-      });
-  });
-
-  function loadCurrentProgram() {
-    $.ajax({
-      url: `${window.API_BASE_URL}/radio-program/live-program`,
-      method: "GET",
-      success: function (response) {
-        const program = response.current;
-
-        const programTitle =
-          program?.program_category?.category || "No live program";
-        const programArtist = program?.system_users?.name || "";
-        const showTime = program?.program_category
-          ? `Show Time: ${program.program_category.start_time.substring(
-              0,
-              5
-            )} - ${program.program_category.end_time.substring(0, 5)}`
-          : "";
-        const imagePath = program?.system_users?.image_url
-          ? `${window.API_BASE_URL}/${program.system_users.image_url.replace(
-              /\\/g,
-              "/"
-            )}`
-          : "/images/default-cover.jpg";
-
-        // Only update if changed
-        if ($("#programTitle").text() !== programTitle) {
-          updateCarousel(program);
-          $("#programTitle").text(programTitle);
-        }
-        if ($("#programArtist").text() !== programArtist)
-          $("#programArtist").text(programArtist);
-        if ($("#showTime").text() !== showTime) $("#showTime").text(showTime);
-        if ($("#programImage").attr("src") !== imagePath)
-          $("#programImage").attr("src", imagePath);
-
-        // Next program notice
-        if (response.minutesLeft <= 30 && response.next?.program_category) {
-          const nextText = `Next Show : ${response.next.program_category.category}`;
-          if (!$("#nextProgramNotice").length) {
-            $("#showTime").after(
-              '<div id="nextProgramNotice" class="blinking"></div>'
-            );
-          }
-          if ($("#nextProgramNotice").text() !== nextText) {
-            $("#nextProgramNotice").text(nextText).show();
-          }
-        } else {
-          $("#nextProgramNotice").hide();
-        }
-      },
-      error: function () {
-        $("#programTitle").text("Error loading program");
-        $("#programArtist").text("");
-        $("#showTime").text("");
-        $("#nextProgramNotice").hide();
-        $("#programImage").attr("src", "/images/default-cover.jpg");
-      },
-    });
+    } catch (err) {
+      console.error("Program API Error:", err);
+    }
   }
 
-  loadCurrentProgram();
-  setInterval(loadCurrentProgram, 1 * 60 * 1000);
+  loadCurrentProgram(true);
+  setInterval(() => loadCurrentProgram(false), 1 * 60 * 1000);
 
-  const podcastList = $(".live-class-two__list");
-  podcastList.empty();
+  // ---------------- PODCASTS API ✅ ----------------
 
-  $.ajax({
-    url: `${window.API_BASE_URL}/podcasts?status=active&limit=4`,
-    method: "GET",
-    success: function (response) {
-      const podcasts = response?.data?.data;
-
+  async function loadPodcasts() {
+    if (!$podcastList.length) return;
+    $podcastList.empty();
+    try {
+      const res = await $.ajax({
+        url: `${window.API_BASE_URL}/podcasts?status=active&limit=4`,
+        method: "GET",
+      });
+      const podcasts = res?.data?.data || [];
       podcasts.forEach((podcast) => {
-        const item = `
-                    <li>
+        $podcastList.append(`
+          <li>
                         <a href="podcast-details.php?id=${podcast.id}"  class="video-popup">
-                            <div class="live-class-two__icon"></div>
+              <div class="live-class-two__icon"></div>
                             <h3 class="live-class-two__content-title">
                                 <a href="podcast-details.php?id=${podcast.id}" >${podcast.title}</a>
                             </h3>
-                        </a>
+            </a>
                            
-                    </li>
-                `;
-        podcastList.append(item);
+          </li>
+        `);
       });
-    },
-    error: function () {
-      console.error("Failed to fetch podcasts");
-    },
-  });
-
-  function popupbanner() {
-    const popupBanner = document.getElementById("popupBanner");
-    const popupBannerImage = document.getElementById("popupBanner-image");
-    const closePopup = document.getElementById("close-popupBanner");
-
-    popupBanner.style.display = "none";
-
-    $.ajax({
-      url: `${window.API_BASE_URL}/popup-banner?status=active`,
-      method: "GET",
-      success: function (response) {
-        const bannerData = response?.data[0];
-
-        if (!bannerData) return;
-
-        const imagePath = bannerData.website_image.replace("/\\/g", "/");
-        const imageURL = `${window.API_BASE_URL}/${imagePath}`;
-        popupBannerImage.src = imageURL;
-
-        if (bannerData.status === "active") {
-          popupBanner.style.display = "flex";
-          document.body.style.overflow = "hidden";
-          $(popupBanner).hide().fadeIn(400);
-        }
-      },
-      error: function () {
-        console.error("Failed to fetch popup banner");
-      },
-    });
-
-    closePopup.addEventListener("click", function () {
-      $(popupBanner).fadeOut(300, function () {
-        popupBanner.style.display = "none";
-        document.body.style.overflow = ""; // Restore scroll
-      });
-    });
-
-    // Close when clicking outside the container
-    $(popupBanner).on("click", function (e) {
-      if (e.target.id === "popupBanner") {
-        $(popupBanner).fadeOut(300, function () {
-          popupBanner.style.display = "none";
-          document.body.style.overflow = ""; // Restore scroll
-        });
-      }
-    });
+      $podcastList.fadeIn(300);
+    } catch (err) {
+      console.error("Podcast failed:", err);
+    }
   }
 
-  popupbanner();
+  loadPodcasts();
 
-  function loadFestivalGifs() {
-    const leftImg = document.getElementById("festivalLeft");
-    const rightImg = document.getElementById("festivalRight");
+  // ---------------- FESTIVAL GIFS API ✅ ----------------
 
-    // Hide initially
-    leftImg.style.display = "none";
-    rightImg.style.display = "none";
+  async function loadFestivalGifs() {
+    if (!$festivalLeft.length && !$festivalRight.length) return;
 
-    $.ajax({
-      url: `${window.API_BASE_URL}/festival-gif?status=true`,
-      method: "GET",
-      success: function (response) {
-        const gifData = response?.data[0];
-        if (!gifData) return;
+    try {
+      const r = await $.ajax({
+        url: `${window.API_BASE_URL}/festival-gif?status=true`,
+        method: "GET",
+      });
 
-        if (gifData.left_side_image) {
-          leftImg.src = `${
-            window.API_BASE_URL
-          }/${gifData.left_side_image.replace(/\\/g, "/")}`;
-          leftImg.style.display = "block"; // show only if image exists
-        }
-        if (gifData.right_side_image) {
-          rightImg.src = `${
-            window.API_BASE_URL
-          }/${gifData.right_side_image.replace(/\\/g, "/")}`;
-          rightImg.style.display = "block"; // show only if image exists
-        }
-      },
-      error: function () {
-        console.error("Failed to fetch festival GIFs");
-      },
-    });
+      const gif = r?.data?.data?.[0];
+      if (!gif) return;
+
+      if (gif.left_side_image) {
+        $festivalLeft
+          .attr(
+            "src",
+            `${window.API_BASE_URL}/${gif.left_side_image.replace(/\\/g, "/")}`
+          )
+          .fadeIn(400);
+      } else {
+        $festivalLeft.fadeOut(200);
+      }
+
+      if (gif.right_side_image) {
+        $festivalRight
+          .attr(
+            "src",
+            `${window.API_BASE_URL}/${gif.right_side_image.replace(/\\/g, "/")}`
+          )
+          .fadeIn(400);
+      } else {
+        $festivalRight.fadeOut(200);
+      }
+    } catch (err) {
+      console.error("GIF API error:", err);
+    }
   }
 
   loadFestivalGifs();
+  setInterval(loadFestivalGifs, 10 * 60 * 1000);
+
+  // ---------------- POPUP BANNER API ✅ ----------------
+
+  async function loadPopupBanner() {
+    try {
+      const r = await $.ajax({
+        url: `${window.API_BASE_URL}/popup-banner?status=active`,
+        method: "GET",
+      });
+
+      const b = r?.data?.data?.[0];
+      if (!b) return;
+
+      const path = b.website_image.replace(/\\/g, "/");
+      $("#popupBanner-image").attr("src", `${window.API_BASE_URL}/${path}`);
+
+      if (b.status === "active") {
+        $("#popupBanner").css("display", "flex").hide().fadeIn(400);
+        document.body.style.overflow = "hidden";
+      }
+    } catch {}
+  }
+
+  loadPopupBanner();
+
+  // ---------------- VISITOR TRACKING ✅ ----------------
 
   (async function trackVisitor() {
     let visitorId = localStorage.getItem("visitor_id_v2");
@@ -382,4 +270,65 @@ $(document).ready(function () {
       console.error("Failed to send visitor tracking:", err);
     }
   })();
+
+  // ---------------- AUDIO CONTROLS ✅ ----------------
+
+  function initAudioPlayer() {
+    const audio = document.getElementById("audioPlayer");
+    const playBtn = document.getElementById("mainPlayBtn");
+    const playIcon = document.getElementById("mainPlayIcon");
+    const volumeBtn = document.getElementById("volumeBtn");
+    const volumeSlider = document.getElementById("volumeSlider");
+    const volumeIcon = document.getElementById("volumeIcon");
+    const shareBtn = document.getElementById("shareBtn");
+
+    if (!audio) return;
+
+    // autoplay attempt
+    setTimeout(() => {
+      audio
+        .play()
+        .then(() => {
+          playIcon.classList.replace("fa-play", "fa-pause");
+        })
+        .catch(() => {});
+    }, 200);
+
+    // play/pause
+    playBtn?.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        playIcon.classList.replace("fa-play", "fa-pause");
+      } else {
+        audio.pause();
+        playIcon.classList.replace("fa-pause", "fa-play");
+      }
+    });
+
+    // volume slider
+    volumeSlider?.addEventListener("input", (e) => {
+      audio.volume = e.target.value;
+      if (audio.volume == 0)
+        volumeIcon.classList.replace("fa-volume-up", "fa-volume-mute");
+      else volumeIcon.classList.replace("fa-volume-mute", "fa-volume-up");
+    });
+
+    // mute button
+    volumeBtn?.addEventListener("click", () => {
+      audio.muted = !audio.muted;
+      if (audio.muted)
+        volumeIcon.classList.replace("fa-volume-up", "fa-volume-mute");
+      else volumeIcon.classList.replace("fa-volume-mute", "fa-volume-up");
+    });
+
+    // share copy
+    shareBtn?.addEventListener("click", () => {
+      navigator.clipboard
+        .writeText(window.location.href)
+        .then(() => showToast("Link Copied", "success"))
+        .catch(console.error);
+    });
+  }
+
+  initAudioPlayer();
 });

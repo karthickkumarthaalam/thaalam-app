@@ -23,9 +23,7 @@
                 </div>
             </div>
             <div class="main-menu-two__wrapper-inside">
-                <div class="main-menu-two__wrapper-inner" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-3.png');background-size: cover; background-position: center;">
+                <div class="main-menu-two__wrapper-inner">
                     <div class="only-mob mobile-header__first">
                         <div class="main-menu__logo only-mob">
                             <a href="index"><img src="assets/img/logo/thalam-logo.png" alt=""></a>
@@ -48,7 +46,7 @@
                                 <a href="index">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-music pe-2"></i>
-                                        <p>Audio</p>
+                                        <span>Audio</span>
                                     </div>
                                 </a>
                             </li>
@@ -56,18 +54,23 @@
                                 <a href="podcasts-list">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-microphone pe-2"></i>
-                                        <p>Podcast</p>
+                                        <span>Podcast</span>
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="news-list" target="_blank">
+                            <li class="dropdown">
+                                <a role="button" aria-label="Explore news and blogs" aria-haspopup="true" aria-expanded="false">
                                     <div class="d-flex align-items-center">
-                                        <i class="fas fa-newspaper pe-2"></i>
-                                        <p>News</p>
+                                        <i class="fas fa-compass pe-2"></i>
+                                        <span>Explore</span>
                                     </div>
                                 </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="news-list" target="_blank" aria-label="News"><i class="fas fa-newspaper pe-2"></i>News</a></li>
+                                    <li><a href="blogs-list" target="_blank" aria-label="Blogs"><i class="fas fa-blog pe-2"></i>Blogs</a></li>
+                                </ul>
                             </li>
+
 
                             <!-- <li class="dropdown">
                                 <a href="javascript:void(0)">
@@ -83,35 +86,36 @@
                                 </ul>
                             </li> -->
                             <li class="dropdown">
-                                <a href="javascript:void(0)">
+                                <a role="button" aria-label="Marketing and pricing services" aria-haspopup="true" aria-expanded="false">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-bullhorn pe-2"></i>
-                                        <p>Services</p>
+                                        <span>Services</span>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="marketting"><i class="fas fa-bullhorn pe-2"></i>Marketing</a></li>
-                                    <li><a href="pricing"><i class="fas fa-tags pe-2"></i>Pricing</a></li>
+                                    <li><a href="marketing" aria-label="Marketing"><i class="fas fa-bullhorn pe-2"></i>Marketing</a></li>
+                                    <li><a href="pricing" aria-label="Pricing"><i class="fas fa-tags pe-2"></i>Pricing</a></li>
                                 </ul>
                             </li>
+
                             <li class="dropdown">
-                                <a href="javascript:void(0)">
+                                <a role="button" aria-label="About our teams and career" aria-haspopup="true" aria-expanded="false">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-info-circle pe-2"></i>
-                                        <p>About</p>
+                                        <span>About</span>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="about-us"><i class="fas fa-info-circle pe-2"></i>About Us</a></li>
-                                    <li><a href="rj-portfolio"><i class="fas fa-users pe-2"></i>Our Team</a></li>
-                                    <li><a href="careers-form"><i class="fas fa-suitcase pe-2"></i>Careers</a></li>
+                                    <li><a href="about-us" aria-label="About Us"><i class="fas fa-info-circle pe-2"></i>About Us</a></li>
+                                    <li><a href="rj-portfolio" aria-label="Our Team"><i class="fas fa-users pe-2"></i>Our Team</a></li>
+                                    <li><a href="careers-form" aria-label="Careers"><i class="fas fa-suitcase pe-2"></i>Careers</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="contact-us">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-envelope pe-2"></i>
-                                        <p> Contact Us</p>
+                                        <span> Contact Us</span>
                                     </div>
                                 </a>
                             </li>
@@ -183,22 +187,14 @@
         `;
         } else {
             menuHtml = `
-            <div class="main-menu__btn-box-2  desktop-menu">
-                <a href="login"  class="login-style">
-                    <i class="fas fa-sign-in"></i> Login
-                </a>
-            </div>
-            <div class="main-menu-two__support-box  desktop-menu">
-                    <a href="register" class="login-style">
+                <div class="auth-buttons-desktop auth-buttons desktop-menu">
+                    <a href="register" class="auth-btn register-btn">Register</a>
+                    <a href="login" class="auth-btn login-btn">Login</a>
+                </div>
+
+                <a href="login" class="mobile-user-icon only-mob">
                     <i class="fas fa-user-tie"></i>
-                    Become a Member
-                    </a>
-            </div>
-            <div class="main-menu__btn-box-2 only-mob" >
-                <a href="login" class="thm-btn" style="padding:10px 15px;" >
-                    <i class="fas fa-user-alt" style="font-size: 13px;"></i>
                 </a>
-            </div>
         `;
         }
 

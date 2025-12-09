@@ -100,7 +100,7 @@
         <section class="news-details-page" style=" 
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
                         url('./assets/images/backgrounds/background_image.jpg'); ">
-            <?php include 'php/newsHeader.php'; ?>
+            <?php include 'php/header.php'; ?>
 
             <div class="news-details-wrapper">
 

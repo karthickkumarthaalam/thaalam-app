@@ -1569,7 +1569,6 @@
 
     .blog-details__client-meta {
         gap: 0;
-        flex-direction: column;
         margin-top: 20px;
     }
 

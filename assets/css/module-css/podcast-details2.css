@@ -1,10 +1,9 @@
-/* ===== Page Wrapper & Container ===== */
+/* =======================================================================
+   PAGE WRAPPER & LAYOUT
+======================================================================= */
 .podcast-details-page {
-    padding: 50px 0;
-    background: #fff;
-    /* White background for a clean look */
+    padding: 10px 0;
     color: #111;
-    /* Default text color */
 }
 
 .podcast-details-page .container {
@@ -12,49 +11,55 @@
     padding: 0 20px;
 }
 
-.podcast-header {
+.podcast-details {
     display: flex;
-    gap: 40px;
+    flex-direction: column;
+}
+
+
+/* =======================================================================
+   HEADER — Apple Clean Minimal Style
+======================================================================= */
+
+/* Header wrapper */
+.podcast-header {
+    display: block !important;
     margin-bottom: 50px;
-    align-items: flex-start;
     transition: all 0.3s ease;
-    flex-wrap: wrap;
 }
 
+/* FLOATING IMAGE (Apple style) */
+.float-image,
 .podcast-image {
-    width: 100%;
-    max-width: 500px;
-    /* bigger image */
-    flex-shrink: 0;
-    border-radius: 16px;
+    float: left;
+    width: 520px;
+    max-width: 45%;
+    margin: 5px 30px 18px 0;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-    transition: all 0.3s ease;
+    background: #f5f5f7;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.10);
+    transition: 0.3s ease;
 }
 
+.float-image img,
 .podcast-image img {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
 }
 
-.podcast-image:hover img {
-    transform: scale(1.04);
-}
-
+/* HEADER TEXT SECTION */
 .podcast-header-details {
-    flex: 1;
-    max-width: 600px;
+    width: 100%;
 }
 
-.podcast-header-details p {
-    font-size: 16px;
-    /* smaller text */
-    color: #F90000;
-    margin-bottom: 8px;
-    font-weight: 600;
+/* Published date */
+.podcast-header-details #publishedDate {
+    font-size: 0.95rem;
+    color: #f90000;
+    margin-bottom: 10px;
+    font-weight: 500;
 }
 
 .podcast-header-details p span {
@@ -63,85 +68,304 @@
     font-weight: 600;
 }
 
+/* Title */
+.podcast-header-details h4 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #111;
+    margin: 10px 0 20px;
+    line-height: 1.25;
+}
+
+/* Description */
+.podcast-description {
+    margin-top: 20px;
+    overflow: hidden;
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.65;
+}
+
+/* TIMINGS ROW */
 .podcast-timings {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 12px;
 }
 
-
-.podcast-header-details h4 {
-    font-size: 1.5rem;
-    /* smaller title */
-    color: #111;
-    margin-bottom: 20px;
-    line-height: 1.3;
-    font-weight: 500;
-}
-
-
-.podcast-description p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #1d1d1d;
-    margin-bottom: 40px;
-}
-
-/* Podcast Features */
-
+/* LIKE + SHARE BUTTONS */
 .podcast-features {
     display: flex;
+    gap: 8px;
 }
 
 .feature-btn {
+    background: #f2f2f3;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #333;
     display: flex;
     align-items: center;
     gap: 6px;
-    background: transparent;
-    /* black background */
-    color: #333;
-    /* white text */
-    border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: all 0.2s ease;
-}
-
-.feature-btn.active {
-    color: #f90000;
-}
-
-.feature-btn i {
-    font-size: 16px;
+    transition: 0.2s;
 }
 
 .feature-btn:hover {
-    background: #333;
-    color: #fff;
-    /* minimal red highlight */
+    background: #e5e5e7;
+}
+
+.feature-btn.active {
+    color: #ff3b30;
+}
+
+.feature-btn i {
+    font-size: 15px;
 }
 
 #like-count {
     font-weight: 600;
 }
 
-/* Responsive adjustments */
 @media (max-width: 576px) {
     .feature-btn {
         padding: 5px 10px;
         font-size: 0.8rem;
     }
-
-    .feature-btn i {
-        font-size: 14px;
-    }
 }
 
 
-/* podcast information */
 
+/* ----------------------------------------------
+   BREADCRUMB
+---------------------------------------------- */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    padding: 10px 0px;
+    margin: 14px 0 20px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    color: var(--text-light);
+}
+
+.breadcrumb>*:not(:last-child)::after {
+    content: "›";
+    display: inline-block;
+    margin: 0 8px;
+    color: var(--text-muted, #9aa4b2);
+    transform: translateY(1px);
+}
+
+.breadcrumb a {
+    color: var(--primary, #1a365d);
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    white-space: nowrap;
+    max-width: 30vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color .2s ease;
+}
+
+.breadcrumb a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .2s ease;
+    opacity: .6;
+}
+
+.breadcrumb a:hover {
+    color: var(--accent, #e53e3e);
+}
+
+.breadcrumb a:hover::before {
+    transform: scaleX(1);
+}
+
+.breadcrumb span,
+.breadcrumb #breadcrumb-title {
+    color: var(--text-dark, #1a202c);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: clamp(140px, 48vw, 700px);
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+    .breadcrumb {
+        padding: 8px 10px;
+        font-size: 0.88rem;
+        gap: 6px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .breadcrumb::-webkit-scrollbar {
+        display: none;
+    }
+
+    .breadcrumb a {
+        max-width: 42vw;
+    }
+
+    .breadcrumb #breadcrumb-title {
+        max-width: 56vw;
+    }
+}
+
+.breadcrumb a:focus-visible {
+    outline: 2px solid var(--accent, #e53e3e);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+
+
+/* =======================================================================
+   AUDIO PLAYER — Apple Style
+======================================================================= */
+
+#thaalam-audio-player audio {
+    display: none;
+}
+
+#thaalam-audio-player {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 10px;
+    background: transparent;
+    margin: 15px 0 25px;
+}
+
+/* Play Button */
+#thaalam-play-pause-btn {
+    width: 64px;
+    height: 60px;
+    background: linear-gradient(90deg, #ff0d00, #ff355a);
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+#thaalam-play-pause-btn:hover {
+    transform: scale(1.07);
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.35),
+        inset 0 2px 8px rgba(255, 255, 255, 0.18);
+}
+
+
+/* Progress */
+.thaalam-prograss-controller {
+    display: flex;
+    width: 100%;
+}
+
+#thaalam-progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+#thaalam-current-time,
+#thaalam-duration {
+    font-size: 0.8rem;
+    width: 40px;
+    text-align: center;
+    color: #666;
+}
+
+#thaalam-progress-bar {
+    flex: 1;
+    height: 7px;
+    background: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#thaalam-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff3b30, #ff2d55);
+    border-radius: 4px;
+    transition: width 0.2s ease;
+}
+
+
+/* Volume */
+#thaalam-volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#thaalam-volume-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #555;
+}
+
+#thaalam-volume-slider {
+    width: 80px;
+    accent-color: #555;
+    height: 4px;
+}
+
+@media(max-width:1200px) {
+
+    .float-image,
+    .podcast-image {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 20px 0;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #thaalam-play-pause-btn {
+        width: 58px;
+        height: 50px;
+        font-size: 16px;
+
+    }
+
+
+    #thaalam-volume-control {
+        display: none;
+    }
+
+}
+
+
+/* =======================================================================
+   PODCAST INFO BOXES
+======================================================================= */
 .podcast-informations {
     display: flex;
     flex-wrap: wrap;
@@ -154,9 +378,9 @@
     font-size: 1.3rem;
     font-weight: 600;
     color: #f90000;
-    margin-bottom: 20px;
     border-bottom: 2px solid #eee;
     padding-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .podcast-informations .information {
@@ -169,12 +393,6 @@
 .podcast-informations .information i {
     color: #111;
     font-size: 1.2rem;
-    flex-shrink: 0;
-}
-
-.info-text {
-    display: flex;
-    flex-direction: column;
 }
 
 .info-label {
@@ -188,595 +406,27 @@
     color: #111;
 }
 
-/* Separator line between info items */
 .podcast-informations .information:not(:last-child) {
     border-right: 1px solid #eee;
     padding-right: 20px;
     margin-right: 20px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .podcast-informations {
         flex-direction: column;
-        gap: 15px;
     }
 
     .podcast-informations .information {
         border-right: none;
         padding-right: 0;
-        margin-right: 0;
     }
 }
 
 
-
-
-
-
-
-/* ===== Container ===== */
-
-#thaalam-audio-player audio {
-    display: none;
-    /* Hide default player */
-}
-
-/* ===== Track Section ===== */
-#thaalam-track-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-#thaalam-thumbnail img {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-#thaalam-track-info h5 {
-    font-size: 1rem;
-    margin: 0;
-    color: #111;
-    font-weight: 600;
-}
-
-#thaalam-track-info span {
-    font-size: 0.85rem;
-    color: #777;
-}
-
-/* ===== Controls Section ===== */
-#thaalam-audio-player {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Play/Pause Button */
-#thaalam-play-pause-btn {
-    width: 60px;
-    height: 55px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #f90000, #ff4e50);
-    color: #fff;
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    border: none;
-    outline: none;
-}
-
-/* ===== Progress Bar ===== */
-
-.thaalam-prograss-controller {
-    display: flex;
-    width: 100%;
-}
-
-#thaalam-progress-wrapper {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    gap: 10px;
-}
-
-
-
-#thaalam-current-time,
-#thaalam-duration {
-    font-size: 0.8rem;
-    color: #555;
-    width: 40px;
-    text-align: center;
-}
-
-#thaalam-progress-bar {
-    flex: 1;
-    height: 6px;
-    background: #e0e0e0;
-    border-radius: 6px;
-    position: relative;
-    overflow: hidden;
-}
-
-#thaalam-progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #f90000, #ff4e50);
-    border-radius: 6px;
-    transition: width 0.2s ease;
-}
-
-#thaalam-progress-slider {
-    width: 100%;
-    position: absolute;
-    top: -5px;
-    -webkit-appearance: none;
-    background: transparent;
-}
-
-#thaalam-progress-slider::-webkit-slider-thumb {
-    width: 14px;
-    height: 14px;
-    background: #f90000;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-/* ===== Volume ===== */
-#thaalam-volume-control {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-#thaalam-volume-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: #333;
-    font-size: 18px;
-}
-
-#thaalam-volume-slider {
-    width: 80px;
-    accent-color: #555;
-    height: 4px;
-    border-radius: 4px;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-
-    #thaalam-play-pause-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-    }
-
-    .thaalam-prograss-controller {
-        flex-direction: column;
-    }
-
-    #thaalam-audio-player {
-        padding: 15px;
-    }
-
-    #thaalam-audio-player {
-        gap: 12px;
-    }
-
-    #thaalam-progress-wrapper {
-        width: 100%;
-        gap: 5px;
-    }
-
-    #thaalam-volume-slider {
-        width: 30%;
-    }
-}
-
-
-
-/* related podcasts */
-
-.related-title {
-    margin: 25px 0;
-    width: 100%;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 5px;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #f90000;
-}
-
-.related-podcast-image {
-    width: 200px;
-    aspect-ratio: 16 / 9;
-    border-radius: 12px;
-    overflow: hidden;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
-}
-
-.related-podcast-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-
-.podcast {
-    display: flex;
-    gap: 5px;
-    padding: 8px;
-    border-radius: 14px;
-    background: #fff;
-    transition: all 0.2s ease;
-    align-items: flex-start;
-    width: 100%;
-}
-
-.podcast:hover {
-    background: #fef7f7;
-    transform: translateX(4px)
-}
-
-.podcast button {
-    background: #F90000;
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    display: none;
-}
-
-.podcast button:hover {
-    background: #d00;
-}
-
-.released-stamp {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #f90000;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0 0 4px;
-}
-
-
-.podcast-heading {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #111;
-    margin: 0 0 4px;
-}
-
-.podcast-desc {
-    font-size: 16px;
-    color: #444;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.audio-details {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    margin-top: 8px;
-    font-size: 0.9rem;
-    color: #333;
-}
-
-.audio-details i {
-    color: #333;
-    cursor: pointer;
-}
-
-.audio-details i:hover {
-    color: #b00;
-}
-
-
-@media (max-width: 768px) {
-    .podcast {
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        padding: 8px;
-    }
-
-    .related-podcast-image {
-        width: 90px;
-        /* smaller thumbnail */
-        height: 60px;
-        /* rectangle ratio */
-        border-radius: 8px;
-        flex-shrink: 0;
-        overflow: hidden;
-    }
-
-    .related-podcast-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .podcast-details {
-        flex: 1;
-    }
-
-    /* Hide unnecessary elements */
-    .released-stamp,
-    .podcast-desc,
-    .audio-details i {
-        display: none;
-    }
-
-
-    /* Title styling */
-    .podcast-heading {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        /* max 2 lines */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 16px;
-        font-weight: 600;
-        color: #111;
-        margin: 0 0 4px;
-        line-height: 1.2;
-    }
-
-
-    /* Show duration only */
-    .audio-details {
-        display: block;
-        font-size: 0.85rem;
-        color: #666;
-    }
-
-    .audio-details p {
-        margin: 0;
-    }
-}
-
-
-
-
-
-
-/* ===== Podcast Comments ===== */
-.podcast-comments {
-    margin-top: 30px;
-    padding-top: 20px;
-}
-
-.comment-title {
-    color: #f90000;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #eee;
-    margin-bottom: 30px;
-    font-weight: 600;
-}
-
-/* Comment Input (Inline Row) */
-.add-comment-section {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-/* Guest input container */
-#guestFields {
-    display: none;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-}
-
-/* Guest input styling */
-.guest-input {
-    width: 48%;
-    border: 1px solid #bbb;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 0.9rem;
-    font-family: inherit;
-    transition: border 0.2s ease, box-shadow 0.2s ease;
-}
-
-.guest-input:focus {
-    border-color: #f90000;
-    box-shadow: 0 0 0 2px rgba(249, 0, 0, 0.1);
-    outline: none;
-}
-
-.add-comment {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.add-comment textarea {
-    flex: 1;
-    border: 1px solid #bbb;
-    border-radius: 8px;
-    padding: 10px 12px;
-    resize: none;
-    font-size: 0.9rem;
-    font-family: inherit;
-    transition: border 0.2s ease;
-    height: 62px;
-    /* keep height consistent with button */
-}
-
-.add-comment textarea:focus {
-    border-color: #f90000;
-    outline: none;
-}
-
-.add-comment .submit-comment {
-    background: #f90000;
-    /* solid red, no gradient */
-    border: none;
-    padding: 0 16px;
-    height: 62px;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.add-comment .submit-comment:hover {
-    background: #cc0000;
-    /* darker red on hover */
-}
-
-
-/* Accordion Button */
-.accordion-toggle {
-    max-width: 100%;
-    background: transparent;
-    color: #111;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 12px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    transition: all 0.3s ease;
-    border: none;
-    outline: none;
-}
-
-.accordion-toggle i {
-    color: #f90000;
-}
-
-
-/* Accordion Content */
-.accordion-content {
-    display: none;
-    margin-top: 8px;
-}
-
-/* Individual Comment */
-.comment {
-    background: #fafafa;
-    border-radius: 10px;
-    padding: 10px 14px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.comment-author {
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 4px;
-    color: #111;
-}
-
-.comment-author span {
-    font-size: 0.8rem;
-    font-weight: normal;
-    color: #777;
-    margin-left: 6px;
-}
-
-.comment-text {
-    font-size: 0.95rem;
-    color: #444;
-    line-height: 1.5;
-}
-
-.comment-pagination {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 15px;
-    flex-wrap: wrap;
-}
-
-.comment-pagination .page-btn {
-    padding: 8px 14px;
-    background: #fff;
-    color: #000;
-    border-radius: 50px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: none;
-}
-
-.comment-pagination .page-btn.active {
-    background: #ff3333;
-    /* Red for active */
-    color: #fff;
-    font-weight: 600;
-}
-
-.comment-pagination .page-btn:hover:not(.active) {
-    background: #f0f0f0;
-    /* Light grey on hover */
-}
-
-.comment-pagination .page-btn.prev,
-.comment-pagination .page-btn.next {
-    font-weight: 500;
-    border-radius: 50px;
-}
-
-
-.more-link {
-    color: #ff3333;
-    font-weight: 600;
-    font-size: 13.5px;
-    cursor: pointer;
-    margin-left: 5px;
-}
-
-.more-link:hover {
-    text-decoration: underline;
-}
-
-
-.no-comments {
-    text-align: center;
-    padding: 20px;
-    color: #999;
-    font-size: 14.5px;
-}
-
-/* Modal overlay */
+/* =======================================================================
+   SHARE MODAL
+======================================================================= */
 .share-modal {
     display: none;
     position: fixed;
@@ -786,10 +436,8 @@
     z-index: 1000;
     justify-content: center;
     align-items: center;
-    animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Content card */
 .share-content {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 10px;
@@ -807,87 +455,61 @@
     flex-direction: column;
 }
 
+.share-content h3 {
+    font-size: 24px;
+}
 
-
-/* Close button */
 .close-btn {
     position: absolute;
     top: 12px;
     right: 18px;
     font-size: 24px;
-    cursor: pointer;
     color: #444;
-    transition: 0.3s;
+    cursor: pointer;
 }
 
-.close-btn:hover {
-    color: #f44336;
-}
-
-/* Heading */
-.share-content h3 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #111;
-}
-
-/* Share link input */
 .share-link-box {
     display: flex;
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 20px;
 }
 
 #podcast-link {
     flex: 1;
     padding: 10px 12px;
     border: none;
-    outline: none;
-    font-size: 14px;
     background: transparent;
+    font-size: 14px;
 }
 
 .copy-btn {
     background: #000;
-    color: white;
+    color: #fff;
     border: none;
     padding: 10px 14px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.copy-btn:hover {
-    opacity: 0.8;
-}
-
-/* Social icons */
 .share-options {
     display: flex;
     justify-content: space-around;
     gap: 18px;
+    margin-top: 20px;
 }
 
 .share-options a {
-    font-size: 26px;
-    color: white;
     width: 48px;
     height: 48px;
+    font-size: 26px;
     border-radius: 50%;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.25s, box-shadow 0.25s;
 }
 
-.share-options a:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-}
-
-/* Brand colors */
 #share-whatsapp {
     background: #25d366;
 }
@@ -906,48 +528,353 @@
 
 #share-tiktok {
     background: #010101;
-    color: #fff;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(30px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
 }
 
 @media (max-width: 768px) {
-
-    #thaalam-volume-control {
-        display: none;
-    }
-
-    .share-modal {
-        padding: 15px;
-
-    }
-
     .share-content {
-        position: relative;
         margin: 100% auto;
         width: 100%;
         max-width: 400px;
         height: auto;
+    }
+}
+
+
+/* =======================================================================
+   COMMENTS
+======================================================================= */
+.podcast-comments {
+    margin-top: 30px;
+    padding-top: 20px;
+}
+
+.comment-title {
+    color: #f90000;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.no-comments {
+    text-align: center;
+    color: #777;
+    font-size: 0.95rem;
+    margin: 15px 0;
+}
+
+/* Comments List */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+/* Guest Fields Container */
+.guestFields {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    animation: fadeIn 0.25s ease;
+}
+
+/* Input Fields */
+.guest-input {
+    flex: 1;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    margin-right: 20px;
+    background: transparent;
+    /* light red tint */
+    border: 1px solid #bbb;
+    color: #222;
+    font-family: inherit;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+}
+
+/* Placeholder */
+.guest-input::placeholder {
+    color: #111;
+}
+
+/* Red Focus Glow */
+.guest-input:focus {
+    background: #fff;
+    border-color: #f90000;
+    box-shadow: 0 0 0 3px rgba(249, 0, 0, 0.18);
+    /* soft red glow */
+    outline: none;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    #guestFields {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* Smooth Fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+.add-comment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.add-comment {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-comment textarea {
+    flex: 1;
+    height: 62px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    resize: none;
+    font-size: 0.9rem;
+}
+
+.add-comment textarea:focus {
+    border-color: #f90000;
+}
+
+.submit-comment {
+    background: #f90000;
+    border: none;
+    padding: 0 16px;
+    height: 62px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.accordion-toggle {
+    background: transparent;
+    color: #111;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.accordion-content {
+    display: none;
+    margin-top: 8px;
+}
+
+.comment {
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: 0.2s ease;
+}
+
+.comment:hover {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
+}
+
+/* Comment Author */
+.comment-author {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    color: #111;
+}
+
+.comment-author span {
+    color: #888;
+    font-weight: 400;
+    font-size: 0.82rem;
+    margin-left: 6px;
+}
+
+/* Comment Text */
+.comment-text {
+    color: #444;
+    line-height: 1.55;
+    font-size: 0.95rem;
+    word-break: break-word;
+}
+
+/* More / Less link */
+.more-link {
+    color: #f90000;
+    margin-left: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: 0.1s ease;
+}
+
+.more-link:hover {
+    text-decoration: underline;
+}
+
+/* Pagination container for comments if needed */
+.comment-pagination {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+
+@media (max-width: 600px) {
+    .comment {
+        padding: 12px 14px;
+    }
+
+    .comment-author {
+        font-size: 0.9rem;
+    }
+
+    .comment-text {
+        font-size: 0.9rem;
+    }
+
+    .more-link {
+        font-size: 0.85rem;
+    }
+}
+
+/* =======================================================================
+   RELATED PODCASTS
+======================================================================= */
+.related-title {
+    margin: 25px 0;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #f90000;
+}
+
+.related-podcast-image {
+    width: 200px;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.related-podcast-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.podcast {
+    display: flex;
+    gap: 5px;
+    padding: 8px;
+    border-radius: 14px;
+    background: transparent;
+    transition: all 0.2s ease;
+    align-items: flex-start;
+    width: 100%;
+}
+
+
+.podcast:hover {
+    background: #fef7f7;
+    transform: translateX(4px);
+}
+
+
+.related-podcast-details {
+    width: 100%;
+    padding: 8px 20px;
+}
+
+.released-stamp {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #f90000;
+    /* Thaalam red */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 4px;
+}
+
+/* Podcast Title */
+.podcast-heading {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #111;
+    margin: 0;
+    line-height: 1.35;
+    transition: color 0.2s ease;
+}
+
+/* Hover color shift */
+.podcast-heading:hover {
+    color: #f90000;
+    /* red accent */
+}
+
+/* Audio duration on right */
+.audio-details {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #555;
+    min-width: 60px;
+    /* keeps layout aligned */
+    /* justify-content: flex-end; */
+}
+
+.audio-duration {
+    margin: 0;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .float-image {
+        float: none;
+        width: 100%;
+        margin: 15px 0;
+    }
+
+    .related-podcast-details {
+        padding: 0 10px;
+    }
+
+    .podcast {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .related-podcast-image {
+        width: 90px;
+        height: 60px;
     }
 }

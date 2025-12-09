@@ -91,8 +91,8 @@
                          </div>
                      </a>
                  </li>
-                 <!-- <li>
-                     <a href="news.php">
+                 <li>
+                     <a href="news-list.php">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-newspaper pe-2"></i>
                              <p>News</p>
@@ -100,13 +100,13 @@
                      </a>
                  </li>
                  <li>
-                     <a href="blogs.php">
+                     <a href="blogs-list.php">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-blog pe-2"></i>
                              <p>Blogs</p>
                          </div>
                      </a>
-                 </li> -->
+                 </li>
                  <li>
                      <a href="contact-us">
                          <div class="d-flex align-items-center">
