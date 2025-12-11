@@ -47,6 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
       "relatedPodcasts",
       "videoSection",
       "videoContainer",
+      "relatedPodcastsSidebar",
+      "relatedPodcastsBottom",
+      "relatedBottomContainer",
+      "relatedSidebarContainer",
     ];
 
     const elements = {};
@@ -150,9 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "linear-gradient(45deg, #1b0f2a 0%, #5a1e8a 50%, #b450ff 100%)",
       "linear-gradient(45deg, #0a1f12 0%, #1e8a4e 50%, #4dff88 100%)",
       "linear-gradient(45deg, #2a0f1e 0%, #8a1e5a 50%, #ff50a8 100%)",
-      "linear-gradient(45deg, #1f150a 0%, #8a5a2e 50%, #e0a96d 100%)",
       "linear-gradient(45deg, #0b0b0b 0%, #3a3a3a 50%, #bfbfbf 100%)",
-      "linear-gradient(45deg, #150021 0%, #602080 50%, #ff75e8 100%)",
       "linear-gradient(45deg, #1f0a00 0%, #a33200 50%, #ff7a3b 100%)",
     ];
 
@@ -727,7 +729,22 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSidebarInfo(podcast);
 
     // Related podcasts
-    fetchRelated(podcast.rjname || "", podcast.id);
+    // fetchRelated(podcast.rjname || "", podcast.id);
+    const hasVideo =
+      podcast.video_link &&
+      podcast.video_link !== "NA" &&
+      podcast.video_link !== null;
+
+    if (hasVideo) {
+      el.relatedPodcastsSidebar.style.display = "block";
+      el.relatedBottomContainer.style.display = "none";
+
+      fetchRelated(podcast.rjname || "", podcast.id, "sidebar");
+    } else {
+      el.relatedSidebarContainer.style.display = "none";
+      el.relatedPodcastsBottom.style.display = "block";
+      fetchRelated(podcast.rjname || "", podcast.id, "bottom");
+    }
   };
 
   const updateNavigationButtons = (prev, next) => {
@@ -820,23 +837,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const fetchRelated = debounce((name, excludeId) => {
+  const fetchRelated = debounce((name, excludeId, target = "sidebar") => {
     if (!name) return;
 
     fetch(`${API}/podcasts?search=${encodeURIComponent(name)}&limit=4`)
       .then((r) => r.json())
       .then((res) => {
         const items = res?.data?.data || res?.data || res || [];
-        renderRelated(items, excludeId);
+        renderRelated(items, excludeId, target);
       })
       .catch((err) => console.error("fetchRelated error:", err));
   }, 300);
 
-  const renderRelated = (list, excludeId) => {
-    if (!el.relatedPodcasts) return;
+  const renderRelated = (list, excludeId, target) => {
+    const container =
+      target === "sidebar"
+        ? el.relatedPodcastsSidebar
+        : el.relatedPodcastsBottom;
+
+    if (!container) return;
 
     if (!Array.isArray(list) || !list.length) {
-      el.relatedPodcasts.innerHTML = `<p class="text-gray-500 text-sm">No related podcasts found</p>`;
+      container.innerHTML = `<p class="text-gray-500 text-sm">No related podcasts found</p>`;
       return;
     }
 
@@ -875,8 +897,8 @@ document.addEventListener("DOMContentLoaded", () => {
       fragment.appendChild(item);
     });
 
-    el.relatedPodcasts.innerHTML = "";
-    el.relatedPodcasts.appendChild(fragment);
+    container.innerHTML = "";
+    container.appendChild(fragment);
   };
 
   // Initial load

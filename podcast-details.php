@@ -41,9 +41,6 @@
     <meta name="twitter:description" content="<?php echo htmlspecialchars($description); ?>" />
     <meta name="twitter:image" content="<?php echo htmlspecialchars($image); ?>" />
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <?php include 'php/css.php'; ?>
     <?php include 'php/analyticsHeader.php'; ?>
 
@@ -239,7 +236,7 @@
                                 <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
                                     <i class="fas fa-headphones text-blue-600"></i>
                                 </div>
-                                <h2 class="text-xl font-semibold text-gray-800">Audio Player</h2>
+                                <h2 class="text-xl font-semibold text-gray-800">Audio</h2>
                             </div>
 
                             <div class="flex justify-between text-sm text-gray-600 mb-2">
@@ -305,6 +302,21 @@
                                 <p class="text-gray-500 italic">Loading description...</p>
                             </div>
                         </div>
+
+                        <div id="relatedBottomContainer" class="glass-effect rounded-2xl p-3 md:p-6 hover-card">
+                            <div class="flex items-center gap-3 mb-3 md:mb-6">
+                                <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center">
+                                    <i class="fas fa-stream text-orange-600"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-800">Related Podcasts</h3>
+                            </div>
+
+                            <div id="relatedPodcastsBottom" class=" space-y-3 md:space-y-4">
+                                <div class="skeleton h-20 rounded-lg"></div>
+                                <div class="skeleton h-20 rounded-lg"></div>
+                                <div class="skeleton h-20 rounded-lg"></div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- SIDEBAR -->
@@ -357,20 +369,10 @@
                                         <p id="sidebar-duration" class="font-semibold text-gray-800">Loading...</p>
                                     </div>
                                 </div>
-
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
-                                        <i class="fas fa-video text-red-600"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-500">Video Available</p>
-                                        <p id="video-available" class="font-semibold text-gray-800">Loading...</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
-                        <div class="glass-effect rounded-2xl p-3 md:p-6 hover-card">
+                        <div id="relatedSidebarContainer" class="glass-effect rounded-2xl p-3 md:p-6 hover-card">
                             <div class="flex items-center gap-3 mb-3 md:mb-6">
                                 <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center">
                                     <i class="fas fa-stream text-orange-600"></i>
@@ -378,7 +380,7 @@
                                 <h3 class="text-xl font-semibold text-gray-800">Related Podcasts</h3>
                             </div>
 
-                            <div id="relatedPodcasts" class=" space-y-3 md:space-y-4">
+                            <div id="relatedPodcastsSidebar" class=" space-y-3 md:space-y-4">
                                 <div class="skeleton h-20 rounded-lg"></div>
                                 <div class="skeleton h-20 rounded-lg"></div>
                                 <div class="skeleton h-20 rounded-lg"></div>

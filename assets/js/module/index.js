@@ -125,7 +125,7 @@ $(document).ready(function () {
     $podcastList.empty();
     try {
       const res = await $.ajax({
-        url: `${window.API_BASE_URL}/podcasts?status=active&limit=4`,
+        url: `${window.API_BASE_URL}/podcasts?status=approved&limit=4`,
         method: "GET",
       });
       const podcasts = res?.data?.data || [];

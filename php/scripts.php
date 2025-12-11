@@ -7,6 +7,21 @@
 <!-- Bootstrap Bundle (includes Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
 
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    thaalam: "#e60000",
+                    dark: "#111111"
+                }
+            }
+        }
+    };
+</script>
+
 <!-- Core JS Plugins (defer to prevent blocking render) -->
 <script src="assets/js/owl.carousel.min.js" defer></script>
 <script src="assets/js/jquery.appear.min.js" defer></script>
