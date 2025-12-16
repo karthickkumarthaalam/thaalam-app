@@ -9,7 +9,7 @@
     $slug = $_GET['slug'] ?? null;
     $podcastId = $_GET['id'] ?? null;
 
-    $baseUrl = "http://localhost:5000/api";
+    $baseUrl = "https://api.demoview.ch/api";
     $metaUrl = "$baseUrl/podcasts/$slug/meta-data";
 
     $response = @file_get_contents($metaUrl);
@@ -43,6 +43,21 @@
 
     <?php include 'php/css.php'; ?>
     <?php include 'php/analyticsHeader.php'; ?>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        thaalam: "#e60000",
+                        dark: "#111111"
+                    }
+                }
+            }
+        };
+    </script>
 
     <style>
         /* --------------------------------------------- */

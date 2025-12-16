@@ -1,6 +1,7 @@
-/* --------------------------------
-CINEMATIC PREMIUM RJ PROFILE THEME
--------------------------------- */
+/* ======================================================
+   CINEMATIC PREMIUM RJ PROFILE THEME (OPTIMIZED)
+====================================================== */
+
 :root {
     --primary: #f90000e3;
     --primary-glow: rgba(255, 46, 46, 0.18);
@@ -8,12 +9,13 @@ CINEMATIC PREMIUM RJ PROFILE THEME
     --text-light: #6b6b6b;
     --border-light: rgba(0, 0, 0, 0.08);
     --bg-soft: #f9f9fb;
-    --transition: 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+    --transition: 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* --------------------------------
-PAGE FADE-IN
--------------------------------- */
+/* ======================================================
+   PAGE ANIMATION
+====================================================== */
+
 .rj-details-section {
     padding: 120px 0 90px;
     background: linear-gradient(135deg, #ffffff 0%, #fafafa 40%, #ffffff 100%);
@@ -27,27 +29,23 @@ PAGE FADE-IN
     }
 }
 
-/* --------------------------------
-HERO — Modern Cinematic Layout
--------------------------------- */
+/* ======================================================
+   HERO SECTION
+====================================================== */
+
 .rj-hero {
     display: flex;
     align-items: center;
     gap: 70px;
     padding-bottom: 90px;
     border-bottom: 2px solid var(--border-light);
-    position: relative;
 }
 
-
-/* Avatar container animation */
 .rj-avatar-container {
     opacity: 0;
     transform: translateY(20px) scale(0.96);
     animation: avatarReveal 1s ease forwards .4s;
 }
-
-
 
 @keyframes avatarReveal {
     to {
@@ -66,11 +64,9 @@ HERO — Modern Cinematic Layout
 }
 
 .rj-avatar:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 28px 70px rgba(250, 137, 137, 0.14);
+    transform: translateY(-8px) scale(1.02);
 }
 
-/* Hero text reveal */
 .rj-info {
     opacity: 0;
     transform: translateX(45px);
@@ -89,47 +85,19 @@ HERO — Modern Cinematic Layout
     font-weight: 600;
     color: var(--primary);
     text-transform: uppercase;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .rj-bio {
-    font-size: 1.18rem;
+    font-size: 1.1rem;
     max-width: 680px;
-    line-height: 1.4;
-    color: var(--text-light);
-    margin-bottom: 32px;
-}
-
-/* --------------------------------
-STATS
--------------------------------- */
-.rj-stats {
-    display: flex;
-    gap: 55px;
-    margin-top: 18px;
-}
-
-.stat {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary);
-    display: block;
-}
-
-.stat-label {
-    font-size: .78rem;
-    text-transform: uppercase;
-    letter-spacing: 1.8px;
     color: var(--text-light);
 }
 
-/* --------------------------------
-2-COLUMN LAYOUT — Sidebar + Content
--------------------------------- */
+/* ======================================================
+   LAYOUT
+====================================================== */
+
 .rj-layout {
     display: grid;
     grid-template-columns: 240px 1fr;
@@ -137,33 +105,25 @@ STATS
     padding-top: 90px;
 }
 
-/* Sidebar menu */
+/* Sidebar */
 .rj-sidebar {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
     position: sticky;
     top: 130px;
-    height: fit-content;
-    padding-right: 15px;
     border-right: 2px solid var(--border-light);
 }
 
-.rj-sidebar .nav-item {
-    text-align: left;
-    font-size: 1.04rem;
-    padding: 14px 6px;
+.nav-item {
     background: none;
     border: none;
+    text-align: left;
+    padding: 10px 6px;
+    font-size: 1rem;
     cursor: pointer;
     color: var(--text-light);
     transition: var(--transition);
-    position: relative;
-}
-
-.rj-sidebar .nav-item:hover {
-    color: var(--primary);
-    transform: translateX(6px);
 }
 
 .rj-sidebar .nav-item.active {
@@ -184,12 +144,14 @@ STATS
     transform: translateY(-50%);
 }
 
-/* --------------------------------
-CONTENT AREA + ANIMATION
--------------------------------- */
+
+/* ======================================================
+   CONTENT SECTIONS
+====================================================== */
+
 .rj-body {
     opacity: 0;
-    animation: bodyFade .7s ease forwards .2s;
+    animation: bodyFade .6s ease forwards .2s;
 }
 
 @keyframes bodyFade {
@@ -198,29 +160,17 @@ CONTENT AREA + ANIMATION
     }
 }
 
-/* Section switching animation */
 .rj-block {
     display: none;
-    opacity: 0;
-    transform: translateY(35px);
 }
 
 .rj-block.active {
     display: block;
-    animation: sectionReveal .65s ease forwards;
-}
-
-@keyframes sectionReveal {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .block-title {
     font-size: 1.4rem;
     font-weight: 600;
-    color: var(--text-dark);
     margin-bottom: 45px;
 }
 
@@ -228,29 +178,50 @@ CONTENT AREA + ANIMATION
     color: var(--primary);
 }
 
-/* --------------------------------
-LIST CARDS
--------------------------------- */
+/* ======================================================
+   SHARED GRID (PROGRAM / PODCAST / NEWS / BLOG)
+====================================================== */
+
 .list-section {
-    display: flex;
-    flex-direction: column;
-    gap: 42px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+    .list-section {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
 
+/* Mobile */
+@media (max-width: 640px) {
+    .list-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* ======================================================
+   SHARED CARD STYLE
+====================================================== */
 
 .list-item {
     display: flex;
-    gap: 34px;
-    padding: 28px;
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 6px;
+    border-radius: 12px;
+    background: #fff;
     overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
     cursor: pointer;
-    transition: var(--transition);
+    transition: transform .45s ease, box-shadow .45s ease;
     opacity: 0;
-    transform: translateY(25px);
-    animation: listFade .6s ease forwards calc(var(--i) * 0.09s);
+    transform: translateY(20px);
+    animation: listFade .6s ease forwards;
+    animation-delay: calc(var(--i) * .08s);
 }
 
 @keyframes listFade {
@@ -261,130 +232,82 @@ LIST CARDS
 }
 
 .list-item:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.10);
+    transform: translateY(-8px);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.14);
 }
 
+/* Image */
 .list-item img {
-    width: 260px;
-    height: 155px;
-    border-radius: 14px;
+    width: 100%;
+    height: 180px;
     object-fit: cover;
-    transition: var(--transition);
-}
-
-.list-item:hover img {
-    transform: scale(1.05);
-}
-
-
-.list-content h4 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 8px;
-}
-
-.list-content p {
-    font-size: 1rem;
-    color: var(--text-light);
-    line-height: 1.55;
-}
-
-/* PROGRAM CARD — Premium Vertical Layout */
-.program {
-    flex-direction: column;
-    padding: 0;
-    gap: 0;
-    border-radius: 18px;
-    overflow: hidden;
-}
-
-/* Cinematic banner */
-.program img {
-    width: 80%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
+    border-radius: 8px;
     transition: transform .6s ease;
 }
 
-.program:hover {
-    transform: none;
-    box-shadow: none;
+.list-item:hover img {
+    transform: scale(1.02);
 }
 
-/* Gentle zoom on hover */
-.program:hover img {
-    transform: scale(1.01);
-}
-
-/* program text container */
+/* Content */
+.list-content,
 .program-list-content {
-    padding: 22px 24px 26px;
-    text-align: left;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-
-/* <h4> becomes chip/badge style */
+.list-content h4,
 .program-list-content h4 {
-    font-size: 1.45rem;
-    font-weight: 700;
-    margin-bottom: 20px;
+    font-size: 1.05rem;
+    font-weight: 600;
     color: var(--text-dark);
-    display: block;
+    line-height: 1.4;
 }
+
+/* ======================================================
+   PROGRAM-SPECIFIC BADGE
+====================================================== */
 
 .program-list-content p {
-    font-size: 0.96rem;
-    color: #fff;
+    align-self: flex-start;
+    font-size: 0.72rem;
     font-weight: 600;
-    display: inline-block;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
     background: linear-gradient(90deg, #ff512f, #dd2476);
-    /* old h4 style */
-    padding: 6px 16px;
-    border-radius: 10px;
-    margin: 0;
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 81, 47, 0.35);
 }
 
-.program-list-content p:hover {
-    box-shadow: 0 0 15px rgba(255, 81, 47, 0.35), 0 0 30px rgba(221, 36, 118, 0.25);
-    transform: translateY(-2px);
-}
+/* ======================================================
+   EMPTY STATE
+====================================================== */
 
-
-
-/* responsive layout */
-@media(max-width: 720px) {
-    .program-list-content {
-        text-align: center;
-    }
-
-    .program-list-content h4 {
-        font-size: 1rem;
-    }
-}
-
-
-/* --------------------------------
-EMPTY STATE
--------------------------------- */
 .empty {
     padding: 90px 0;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--text-light);
-    opacity: 0.65;
+    opacity: .7;
 }
 
-/* --------------------------------
-RESPONSIVE DESIGN
--------------------------------- */
-@media (max-width: 1200px) {
+/* ======================================================
+   MOBILE ADJUSTMENTS
+====================================================== */
+
+@media (max-width: 768px) {
+
+    .rj-hero {
+        /* flex-direction: column; */
+        text-align: start;
+        gap: 24px;
+    }
+
     .rj-layout {
         grid-template-columns: 1fr;
-        gap: 45px;
+        gap: 40px;
     }
 
     .rj-sidebar {
@@ -392,132 +315,29 @@ RESPONSIVE DESIGN
         justify-content: center;
         border-right: none;
         border-bottom: 1px solid var(--border-light);
-        padding-bottom: 14px;
-        position: static;
+    }
+
+    .list-item img {
+        height: 190px;
+    }
+
+    .list-content h4,
+    .program-list-content h4 {
+        font-size: .95rem;
     }
 
     .rj-sidebar .nav-item.active::before {
         display: none;
     }
-}
-
-/* --------------------------------
-✨ PREMIUM MOBILE RJ PROFILE UI (Cinematic + Modern)
--------------------------------- */
-@media (max-width: 768px) {
-
-
-
-    /* HERO SECTION */
-    .rj-hero {
-        flex-direction: column;
-        text-align: center;
-        gap: 24px;
-        padding-bottom: 50px;
-        border-bottom: 1px solid var(--border-light);
-    }
-
-    .rj-avatar-container {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .rj-name {
-        font-size: 1.6rem;
-        font-weight: 600;
-        color: var(--primary);
-        margin-bottom: 6px;
-        letter-spacing: 2px;
-    }
-
-    .rj-bio {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        padding: 0 22px;
-        text-align: center;
-        color: #444;
-        font-weight: 500;
-        opacity: 0.9;
-    }
-
-
-    /* HORIZONTAL NAVIGATION SCROLLER */
-    .rj-sidebar {
-        display: flex;
-        gap: 14px;
-        overflow-x: auto;
-        padding-bottom: 14px;
-        border-right: none;
-        border-bottom: 2px solid var(--border-light);
-        position: sticky;
-        background: #fff;
-        top: 0;
-        z-index: 10;
-        margin-bottom: 24px;
-    }
 
     .block-title {
         text-align: center;
     }
+}
 
-    /* LIST SECTION */
-    .list-section {
-        gap: 26px;
-        padding: 8px 4px;
-    }
-
-    /* LIST ITEMS AS PREMIUM CARDS */
-    .list-item {
-        background: #fff;
+@media (max-width: 640px) {
+    .rj-hero {
         flex-direction: column;
-        width: 92%;
-        margin: auto;
-        padding: 18px;
-        border-radius: 16px;
-        box-shadow: 0 5px 22px rgba(0, 0, 0, 0.08);
-        border: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    .list-item img {
-        width: 100%;
-        height: 190px;
-        border-radius: 12px;
-        object-fit: cover;
-        margin-bottom: 14px;
-    }
-
-    .list-content {
-        width: 100%;
-        text-align: left;
-    }
-
-    .list-content h4 {
-        font-size: 1.06rem;
-        font-weight: 500;
-        margin-bottom: 6px;
-        color: #000;
-    }
-
-    .list-content p {
-        font-size: 0.82rem;
-        line-height: 1.5;
-        font-weight: 400;
-        color: #444;
-        opacity: 0.9;
-    }
-
-    /* PROGRAM CARD TYPE */
-    .program img {
-        width: 100%;
-        height: 200px;
-    }
-
-    /* EMPTY STATE */
-    .empty {
-        font-size: 0.88rem;
-        padding: 55px 10px;
-        font-weight: 600;
-        opacity: 0.7;
+        text-align: center;
     }
 }

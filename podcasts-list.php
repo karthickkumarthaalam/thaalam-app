@@ -12,7 +12,20 @@
 
     <?php include 'php/css.php' ?>
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        thaalam: "#e60000",
+                        dark: "#111111"
+                    }
+                }
+            }
+        };
+    </script>
     <style>
         .page-wrapper,
         #podcast-list {

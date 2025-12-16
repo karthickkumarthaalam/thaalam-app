@@ -9,7 +9,7 @@
 
     $rjSlug = $_GET['slug'] ?? null;
 
-    $baseUrl = "http://localhost:5000/api";
+    $baseUrl = "https://api.demoview.ch/api";
     $metaUrl = "$baseUrl/rj-details/meta-tag/$rjSlug";
 
     $response = @file_get_contents($metaUrl);

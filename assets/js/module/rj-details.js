@@ -32,7 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
       ? window.API_BASE_URL + "/" + rj.image_url.replace(/\\/g, "/")
       : "/assets/img/home/default-rj.jpg";
 
-    document.getElementById("rj-image").src = profile;
+    const preload = new Image();
+    preload.src = profile;
+
+    const imgEl = document.getElementById("rj-image");
+    imgEl.src = profile;
+    imgEl.loading = "eager";
+    imgEl.decoding = "async";
     document.getElementById("rj-name").textContent = rj.name;
     document.getElementById("rj-description").textContent =
       rj.description || "No description available";
@@ -50,7 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return `
         <div class="program list-item" style="--i:${i}">
-          <img src="${img}" alt="${pc.category}">
+          <img src="${img}" alt="${
+          pc.category
+        }"  loading="lazy" decoding="async">
           <div class="program-list-content">
             <h4>${pc.category || "Unnamed Show"}</h4>
             <p>Running On : ${pc.start_time?.slice(0, 5) || "N/A"} – ${
@@ -70,10 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         (n, i) => `
       <a href="/news-details?slug=${n.slug}" class="list-item" style="--i:${i}">
-        <img src="${n.cover_image}" alt="${n.title}">
+        <img src="${n.cover_image}" alt="${n.title}"  loading="lazy" decoding="async">
         <div class="list-content">
           <h4>${n.title}</h4>
-          <p>${n.content ? n.content.slice(0, 200) + "..." : ""}</p>
         </div>
       </a>`
       )
@@ -88,14 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         (p, i) => `
       <a href="/podcast-details?id=${p.id}" class="list-item" style="--i:${i}">
-        <img src="${p.image_url || "assets/images/default-podcast.jpg"}" alt="${
-          p.title
-        }">
+        <img src="${
+          p.image_url || "assets/img/common/podcast-details/podcast-banner.jpg"
+        }" alt="${p.title}"  loading="lazy" decoding="async">
         <div class="list-content">
           <h4>${p.title}</h4>
-          <p>${(p.description || "")
-            .replace(/<[^>]*>/g, "")
-            .slice(0, 100)}...</p>
+  
         </div>
       </a>`
       )
@@ -109,13 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
     el.innerHTML = blogs
       .map(
         (b, i) => `
-          <a href="/news-details?slug=${
-            b.slug
-          }" class="list-item" style="--i:${i}">
+          <a href="/news-details?slug=${b.slug}" class="list-item" style="--i:${i}">
             <img src="${b.cover_image}" alt="${b.title}">
             <div class="list-content">
               <h4>${b.title}</h4>
-              <p>${(b.subtitle || "").slice(0, 120)}...</p>
             </div>
           </a>
         `

@@ -13,6 +13,7 @@ $(document).ready(function () {
   // ---------------- CAROUSEL + BANNERS ✅ ----------------
 
   async function updateCarousel(program, firstLoad = false) {
+    $("#bannerLoader").show();
     if ($carousel.hasClass("owl-loaded")) {
       $carousel.trigger("destroy.owl.carousel");
       $carousel.removeClass("owl-loaded owl-hidden");
@@ -26,7 +27,7 @@ $(document).ready(function () {
     if (programImage) {
       slides.push(`
         <div class="item"><div class="main-slider__bg">
-          <img src="${programImage}" loading="eager" alt="${programImage}" />
+          <img src="${programImage}" decoding="async" fetchpriority="high"  alt="${programImage}" />
         </div></div>
       `);
     }
@@ -41,7 +42,7 @@ $(document).ready(function () {
         const path = b.website_image.replace(/\\/g, "/");
         slides.push(`
           <div class="item"><div class="main-slider__bg">
-            <img src="${window.API_BASE_URL}/${path}" loading="eager" alt="${path}" />
+            <img src="${window.API_BASE_URL}/${path}" decoding="async" fetchpriority="high"  alt="${path}" />
           </div></div>
         `);
       });
@@ -53,7 +54,7 @@ $(document).ready(function () {
     if (!slides.length) {
       slides.push(`
         <div class="item"><div class="main-slider__bg">
-          <img src="assets/img/logo/thaalam-logo.png" loading="eager" alt="thaalam-logo" />
+          <img src="assets/img/logo/thaalam-logo.png" decoding="async" fetchpriority="high"   alt="thaalam-logo" />
         </div></div>
       `);
     }
@@ -68,7 +69,35 @@ $(document).ready(function () {
       autoplayTimeout: 5000,
       dots: true,
       nav: false,
+      onInitialized: function () {
+        hideBannerLoaderSafely($carousel);
+      },
+
+      onResized: function () {
+        hideBannerLoaderSafely($carousel);
+      },
     });
+  }
+
+  function hideBannerLoaderSafely($carousel) {
+    let done = false;
+
+    function hide() {
+      if (done) return;
+      done = true;
+      $("#bannerLoader").fadeOut(300);
+    }
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(hide);
+    });
+
+    const $images = $carousel.find("img");
+    $images.each(function () {
+      $(this).one("load error", hide);
+    });
+
+    setTimeout(hide, 2500);
   }
 
   // ---------------- LIVE PROGRAM API ✅ ----------------

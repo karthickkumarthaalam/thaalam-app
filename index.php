@@ -44,6 +44,79 @@
             }
         }
     </script>
+    <style>
+        /* ================= Pure Banner Loader ================= */
+
+        .banner-loader {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Main loader ring */
+        .signal-loader {
+            width: clamp(64px, 2vw, 120px);
+            height: clamp(64px, 2vw, 120px);
+            border-radius: 50%;
+            border: 4px solid rgba(0, 0, 0, 0.08);
+            border-top-color: #ff0000;
+            animation: spin 1.2s linear infinite;
+            position: relative;
+        }
+
+
+
+        /* Animations */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* Ensure slider area height */
+        .main-slider {
+            position: relative;
+            min-height: 260px;
+        }
+
+        @media (min-width: 576px) {
+            .main-slider {
+                min-height: 360px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-slider {
+                min-height: 460px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .main-slider {
+                min-height: 560px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .main-slider {
+                min-height: 760px;
+            }
+        }
+
+        .festival-side {
+            display: none;
+        }
+
+        .festival-side[src] {
+            display: block;
+        }
+    </style>
 
 </head>
 
@@ -68,6 +141,9 @@
                 <!-- Main Slider Start -->
                 <section class="main-slider">
                     <h2 class="visually-hidden">24/7 Live Tamil radio streaming and shows from Switzerland</h2>
+                    <div id="bannerLoader" class="banner-loader">
+                        <div class="signal-loader"></div>
+                    </div>
                     <div class="main-slider__carousel owl-carousel owl-theme">
 
                     </div>
@@ -129,7 +205,7 @@
                                     <div class="row">
                                         <div class="audio-page__player">
                                             <div class="audio-page__player-cover">
-                                                <img id="programImage" alt="Thaalam Live">
+                                                <img id="programImage" src="assets/img/logo/thalam-logo.png" alt="Thaalam Live">
                                                 <div class="audio-page__player-overlay">
                                                 </div>
                                             </div>
@@ -240,8 +316,6 @@
             });
         });
     </script>
-
-
 </body>
 
 </html>

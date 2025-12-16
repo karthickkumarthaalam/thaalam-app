@@ -1,3 +1,65 @@
+<style>
+    /* ================= SNOW SYMBOL FALL ================= */
+
+    .christmas-overlay {
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        overflow: hidden;
+    }
+
+    .snow-symbol {
+        position: absolute;
+        top: -40px;
+        color: #e6f6ff;
+        opacity: 0.85;
+        user-select: none;
+        animation-name: snowSymbolFall;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Sizes */
+    .snow-small {
+        font-size: 14px;
+        opacity: 0.4;
+    }
+
+    .snow-medium {
+        font-size: 20px;
+        opacity: 0.6;
+    }
+
+    .snow-large {
+        font-size: 26px;
+        opacity: 0.85;
+    }
+
+    /* Falling animation */
+    @keyframes snowSymbolFall {
+        0% {
+            transform: translateY(-40px) rotate(0deg);
+        }
+
+        100% {
+            transform: translateY(110vh) rotate(360deg);
+        }
+    }
+
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+        .snow-large {
+            display: none;
+        }
+    }
+</style>
+<div class="christmas-overlay">
+    <div id="snowflakes"></div>
+</div>
+
+
 <header class="main-header-two">
     <nav class="main-menu main-menu-two">
         <div class="main-menu-two__wrapper">
@@ -231,5 +293,48 @@
 
         setInterval(updateSiwssTime, 1000);
 
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("snowflakes");
+
+        const snowSymbols = ["❄", "❅", "❆"];
+
+        /* ⬇ Reduced initial density */
+        const density = window.innerWidth < 768 ? 1 : 1;
+
+        for (let i = 0; i < density; i++) {
+            createSnow(true);
+        }
+
+        /* ⬇ Slower continuous snowfall */
+        setInterval(
+            () => createSnow(false),
+            window.innerWidth < 768 ? 550 : 450
+        );
+
+        function createSnow(initial) {
+            const snow = document.createElement("div");
+
+            const sizes = ["snow-small", "snow-medium", "snow-large"];
+            const size = sizes[Math.floor(Math.random() * sizes.length)];
+
+            snow.className = `snow-symbol ${size}`;
+            snow.innerHTML = snowSymbols[Math.floor(Math.random() * snowSymbols.length)];
+
+            snow.style.left = Math.random() * 100 + "%";
+
+            snow.style.animationDuration =
+                size === "snow-large" ? "22s" :
+                size === "snow-medium" ? "16s" :
+                "12s";
+
+            snow.style.animationDelay = initial ? Math.random() * 15 + "s" : "0s";
+
+            container.appendChild(snow);
+
+            setTimeout(() => snow.remove(), 26000);
+        }
     });
 </script>
