@@ -116,6 +116,35 @@
         .festival-side[src] {
             display: block;
         }
+
+        .rewind-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @keyframes rewindSvg {
+            0% {
+                transform: translateX(0);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateX(-3px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 0.6;
+            }
+        }
+
+        .rewind-svg {
+            animation: rewindSvg 1.6s ease-in-out infinite;
+            color: #ef4444;
+            /* Christmas / Rewind red */
+        }
     </style>
 
 </head>
@@ -185,10 +214,27 @@
                                             <a class="nav-link" data-bs-toggle="tab" href="#podcasts" role="tab">Podcasts</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/events-list" target="_blank" rel="noopener">
-                                                Event
+                                            <a class="nav-link rewind-link" href="/rewind-2025" rel="noopener">
+                                                <svg
+                                                    class="rewind-svg"
+                                                    width="22"
+                                                    height="18"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    aria-hidden="true">
+                                                    <path
+                                                        d="M11 18V6L2 12L11 18Z"
+                                                        fill="currentColor" />
+                                                    <path
+                                                        d="M22 18V6L13 12L22 18Z"
+                                                        fill="currentColor" />
+                                                </svg>
+                                                Rewind 2025
+
                                             </a>
                                         </li>
+
                                     </ul>
                                 </div>
                             </div>

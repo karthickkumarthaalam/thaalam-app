@@ -12,7 +12,7 @@
     .snow-symbol {
         position: absolute;
         top: -40px;
-        color: #e6f6ff;
+        color: #c4e4f7ff;
         opacity: 0.85;
         user-select: none;
         animation-name: snowSymbolFall;
@@ -120,6 +120,14 @@
                                     </div>
                                 </a>
                             </li>
+                            <li>
+                                <a href="rewind-2025">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-backward pe-2"></i>
+                                        <span>Rewind</span>
+                                    </div>
+                                </a>
+                            </li>
                             <li class="dropdown">
                                 <a role="button" aria-label="Explore news and blogs" aria-haspopup="true" aria-expanded="false">
                                     <div class="d-flex align-items-center">
@@ -132,22 +140,7 @@
                                     <li><a href="blogs-list" target="_blank" aria-label="Blogs"><i class="fas fa-blog pe-2"></i>Blogs</a></li>
                                 </ul>
                             </li>
-
-
                             <!-- <li class="dropdown">
-                                <a href="javascript:void(0)">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-broadcast-tower pe-2"></i>
-                                        <p>Shows</p>
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="podcasts.php"><i class="fas fa-microphone pe-2"></i>Podcasts</a></li>
-                                    <li><a href="blogs.php"><i class="fas fa-blog pe-2"></i>Blogs</a></li>
-                                    <li><a href="news.php"><i class="fas fa-newspaper pe-2"></i>News</a></li>
-                                </ul>
-                            </li> -->
-                            <li class="dropdown">
                                 <a role="button" aria-label="Marketing and pricing services" aria-haspopup="true" aria-expanded="false">
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-bullhorn pe-2"></i>
@@ -158,7 +151,7 @@
                                     <li><a href="marketing" aria-label="Marketing"><i class="fas fa-bullhorn pe-2"></i>Marketing</a></li>
                                     <li><a href="pricing" aria-label="Pricing"><i class="fas fa-tags pe-2"></i>Pricing</a></li>
                                 </ul>
-                            </li>
+                            </li> -->
 
                             <li class="dropdown">
                                 <a role="button" aria-label="About our teams and career" aria-haspopup="true" aria-expanded="false">

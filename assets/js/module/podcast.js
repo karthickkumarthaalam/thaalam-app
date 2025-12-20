@@ -74,7 +74,7 @@ async function fetchPodcasts(page = 1, search = "") {
     const res = await fetch(
       `${API_URL}?status=approved&page=${page}&limit=${podcastsPerPage}&search=${encodeURIComponent(
         search
-      )}`
+      )}&not_category_id=${1}`
     );
 
     const result = await res.json();

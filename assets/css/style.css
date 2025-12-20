@@ -2110,9 +2110,8 @@ ul {
 
 .home-page__categories li.active a,
 .home-page__categories li a:hover {
-  background: var(--fistudy-primary);
+  background: linear-gradient(135deg, #f00000, #f90000);
   color: #fff;
-  border-color: var(--fistudy-base)
 }
 
 .audio-page__player {

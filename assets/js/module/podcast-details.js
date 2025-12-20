@@ -822,7 +822,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const elements = {
       "published-name": podcast.rjname || "Unknown",
       "content-creator": podcast.content || "Unknown",
-      "published-date": new Date(podcast.date).toLocaleDateString(),
+      "published-date": new Date(podcast.date).toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
       "video-available":
         podcast.video_link &&
         podcast.video_link !== "NA" &&
@@ -889,7 +893,11 @@ document.addEventListener("DOMContentLoaded", () => {
             )}</h4>
             <p class="text-sm text-gray-500">${new Date(
               p.date
-            ).toLocaleDateString()}</p>
+            ).toLocaleDateString("en-GB", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}</p>
             <p class="text-sm text-gray-500">${p.duration} min</p>
           </div>
         </div>

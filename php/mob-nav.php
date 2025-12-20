@@ -36,6 +36,14 @@
                      </a>
                  </li>
                  <li>
+                     <a href="rewind-2025">
+                         <div class="d-flex align-items-center">
+                             <i class="fas fa-backward pe-2"></i>
+                             <p>Rewind 2025</p>
+                         </div>
+                     </a>
+                 </li>
+                 <li>
                      <a href="news-list">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-newspaper pe-2"></i>
