@@ -216,7 +216,7 @@
                             <div class="flex flex-wrap items-center gap-3 text-white mt-4">
                                 <span class="flex items-center gap-1"><i class="fas fa-calendar text-sm"></i><span id="publishedDate" class="text-sm">Loading...</span></span>
                                 <span class="w-1 h-1 bg-white/40 rounded-full"></span>
-                                <span class="flex items-center gap-1"><i class="fas fa-clock text-sm"></i><span id="duration" class="text-sm">0 min</span></span>
+                                <span class="flex items-center gap-1"><i class="fas fa-clock text-sm"></i><span id="mainDuration" class="text-sm">0 min</span></span>
                                 <span class="w-1 h-1 bg-white/40 rounded-full"></span>
                                 <span class="flex items-center gap-1"><i class="fas fa-heart text-sm"></i><span><span id="like-count">0</span> likes</span></span>
                             </div>

@@ -21,6 +21,9 @@
                     colors: {
                         thaalam: "#e60000",
                         dark: "#111111"
+                    },
+                    screens: {
+                        xs: '500px'
                     }
                 }
             }

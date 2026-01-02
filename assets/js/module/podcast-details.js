@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "podcastTitle",
       "podcastCategoryName",
       "publishedDate",
+      "mainDuration",
       "sidebar-duration",
       "podcastImage",
       "podcastDescription",
@@ -694,8 +695,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const updates = [
       [el.podcastTitle, podcast.title || "Untitled"],
       [el.podcastCategoryName, podcast.category?.name || ""],
-      [el.publishedDate, new Date(podcast.date).toLocaleDateString()],
-      [el.sidebarDuration, `${podcast.duration || 0} min`],
+      [
+        el.publishedDate,
+        new Date(podcast.date).toLocaleDateString("en-GB", {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+        }),
+      ],
+      [el.mainDuration, `${podcast.duration || 0} min`],
     ];
 
     updates.forEach(([element, value]) => {

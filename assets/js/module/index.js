@@ -110,6 +110,18 @@ $(document).ready(function () {
       });
 
       const program = res.current;
+      const programId = program?.id || null;
+
+      if (programId) {
+        window.dispatchEvent(
+          new CustomEvent("program:changed", {
+            detail: {
+              programId,
+            },
+          })
+        );
+      }
+
       const title = program?.program_category?.category || "No live program";
       const rj = program?.system_users?.name || "";
       const time = program?.program_category

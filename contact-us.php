@@ -55,8 +55,8 @@
                                 </div>
                                 <div class="contact-content">
 
-                                    <p><a href="tel:+41792882271" style="color: #333">+41 79 288 22 71</a></p>
-                                    <p><a href="tel:+41415627944" style="color: #333">+41 41 562 79 44</a></p>
+                                    <p><a href="tel:079 694 88 89" style="color: #333">079 694 88 89</a></p>
+                                    <!-- <p><a href="tel:+41415627944" style="color: #333">+41 41 562 79 44</a></p> -->
                                 </div>
                             </div>
                             <div class="contact-box">

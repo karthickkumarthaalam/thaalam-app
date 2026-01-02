@@ -158,6 +158,8 @@
 
     <?php include 'php/toast.php'; ?>
 
+    <?php include 'php/config-js.php'; ?>
+
     <div class="page-wrapper">
         <div class="row">
             <!-- <div class="col-lg-20">
@@ -243,6 +245,7 @@
                     </div>
 
                     <div class="tab-content" style="margin-bottom: 50px;">
+                        <!-- <img src="assets/img/radio/santa.png" alt="christmas tree" class="tab-side-image left"> -->
                         <div class="tab-pane fade show active" id="liveStream" role="tabpanel">
                             <section style=" 
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
@@ -279,6 +282,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <?php include 'php/quiz.php'; ?>
                                 </div>
                             </section>
                         </div>
@@ -351,7 +355,6 @@
 
     <?php include 'php/scripts.php'; ?>
 
-    <?php include 'php/config-js.php'; ?>
 
     <script src="assets/js/module/index.js" defer></script>
     <script>

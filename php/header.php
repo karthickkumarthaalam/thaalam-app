@@ -70,7 +70,7 @@
                         <li>
                             <div class="d-flex align-items-center gap-2">
                                 <i class="fas fa-phone"></i>
-                                <p>Reach Us: +41 79 288 22 71</p>
+                                <p>Reach Us: 079 694 88 89</p>
                             </div>
 
                         </li>

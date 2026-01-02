@@ -129,7 +129,7 @@ function renderSpotifyCards(podcasts, list) {
     })
     .join("");
 
-  list.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-3  lg:grid-cols-4 gap-6 mt-6 ">${html}</div>`;
+  list.innerHTML = `<div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-6 mt-6 ">${html}</div>`;
 }
 
 // ✅ Render Pagination Spotify vibe

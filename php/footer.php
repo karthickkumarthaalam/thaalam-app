@@ -104,9 +104,7 @@
                                                         <div class="site-footer__contact-info-icon">
                                                             <span class="icon-phone"></span>
                                                             <p class="site-footer__contact-info-text"><a
-                                                                    href="tel:+41792882271">+41 79 288
-                                                                    22
-                                                                    71</a>
+                                                                    href="tel:+41792882271">079 694 88 89</a>
                                                             </p>
                                                         </div>
                                                     </div>
