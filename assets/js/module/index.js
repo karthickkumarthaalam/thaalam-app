@@ -67,7 +67,7 @@ $(document).ready(function () {
       loop: slides.length > 1,
       autoplay: true,
       autoplayTimeout: 5000,
-      dots: true,
+      dots: false,
       nav: false,
       onInitialized: function () {
         hideBannerLoaderSafely($carousel);

@@ -206,7 +206,7 @@
                 <div class="container mx-auto my-5 px-4 z-10 py-6 pb-10 flex flex-col md:flex-row items-start md:items-center gap-6">
                     <div class="flex flex-col-reverse md:flex-row gap-6 flex-1 md:items-center">
                         <div class="w-full h-48 md:w-60 md:h-60 rounded-xl overflow-hidden shadow-2xl bg-white">
-                            <img id="podcastImage" src="assets/img/common/blog-details/img-3.jpg" class="w-full h-full object-cover" />
+                            <img id="podcastImage" src="assets/img/common/podcast-details/podcast-banner.jpg" class="w-full h-full object-cover" />
                         </div>
 
                         <div class="flex-1">
