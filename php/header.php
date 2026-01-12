@@ -152,6 +152,14 @@
                                     <li><a href="pricing" aria-label="Pricing"><i class="fas fa-tags pe-2"></i>Pricing</a></li>
                                 </ul>
                             </li> -->
+                            <li>
+                                <a href="rj-portfolio">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-users pe-2"></i>
+                                        <span>Our Team</span>
+                                    </div>
+                                </a>
+                            </li>
 
                             <li class="dropdown">
                                 <a role="button" aria-label="About our teams and career" aria-haspopup="true" aria-expanded="false">
@@ -162,7 +170,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="about-us" aria-label="About Us"><i class="fas fa-info-circle pe-2"></i>About Us</a></li>
-                                    <li><a href="rj-portfolio" aria-label="Our Team"><i class="fas fa-users pe-2"></i>Our Team</a></li>
+                                    <!-- <li><a href="rj-portfolio" aria-label="Our Team"><i class="fas fa-users pe-2"></i>Our Team</a></li> -->
                                     <li><a href="careers-form" aria-label="Careers"><i class="fas fa-suitcase pe-2"></i>Careers</a></li>
                                 </ul>
                             </li>
