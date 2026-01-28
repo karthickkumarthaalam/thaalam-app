@@ -325,44 +325,46 @@ $(document).ready(function () {
 
     if (!audio) return;
 
-    // autoplay attempt
-    setTimeout(() => {
-      audio
-        .play()
-        .then(() => {
-          playIcon.classList.replace("fa-play", "fa-pause");
-        })
-        .catch(() => {});
-    }, 200);
-
-    // play/pause
-    playBtn?.addEventListener("click", () => {
+    const updatePlayState = () => {
       if (audio.paused) {
-        audio.play();
-        playIcon.classList.replace("fa-play", "fa-pause");
-      } else {
-        audio.pause();
         playIcon.classList.replace("fa-pause", "fa-play");
+      } else {
+        playIcon.classList.replace("fa-play", "fa-pause");
       }
+    };
+
+    setTimeout(() => {
+      audio.play().catch(() => {});
+    }, 1000);
+
+    audio.addEventListener("play", updatePlayState);
+    audio.addEventListener("pause", updatePlayState);
+    audio.addEventListener("ended", updatePlayState);
+
+    playBtn?.addEventListener("click", () => {
+      if (audio.paused) audio.play();
+      else audio.pause();
     });
 
     // volume slider
     volumeSlider?.addEventListener("input", (e) => {
       audio.volume = e.target.value;
-      if (audio.volume == 0)
-        volumeIcon.classList.replace("fa-volume-up", "fa-volume-mute");
-      else volumeIcon.classList.replace("fa-volume-mute", "fa-volume-up");
+      volumeIcon.classList.toggle("fa-volume-mute", audio.volume == 0);
+      volumeIcon.classList.toggle("fa-volume-up", audio.volume > 0);
     });
 
     // mute button
     volumeBtn?.addEventListener("click", () => {
       audio.muted = !audio.muted;
-      if (audio.muted)
-        volumeIcon.classList.replace("fa-volume-up", "fa-volume-mute");
-      else volumeIcon.classList.replace("fa-volume-mute", "fa-volume-up");
+      volumeIcon.classList.toggle("fa-volume-mute", audio.muted);
+      volumeIcon.classList.toggle("fa-volume-up", !audio.muted);
     });
 
-    // share copy
+    // Page visible change (fix when waking from lock)
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) updatePlayState();
+    });
+
     shareBtn?.addEventListener("click", () => {
       navigator.clipboard
         .writeText(window.location.href)

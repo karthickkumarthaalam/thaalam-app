@@ -179,6 +179,46 @@
                 opacity: 1;
             }
         }
+
+        .bubble-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(2px);
+            animation: floatUp linear infinite;
+        }
+
+        .bubble {
+            background: radial-gradient(circle at 30% 30%,
+                    rgba(255, 255, 255, 0.6),
+                    rgba(255, 255, 255, 0.15));
+        }
+
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            to {
+                transform: translateY(-120vh) scale(1.2);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
@@ -197,21 +237,22 @@
     <div class="page-wrapper">
         <?php include 'php/header.php'; ?>
 
-        <div class=" min-h-screen">
+        <div class=" min-h-screen" style="background-image: 
+        url('./assets/images/backgrounds/background_image.jpg');background-size: contain;">
 
             <!-- HEADER -->
-            <div class="podcast-header-gradient h-auto md:h-92 w-full relative flex items-end">
+            <div class="podcast-header-gradient h-auto lg:h-92 w-full relative flex items-end">
                 <div class="absolute inset-0 bg-gradient-to-t from-white to-transparent"></div>
-
-                <div class="container mx-auto my-5 px-4 z-10 py-6 pb-10 flex flex-col md:flex-row items-start md:items-center gap-6">
-                    <div class="flex flex-col-reverse md:flex-row gap-6 flex-1 md:items-center">
-                        <div class="w-full h-48 md:w-60 md:h-60 rounded-xl overflow-hidden shadow-2xl bg-white">
+                <div class="bubble-container"></div>
+                <div class="container mx-auto my-5 px-4 z-10 py-6 pb-10 flex flex-col xl:flex-row items-start  gap-6">
+                    <div class="flex flex-col-reverse xl:flex-row gap-6 flex-1 xl:items-start">
+                        <div class="w-full h-48 md:h-64 lg:h-72 xl:w-1/3 lg:h-72 rounded-xl overflow-hidden shadow-2xl bg-white">
                             <img id="podcastImage" src="assets/img/common/podcast-details/podcast-banner.jpg" class="w-full h-full object-cover" />
                         </div>
 
-                        <div class="flex-1">
-                            <h4 id="podcastTitle" class="text-2xl lg:text-4xl font-semibold mb-3 text-white drop-shadow-xl">Loading...</h4>
-                            <h2 id="podcastCategoryName" class="text-xl lg:text-2xl text-white drop-shadow">Loading...</h2>
+                        <div class="flex-1 lg:mt-10">
+                            <h4 id="podcastTitle" class="text-2xl lg:text-3xl lg:text-4xl font-semibold mb-3 text-white drop-shadow-xl">Loading...</h4>
+                            <h2 id="podcastCategoryName" class="text-xl lg:text-2xl lg:text-2xl text-white drop-shadow">Loading...</h2>
 
                             <div class="flex flex-wrap items-center gap-3 text-white mt-4">
                                 <span class="flex items-center gap-1"><i class="fas fa-calendar text-sm"></i><span id="publishedDate" class="text-sm">Loading...</span></span>
@@ -224,18 +265,18 @@
                     </div>
 
                     <!-- ACTIONS: LIKE / SHARE / COMMENT -->
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-4 md:mt-10">
                         <button id="like-btn" aria-label="Like" class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center hover:bg-white/10">
-                            <i class="far fa-heart text-gray-800 md:text-white"></i>
+                            <i class="far fa-heart text-gray-800 xl:text-white"></i>
                         </button>
 
                         <button id="share-btn" aria-label="Share" class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center hover:bg-white/10">
-                            <i class="fas fa-share-alt text-gray-800 md:text-white"></i>
+                            <i class="fas fa-share-alt text-gray-800 xl:text-white"></i>
                         </button>
 
                         <!-- NEW comment trigger (Option A) -->
                         <button id="comment-btn" aria-label="Comments" class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center hover:bg-white/10">
-                            <i class="far fa-comment-dots text-gray-800 md:text-white"></i>
+                            <i class="far fa-comment-dots text-gray-800 xl:text-white"></i>
                         </button>
                     </div>
                 </div>

@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const s = Math.floor(seconds % 60);
         const result = `${String(m).padStart(2, "0")}:${String(s).padStart(
           2,
-          "0"
+          "0",
         )}`;
         cache.set(seconds, result);
         return result;
@@ -147,23 +147,72 @@ document.addEventListener("DOMContentLoaded", () => {
     })(),
   };
 
-  // Header gradient - generate once
   const headerGradient = (() => {
-    const gradients = [
-      "linear-gradient(45deg, #0f172a 0%, #1e3a8a 50%, #3b82f6 100%)",
-      "linear-gradient(45deg, #280a0a 0%, #8a1e1e 50%, #ff4d4d 100%)",
-      "linear-gradient(45deg, #1b0f2a 0%, #5a1e8a 50%, #b450ff 100%)",
-      "linear-gradient(45deg, #0a1f12 0%, #1e8a4e 50%, #4dff88 100%)",
-      "linear-gradient(45deg, #2a0f1e 0%, #8a1e5a 50%, #ff50a8 100%)",
-      "linear-gradient(45deg, #0b0b0b 0%, #3a3a3a 50%, #bfbfbf 100%)",
-      "linear-gradient(45deg, #1f0a00 0%, #a33200 50%, #ff7a3b 100%)",
-    ];
-
+    const gradients = ["linear-gradient(180deg, #3a3a3a 50%, #bfbfbf 100%)"];
     const header = document.querySelector(".podcast-header-gradient");
     if (header) {
-      header.style.background =
-        gradients[Math.floor(Math.random() * gradients.length)];
+      header.style.background = gradients[0];
     }
+  })();
+
+  const floatingBubbles = (() => {
+    const container = document.querySelector(".bubble-container");
+    if (!container) return;
+
+    const MAX_BUBBLES = 20;
+    const INITIAL_BUBBLES = 12;
+    const INTERVAL_MS = 1500;
+
+    let intervalId = null;
+    let activeBubbles = 0;
+
+    const createBubble = () => {
+      if (activeBubbles >= MAX_BUBBLES) return;
+
+      const bubble = document.createElement("span");
+      bubble.className = "bubble";
+
+      const size = Math.random() * 60 + 20;
+      const duration = Math.random() * 8 + 10;
+      const delay = Math.random() * 2;
+      const left = Math.random() * 100;
+
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${left}%`;
+      bubble.style.animationDuration = `${duration}s`;
+      bubble.style.animationDelay = `${delay}s`;
+
+      activeBubbles++;
+      container.appendChild(bubble);
+
+      const removeBubble = () => {
+        activeBubbles--;
+        bubble.remove();
+      };
+
+      bubble.addEventListener("animationend", removeBubble, { once: true });
+    };
+
+    const start = () => {
+      if (intervalId) return;
+      intervalId = setInterval(createBubble, INTERVAL_MS);
+    };
+
+    const stop = () => {
+      clearInterval(intervalId);
+      intervalId = null;
+    };
+
+    for (let i = 0; i < INITIAL_BUBBLES; i++) {
+      createBubble();
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      document.hidden ? stop() : start();
+    });
+
+    start();
   })();
 
   // Get podcast ID from URL
@@ -219,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
         el.thaalamProgressFill.style.width = `${pct}%`;
       if (el.thaalamCurrentTime) {
         el.thaalamCurrentTime.textContent = utils.formatTime(
-          el.thaalamPlayer.currentTime
+          el.thaalamPlayer.currentTime,
         );
       }
     }, 100); // Update at most every 100ms instead of every frame
@@ -232,11 +281,11 @@ document.addEventListener("DOMContentLoaded", () => {
       () => {
         if (el.thaalamDuration) {
           el.thaalamDuration.textContent = utils.formatTime(
-            el.thaalamPlayer.duration
+            el.thaalamPlayer.duration,
           );
         }
       },
-      { once: true }
+      { once: true },
     );
 
     el.thaalamPlayer.addEventListener("error", () => {
@@ -255,27 +304,54 @@ document.addEventListener("DOMContentLoaded", () => {
     state.cleanupPlayer = cleanupPlayer;
   }
 
+  const updatePlayPauseUI = () => {
+    if (!el.thaalamPlayPauseBtn) return;
+
+    requestAnimationFrame(() => {
+      el.thaalamPlayPauseBtn.innerHTML = el.thaalamPlayer.paused
+        ? '<i class="fas fa-play text-white text-xl"></i>'
+        : '<i class="fas fa-pause text-white text-xl"></i>';
+    });
+  };
+
   // Play/pause with requestAnimationFrame for smoother UI updates
   if (el.thaalamPlayPauseBtn) {
     el.thaalamPlayPauseBtn.addEventListener("click", () => {
       if (!el.thaalamPlayer) return;
 
-      state.isPlaying = !el.thaalamPlayer.paused;
-
-      if (state.isPlaying) {
-        el.thaalamPlayer.pause();
+      if (el.thaalamPlayer.paused) {
+        el.thaalamPlayer.play().catch(() => {});
       } else {
-        el.thaalamPlayer.play().catch((err) => console.error(err));
+        el.thaalamPlayer.pause();
       }
-
-      // Use requestAnimationFrame for immediate UI feedback
-      requestAnimationFrame(() => {
-        el.thaalamPlayPauseBtn.innerHTML = state.isPlaying
-          ? '<i class="fas fa-play text-white text-xl"></i>'
-          : '<i class="fas fa-pause text-white text-xl"></i>';
-      });
     });
   }
+
+  if (el.thaalamPlayer) {
+    const media = el.thaalamPlayer;
+
+    media.addEventListener("play", () => {
+      updatePlayPauseUI();
+      trackPodcastView.play(media);
+    });
+
+    media.addEventListener("pause", () => {
+      updatePlayPauseUI();
+      trackPodcastView.pause(media);
+    });
+
+    media.addEventListener("ended", () => {
+      trackPodcastView.ended(media);
+    });
+
+    media.addEventListener("timeupdate", () => {
+      trackPodcastView.timeupdate(media);
+    });
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) updatePlayPauseUI();
+  });
 
   // Progress bar with debounced click handler
   if (el.thaalamProgressBar) {
@@ -309,17 +385,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Audio end handler
-  if (el.thaalamPlayer) {
-    el.thaalamPlayer.addEventListener("ended", () => {
-      requestAnimationFrame(() => {
-        el.thaalamPlayPauseBtn.innerHTML =
-          '<i class="fas fa-play text-white text-xl"></i>';
-        state.isPlaying = false;
-      });
-    });
-  }
-
   // ----------------------------
   // SHARE MODAL - Optimized event handlers
   // ----------------------------
@@ -342,7 +407,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       Object.entries(platforms).forEach(([id, href]) => {
         const element = document.getElementById(id);
-        if (element) element.href = href;
+        if (!element) return;
+
+        element.href = href;
+
+        element.onclick = () => {
+          const platform = id.replace("share-", "");
+          trackPodcastShare(platform);
+        };
       });
     },
 
@@ -372,6 +444,9 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         await navigator.clipboard.writeText(el.podcastLink.value);
         utils.toast("Link copied to clipboard", "success");
+
+        trackPodcastShare("copy_link");
+
         const orig = el.copyLink.innerHTML;
         el.copyLink.innerHTML = '<i class="fas fa-check"></i>';
         setTimeout(() => (el.copyLink.innerHTML = orig), 450);
@@ -422,10 +497,92 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(() => utils.toast("Failed to submit like", "error"));
         },
-        { timeout: 1000 }
+        { timeout: 1000 },
       );
     });
   }
+
+  // ----------------------------
+  // PODCAST VIEW TRACKING (LOW MEMORY)
+  // ----------------------------
+  const trackPodcastView = (() => {
+    const REQUIRED_SECONDS = 20;
+
+    let watchedSeconds = 0;
+    let lastTime = 0;
+    let playing = false;
+    let tracked = false;
+
+    const sendView = () => {
+      if (tracked || !podcastId) return;
+      tracked = true;
+
+      fetch(`${API}/podcasts/reaction/${podcastId}/view`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          member_id: memberId || null,
+          guest_id: memberId ? null : getGuestId(),
+        }),
+        priority: "low",
+      }).catch(() => {});
+    };
+
+    return {
+      play(media) {
+        if (tracked) return;
+        playing = true;
+        lastTime = media.currentTime;
+      },
+
+      pause(media) {
+        if (!playing || tracked) return;
+        watchedSeconds += Math.max(0, media.currentTime - lastTime);
+        playing = false;
+
+        if (watchedSeconds >= REQUIRED_SECONDS) {
+          sendView();
+        }
+      },
+
+      timeupdate(media) {
+        if (!playing || tracked) return;
+
+        const delta = media.currentTime - lastTime;
+        if (delta > 0 && delta < 1.5) {
+          watchedSeconds += delta;
+        }
+
+        lastTime = media.currentTime;
+
+        if (watchedSeconds >= REQUIRED_SECONDS) {
+          sendView();
+        }
+      },
+
+      ended(media) {
+        this.pause(media);
+      },
+    };
+  })();
+
+  // ----------------------------
+  // PODCAST SHARE TRACKING (LOW MEMORY)
+  // ----------------------------
+  const trackPodcastShare = (platform) => {
+    if (!podcastId || !platform) return;
+
+    fetch(`${API}/podcasts/reaction/${podcastId}/share`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        member_id: memberId || null,
+        guest_id: memberId ? null : getGuestId(),
+        platform,
+      }),
+      priority: "low",
+    }).catch(() => {});
+  };
 
   // ----------------------------
   // COMMENTS - Optimized with Intersection Observer
@@ -541,7 +698,7 @@ document.addEventListener("DOMContentLoaded", () => {
       div.className = "comment mb-3 p-3 border-b";
       const author = comment.Member?.name || comment.guest_name || "Anonymous";
       const created = utils.timeAgo(
-        comment.created_at || comment.createdAt || comment.date
+        comment.created_at || comment.createdAt || comment.date,
       );
       const text = comment.comment || comment.text || "";
 
@@ -551,7 +708,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="text-xs text-gray-400 ml-2">• ${created}</span>
         </div>
         <div class="text-gray-600 mt-1">${utils.escapeHtml(
-          utils.truncate(text, 450)
+          utils.truncate(text, 450),
         )}</div>
       `;
       fragment.appendChild(div);
@@ -631,7 +788,7 @@ document.addEventListener("DOMContentLoaded", () => {
           commentsModal.close();
           utils.toast(
             "Your comment was submitted and is pending approval",
-            "success"
+            "success",
           );
         } else {
           utils.toast(res.message || "Failed to post comment", "error");
@@ -835,6 +992,7 @@ document.addEventListener("DOMContentLoaded", () => {
         month: "long",
         day: "numeric",
       }),
+      "sidebar-duration": `${podcast.duration || 0} min`,
       "video-available":
         podcast.video_link &&
         podcast.video_link !== "NA" &&
@@ -897,10 +1055,10 @@ document.addEventListener("DOMContentLoaded", () => {
                alt="${utils.escapeHtml(p.title || "")}">
           <div>
             <h4 class="font-semibold text-gray-800">${utils.escapeHtml(
-              p.title
+              p.title,
             )}</h4>
             <p class="text-sm text-gray-500">${new Date(
-              p.date
+              p.date,
             ).toLocaleDateString("en-GB", {
               year: "numeric",
               month: "long",

@@ -296,7 +296,7 @@
 
     });
 </script>
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById("snowflakes");
 
@@ -338,4 +338,4 @@
             setTimeout(() => snow.remove(), 26000);
         }
     });
-</script>
+</script> -->

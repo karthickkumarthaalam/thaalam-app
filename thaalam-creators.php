@@ -5,7 +5,7 @@
     <?php
     $page_title = "Thaalam Podcast Creator - Create and Share your Podcasts Easily";
     $page_description = "Thaalam Podcast Creator enables you to create and share your podcasts effortlessly with our tools.";
-    $page_url = "https://www.thaalam.ch/podcast-creator";
+    $page_url = "https://www.thaalam.ch/thaalam-creators";
     $page_image = "https://thaalam.ch/assets/img/logo/thalam-logo.png";
     include 'php/meta.php'; ?>
 
@@ -67,12 +67,12 @@
                             </span>
                         </h1>
 
-                        <p class="text-base lg:text-xl text-gray-600 leading-relaxed animate-fade fade-delay-1">
+                        <p class="text-base lg:text-xl text-gray-600 leading-relaxed animate-fade">
                             Join Thaalam Radio's Creator Program! Share your podcast with our audience and get paid based on your reach.
                             No experience needed – just your unique story and passion.
                         </p>
 
-                        <div class="flex flex-col items-center justify-start flex-row gap-4 pt-4 animate-fade fade-delay-2">
+                        <div class="flex flex-col items-center justify-start flex-row gap-4 pt-4 animate-fade ">
                             <a href="/podcast-creator-form"
                                 class="border-2 border-red-500 bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-2 rounded-full text-base font-semibold hover:shadow-xl transition-all text-center">
                                 Become a Creator
@@ -86,7 +86,7 @@
                     </div>
 
                     <!-- IMAGE -->
-                    <div class="animate-fade fade-delay-3">
+                    <div class="animate-fade ">
                         <img
                             src="assets/img/radio/podcast-sofa.webp"
                             alt="Podcast recording microphone for Thaalam Podcast Creator"

@@ -38,7 +38,7 @@ async function fetchPodcasts(page = 1) {
 
   try {
     const res = await fetch(
-      `${API_URL}?status=approved&page=${page}&limit=${PER_PAGE}&category_id=${CATEGORY_ID}`
+      `${API_URL}?status=approved&page=${page}&limit=${PER_PAGE}&category_id=${CATEGORY_ID}`,
     );
     if (!res.ok) throw new Error("API failed");
 
@@ -160,6 +160,7 @@ function renderCard(p, i) {
                  ? "bg-gradient-to-r from-purple-500 to-indigo-600 text-white border-red-500"
                  : "text-purple-800 border-red-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-600 hover:text-white hover:border-red-500"
              }"
+      data-podcast-id="${p.id}"
       data-audio-url="${p.audio_drive_file_link}"
       data-title="${p.title}"
       data-rj="${p.rjname}"
@@ -178,6 +179,85 @@ function renderCard(p, i) {
   </div>
   `;
 }
+
+/* ---------------------------------------------------------------
+PODCAST VIEW TRACKER (LIST PAGE)
+-----------------------------------------------------------------*/
+const trackPodcastView = (() => {
+  const REQUIRED_SECONDS = 20;
+
+  let currentPodcastId = null;
+  let watchedSeconds = 0;
+  let lastTime = 0;
+  let playing = false;
+  let tracked = false;
+
+  const reset = (podcastId) => {
+    currentPodcastId = podcastId;
+    watchedSeconds = 0;
+    lastTime = 0;
+    playing = false;
+    tracked = false;
+  };
+
+  const sendView = () => {
+    if (tracked || !currentPodcastId) return;
+    tracked = true;
+
+    fetch(`${API_URL}/reaction/${currentPodcastId}/view`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        member_id: localStorage.getItem("memberId") || null,
+        guest_id: localStorage.getItem("memberId") ? null : getGuestId?.(),
+      }),
+      priority: "low",
+    }).catch(() => {});
+  };
+
+  return {
+    reset,
+
+    play(media) {
+      if (tracked) return;
+      playing = true;
+      lastTime = media.currentTime;
+    },
+
+    pause(media) {
+      if (!playing || tracked) return;
+
+      watchedSeconds += Math.max(0, media.currentTime - lastTime);
+      playing = false;
+
+      if (watchedSeconds >= REQUIRED_SECONDS) {
+        sendView();
+      }
+    },
+
+    timeupdate(media) {
+      if (!playing || tracked || document.hidden) return;
+
+      const delta = media.currentTime - lastTime;
+
+      if (delta > 0 && delta < 1.5) {
+        watchedSeconds += delta;
+      }
+
+      lastTime = media.currentTime;
+
+      if (watchedSeconds >= REQUIRED_SECONDS) {
+        sendView();
+      }
+    },
+
+    ended(media) {
+      this.pause(media);
+    },
+  };
+})();
 
 /* ------------------------------------------------------------------
    EVENT DELEGATION (LIST PLAY)
@@ -209,6 +289,10 @@ document.addEventListener("click", (e) => {
    CORE PLAY LOGIC
 ------------------------------------------------------------------ */
 function playNewTrack({ url, trackId, row, btn }) {
+  const podcastId = btn.dataset.podcastId;
+
+  trackPodcastView.reset(podcastId);
+
   // Clear previous playing state
   clearActiveState();
 
@@ -265,7 +349,7 @@ function clearActiveState() {
       "from-purple-500",
       "to-indigo-600",
       "text-white",
-      "border-red-500"
+      "border-red-500",
     );
     btn.classList.add("text-purple-800", "border-red-300");
   });
@@ -295,7 +379,7 @@ function updateButtonUI(btn, isPlaying) {
       "from-purple-500",
       "to-indigo-600",
       "text-white",
-      "border-red-500"
+      "border-red-500",
     );
     btn.classList.remove("text-purple-800", "border-red-300");
   } else {
@@ -304,7 +388,7 @@ function updateButtonUI(btn, isPlaying) {
       "from-purple-500",
       "to-indigo-600",
       "text-white",
-      "border-red-500"
+      "border-red-500",
     );
     btn.classList.add("text-purple-800", "border-red-300");
   }
@@ -315,7 +399,7 @@ function restorePlayingState() {
 
   // Find the current track button
   const currentBtn = document.querySelector(
-    `[data-track-id="${currentTrackId}"]`
+    `[data-track-id="${currentTrackId}"]`,
   );
   if (!currentBtn) {
     // Track not found on this page
@@ -349,6 +433,8 @@ function bindGlobalAudio() {
     if (activeRow) {
       activeRow.classList.add("playing");
     }
+
+    trackPodcastView.play(globalAudio);
   });
 
   globalAudio.addEventListener("pause", () => {
@@ -356,22 +442,24 @@ function bindGlobalAudio() {
     if (activeBtn) {
       updateButtonUI(activeBtn, false);
     }
-    // Don't remove playing class on pause, just show pause state
+    trackPodcastView.pause(globalAudio);
   });
 
   globalAudio.addEventListener("timeupdate", () => {
+    trackPodcastView.timeupdate(globalAudio);
     if (!globalAudio.duration || isNaN(globalAudio.duration)) return;
 
     const progress = (globalAudio.currentTime / globalAudio.duration) * 100;
     document.getElementById("dock-progress").style.width = progress + "%";
 
     document.getElementById("dock-cur").innerText = fmt(
-      globalAudio.currentTime
+      globalAudio.currentTime,
     );
     document.getElementById("dock-dur").innerText = fmt(globalAudio.duration);
   });
 
   globalAudio.addEventListener("ended", () => {
+    trackPodcastView.ended(globalAudio);
     clearActiveState();
     setDockIcon("▶");
     currentTrackId = null;
@@ -446,7 +534,7 @@ function renderPagination(el) {
                 : "bg-gray-100 hover:bg-gray-200"
             }">
             ${i + 1}
-          </button>`
+          </button>`,
         )
         .join("")}
     </div>
@@ -464,7 +552,7 @@ function bindPagination() {
       globalAudio.pause();
       clearActiveState();
       currentTrackId = null;
-
+      trackPodcastView.reset(null);
       // Fetch new page
       fetchPodcasts(page);
       window.scrollTo({ top: 0, behavior: "smooth" });

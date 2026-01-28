@@ -1440,3 +1440,9 @@ function showToast(message, type = "success") {
     setTimeout(() => toast.remove(), 400);
   }, 3000);
 }
+
+window.addEventListener("online", function () {
+  if (!navigator.onLine) return;
+  console.log("Back online! Reloading...");
+  location.reload();
+});
