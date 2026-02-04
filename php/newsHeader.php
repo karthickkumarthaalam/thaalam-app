@@ -27,12 +27,15 @@
                 <div class="header-layout">
 
                     <!-- Left empty space -->
-                    <div class="header-left"></div>
+                    <div class="header-left">
+                        <span id="current-date-main" class="header-date"></span>
+                    </div>
+
 
                     <!-- Center Logo -->
                     <div class="header-center">
                         <a href="index">
-                            <img src="assets/img/logo/thalam-logo.png" class="main-menu__logo2" />
+                            <img src="assets/img/logo/thalam-logo.png" />
                         </a>
                     </div>
 
@@ -45,11 +48,14 @@
             <!-- Sticky Header -->
             <div class="stricky-header news-sticky">
                 <div class="header-layout" id="stickyHeaderContent">
-                    <div class="header-left"></div>
+                    <div class="header-left">
+                        <span id="current-date-sticky" class="header-date"></span>
+                    </div>
+
 
                     <div class="header-center">
                         <a href="index">
-                            <img src="assets/img/logo/thalam-logo.png" class="main-menu__logo2" />
+                            <img src="assets/img/logo/thalam-logo.png" />
                         </a>
                     </div>
 
@@ -135,6 +141,27 @@
 
         updateSwissTime();
         setInterval(updateSwissTime, 1000);
+
+        function updateCurrentDate() {
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString("en-GB", {
+                weekday: "short",
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+            });
+
+            const mainDate = document.getElementById("current-date-main");
+            const stickyDate = document.getElementById("current-date-sticky");
+
+            if (mainDate) mainDate.textContent = formattedDate;
+            if (stickyDate) stickyDate.textContent = formattedDate;
+        }
+
+        updateCurrentDate();
+
+
+        updateCurrentDate()
     });
 
     // SHOW STICKY HEADER ON SCROLL

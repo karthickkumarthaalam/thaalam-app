@@ -27,6 +27,7 @@
     <?php include 'php/css.php'; ?>
     <?php include 'php/analyticsHeader.php'; ?>
 
+    <script src="https://cdn.tailwindcss.com"></script>
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -145,6 +146,52 @@
             color: #ef4444;
             /* Christmas / Rewind red */
         }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.8s ease-out both;
+        }
+
+        @keyframes spinSlow {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spinSlow 8s linear infinite;
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg,
+                    #f1f1f1 25%,
+                    #e5e5e5 37%,
+                    #f1f1f1 63%);
+            background-size: 400% 100%;
+            animation: skeleton-loading 1.4s ease infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes skeleton-loading {
+            0% {
+                background-position: 100% 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }
     </style>
 
 </head>
@@ -186,153 +233,160 @@
                     <img id="festivalLeft" alt="Festival Left" class="festival-side left">
                     <img id="festivalRight" alt="Festival Right" class="festival-side right">
 
-                    <div class="playlist-container position-relative" style="background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
-        url('assets/img/home/pattern/banner-4.png');background-size: contain;">
 
-                        <div class="col-xl-12">
-                            <div class="home-page__header">
-                                <h1 class="home-page__title">Thaalam <span style="color:#000">BroadCasting</span></h1>
-                                <p class="home-page__subtitle">Streaming & Audio</p>
-                            </div>
-
-                            <div class="home-page__filter">
-                                <!-- <div class="home-page__search">
-                                <input type="text" placeholder="Search what you want...">
-                                <button class="home-page__search-btn">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div> -->
-
-                                <div class="home-page__categories">
-                                    <ul class="visually-hidden">
-                                        <li>Latest Tamil podcasts, audio shows, and live streaming from Switzerland</li>
-                                    </ul>
-                                    <ul class="list-unstyled nav" role="tablist">
-                                        <li class="active nav-item">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#liveStream" role="tab">Radio</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#podcasts" role="tab">Podcasts</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link rewind-link" href="/rewind-2025" rel="noopener">
-                                                <svg
-                                                    class="rewind-svg"
-                                                    width="22"
-                                                    height="18"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    aria-hidden="true">
-                                                    <path
-                                                        d="M11 18V6L2 12L11 18Z"
-                                                        fill="currentColor" />
-                                                    <path
-                                                        d="M22 18V6L13 12L22 18Z"
-                                                        fill="currentColor" />
-                                                </svg>
-                                                Rewind 2025
-
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
+                    <div class="">
+                        <div class="home-page__header animate-fade-up">
+                            <h1 class="home-page__title">Thaalam <span style="color:#000">BroadCasting</span></h1>
+                            <p class="home-page__subtitle">Streaming & Audio</p>
                         </div>
 
-                    </div>
+                        <section class="py-10  border-b  border-gray-300"
+                            style="
+                              background-image: url('assets/images/backgrounds/background_image.jpg');
+                              background-size: cover;
+                              background-position: center;
+                              background-repeat: no-repeat;
+                            ">
 
-                    <div class="tab-content" style="margin-bottom: 50px;">
-                        <!-- <img src="assets/img/radio/santa.png" alt="christmas tree" class="tab-side-image left"> -->
-                        <div class="tab-pane fade show active" id="liveStream" role="tabpanel">
-                            <section style=" 
-            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
-                        url('./assets/images/backgrounds/background_image.jpg');">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="audio-page__player">
-                                            <div class="audio-page__player-cover">
-                                                <img id="programImage" src="assets/img/logo/thalam-logo.png" alt="Thaalam Live">
-                                                <div class="audio-page__player-overlay">
+                            <div class="container mx-auto px-4">
+                                <div class="flex justify-center items-center">
+                                    <div class="w-full max-w-2xl bg-white shadow-xl rounded-2xl overflow-hidden">
+
+                                        <!-- Player Wrapper -->
+                                        <div class="gap-6 p-6">
+
+
+
+
+                                            <!-- Player Info -->
+                                            <div class="flex-1 w-full space-y-3">
+                                                <div class="flex flex-col md:flex-row items-center justify-center  gap-3 sm:gap-4
+                                                            pl-3 sm:pl-4 py-3  border-b border-dashed border-gray-500">
+
+                                                    <!-- Program Image -->
+                                                    <img
+                                                        id="programImage"
+                                                        src="assets/img/logo/thalam-logo.png"
+                                                        alt="Thaalam Live"
+                                                        class="w-32 h-32 md:w-24 md:h-24
+                                                               rounded-xl object-contain
+                                                               bg-white p-1" />
+
+                                                    <!-- Text Content -->
+                                                    <div class="flex flex-col  leading-tight">
+
+                                                        <!-- Title -->
+                                                        <h3
+                                                            id="programTitle"
+                                                            class="text-base text-center md:text-right
+                                                                 sm:text-lg md:text-xl font-semibold text-gray-900
+                                                                 truncate max-w-[220px] sm:max-w-full
+                                                                 mx-auto md:ml-auto mb-2">
+                                                            Thaalam Live Stream
+                                                        </h3>
+
+
+                                                        <!-- RJ Name -->
+                                                        <p class="text-sm text-gray-700 font-semibold flex items-center justify-center md:justify-start gap-2  ">
+                                                            <span id="programArtist">Live RJ</span>
+                                                            <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                                                        </p>
+
+                                                        <!-- Show Time -->
+                                                        <p
+                                                            id="showTime"
+                                                            class="text-xs text-gray-500 flex items-center justify-center md:justify-start gap-1 ">
+                                                            <span>Now Streaming</span>
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="audio-page__player-info">
-                                                <h3 id="programTitle" class="audio-page__player-title">Thaalam Live Stream</h3>
-                                                <div class="audio-page__player-artist">
-                                                    <p>Rj Name: <span id="programArtist"></span></p>
-                                                    <p id="showTime">Show Time: </p>
-                                                </div>
-                                                <div class="audio-page__player-controls">
-                                                    <button class="audio-page__play-btn" id="mainPlayBtn">
-                                                        <i class="fas fa-play" id="mainPlayIcon"></i>
-                                                    </button>
-                                                    <button class="audio-page__player-btn" id="volumeBtn">
+
+
+
+
+                                                <!-- Controls -->
+                                                <div class="flex flex-wrap items-center justify-center   gap-4 mt-4 pl-6 ">
+
+
+                                                    <button
+                                                        id="volumeBtn"
+                                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
                                                         <i class="fas fa-volume-up" id="volumeIcon"></i>
                                                     </button>
-                                                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.7">
-                                                    <button class="audio-page__player-btn" id="shareBtn">
-                                                        <i class="fas fa-share-alt"></i>
+
+                                                    <button
+                                                        id="mainPlayBtn"
+                                                        class="w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-600  text-white shadow-md transition hover:scale-105">
+                                                        <i class="fas fa-play" id="mainPlayIcon"></i>
                                                     </button>
 
-                                                </div>
-                                                <div id="nextProgramNotice" class="blinking"></div>
-                                                <audio id="audioPlayer" src="https://thaalam.out.airtime.pro/thaalam_b" autoplay></audio>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php include 'php/quiz.php'; ?>
-                                </div>
-                            </section>
-                        </div>
+                                                    <!-- 
+                                                    <input
+                                                        type="range"
+                                                        id="volumeSlider"
+                                                        min="0"
+                                                        max="1"
+                                                        step="0.1"
+                                                        value="0.7"
+                                                        class="w-32 accent-orange-600 cursor-pointer" /> -->
 
-                        <div class="tab-pane fade" id="podcasts" role="tabpanel">
-                            <section class="live-class-two" style=" 
-            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
-                        url('./assets/images/backgrounds/background_image.jpg');">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-xl-6 col-lg-6">
-                                            <div class="live-class-two__left">
-                                                <div class="section-title-two text-left sec-title-animation animation-style2">
-                                                    <div class="section-title-two__tagline-box">
-                                                        <div class="section-title-two__tagline-shape">
-                                                            <img src="assets/img/home/rock.png" alt="">
-                                                        </div>
-                                                        <span class="section-title-two__tagline">Podcasts</span>
-                                                    </div>
-                                                    <h2 class="section-title-two__title title-animation">Discover Our Latest <br>
-                                                        <span>Podcasts</span>
-                                                    </h2>
+                                                    <button
+                                                        id="shareBtn"
+                                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
+                                                        <i class="fas fa-share-alt"></i>
+                                                    </button>
                                                 </div>
-                                                <ul class="live-class-two__list list-unstyled">
-                                                </ul>
-                                                <div class="listen-more">
-                                                    <a href="podcasts-list">Listen More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6" style="display: flex; align-items: center; justify-content: center;">
-                                            <div class="live-class-two__right">
-                                                <div class="live-class-two__img-box mob-top3">
-                                                    <iframe
-                                                        loading="lazy"
-                                                        width="100%"
-                                                        height="315"
-                                                        src="https://www.youtube.com/embed/D7EIkNH8NeU"
-                                                        title="Dunkin' Crowns Gavin Casalegno King Of Summer"
-                                                        frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                        allowfullscreen>
-                                                    </iframe>
-                                                </div>
+
+                                                <!-- Next Program -->
+                                                <div
+                                                    id="nextProgramNotice"
+                                                    class="text-sm text-red-500 text-center font-semibold animate-pulse mt-4"></div>
+
+                                                <!-- Audio -->
+                                                <audio
+                                                    id="audioPlayer"
+                                                    src="https://thaalam.out.airtime.pro/thaalam_b"
+                                                    autoplay></audio>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                        </div>
+
+                                <?php include 'php/quiz.php'; ?>
+                            </div>
+                        </section>
+
+                        <section class="py-16 bg-gradient-to-r from-slate-50 via-white  to-slate-50">
+                            <div class="max-w-7xl mx-auto px-4">
+
+                                <div>
+                                    <div class="mb-8 animate-fade-up">
+
+                                        <h2 class="text-xl md:text-2xl text-center font-medium text-gray-900 leading-tight">
+                                            Discover Our Latest <br>
+                                            <span class="text-[#f90000]">Podcasts</span>
+                                        </h2>
+                                    </div>
+
+
+                                    <div id="new-podcasts">
+                                    </div>
+
+                                    <div class="mt-6 flex justify-end">
+                                        <a
+                                            href="podcasts-list"
+                                            class="inline-flex items-center gap-1 text-sm font-semibold text-gray-800 hover:text-gray-900 transition">
+                                            Listen More Podcasts
+                                            <span aria-hidden="true">→</span>
+                                        </a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </section>
+
 
                     </div>
                 </div>
@@ -357,14 +411,6 @@
 
 
     <script src="assets/js/module/index.js" defer></script>
-    <script>
-        document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
-            tab.addEventListener('shown.bs.tab', function(e) {
-                document.querySelectorAll('.home-page__categories .nav-item').forEach(li => li.classList.remove('active'));
-                e.target.closest('.nav-item').classList.add('active');
-            });
-        });
-    </script>
 </body>
 
 </html>

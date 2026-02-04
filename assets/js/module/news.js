@@ -1,247 +1,427 @@
 const API_URL = `${window.API_BASE_URL}/news`;
-const NewsPersPage = 10;
+const NewsPerPage = 20;
+
 let currentPage = 1;
-let totalPages = 1;
 let activeCategory = "all";
-let searchValue = "";
+let isLoading = false;
 
+function buildBigSkeleton() {
+  return `
+    <article class="animate-pulse border-b border-gray-200 pb-6">
+      <div class="h-[240px] bg-gray-200 mb-4"></div>
+      <div class="h-3 w-24 bg-gray-300 mb-3"></div>
+      <div class="h-6 w-3/4 bg-gray-300 mb-2"></div>
+      <div class="h-6 w-2/3 bg-gray-200 mb-3"></div>
+      <div class="h-4 w-full bg-gray-200"></div>
+    </article>
+  `;
+}
+
+function buildSmallSkeleton() {
+  return `
+    <article class="animate-pulse border-b border-gray-200 pb-6">
+      <div class="h-44 bg-gray-200 mb-4"></div>
+      <div class="h-5 w-5/6 bg-gray-300 mb-2"></div>
+      <div class="h-3 w-24 bg-gray-300"></div>
+    </article>
+  `;
+}
+
+/* =============================
+   SKELETON LOADER (INITIAL ONLY)
+============================= */
+function renderSkeletons() {
+  $("#news-grid").html(`
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+
+      ${buildBigSkeleton()}
+      ${buildBigSkeleton()}
+
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      ${buildSmallSkeleton()}
+      ${buildSmallSkeleton()}
+      ${buildSmallSkeleton()}
+
+    </div>
+  `);
+}
+
+/* =============================
+   DOCUMENT READY
+============================= */
 $(document).ready(function () {
-  fetchNews(currentPage);
+  renderSkeletons();
   fetchCategories();
+  fetchNews(false);
 
-  // 🔍 Search Functionality
-  $(document).on("click", ".news-searchbar__btn", function () {
-    searchValue = $(".news-searchbar__input").val().trim().toLowerCase();
-    activeCategory = "all";
-    currentPage = 1;
-
-    $(".category-filter").removeClass("active");
-    $('.category-filter[data-category="all"]').addClass("active");
-
-    fetchNews(currentPage);
+  // Read More
+  $("#read-more-btn").on("click", function () {
+    if (isLoading) return;
+    currentPage++;
+    fetchNews(true);
   });
 
-  // 🏷️ Category Filter
-  $(document).on("click", ".category-filter", function (e) {
-    e.preventDefault();
-    $(".category-filter").removeClass("active");
-    $(this).addClass("active");
-
-    activeCategory = $(this).data("category");
-    searchValue = "";
-    currentPage = 1;
-
-    fetchNews(currentPage);
-  });
-
-  // 📄 Pagination Clicks
-  $(document).on("click", ".pg-pagination li.count a", function (e) {
-    e.preventDefault();
-    const page = parseInt($(this).text());
-    changePage(page);
-  });
-
-  $(document).on("click", ".pg-pagination li.prev a", function (e) {
-    e.preventDefault();
-    if (currentPage > 1) changePage(currentPage - 1);
-  });
-
-  $(document).on("click", ".pg-pagination li.next a", function (e) {
-    e.preventDefault();
-    if (currentPage < totalPages) changePage(currentPage + 1);
-  });
-
-  // 📰 Click News Card → Redirect to Details
+  // Card click
   $(document).on("click", ".news-card", function () {
     const slug = $(this).data("slug");
     if (slug) window.location.href = `news-details?slug=${slug}`;
   });
 
-  // ↔️ Scroll Buttons for Category Filters
-  const container = document.getElementById("category-filters");
-  const scrollLeftBtn = document.getElementById("scrollLeft");
-  const scrollRightBtn = document.getElementById("scrollRight");
+  // Category click
+  $(document).on("click", ".category-filter", function (e) {
+    e.preventDefault();
 
-  if (scrollLeftBtn && scrollRightBtn && container) {
-    scrollLeftBtn.addEventListener("click", () => {
-      container.scrollBy({ left: -200, behavior: "smooth" });
-    });
-    scrollRightBtn.addEventListener("click", () => {
-      container.scrollBy({ left: 200, behavior: "smooth" });
-    });
-  }
+    $(".category-filter")
+      .removeClass("text-red-600 border-red-600 font-semibold")
+      .addClass("text-gray-600 border-transparent font-medium");
+
+    $(this)
+      .addClass("text-red-600 border-red-600 font-semibold")
+      .removeClass("text-gray-600 border-transparent");
+
+    activeCategory = $(this).data("category");
+    currentPage = 1;
+
+    $("#news-grid").empty();
+    renderSkeletons();
+    fetchNews(false);
+  });
 });
 
-// 📰 Fetch News (with pagination)
-function fetchNews(page = 1) {
-  $("#news-list").html(`
-    <div class="loading-container">
-      <div class="spinner"></div>
-      <p>Loading news...</p>
-    </div>
-  `);
+/* =============================
+   FETCH NEWS
+============================= */
+function fetchNews(isLoadMore) {
+  isLoading = true;
 
-  let query = `?status=published&limit=${NewsPersPage}&page=${page}`;
-
-  if (activeCategory && activeCategory !== "all") {
+  let query = `?status=published&limit=${NewsPerPage}&page=${currentPage}`;
+  if (activeCategory !== "all") {
     query += `&category=${encodeURIComponent(activeCategory)}`;
-  }
-  if (searchValue) {
-    query += `&search=${encodeURIComponent(searchValue)}`;
   }
 
   $.get(`${API_URL}${query}`)
-    .done(function (res) {
+    .done((res) => {
       const data = res.data || [];
 
-      // ✅ Fix: Read pagination data correctly
-      if (res.pagination) {
-        totalPages = res.pagination.totalPages || 1;
-        currentPage = res.pagination.currentPage || 1;
-      } else {
-        totalPages = Math.ceil((res.total || data.length) / NewsPersPage);
-      }
-
-      if (data.length === 0) {
-        $("#news-list").html(`
-          <div class="no-results-container">
-            <div class="no-results-icon"><i class="fas fa-newspaper"></i></div>
-            <h3>No News Articles Found</h3>
-            <p class="no-results-text">
-              Try adjusting your keywords or explore other categories.
-            </p>
-          </div>
-        `);
-        $("#pagination").html("");
+      if (data.length === 0 && !isLoadMore) {
+        showNoResults();
+        $("#read-more-btn").addClass("hidden");
         return;
       }
 
-      renderNews(data);
-      renderPagination(totalPages, currentPage);
+      if (!isLoadMore) {
+        renderInitialGrid(data);
+      } else {
+        appendSmallGrid(data);
+      }
+
+      if (data.length > NewsPerPage) {
+        $("#read-more-btn").removeClass("hidden");
+      } else {
+        $("#read-more-btn").addClass("hidden");
+      }
     })
-    .fail(function (err) {
-      console.error("Error fetching news:", err);
-      $("#news-list").html(`
-        <div class="no-results-container">
-          <h3>Error Loading News</h3>
-          <p>Please try again later.</p>
-        </div>
-      `);
+    .always(() => {
+      isLoading = false;
     });
 }
 
-// 📰 Render News
-function renderNews(newslist) {
-  const html = newslist
-    .map((news) => {
-      const formattedDate = news.published_date
-        ? new Date(news.published_date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })
-        : "—";
+function showNoResults() {
+  $("#news-grid").html(`
+    <div class="flex flex-col items-center justify-center
+                text-center py-16 px-4">
 
-      const imagePath =
-        news.cover_image ||
-        "assets/img/common/podcast-details/podcast-banner.jpg";
+      <!-- Icon -->
+      <div class="mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-14 w-14 text-gray-300"
+             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M19 11H5m14 0a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
 
-      const allowed = news.content.replace(
-        /<(?!\/?(strong|em|a)\b)[^>]*>/g,
-        ""
-      );
-      const shortDesc =
-        allowed.length > 180 ? allowed.slice(0, 180) + "..." : allowed;
+      <!-- Title -->
+      <h3 class="text-2xl font-semibold text-gray-900 mb-2">
+        No articles found
+      </h3>
 
-      return `
-        <article class="news-card" data-slug="${news.slug}">
-          <div class="news-image">
-            <img src="${imagePath}" alt="${news.title}" loading="lazy"
-              onerror="this.src='assets/img/common/podcast-details/podcast-banner.jpg';">
-          </div>
-          <div class="news-body">
-            <h3 class="news-title">${news.title}</h3>
-            <p class="news-desc">${shortDesc}</p>
-            <div class="news-cat">
-              ${
-                news.category
-                  ? `<span class="news-category">
-                      <i class="fas fa-folder-open"></i> ${news.category}
-                    </span>`
-                  : ""
-              }
-              <span class="news-date">
-                <i class="far fa-calendar-alt"></i> ${formattedDate}
-              </span>
-            </div>
-          </div>
-        </article>`;
-    })
-    .join("");
+      <!-- Description -->
+      <p class="text-gray-500 max-w-md mb-6">
+        We couldn’t find any news under this category right now.
+        Try exploring other topics or check out our latest updates below.
+      </p>
 
-  $("#news-list").fadeOut(150, function () {
-    $("#news-list").html(html).fadeIn(200);
-    if (window.innerWidth <= 768) $(".news-desc").hide();
+      <!-- Action -->
+      <button
+        id="browse-all-news"
+        class="inline-flex items-center gap-2
+               px-5 py-2.5 rounded-md
+               text-sm font-medium
+               bg-red-600 text-white
+               hover:bg-red-700
+               transition"
+      >
+        Browse all news
+      </button>
+
+    </div>
+  `);
+
+  // Reset to all category
+  $("#browse-all-news").on("click", function () {
+    activeCategory = "all";
+    currentPage = 1;
+
+    $(".category-filter")
+      .removeClass("text-red-600 border-red-600 font-semibold")
+      .addClass("text-gray-600 border-transparent font-medium");
+
+    $('.category-filter[data-category="all"]').addClass(
+      "text-red-600 border-red-600 font-semibold",
+    );
+
+    renderSkeletons();
+    fetchNews(false);
   });
 }
 
-// 🔢 Render Pagination
-function renderPagination(totalPages, current) {
-  $("#pagination").empty();
+/* =============================
+   INITIAL GRID
+   2 BIG + SMALL GRID
+============================= */
+function renderInitialGrid(newslist) {
+  let big = "";
+  let small1 = "";
+  let small2 = "";
+  let compact = "";
 
-  if (!totalPages || totalPages <= 1) return;
+  newslist.forEach((news, index) => {
+    if (index < 2) {
+      big += buildBigCard(news);
+    } else if (index < 5) {
+      small1 += buildSmallCard(news);
+    } else if (index < 8) {
+      small2 += buildSmallCard(news);
+    } else if (index < 10) {
+      compact += buildCompactCard(news);
+    }
+  });
 
-  let html = `<ul class="pg-pagination list-unstyled">`;
+  $("#news-grid").html(`
+    <!-- 2 BIG -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+      ${big}
+    </div>
 
-  // Disable prev on first page
-  html += `<li class="prev ${current === 1 ? "disabled" : ""}">
-             <a href="#"><i class="fas fa-arrow-left"></i></a>
-           </li>`;
+    <!-- 3 SMALL -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+      ${small1}
+    </div>
 
-  for (let i = 1; i <= totalPages; i++) {
-    html += `<li class="count ${i === current ? "active" : ""}">
-      <a href="#">${String(i).padStart(2, "0")}</a>
-    </li>`;
-  }
+    <!-- 3 SMALL -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+      ${small2}
+    </div>
 
-  // Disable next on last page
-  html += `<li class="next ${current === totalPages ? "disabled" : ""}">
-             <a href="#"><i class="fas fa-arrow-right"></i></a>
-           </li>`;
-
-  html += `</ul>`;
-  $("#pagination").html(html);
+    <!-- 2 COMPACT ROW -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      ${compact}
+    </div>
+  `);
 }
 
-// 🔁 Change Page
-function changePage(page) {
-  if (page < 1 || page > totalPages) return;
-  currentPage = page;
-  fetchNews(page);
+/* =============================
+   APPEND SMALL NEWS (READ MORE)
+============================= */
+function appendSmallGrid(newslist) {
+  let html = "";
+  newslist.forEach((news) => {
+    html += buildSmallCard(news);
+  });
 
-  const wrapper = document.querySelector(".page-wrapper");
-  if (wrapper) wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+  $("#news-grid .grid:last").append(html);
 }
 
-// 🏷️ Fetch Categories
+/* =============================
+   BIG CARD
+============================= */
+function buildBigCard(news) {
+  const image =
+    news.cover_image || "assets/img/common/podcast-details/podcast-banner.jpg";
+
+  const date = formatDate(news.published_date);
+  const desc = stripHtml(news.content);
+
+  return `
+<article
+  class="news-card group cursor-pointer
+         bg-white
+         border-b border-gray-200
+         pb-6
+         transition-colors"
+  data-slug="${news.slug}"
+>
+
+  <!-- IMAGE -->
+  <div class="mb-4 overflow-hidden">
+    <img
+      src="${image}"
+      alt="${news.title}"
+      class="w-full h-[280px] object-cover"
+    />
+  </div>
+
+  <!-- CONTENT -->
+  <div class="p-3">
+
+    <!-- DATE -->
+    <div class="text-xs text-red-500 mb-2">
+      ${date}
+    </div>
+
+    <!-- TITLE -->
+    <h2
+      class="text-xl md:text-2xl font-bold
+             text-gray-900 leading-snug
+             group-hover:underline decoration-red-600 decoration-2 underline-offset-4"
+    >
+      ${news.title}
+    </h2>
+
+    <!-- DESCRIPTION -->
+    <p class="mt-3 text-sm text-gray-700 leading-relaxed line-clamp-3">
+      ${desc}
+    </p>
+
+  </div>
+</article>
+`;
+}
+
+/* =============================
+   SMALL CARD
+============================= */
+function buildSmallCard(news) {
+  const image =
+    news.cover_image || "assets/img/common/podcast-details/podcast-banner.jpg";
+
+  const date = formatDate(news.published_date);
+
+  return `
+    <article
+      class="news-card group cursor-pointer
+             bg-white
+             border-b border-gray-200
+             pb-5
+             transition-colors"
+      data-slug="${news.slug}"
+    >
+
+      <!-- MOBILE: ROW REVERSE | DESKTOP: COLUMN -->
+      <div class="flex flex-row-reverse gap-4 sm:block">
+
+        <!-- IMAGE -->
+        <div class="flex-shrink-0 sm:mb-3">
+          <img
+            src="${image}"
+            alt="${news.title}"
+            class="w-28 h-20 object-cover
+                   sm:w-full sm:h-48"
+          />
+        </div>
+
+        <!-- CONTENT -->
+        <div class="flex flex-col-reverse sm:flex-col
+                    justify-center
+                    px-2 sm:px-0">
+
+          <!-- DATE -->
+          <span class="text-xs text-red-500 mt-1 sm:mt-0">
+            ${date}
+          </span>
+
+          <!-- TITLE -->
+          <h3
+            class="mt-1 sm:mt-0
+                   font-semibold text-gray-900 leading-snug
+                   group-hover:underline
+                   decoration-red-600 decoration-2 underline-offset-4"
+          >
+            ${news.title}
+          </h3>
+
+        </div>
+
+      </div>
+    </article>
+  `;
+}
+
+function buildCompactCard(news) {
+  const image = news.cover_image;
+  const date = formatDate(news.published_date);
+
+  return `
+    <article 
+      class="news-card group flex items-center gap-4 bg-white border border-gray-200 rounded-md p-3 hover:bg-gray-50 transition cursor-pointer"
+      data-slug="${news.slug}"
+    >
+      <img src="${image}" alt="${news.title}" class="w-24 h-16 object-cover rounded" />
+      <div class="flex flex-col">
+         <span class="text-xs text-red-500 mb-1">${date}</span>
+         <h4 class="font-semibold group-hover:underline underline-offset-4 decoration-red-600 decoration-2 text-gray-900 leading-snug line-clamp-2">
+          ${news.title}
+        </h4>
+      </div>
+    </article>
+  `;
+}
+
+/* =============================
+   HELPERS
+============================= */
+function stripHtml(html) {
+  return html ? html.replace(/<[^>]*>/g, "").slice(0, 140) + "…" : "";
+}
+
+function formatDate(date) {
+  return date
+    ? new Date(date).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })
+    : "";
+}
+
+/* =============================
+   CATEGORIES (NO STYLE CHANGE)
+============================= */
 function fetchCategories() {
-  $.get(`${window.API_BASE_URL}/news-category/category-list`)
-    .done(function (res) {
-      if (res.status === "success" && res.data) {
-        const $container = $("#category-filters");
-        $container.html(""); // clear existing
-        $container.append(
-          `<a href="#" class="category-filter active" data-category="all">All</a>`
-        );
+  $.get(`${window.API_BASE_URL}/news-category/category-list`).done((res) => {
+    if (!res.data) return;
 
-        res.data.forEach((cat) => {
-          $container.append(
-            `<a href="#" class="category-filter" data-category="${cat}">${cat}</a>`
-          );
-        });
-      }
-    })
-    .fail(function (err) {
-      console.error("Error fetching categories:", err);
+    const $c = $("#category-filters");
+    $c.html(`
+        <a href="#" data-category="all"
+           class="category-filter px-1 pb-2 text-base font-semibold
+                  text-red-600 border-b-2 border-red-600">
+          All
+        </a>
+      `);
+
+    res.data.forEach((cat) => {
+      $c.append(`
+          <a href="#" data-category="${cat}"
+             class="category-filter px-1 pb-2 text-base font-medium
+                    text-gray-600 hover:text-gray-900
+                    border-b-2 border-transparent hover:border-gray-300">
+            ${cat}
+          </a>
+        `);
     });
+  });
 }

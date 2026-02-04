@@ -3876,8 +3876,8 @@ ul {
   }
 
   .header-center {
-    flex: 0;
-    align-items: start;
+    flex: 2;
+    align-items: center;
   }
 
   .header-center img {
@@ -3970,4 +3970,19 @@ ul {
 
 .news-sticky .header-layout {
   padding: 10px 20px;
+}
+
+.header-date {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #24262b;
+  /* gray-500 */
+  white-space: nowrap;
+}
+
+/* Mobile tidy */
+@media (max-width: 768px) {
+  .header-date {
+    font-size: 0.8rem;
+  }
 }

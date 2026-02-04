@@ -1,7 +1,7 @@
 $(document).ready(function () {
   let $loader = $("#globalLoader");
   const $carousel = $(".main-slider__carousel");
-  const $podcastList = $(".live-class-two__list");
+  const $podcastList = $("#new-podcasts");
   const $festivalLeft = $("#festivalLeft");
   const $festivalRight = $("#festivalRight");
 
@@ -118,7 +118,7 @@ $(document).ready(function () {
             detail: {
               programId,
             },
-          })
+          }),
         );
       }
 
@@ -127,13 +127,13 @@ $(document).ready(function () {
       const time = program?.program_category
         ? `Show Time: ${program.program_category.start_time.substring(
             0,
-            5
+            5,
           )} - ${program.program_category.end_time.substring(0, 5)}`
         : "";
       const imgURL = program?.system_users?.image_url
         ? `${window.API_BASE_URL}/${program.system_users.image_url.replace(
             /\\/g,
-            "/"
+            "/",
           )}`
         : "images/default-cover.png";
 
@@ -161,28 +161,112 @@ $(document).ready(function () {
 
   // ---------------- PODCASTS API ✅ ----------------
 
+  function renderPodcastSkeleton(count = 4) {
+    let html = "";
+
+    for (let i = 0; i < count; i++) {
+      html += `
+      <div class="bg-white rounded-xl border border-gray-100 p-2 shadow-sm">
+        <div class="skeleton w-full h-[150px] mb-3"></div>
+        <div class="skeleton h-4 w-3/4 mb-2"></div>
+        <div class="skeleton h-3 w-1/3"></div>
+      </div>
+    `;
+    }
+
+    $("#new-podcasts")
+      .html(
+        `
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+      ${html}
+    </div>
+  `,
+      )
+      .show();
+  }
+
   async function loadPodcasts() {
     if (!$podcastList.length) return;
+
     $podcastList.empty();
+    renderPodcastSkeleton(4);
+
     try {
       const res = await $.ajax({
         url: `${window.API_BASE_URL}/podcasts?status=approved&limit=4`,
         method: "GET",
       });
+
       const podcasts = res?.data?.data || [];
-      podcasts.forEach((podcast) => {
-        $podcastList.append(`
-          <li>
-                        <a href="podcast-details.php?id=${podcast.id}"  class="video-popup">
-              <div class="live-class-two__icon"></div>
-                            <h3 class="live-class-two__content-title">
-                                <a href="podcast-details.php?id=${podcast.id}" >${podcast.title}</a>
-                            </h3>
-            </a>
-                           
-          </li>
-        `);
-      });
+
+      if (!podcasts.length) {
+        $podcastList.html(
+          `<p class="text-sm text-gray-400 text-center mt-8">No Podcasts Found</p>`,
+        );
+        return;
+      }
+
+      const html = podcasts
+        .map((p, i) => {
+          const img =
+            p.image_url ||
+            "assets/img/common/podcast-details/podcast-banner.jpg";
+
+          const title =
+            (p.title || "").slice(0, 80) + (p.title?.length > 80 ? "…" : "");
+
+          const duration = `${p.duration ?? 0} min`;
+
+          return `
+        <div
+          class="podcast-card 
+                 bg-white rounded-xl border border-gray-100
+                 p-2 shadow-sm hover:shadow-lg hover:-translate-y-1
+                 transition-all cursor-pointer">
+
+          <a href="podcast-details.php?id=${p.id}" class="block">
+
+            <!-- Image -->
+            <div class="relative rounded-lg overflow-hidden mb-3">
+            <span
+              class="absolute top-2 left-2 z-10
+                     bg-red-600 text-white text-[10px]
+                     font-bold px-2 py-0.5 rounded-full
+                     shadow"
+            >
+              NEW
+            </span>
+              <img src="${img}" alt="podcast-cover"
+                   class="w-full h-[150px] object-cover">
+
+              <div class="absolute inset-0 bg-black/10 hover:bg-black/20 transition-all"></div>
+            </div>
+
+            <!-- Title -->
+            <p class="text-[15px] font-medium text-gray-900 truncate">
+              ${title}
+            </p>
+
+            <!-- Duration -->
+            <div class="flex items-center gap-2 text-gray-600 text-sm mt-2">
+              <i class="fa fa-clock text-[11px]"></i>
+              <span class="text-[13px] font-medium text-[#f90000]">
+                ${duration}
+              </span>
+            </div>
+
+          </a>
+        </div>
+      `;
+        })
+        .join("");
+
+      $podcastList.html(`
+      <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+        ${html}
+      </div>
+    `);
+
       $podcastList.fadeIn(300);
     } catch (err) {
       console.error("Podcast failed:", err);
@@ -209,7 +293,7 @@ $(document).ready(function () {
         $festivalLeft
           .attr(
             "src",
-            `${window.API_BASE_URL}/${gif.left_side_image.replace(/\\/g, "/")}`
+            `${window.API_BASE_URL}/${gif.left_side_image.replace(/\\/g, "/")}`,
           )
           .fadeIn(400);
       } else {
@@ -220,7 +304,7 @@ $(document).ready(function () {
         $festivalRight
           .attr(
             "src",
-            `${window.API_BASE_URL}/${gif.right_side_image.replace(/\\/g, "/")}`
+            `${window.API_BASE_URL}/${gif.right_side_image.replace(/\\/g, "/")}`,
           )
           .fadeIn(400);
       } else {

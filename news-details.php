@@ -83,8 +83,23 @@
     <meta name="author" content="<?php echo htmlspecialchars($news['published_by'] ?? 'Thaalam Radio Station'); ?>">
 
     <?php include 'php/css.php'; ?>
-    <link rel="stylesheet" href="assets/css/module-css/news-details.css">
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes slide-in {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .animate-slide-in {
+            animation: slide-in 0.3s ease-out;
+        }
+    </style>
 
 </head>
 
@@ -97,56 +112,142 @@
     <?php include 'php/preloader.php'; ?>
 
     <div class="page-wrapper">
-        <section class="news-details-page" style=" 
-            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
-                        url('./assets/images/backgrounds/background_image.jpg'); ">
-            <?php include 'php/header.php'; ?>
+        <section class="bg-gray-50">
+            <?php include 'php/newsHeader.php'; ?>
 
             <div class="news-details-wrapper">
 
-                <!-- Breadcrumb -->
-                <div class="breadcrumb" role="navigation" aria-label="Breadcrumb">
-                    <a href="index">Home</a>
-                    <a href="news-list">News</a>
-                    <span id="breadcrumb-title">News Details</span>
-                </div>
+                <nav
+                    class="border-b bg-[#fafafa]"
+                    role="navigation"
+                    aria-label="Breadcrumb">
+                    <div class="max-w-7xl mx-auto px-4 py-3">
+                        <ol class="flex items-center gap-2 text-sm text-gray-500">
+
+                            <li>
+                                <a href="index" class="hover:underline">
+                                    Home
+                                </a>
+                            </li>
+
+                            <li class="text-gray-400">/</li>
+
+                            <li>
+                                <a href="news-list" class="hover:underline">
+                                    News
+                                </a>
+                            </li>
+
+                            <li class="text-gray-400">/</li>
+
+                            <li
+                                id="breadcrumb-title"
+                                class="text-gray-900 font-medium truncate max-w-xs md:max-w-md"
+                                aria-current="page">
+                                News Details
+                            </li>
+
+                        </ol>
+                    </div>
+                </nav>
 
 
-                <!-- News Container -->
-                <div class="news-container">
-                    <div id="news-details"></div>
-                </div>
+                <div class="max-w-7xl mx-auto px-4 py-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
-                <div class="related-news-section">
-                    <h2 class="related-title">Related News</h2>
-                    <div class="related-news-grid" id="related-news"></div>
+                        <article class="lg:col-span-8 bg-white  shadow-sm p-6 md:p-10">
+                            <div id="news-details"></div>
+                        </article>
+
+                        <aside class="lg:col-span-4 space-y-6 sticky top-24 self-start">
+
+                            <h2 class="text-sm uppercase tracking-widest font-semibold mb-4 text-gray-900">
+                                Related News
+                            </h2>
+
+                            <div id="related-news" class="space-y-4"></div>
+
+                        </aside>
+
+
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 🗨️ Comment Modal -->
-        <div id="comment-modal" class="comment-modal" style=" 
-            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
-                        url('./assets/images/backgrounds/background_image.jpg'); ">
-            <div class="comment-modal-content">
-                <div class="comment-header">
-                    <button class="close-comment-modal"><i class="fas fa-times"></i></button>
-                    <h3 class="comments-title">Comments</h3>
-                </div>
-                <div id="comment-list" class="comment-list">
-                    <p class="no-comments">No comments yet. Be the first to comment!</p>
+
+        <div
+            id="comment-modal"
+            class="fixed inset-0 z-50 hidden bg-black/40"
+            role="dialog"
+            aria-modal="true">
+            <div class="absolute inset-0 close-comment-modal"></div>
+
+            <div
+                class="absolute right-0 top-0 h-full w-full max-w-md
+           bg-white shadow-2xl
+           flex flex-col animate-slide-in">
+
+                <div class="px-6 py-4 border-b flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            Comments
+                        </h3>
+                        <p class="text-xs text-gray-500">
+                            Join the discussion
+                        </p>
+                    </div>
+
+                    <button
+                        class="close-comment-modal text-gray-400 hover:text-gray-700"
+                        aria-label="Close comments">
+                        ✕
+                    </button>
                 </div>
 
-                <div class="comment-form">
-                    <form id="add-comment-form">
-                        <input type="hidden" name="news_id" id="news_id">
-                        <div id="member-fields"></div>
-                        <textarea id="comment-text" placeholder="Write your comment..." required></textarea>
-                        <button type="submit" class="submit-comment-btn">Post Comment</button>
+                <div
+                    id="comment-list"
+                    class="flex-1 overflow-y-auto px-6 py-4 space-y-5">
+                    <p class="text-sm text-gray-500">
+                        No comments yet. Be the first to comment!
+                    </p>
+                </div>
+
+                <!-- Comment Form -->
+                <div class="border-t bg-gray-50 px-6 py-4">
+                    <form id="add-comment-form" class="space-y-3">
+
+                        <input type="hidden" id="news_id" />
+
+                        <!-- Guest / Member Fields -->
+                        <div id="member-fields" class="space-y-2"></div>
+
+                        <textarea
+                            id="comment-text"
+                            rows="3"
+                            placeholder="Write your comment…"
+                            required
+                            class="w-full resize-none rounded-lg border border-gray-300
+                 px-3 py-2 text-sm
+                 focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+
+                        <div class="flex justify-end">
+                            <button
+                                type="submit"
+                                class="px-4 py-2 rounded-lg bg-red-600
+                   text-white text-sm font-medium
+                   hover:bg-red-700 transition">
+                                Post Comment
+                            </button>
+                        </div>
+
                     </form>
                 </div>
+
             </div>
         </div>
+
+
 
         <?php include 'php/footer.php'; ?>
     </div><!-- /.page-wrapper -->

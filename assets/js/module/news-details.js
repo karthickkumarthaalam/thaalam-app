@@ -46,152 +46,113 @@ function timeAgo(dateString) {
 function renderNews(news) {
   fetchRelatedNews(news.category, news.slug);
 
-  const hasAudio =
-    news.audio_url &&
-    news.audio_url.trim() &&
-    news.audio_url !== "null" &&
-    news.audio_url !== "undefined";
+  const newsDetailsHTML = `
+  <!-- Category -->
+  <div class="mb-3">
+    <span class="text-xs uppercase tracking-widest text-red-600 font-semibold">
+      ${news.category || "News"}
+    </span>
+    ${
+      news.subcategory
+        ? `<span class="ml-3 text-xs text-gray-500">${news.subcategory}</span>`
+        : ""
+    }
+  </div>
 
-  const slides = [];
+  <!-- Title -->
+  <h1 class="text-xl md:text-2xl font-semibold leading-tight text-gray-900">
+    ${news.title}
+  </h1>
 
-  if (news.video_url && news.video_url.trim() && news.video_url !== "null") {
-    slides.push(`
-      <div class="carousel-slide">
-        <video controls poster="${news.cover_image || ""}">
-          <source src="${news.video_url}" type="video/mp4" />
-        </video>
-      </div>
-    `);
+  <!-- Subtitle -->
+  ${
+    news.subtitle
+      ? `<p class="mt-5 text-lg text-gray-700 leading-relaxed max-w-3xl">
+          ${news.subtitle}
+        </p>`
+      : ""
   }
 
-  if (
-    news.cover_image &&
-    news.cover_image.trim() &&
-    news.cover_image !== "null"
-  ) {
-    slides.push(`
-      <div class="carousel-slide">
-        <img src="${news.cover_image}" alt="${news.title}" />
-      </div>
-    `);
-  }
-
-  if (Array.isArray(news.media)) {
-    news.media.forEach((m) => {
-      if (m.url && m.url.trim() && m.url !== "null") {
-        slides.push(`
-          <div class="carousel-slide">
-            <img src="${m.url}" alt="${news.title}" />
-          </div>
-        `);
-      }
-    });
-  }
-
-  if (slides.length > 0)
-    slides[0] = slides[0].replace("carousel-slide", "carousel-slide active");
-
-  const carouselHTML =
-    slides.length > 0
-      ? `
-    <div class="carousel-container">
-      <div class="carousel-track">${slides.join("")}</div>
+  <!-- Meta -->
+  <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-gray-500 border-b pb-6">
+    <span class="font-medium text-gray-900">
+      ${news.published_by || "Thaalam News"}
+    </span>
+    <span class="h-1 w-1 rounded-full bg-gray-400"></span>
+    <span>
       ${
-        slides.length > 1
-          ? `
-        <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
-        <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
-        <div class="carousel-indicators">
-          ${slides
-            .map(
-              (_, i) =>
-                `<div class="carousel-indicator ${
-                  i === 0 ? "active" : ""
-                }" data-index="${i}"></div>`
-            )
-            .join("")}
-        </div>`
+        news.published_date
+          ? new Date(news.published_date).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })
           : ""
       }
-    </div>`
-      : "";
+    </span>
+    <span class="h-1 w-1 rounded-full bg-gray-400"></span>
+    <span>${news.city || "Switzerland"}</span>
 
-  const audioHTML = hasAudio
-    ? `
-    <div class="audio-player">
-      <h3><i class="fas fa-headphones"></i> Listen to this story</h3>
-      <audio controls preload="metadata" style="width: 100%;">
-        <source src="${news.audio_url}" type="audio/mpeg" />
-      </audio>
-    </div>`
-    : "";
+    <button
+      class="comment-trigger ml-auto text-sm font-semibold text-red-600 hover:underline"
+      data-newsid="${news.id}">
+      Comments
+    </button>
+  </div>
 
-  const newsDetailsHTML = `
-    <div class="news-header">
-      <div class="news-meta">
-        <span class="category">${news.category || "Uncategorized"}</span>
-        ${
-          news.subcategory
-            ? `<span class="subcategory">${news.subcategory}</span>`
-            : ""
-        }
+  <!-- HERO MEDIA -->
+  ${
+    news.cover_image
+      ? `
+      <div class="mt-8 -mx-6 md:-mx-10">
+        <img
+          src="${news.cover_image}"
+          alt="${news.title}"
+          class="w-full max-h-[420px] object-cover"
+        />
       </div>
-      <h1 class="news-title">${news.title || "Untitled"}</h1>
-      ${news.subtitle ? `<h2 class="news-subtitle">${news.subtitle}</h2>` : ""}
-      <div class="news-info">
-        <span><i class="fas fa-user"></i> ${
-          news.published_by || "Unknown"
-        }</span>
-        <span><i class="fas fa-calendar"></i> ${
-          news.published_date
-            ? new Date(news.published_date).toLocaleDateString()
-            : "Unknown date"
-        }</span>
-        <span><i class="fas fa-map-marker-alt"></i> ${
-          news.city || "Unknown"
-        }, ${news.state || "Unknown"}</span>
-        <span class="comment-trigger" data-newsid="${
-          news.id
-        }" title="View Comments">
-          <i class="fas fa-comments"></i>
-        </span>
-      </div>
+      `
+      : ""
+  }
+
+
+  <!-- Content -->
+  <div class="prose prose-lg md:prose-xl max-w-none mt-10 leading-relaxed">
+    ${news.content}
+  </div>
+
+  <!-- Footer -->
+  <div class="mt-14 pt-6 border-t flex items-center justify-between">
+
+    <div class="text-sm text-gray-600">
+      Written by<br>
+      <span class="font-medium text-gray-900">
+        ${news.content_creator || news.published_by}
+      </span>
     </div>
-    ${carouselHTML}
-    ${audioHTML}
-    <div class="news-body">${
-      news.content || "<p>No content available.</p>"
-    }</div>
-    <div class="news-footer">
-      <div>
-        <p>Written by <strong>${
-          news.content_creator || news.published_by || "Unknown"
-        }</strong></p>
-        <p>Published on ${
-          news.published_date
-            ? new Date(news.published_date).toLocaleDateString()
-            : "Unknown date"
-        }</p>
-      </div>
-      <div class="social-share">
-        <a href="#" id="share-facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" id="share-twitter" title="Share on X" aria-label="Share on X">
-          <svg
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-            aria-hidden="true"
-            focusable="false"
-            fill="currentColor"
-            role="img"
-          >
-            <path d="M18.244 2.25h3.356l-7.336 8.385 8.607 11.115h-6.706l-5.258-6.803L5.48 21.75H2.125l7.55-8.613L1.25 2.25h6.834l4.797 6.199 5.363-6.199Z"/>
-          </svg>
-        </a>        <a href="#" id="share-whatsapp" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="#" id="share-instagram" title="Share on Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" id="copy-link" title="Copy Link"><i class="fas fa-link"></i></a>
-      </div>
-    </div>`;
+
+    <div class="flex items-center gap-5 text-lg text-gray-500">
+      <a id="share-facebook" class="hover:text-blue-600" title="Share on Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+
+      <a id="share-twitter" class="hover:text-black" title="Share on X">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <path d="M18.244 2.25h3.356l-7.336 8.385 8.607 11.115h-6.706l-5.258-6.803L5.48 21.75H2.125l7.55-8.613L1.25 2.25h6.834l4.797 6.199 5.363-6.199Z"/>
+        </svg>
+      </a>
+
+      <a id="share-whatsapp" class="hover:text-green-600" title="Share on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+
+      <a id="copy-link" class="hover:text-gray-900" title="Copy link">
+        <i class="fas fa-link"></i>
+      </a>
+    </div>
+
+  </div>
+`;
 
   document.getElementById("news-details").innerHTML = newsDetailsHTML;
 
@@ -200,57 +161,9 @@ function renderNews(news) {
   const breadcrumbTitle = document.getElementById("breadcrumb-title");
   if (breadcrumbTitle)
     breadcrumbTitle.textContent =
-      news.title?.length > 30
-        ? news.title.substring(0, 30) + "..."
+      news.title?.length > 50
+        ? news.title.substring(0, 50) + "..."
         : news.title || "News Article";
-
-  if (slides.length > 0) setTimeout(initCarousel, 100);
-}
-
-/* =============================
-   🎠 Carousel
-============================= */
-function initCarousel() {
-  const track = document.querySelector(".carousel-track");
-  const slides = Array.from(document.querySelectorAll(".carousel-slide"));
-  const indicators = document.querySelectorAll(".carousel-indicator");
-  const nextBtn = document.querySelector(".carousel-btn.next");
-  const prevBtn = document.querySelector(".carousel-btn.prev");
-
-  if (!track || slides.length === 0) return;
-
-  let currentIndex = 0;
-  const totalSlides = slides.length;
-
-  function goToSlide(index) {
-    currentIndex = (index + totalSlides) % totalSlides;
-    const offset = -currentIndex * track.clientWidth;
-    track.style.transform = `translateX(${offset}px)`;
-
-    slides.forEach((s, i) => s.classList.toggle("active", i === currentIndex));
-    indicators.forEach((dot, i) =>
-      dot.classList.toggle("active", i === currentIndex)
-    );
-  }
-
-  nextBtn?.addEventListener("click", () => goToSlide(currentIndex + 1));
-  prevBtn?.addEventListener("click", () => goToSlide(currentIndex - 1));
-  indicators.forEach((dot, i) =>
-    dot.addEventListener("click", () => goToSlide(i))
-  );
-
-  function setSlideWidths() {
-    const trackWidth = track.clientWidth;
-    slides.forEach((slide) => (slide.style.width = `${trackWidth}px`));
-    goToSlide(currentIndex);
-  }
-
-  let resizeTimeout;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(setSlideWidths, 200);
-  });
-  setSlideWidths();
 }
 
 function setupSocialShare(news) {
@@ -266,12 +179,6 @@ function setupSocialShare(news) {
   document.getElementById("share-facebook").href = facebookUrl;
   document.getElementById("share-twitter").href = twitterUrl;
   document.getElementById("share-whatsapp").href = whatsappUrl;
-
-  // Instagram (placeholder)
-  document.getElementById("share-instagram").addEventListener("click", (e) => {
-    e.preventDefault();
-    showToast("Instagram does not support direct web sharing.");
-  });
 
   // Copy link
   document.getElementById("copy-link").addEventListener("click", async () => {
@@ -291,13 +198,13 @@ function setupSocialShare(news) {
 async function fetchRelatedNews(category, currentSlug) {
   try {
     const res = await fetch(
-      `${window.API_BASE_URL}/news/related-news/${category}?limit=4&status=published`
+      `${window.API_BASE_URL}/news/related-news/${category}?limit=4&status=published`,
     );
     const { status, data } = await res.json();
 
     if (status === "success" && Array.isArray(data)) {
       const related = data.filter(
-        (n) => n.category === category && n.slug !== currentSlug
+        (n) => n.category === category && n.slug !== currentSlug,
       );
       renderRelatedNews(related);
     }
@@ -311,31 +218,60 @@ function renderRelatedNews(related) {
   if (!container) return;
 
   if (!related || !related.length) {
-    container.innerHTML = `<p class="no-related">No related articles available.</p>`;
+    container.innerHTML = `
+    <div class="py-6 text-sm text-gray-500">
+      <p>No related stories at the moment.</p>
+      <p class="mt-1 text-xs text-gray-400">
+        Check back soon for more updates.
+      </p>
+    </div>
+  `;
     return;
   }
 
   container.innerHTML = related
     .map(
       (news) => `
-      <a href="news-details?slug=${news.slug}" class="related-card">
-        <div class="related-image">
-          <img src="${
-            news.cover_image || "./assets/images/default-news.jpg"
-          }" alt="${news.title}">
-        </div>
-        <div class="related-content">
-          <h3>${news.title.substring(0, 70)}...</h3>
-          <span class="related-date">
-            <i class="fas fa-calendar-alt"></i>
-            ${new Date(news.published_date).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </span>
-        </div>
-      </a>`
+    <a
+      href="news-details?slug=${news.slug}"
+      class="group block bg-white border border-gray-200 rounded-lg overflow-hidden
+             hover:shadow-md hover:-translate-y-0.1 transition-all duration-300"
+    >
+
+      <!-- Image -->
+      <div class="overflow-hidden">
+        <img
+          src="${news.cover_image || "./assets/images/default-news.jpg"}"
+          alt="${news.title}"
+          class="w-full h-48 object-cover
+                 group-hover:scale-101 transition-transform duration-300"
+        />
+      </div>
+
+      <!-- Content -->
+      <div class="p-4">
+
+        <!-- Date -->
+        <span class="block text-xs text-red-600 mb-2">
+          ${new Date(news.published_date).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          })}
+        </span>
+
+        <!-- Title -->
+        <h3
+          class="text-sm font-semibold text-gray-900 leading-snug
+                 group-hover:underline decoration-red-600 decoration-2 underline-offset-4 line-clamp-2"
+        >
+          ${news.title}
+        </h3>
+
+      </div>
+
+    </a>
+  `,
     )
     .join("");
 }
@@ -363,44 +299,23 @@ document.addEventListener("click", function (e) {
 });
 
 function openCommentModal(newsId) {
-  document.getElementById("comment-modal").classList.add("active");
+  const modal = document.getElementById("comment-modal");
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
   document.getElementById("news_id").value = newsId;
   fetchComments(newsId);
   renderCommentForm();
+
+  document.body.classList.add("overflow-hidden");
 }
 
 function closeCommentModal() {
-  document.getElementById("comment-modal").classList.remove("active");
-}
+  const modal = document.getElementById("comment-modal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
 
-async function fetchComments(newsId) {
-  const res = await fetch(
-    `${window.API_BASE_URL}/news-comments/news/${newsId}`
-  );
-  const { status, result } = await res.json();
-  const listContainer = document.getElementById("comment-list");
-  const countEl = document.querySelector(".comment-count");
-
-  if (status === "success" && result?.data?.length) {
-    listContainer.innerHTML = result.data
-      .map(
-        (c) => `
-      <div class="comment-item">
-        <div class="comment-content">
-          <div>
-            <strong>${c.Member?.name || c.guest_name || "Guest"}</strong>
-            <small>${timeAgo(c.created_at)}</small>
-          </div>
-          <p>${c.comment}</p>
-        </div>
-      </div>`
-      )
-      .join("");
-  } else {
-    listContainer.innerHTML = `<p class="no-comments">No comments yet. Be the first!</p>`;
-  }
-
-  if (countEl) countEl.textContent = result?.pagination?.totalRecords || 0;
+  document.body.classList.remove("overflow-hidden");
 }
 
 function renderCommentForm() {
@@ -408,41 +323,158 @@ function renderCommentForm() {
   const username = localStorage.getItem("username");
   const fieldsDiv = document.getElementById("member-fields");
 
+  if (!fieldsDiv) return;
+
+  // Logged-in member
   if (memberID && username) {
     fieldsDiv.innerHTML = `
-      <input type="hidden" id="member_id" value="${memberID}" />
-      <p style="color:#555; font-size:0.9rem; margin:0;">
-        Commenting as <strong>${username}</strong>
-      </p>`;
-  } else {
+      <div class="text-sm text-gray-600">
+        Commenting as
+        <span class="font-semibold text-gray-900">${username}</span>
+      </div>
+    `;
+  }
+  // Guest user
+  else {
     fieldsDiv.innerHTML = `
-      <input type="text" id="guest_name" placeholder="Your Name" required />
-      <input type="email" id="guest_email" placeholder="Your Email" required />`;
+      <input
+        type="text"
+        id="guest_name"
+        placeholder="Your name"
+        required
+        class="w-full rounded-lg border border-gray-300
+               px-3 py-2 text-sm
+               focus:outline-none focus:ring-2 focus:ring-red-500"
+      />
+
+      <input
+        type="email"
+        id="guest_email"
+        placeholder="Your email"
+        required
+        class="w-full rounded-lg border border-gray-300
+               px-3 py-2 text-sm
+               focus:outline-none focus:ring-2 focus:ring-red-500"
+      />
+    `;
   }
 }
 
-document
-  .getElementById("add-comment-form")
-  .addEventListener("submit", async (e) => {
-    e.preventDefault();
+async function fetchComments(newsId) {
+  const listContainer = document.getElementById("comment-list");
 
-    const news_id = document.getElementById("news_id").value;
-    const comment = document.getElementById("comment-text").value.trim();
-    if (!comment) return showToast("Please write a comment.");
+  listContainer.innerHTML = `
+    <p class="text-sm text-gray-400 animate-pulse">
+      Loading comments…
+    </p>
+  `;
 
-    const memberID = localStorage.getItem("memberId");
-    const payload = { news_id, comment };
+  try {
+    const res = await fetch(
+      `${window.API_BASE_URL}/news-comments/news/${newsId}`,
+    );
+    const { status, result } = await res.json();
 
-    if (memberID) {
-      payload.member_id = memberID;
+    if (status === "success" && result?.data?.length) {
+      listContainer.innerHTML = result.data
+        .map(
+          (c) => `
+        <div class="flex gap-3 border-b pb-4">
+
+          <div
+            class="w-9 h-9 rounded-full bg-gray-200
+                   flex items-center justify-center
+                   text-xs font-semibold text-gray-600"
+          >
+            ${(c.Member?.name || c.guest_name || "G").charAt(0).toUpperCase()}
+          </div>
+
+          <div class="flex-1">
+            <div class="flex justify-between">
+              <span class="text-sm font-semibold text-gray-900">
+                ${c.Member?.name || c.guest_name || "Guest"}
+              </span>
+              <span class="text-xs text-gray-400">
+                ${timeAgo(c.created_at)}
+              </span>
+            </div>
+
+            <p class="mt-1 text-sm text-gray-700">
+              ${c.comment}
+            </p>
+          </div>
+
+        </div>
+      `,
+        )
+        .join("");
     } else {
-      payload.guest_id = getGuestId();
-      payload.guest_name = document.getElementById("guest_name").value.trim();
-      payload.guest_email = document.getElementById("guest_email").value.trim();
-      if (!payload.guest_name || !payload.guest_email)
-        return showToast("Please fill name and email.");
+      listContainer.innerHTML = `
+        <p class="text-sm text-gray-500">
+          No comments yet. Be the first to comment!
+        </p>
+      `;
+    }
+  } catch (err) {
+    console.error(err);
+    listContainer.innerHTML = `
+      <p class="text-sm text-red-500">
+        Failed to load comments.
+      </p>
+    `;
+  }
+}
+
+document.addEventListener("submit", async (e) => {
+  if (!e.target.matches("#add-comment-form")) return;
+
+  e.preventDefault();
+
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+
+  const commentInput = document.getElementById("comment-text");
+  const newsInput = document.getElementById("news_id");
+
+  if (!commentInput || !newsInput) {
+    return showToast("Comment form not ready.", "error");
+  }
+
+  const comment = commentInput.value.trim();
+  const news_id = newsInput.value;
+
+  if (!comment) return showToast("Please write a comment.", "error");
+
+  btn.disabled = true;
+  btn.textContent = "Posting…";
+
+  const memberID = localStorage.getItem("memberId");
+  const payload = { news_id, comment };
+
+  if (memberID) {
+    payload.member_id = memberID;
+  } else {
+    const guestNameEl = document.getElementById("guest_name");
+    const guestEmailEl = document.getElementById("guest_email");
+
+    if (!guestNameEl || !guestEmailEl) {
+      btn.disabled = false;
+      btn.textContent = "Post Comment";
+      return showToast("Please enter your name and email.", "info");
     }
 
+    payload.guest_id = getGuestId();
+    payload.guest_name = guestNameEl.value.trim();
+    payload.guest_email = guestEmailEl.value.trim();
+
+    if (!payload.guest_name || !payload.guest_email) {
+      btn.disabled = false;
+      btn.textContent = "Post Comment";
+      return showToast("Please fill name and email.", "info");
+    }
+  }
+
+  try {
     const res = await fetch(`${window.API_BASE_URL}/news-comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -450,14 +482,22 @@ document
     });
 
     const data = await res.json();
+
     if (data.status === "success") {
-      document.getElementById("comment-text").value = "";
+      commentInput.value = "";
       fetchComments(news_id);
-      showToast("Comment posted and pending approval!");
+      showToast("Comment submitted for approval!");
     } else {
-      showToast(data.message || "Failed to post comment.");
+      showToast(data.message || "Failed to post comment.", "error");
     }
-  });
+  } catch (err) {
+    console.error(err);
+    showToast("Network error. Try again.", "error");
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Post Comment";
+});
 
 /* =============================
    📱 Keyboard Fix (Mobile)
