@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  let $loader = $("#globalLoader");
   const $carousel = $(".main-slider__carousel");
   const $podcastList = $("#new-podcasts");
   const $festivalLeft = $("#festivalLeft");
@@ -9,6 +8,10 @@ $(document).ready(function () {
   $festivalLeft.hide();
   $festivalRight.hide();
   $podcastList.hide();
+
+  function slugify(name) {
+    return name.split(" ").join("-");
+  }
 
   // ---------------- CAROUSEL + BANNERS ✅ ----------------
 
@@ -124,6 +127,8 @@ $(document).ready(function () {
 
       const title = program?.program_category?.category || "No live program";
       const rj = program?.system_users?.name || "";
+      const rjSlug = slugify(rj);
+      const rjurl = `/rj-details?slug=${rjSlug}`;
       const time = program?.program_category
         ? `Show Time: ${program.program_category.start_time.substring(
             0,
@@ -143,6 +148,20 @@ $(document).ready(function () {
       $("#programArtist").text(rj);
       $("#showTime").text(time);
       $("#programImage").attr("src", imgURL).attr("alt", title);
+
+      $("#programImage")
+        .css("cursor", "pointer")
+        .off("click")
+        .on("click", () => {
+          window.location.href = rjurl;
+        });
+
+      $("#programArtist")
+        .css("cursor", "pointer")
+        .off("click")
+        .on("click", () => {
+          window.location.href = rjurl;
+        });
 
       if (res.minutesLeft <= 30 && res.next?.program_category) {
         $("#nextProgramNotice")
@@ -228,14 +247,20 @@ $(document).ready(function () {
 
             <!-- Image -->
             <div class="relative rounded-lg overflow-hidden mb-3">
-            <span
-              class="absolute top-2 left-2 z-10
-                     bg-red-600 text-white text-[10px]
-                     font-bold px-2 py-0.5 rounded-full
+           ${
+             i < 2
+               ? `
+             <span
+              class="absolute top-2 right-2 z-10
+                     bg-white text-gray-900 text-[10px]
+                     font-bold px-2 py-0.5 rounded-md
                      shadow"
             >
               NEW
             </span>
+            `
+               : ""
+           }
               <img src="${img}" alt="podcast-cover"
                    class="w-full h-[150px] object-cover">
 

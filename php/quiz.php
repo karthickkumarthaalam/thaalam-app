@@ -17,17 +17,18 @@
     /* ================= CLEAN MODERN POLL ================= */
     .live-interaction {
         background: transparent;
-        padding: 60px 20px;
         /* min-height: 100vh; */
     }
 
     .container {
         max-width: 1200px;
+        /* padding: 2.8rem 1.2rem; */
         margin: 0 auto;
     }
 
     .live-interaction__header {
         text-align: center;
+        margin-top: 48px;
         margin-bottom: 48px;
         display: none;
     }
@@ -62,14 +63,14 @@
     /* ================= GRID ================= */
     .quiz-list {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 0.5fr));
+        grid-template-columns: repeat(auto-fit, minmax(400px, 0.4fr));
         gap: 32px;
         justify-content: center;
     }
 
     @media (max-width: 480px) {
         .quiz-list {
-            grid-template-columns: 1fr;
+            grid-template-columns: w-full;
         }
     }
 
@@ -478,13 +479,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    /* ================= POLL SYSTEM (WITH SMART STORAGE) ================= */
-
     const polls = [];
     let currentProgramId = null;
     let submitHandler = null;
 
-    /* ---------- SMART STORAGE SOLUTION ---------- */
     const StorageManager = {
         prefix: 'poll_',
         maxItemsPerProgram: 50,

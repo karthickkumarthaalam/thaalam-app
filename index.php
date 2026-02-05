@@ -106,7 +106,7 @@
 
         @media (min-width: 1200px) {
             .main-slider {
-                min-height: 760px;
+                min-height: 700px;
             }
         }
 
@@ -234,120 +234,109 @@
                     <img id="festivalRight" alt="Festival Right" class="festival-side right">
 
 
-                    <div class="">
-                        <div class="home-page__header animate-fade-up">
-                            <h1 class="home-page__title">Thaalam <span style="color:#000">BroadCasting</span></h1>
-                            <p class="home-page__subtitle">Streaming & Audio</p>
-                        </div>
-
-                        <section class="py-10  border-b  border-gray-300"
-                            style="
+                    <div class="" style="
                               background-image: url('assets/images/backgrounds/background_image.jpg');
                               background-size: cover;
                               background-position: center;
                               background-repeat: no-repeat;
                             ">
+                        <div class="home-page__header animate-fade-up mt-2">
+                            <h1 class="home-page__title">Thaalam <span style="color:#000">BroadCasting</span></h1>
+                            <p class="home-page__subtitle">Streaming & Audio</p>
+                        </div>
 
-                            <div class="container mx-auto px-4">
+                        <section class="md:pb-10 border-b  border-gray-300">
+
+                            <div class="container mx-auto p-0 px-3">
                                 <div class="flex justify-center items-center">
-                                    <div class="w-full max-w-2xl bg-white shadow-xl rounded-2xl overflow-hidden">
+                                    <div class="w-full relative
+                                                     bg-white/25
+                                                     backdrop-blur-xl
+                                                     shadow-[0_25px_60px_rgba(0,0,0,0.1)]
+                                                     rounded-2xl
+                                                     border border-white/30
+                                                     overflow-hidden
+                                                     transition-all duration-300
+                                                     hover:-translate-y-1
+                                                     hover:shadow-[0_35px_80px_rgba(0,0,0,0.15)]">
 
-                                        <!-- Player Wrapper -->
-                                        <div class="gap-6 p-6">
+                                        <div class="absolute top-0 left-0 h-[2px] w-full overflow-hidden bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
 
+                                        <div class="absolute bottom-0 left-0 h-[2px] w-full overflow-hidden bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
 
-
-
-                                            <!-- Player Info -->
-                                            <div class="flex-1 w-full space-y-3">
-                                                <div class="flex flex-col md:flex-row items-center justify-center  gap-3 sm:gap-4
+                                        <div class="overflow-hidden rounded-2xl">
+                                            <div class="gap-6 px-4 pt-0 pb-4 md:p-6">
+                                                <div class="flex-1 w-full space-y-3">
+                                                    <div class="flex flex-col  items-center justify-center  gap-3 sm:gap-4
                                                             pl-3 sm:pl-4 py-3  border-b border-dashed border-gray-500">
 
-                                                    <!-- Program Image -->
-                                                    <img
-                                                        id="programImage"
-                                                        src="assets/img/logo/thalam-logo.png"
-                                                        alt="Thaalam Live"
-                                                        class="w-32 h-32 md:w-24 md:h-24
-                                                               rounded-xl object-contain
-                                                               bg-white p-1" />
+                                                        <img
+                                                            id="programImage"
+                                                            src="assets/img/logo/thalam-logo.png"
+                                                            alt="Thaalam Live"
+                                                            class="w-32 h-32 
+                                                               rounded-xl object-contain" />
 
-                                                    <!-- Text Content -->
-                                                    <div class="flex flex-col  leading-tight">
+                                                        <div class="flex flex-col  leading-tight">
 
-                                                        <!-- Title -->
-                                                        <h3
-                                                            id="programTitle"
-                                                            class="text-base text-center md:text-right
+                                                            <h3
+                                                                id="programTitle"
+                                                                class="text-base text-center
                                                                  sm:text-lg md:text-xl font-semibold text-gray-900
                                                                  truncate max-w-[220px] sm:max-w-full
                                                                  mx-auto md:ml-auto mb-2">
-                                                            Thaalam Live Stream
-                                                        </h3>
+                                                                Thaalam Live Stream
+                                                            </h3>
 
 
-                                                        <!-- RJ Name -->
-                                                        <p class="text-sm text-gray-700 font-semibold flex items-center justify-center md:justify-start gap-2  ">
-                                                            <span id="programArtist">Live RJ</span>
-                                                            <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
-                                                        </p>
+                                                            <p class="text-sm text-gray-700 font-semibold flex items-center justify-center  gap-2  ">
+                                                                <span id="programArtist">Live RJ</span>
+                                                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse "></span>
+                                                            </p>
 
-                                                        <!-- Show Time -->
-                                                        <p
-                                                            id="showTime"
-                                                            class="text-xs text-gray-500 flex items-center justify-center md:justify-start gap-1 ">
-                                                            <span>Now Streaming</span>
-                                                        </p>
+                                                            <p
+                                                                id="showTime"
+                                                                class="text-xs text-gray-500 flex items-center justify-center  gap-1 ">
+                                                                <span>Now Streaming</span>
+                                                            </p>
+                                                        </div>
                                                     </div>
+
+
+
+
+                                                    <div class="flex flex-wrap items-center justify-center   gap-4 mt-4 pl-6 ">
+
+
+                                                        <button
+                                                            id="volumeBtn"
+                                                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
+                                                            <i class="fas fa-volume-up" id="volumeIcon"></i>
+                                                        </button>
+
+                                                        <button
+                                                            id="mainPlayBtn"
+                                                            class="w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-600  text-white shadow-md transition hover:scale-105">
+                                                            <i class="fas fa-play" id="mainPlayIcon"></i>
+                                                        </button>
+
+                                                        <button
+                                                            id="shareBtn"
+                                                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
+                                                            <i class="fas fa-share-alt"></i>
+                                                        </button>
+                                                    </div>
+
+                                                    <div
+                                                        id="nextProgramNotice"
+                                                        class="text-sm text-red-500 text-center font-semibold animate-pulse mt-4"></div>
+
+                                                    <audio
+                                                        id="audioPlayer"
+                                                        src="https://thaalam.out.airtime.pro/thaalam_b"
+                                                        autoplay></audio>
+
                                                 </div>
-
-
-
-
-                                                <!-- Controls -->
-                                                <div class="flex flex-wrap items-center justify-center   gap-4 mt-4 pl-6 ">
-
-
-                                                    <button
-                                                        id="volumeBtn"
-                                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
-                                                        <i class="fas fa-volume-up" id="volumeIcon"></i>
-                                                    </button>
-
-                                                    <button
-                                                        id="mainPlayBtn"
-                                                        class="w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-600  text-white shadow-md transition hover:scale-105">
-                                                        <i class="fas fa-play" id="mainPlayIcon"></i>
-                                                    </button>
-
-                                                    <!-- 
-                                                    <input
-                                                        type="range"
-                                                        id="volumeSlider"
-                                                        min="0"
-                                                        max="1"
-                                                        step="0.1"
-                                                        value="0.7"
-                                                        class="w-32 accent-orange-600 cursor-pointer" /> -->
-
-                                                    <button
-                                                        id="shareBtn"
-                                                        class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
-                                                        <i class="fas fa-share-alt"></i>
-                                                    </button>
-                                                </div>
-
-                                                <!-- Next Program -->
-                                                <div
-                                                    id="nextProgramNotice"
-                                                    class="text-sm text-red-500 text-center font-semibold animate-pulse mt-4"></div>
-
-                                                <!-- Audio -->
-                                                <audio
-                                                    id="audioPlayer"
-                                                    src="https://thaalam.out.airtime.pro/thaalam_b"
-                                                    autoplay></audio>
-
                                             </div>
                                         </div>
                                     </div>
@@ -357,13 +346,13 @@
                             </div>
                         </section>
 
-                        <section class="py-16 bg-gradient-to-r from-slate-50 via-white  to-slate-50">
+                        <section class="py-8  bg-gradient-to-r from-slate-50 via-white  to-slate-50">
                             <div class="max-w-7xl mx-auto px-4">
 
                                 <div>
                                     <div class="mb-8 animate-fade-up">
 
-                                        <h2 class="text-xl md:text-2xl text-center font-medium text-gray-900 leading-tight">
+                                        <h2 class="text-xl md:text-2xl text-center font-medium text-gray-900 ">
                                             Discover Our Latest <br>
                                             <span class="text-[#f90000]">Podcasts</span>
                                         </h2>
