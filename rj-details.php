@@ -70,7 +70,8 @@
     <meta name="keywords" content="<?php echo htmlspecialchars($keywords); ?>">
 
     <?php include 'php/css.php'; ?>
-    <link rel="stylesheet" href="assets/css/module-css/rj-details.css" />
+    <!-- <link rel="stylesheet" href="assets/css/module-css/rj-details.css" /> -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <?php include 'php/analyticsHeader.php'; ?>
 </head>
 
@@ -83,78 +84,169 @@
 
     <div class="page-wrapper">
         <?php include 'php/header.php'; ?>
+        <section>
 
-        <section id="rj-details" class="rj-details-section" style="background: 
-            linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
-            url('./assets/images/backgrounds/background_image.jpg'); 
-            background-repeat: repeat; 
-            background-size: auto; 
-            background-position: top left; 
-            min-height: 200px;">
+            <div id="rj-content" class="hidden ">
 
-            <div class="container">
+                <div
+                    class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 backdrop-blur-xl">
+                    <div class="w-full max-w-5xl mx-auto">
+                        <div class="relative overflow-hidden flex flex-col md:flex-row items-center gap-8  p-10">
+                            <div
+                                class="relative w-44 h-44 shrink-0 rounded-md overflow-hidden  shadow-lg">
+                                <img
+                                    id="rj-image"
+                                    class="w-full h-full object-contain"
+                                    alt="RJ Profile" />
+                            </div>
 
-                <!-- MAIN CONTENT -->
-                <div id="rj-content" class="hidden">
+                            <div class="relative flex flex-col items-center justify-center md:items-start space-y-3">
+                                <h1
+                                    id="rj-name"
+                                    class="text-xl md:text-2xl text-gray-200 font-bold  tracking-tight"></h1>
 
-                    <!-- ✅ HERO -->
-                    <div class="rj-hero">
-
-                        <div class="rj-avatar-container">
-                            <img id="rj-image" class="rj-avatar" alt="RJ Profile" />
-                        </div>
-
-                        <div class="rj-info">
-                            <h1 id="rj-name" class="rj-name"></h1>
-                            <p id="rj-description" class="rj-bio"></p>
+                                <p
+                                    id="rj-description"
+                                    class=" max-w-3xl text-gray-400 leading-relaxed"></p>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section
+            id="rj-details"
+            class="min-h-screen bg-[url('./assets/images/backgrounds/background_image.jpg')] bg-repeat">
+            <div class="max-w-5xl mx-auto px-4 py-10">
+                <div class="space-y-8">
 
-                    <!-- ✅ 2-COLUMN LAYOUT -->
-                    <div class="rj-layout">
+                    <!-- TABS -->
+                    <div class="relative">
 
-                        <!-- LEFT — Sidebar Navigation -->
-                        <aside class="rj-sidebar">
-                            <button class="nav-item active" data-target="shows-section">Radio Shows</button>
-                            <button class="nav-item" data-target="podcast-section">Podcasts</button>
-                            <button class="nav-item" data-target="news-section">News</button>
-                            <button class="nav-item" data-target="blogs-post">Blogs</button>
-                        </aside>
+                        <!-- TAB BAR -->
+                        <div class="relative">
 
-                        <!-- RIGHT — Dynamic Page Content -->
-                        <div class="rj-body">
+                            <!-- TAB BAR -->
+                            <div class="flex justify-center gap-8">
 
-                            <!-- ✅ SHOWS -->
-                            <section id="shows-section" class="rj-block active">
-                                <h2 class="block-title"><span>Radio </span>Shows</h2>
-                                <div id="rj-programs" class="list-section"></div>
-                            </section>
+                                <button
+                                    class="tab-btn active relative pb-3
+             text-sm font-semibold text-red-600 "
+                                    data-target="shows-section">
+                                    Shows
+                                </button>
 
-                            <!-- ✅ PODCASTS -->
-                            <section id="podcast-section" class="rj-block">
-                                <h2 class="block-title"><span>Listen</span> Podcasts</h2>
-                                <div id="rj-podcasts" class="list-section"></div>
-                            </section>
+                                <button
+                                    class="tab-btn relative pb-3
+             text-sm font-medium text-gray-500
+             hover:text-gray-900 transition "
+                                    data-target="podcast-section">
+                                    Podcasts
+                                </button>
 
-                            <!-- ✅ NEWS -->
-                            <section id="news-section" class="rj-block">
-                                <h2 class="block-title"><span>News </span>Articles</h2>
-                                <div id="rj-news" class="list-section"></div>
-                            </section>
+                                <button
+                                    class="tab-btn relative pb-3
+             text-sm font-medium text-gray-500
+             hover:text-gray-900 transition "
+                                    data-target="news-section">
+                                    News
+                                </button>
 
-                            <section id="blogs-post" class="rj-block">
-                                <h2 class="block-title"><span>Blogs </span>Post</h2>
-                                <div id="rj-blogs" class="list-section"></div>
-                            </section>
+                                <button
+                                    class="tab-btn relative pb-3
+             text-sm font-medium text-gray-500
+             hover:text-gray-900 transition "
+                                    data-target="blogs-post">
+                                    Blogs
+                                </button>
+                            </div>
+
+                            <!-- ACTIVE INDICATOR -->
+                            <span
+                                id="tab-indicator"
+                                class="absolute bottom-0 left-0 h-[3px]
+                               bg-gray-900
+                               transition-all duration-300 ease-out">
+                            </span>
 
                         </div>
-
+                        <span
+                            id="tab-indicator"
+                            class="absolute bottom-0 left-0 h-[2px]
+                               bg-indigo-400
+                               transition-all duration-300 ease-out">
+                        </span>
                     </div>
+
+                    <section id="shows-section" class="tab-content space-y-6">
+                        <header class="flex items-center gap-6 py-2">
+                            <span class="flex-1 h-[2px] bg-gradient-to-r from-transparent to-red-600"></span>
+
+                            <h2 class="text-base font-medium text-gray-900  tracking-wide">
+                                Radio Shows
+                            </h2>
+
+                            <span class="flex-1 h-[2px] bg-gradient-to-l from-transparent to-red-600 "></span>
+                        </header>
+
+
+                        <div id="rj-programs" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                        <div id="rj-programs-empty"></div>
+
+                    </section>
+
+
+                    <section id="podcast-section" class="tab-content hidden space-y-6">
+                        <header class="flex items-center gap-6 py-2">
+                            <span class="flex-1 h-[2px] bg-gradient-to-r from-transparent to-red-600"></span>
+
+                            <h2 class="text-base font-medium text-gray-900  tracking-wide">
+                                Podcasts
+                            </h2>
+                            <span class="flex-1 h-[2px] bg-gradient-to-l from-transparent to-red-600 "></span>
+                        </header>
+
+                        <div id="rj-podcasts" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                        <div id="rj-podcasts-empty"></div>
+                    </section>
+
+
+                    <section id="news-section" class="tab-content hidden space-y-6">
+                        <header class="flex items-center gap-6 py-2">
+                            <span class="flex-1 h-[2px] bg-gradient-to-r from-transparent to-red-600"></span>
+
+                            <h2 class="text-base font-medium text-gray-900  tracking-wide">
+                                News
+                            </h2>
+                            <span class="flex-1 h-[2px] bg-gradient-to-l from-transparent to-red-600 "></span>
+                        </header>
+
+                        <div id="rj-news" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                        <div id="rj-news-empty"></div>
+                    </section>
+
+
+                    <section id="blogs-post" class="tab-content hidden space-y-6">
+                        <header class="flex items-center gap-6 py-2">
+                            <span class="flex-1 h-[2px] bg-gradient-to-r from-transparent to-red-600"></span>
+
+                            <h2 class="text-base font-medium text-gray-900  tracking-wide">
+                                Blogs
+                            </h2>
+                            <span class="flex-1 h-[2px] bg-gradient-to-l from-transparent to-red-600 "></span>
+                        </header>
+
+                        <div id="rj-blogs" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                        <div id="rj-blogs-empty"></div>
+
+                    </section>
+
 
                 </div>
 
             </div>
         </section>
+
 
         <?php include 'php/footer.php'; ?>
     </div>

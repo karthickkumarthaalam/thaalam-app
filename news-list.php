@@ -29,7 +29,7 @@
         <?php include 'php/newsHeader.php'; ?>
 
         <section class="bg-gray-200 border-b sticky top-[72px] z-40">
-            <div class="max-w-7xl mx-auto px-4 py-1">
+            <div class="max-w-5xl mx-auto px-4 py-1">
 
                 <div class="relative flex items-center">
 
@@ -67,7 +67,7 @@
         </section>
 
         <section class="bg-[#f8f9fb]">
-            <div class="max-w-7xl mx-auto px-4 py-10">
+            <div class="max-w-5xl mx-auto px-4 py-10">
                 <div id="news-grid">
 
                 </div>
@@ -76,23 +76,23 @@
                     <button
                         id="read-more-btn"
                         class="group hidden inline-flex items-center gap-3
-           px-8 py-3
-           text-sm font-semibold tracking-wide
-           text-gray-900
-           border border-gray-300
-           bg-white
-           hover:border-red-600 hover:text-red-600
-           transition-all duration-300">
+                           px-8 py-3
+                           text-sm font-semibold tracking-wide
+                           text-gray-900
+                           border border-gray-300
+                           bg-white
+                           hover:border-red-600 hover:text-red-600
+                           transition-all duration-300">
                         <span>Read more</span>
 
                         <!-- Arrow -->
                         <span
                             class="inline-flex items-center justify-center
-             w-7 h-7
-             border border-gray-300
-             rounded-full
-             group-hover:border-red-600
-             transition">
+                                 w-7 h-7
+                                 border border-gray-300
+                                 rounded-full
+                                 group-hover:border-red-600
+                                 transition">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 class="w-3 h-3"

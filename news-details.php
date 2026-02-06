@@ -121,7 +121,7 @@
                     class="border-b bg-[#fafafa]"
                     role="navigation"
                     aria-label="Breadcrumb">
-                    <div class="max-w-7xl mx-auto px-4 py-3">
+                    <div class="max-w-5xl mx-auto px-4 py-3">
                         <ol class="flex items-center gap-2 text-sm text-gray-500">
 
                             <li>
@@ -152,7 +152,7 @@
                 </nav>
 
 
-                <div class="max-w-7xl mx-auto px-4 py-10">
+                <div class="max-w-5xl mx-auto px-4 py-10">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
                         <article class="lg:col-span-8 bg-white  shadow-sm p-6 md:p-10">
