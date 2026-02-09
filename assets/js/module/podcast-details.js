@@ -654,9 +654,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-    fetch(`${API}/podcasts/${podcastId}/comments?page=${page}&limit=1000`, {
-      signal: controller.signal,
-    })
+    fetch(
+      `${API}/podcasts/${podcastId}/comments?page=${page}&limit=1000&status=approved`,
+      {
+        signal: controller.signal,
+      },
+    )
       .then((res) => res.json())
       .then((result) => {
         clearTimeout(timeoutId);

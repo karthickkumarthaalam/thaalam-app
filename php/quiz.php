@@ -1,478 +1,29 @@
-<section class="live-interaction">
-    <div class="container">
-        <!-- Section Heading -->
-        <div class="live-interaction__header" id="liveInteractionHeader">
-            <h2 class="live-interaction__title">
+<section class="bg-transparent">
+    <div class="max-w-[1200px] mx-auto">
+        <!-- Header -->
+        <div id="liveInteractionHeader"
+            class="text-center mt-12 mb-12 hidden">
+            <h2 class="text-[1.6rem] font-semibold text-slate-800 tracking-tight mb-3">
                 Live Program Interaction
             </h2>
-            <p class="live-interaction__subtitle">
+            <p class="text-slate-500 font-medium max-w-[500px] mx-auto leading-relaxed">
                 Vote & participate in the current show
             </p>
+            <div
+                class="w-20 h-1 mx-auto mt-5 rounded bg-gradient-to-r from-red-600 to-gray-100">
+            </div>
         </div>
-        <div id="quizList" class="quiz-list"></div>
+
+        <!-- Poll List -->
+        <div
+            id="quizList"
+            class="grid gap-8 justify-center
+             grid-cols-[repeat(auto-fit,minmax(400px,0.4fr))]
+             max-[480px]:grid-cols-1">
+        </div>
     </div>
 </section>
 
-<style>
-    /* ================= CLEAN MODERN POLL ================= */
-    .live-interaction {
-        background: transparent;
-        /* min-height: 100vh; */
-    }
-
-    .container {
-        max-width: 1200px;
-        /* padding: 2.8rem 1.2rem; */
-        margin: 0 auto;
-    }
-
-    .live-interaction__header {
-        text-align: center;
-        margin-top: 48px;
-        margin-bottom: 48px;
-        display: none;
-    }
-
-    .live-interaction__header::after {
-        content: "";
-        display: block;
-        width: 80px;
-        height: 4px;
-        margin: 20px auto 0;
-        background: linear-gradient(90deg, #f90000, #f9f9f9);
-        border-radius: 4px;
-    }
-
-    .live-interaction__title {
-        font-size: 1.6rem;
-        font-weight: 600;
-        color: #1e293b;
-        letter-spacing: -0.5px;
-        margin-bottom: 12px;
-    }
-
-    .live-interaction__subtitle {
-        font-size: 1rem;
-        color: #64748b;
-        font-weight: 500;
-        max-width: 500px;
-        margin: 0 auto;
-        line-height: 1.6;
-    }
-
-    /* ================= GRID ================= */
-    .quiz-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 0.4fr));
-        gap: 32px;
-        justify-content: center;
-    }
-
-    @media (max-width: 480px) {
-        .quiz-list {
-            grid-template-columns: w-full;
-        }
-    }
-
-    /* ================= CARD ================= */
-    .quiz-card {
-        background: #ffffff;
-        border-radius: 20px;
-        padding: 32px;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 10px 5px rgba(0, 0, 0, 0.05);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .quiz-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    /* ================= QUESTION ================= */
-    .quiz-question {
-        font-size: 18px;
-        font-weight: 600;
-        color: #1e293b;
-        line-height: 1.6;
-        margin: 0 0 28px 0;
-        padding-right: 0;
-    }
-
-    /* ================= OPTIONS ================= */
-    .quiz-options {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 28px 0;
-    }
-
-    .quiz-options li {
-        margin-bottom: 16px;
-    }
-
-    .quiz-options label {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 18px 20px;
-        border-radius: 12px;
-        background: #f8fafc;
-        border: 2px solid #e2e8f0;
-        cursor: pointer;
-        font-size: 15px;
-        font-weight: 500;
-        color: #475569;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.2s ease;
-    }
-
-    .quiz-options label:hover {
-        background: #f1f5f9;
-        border-color: #cbd5e1;
-        transform: translateX(4px);
-    }
-
-    .quiz-options label.selected {
-        background: #edf8ff;
-        border-color: #2aafec;
-        color: #0369a1;
-    }
-
-    .quiz-options input {
-        accent-color: #3b82f6;
-        transform: scale(1.2);
-        cursor: pointer;
-    }
-
-    .quiz-options input:checked+span {
-        font-weight: 600;
-        color: #1e293b;
-    }
-
-    /* ================= FEEDBACK SECTION ================= */
-    .feedback-section {
-        margin-top: 28px;
-        padding: 16px;
-        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-        border-radius: 16px;
-        border: 2px solid #bae6fd;
-        animation: slideIn 0.4s ease;
-    }
-
-    .feedback-section.hidden {
-        display: none;
-    }
-
-    .feedback-text::before {
-        content: "💡";
-        font-size: 16px;
-    }
-
-    .feedback-text {
-        font-size: 0.8rem;
-        color: #0c4a6e;
-        line-height: 1.7;
-        margin: 0;
-    }
-
-    /* ================= USER FEEDBACK INPUT ================= */
-    .user-feedback-section {
-        margin-top: 32px;
-        padding-top: 32px;
-        border-top: 2px dashed #cbd5e1;
-    }
-
-    .user-feedback-section.hidden {
-        display: none;
-    }
-
-    .user-feedback-title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .user-feedback-title::before {
-        content: "💬";
-        font-size: 16px;
-    }
-
-    .feedback-textarea-container {
-        position: relative;
-        margin-bottom: 15px;
-    }
-
-    .feedback-textarea {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid #cbd5e1;
-        border-radius: 12px;
-        font-size: 15px;
-        color: #1e293b;
-        background: #ffffff;
-        resize: vertical;
-        min-height: 120px;
-        font-family: inherit;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .feedback-textarea:focus {
-        outline: none;
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-    }
-
-    .feedback-textarea::placeholder {
-        color: #94a3b8;
-        font-style: italic;
-    }
-
-    .char-counter {
-        position: absolute;
-        bottom: 10px;
-        right: 15px;
-        font-size: 12px;
-        color: #64748b;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 2px 8px;
-        border-radius: 10px;
-    }
-
-    .feedback-actions {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-
-    .feedback-submit {
-        flex: 1;
-        min-width: 200px;
-        padding: 12px 16px;
-        border-radius: 12px;
-        border: none;
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        color: #ffffff;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-    }
-
-    .feedback-submit:hover:not(:disabled) {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-    }
-
-    .feedback-submit:active:not(:disabled) {
-        transform: translateY(0);
-    }
-
-    .feedback-submit:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none !important;
-        box-shadow: none !important;
-    }
-
-    .whatsapp-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 12px 16px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-        color: white;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-        border: none;
-        cursor: pointer;
-    }
-
-    .whatsapp-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-    }
-
-    .whatsapp-btn:active {
-        transform: translateY(0);
-    }
-
-    .feedback-success {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 20px;
-        background: rgba(34, 197, 94, 0.1);
-        border-radius: 12px;
-        border: 2px solid #16a34a;
-        color: #166534;
-        font-size: 15px;
-        font-weight: 600;
-        animation: fadeIn 0.5s ease;
-        margin-top: 20px;
-    }
-
-    .feedback-success::before {
-        content: "🎉";
-        font-size: 20px;
-    }
-
-    /* ================= SUBMIT BUTTON ================= */
-    .quiz-submit {
-        width: 100%;
-        padding: 18px;
-        border-radius: 12px;
-        border: none;
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        color: #ffffff;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .quiz-submit::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.6s ease;
-    }
-
-    .quiz-submit:hover:not(:disabled) {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    }
-
-    .quiz-submit:hover:not(:disabled)::after {
-        left: 100%;
-    }
-
-    .quiz-submit:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none !important;
-        box-shadow: none !important;
-    }
-
-    .quiz-submit:disabled::after {
-        display: none;
-    }
-
-    /* ================= UTILITY ================= */
-    .hidden {
-        display: none !important;
-    }
-
-    /* ================= ANIMATIONS ================= */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes pulse {
-
-        0%,
-        100% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0.7;
-        }
-    }
-
-    /* ================= RESPONSIVE ================= */
-    @media (max-width: 768px) {
-        .live-interaction {
-            padding: 40px 16px;
-        }
-
-        .live-interaction__title {
-            font-size: 28px;
-        }
-
-        .quiz-list {
-            gap: 24px;
-        }
-
-        .quiz-card {
-            padding: 24px;
-        }
-
-        .quiz-question {
-            font-size: 17px;
-            padding-right: 0;
-        }
-
-        .feedback-actions {
-            flex-direction: column;
-        }
-
-        .feedback-submit,
-        .whatsapp-btn {
-            width: 100%;
-            min-width: auto;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .live-interaction__title {
-            font-size: 24px;
-        }
-
-        .quiz-card {
-            padding: 20px;
-        }
-
-        .quiz-question {
-            font-size: 16px;
-            padding-right: 0;
-        }
-
-        .quiz-options label {
-            padding: 16px;
-        }
-    }
-</style>
 
 <!-- Include SweetAlert2 CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -726,83 +277,136 @@
         }
     }
 
+    function pollCardTemplate(poll) {
+        const showFeedback = poll.enable_feedback;
+        const showWhatsApp = poll.enable_whatsapp && poll.whatsapp_number;
+
+        return `
+  <div class="bg-white rounded-2xl p-8 border border-slate-200
+              shadow-[0_10px_5px_rgba(0,0,0,0.05)]
+              transition hover:-translate-y-1 hover:shadow-xl">
+
+    <h3 class="text-lg font-semibold text-slate-800 mb-7 leading-relaxed">
+      ${poll.question}
+    </h3>
+
+    <form data-quiz-id="${poll.id}" class="space-y-7">
+
+      <!-- OPTIONS -->
+      <ul class="quiz-options space-y-4 transition-all">
+        ${poll.options.map(opt => `
+          <li>
+            <label
+              class="flex items-center gap-4 p-3 rounded-xl
+                     bg-slate-50 border-2 border-slate-200
+                     cursor-pointer text-sm font-medium text-slate-600
+                     transition hover:bg-slate-100 hover:border-slate-300
+                     hover:translate-x-1">
+
+              <input type="radio"
+                     name="poll-${poll.id}"
+                     value="${opt.id}"
+                     class="scale-125 accent-blue-500" />
+
+              <span>${opt.option_text}</span>
+            </label>
+          </li>
+        `).join("")}
+      </ul>
+
+      <!-- SUBMIT -->
+      <button
+        type="submit"
+        class="quiz-submit w-full py-4 rounded-xl
+               bg-gradient-to-br from-slate-800 to-slate-950
+               text-white font-semibold shadow-md
+               transition hover:-translate-y-1 hover:shadow-xl">
+        Submit Vote
+      </button>
+
+      <!-- FEEDBACK -->
+      <div class="feedback-section hidden mt-7 p-4 rounded-xl
+                  bg-gradient-to-br from-sky-50 to-sky-100
+                  border-2 border-sky-200 animate-[slideIn_0.4s_ease]">
+        <p class="text-xs text-sky-900 leading-relaxed">
+          <span class="mr-1">💡</span>
+          <span class="feedback-text"></span>
+        </p>
+      </div>
+
+      ${showFeedback ? feedbackTemplate(showWhatsApp) : ""}
+    </form>
+  </div>
+  `;
+    }
+
+    function feedbackTemplate(showWhatsApp) {
+        return `
+  <div class="user-feedback-section hidden mt-8 pt-8 border-t-2 border-dashed border-slate-300">
+
+    <h4 class="flex items-center gap-3 font-semibold text-slate-800 mb-3">
+      💬 Share Your Thoughts
+    </h4>
+
+    <div class="relative mb-4">
+      <textarea
+        maxlength="500"
+        placeholder="What did you think about this poll?"
+        class="feedback-textarea w-full min-h-[120px] p-3
+               border-2 border-slate-300 rounded-xl
+               text-sm text-slate-800 resize-y
+               shadow focus:outline-none focus:border-blue-500
+               focus:ring-4 focus:ring-blue-500/20"></textarea>
+
+      <div class="char-counter absolute bottom-2 right-3
+                  text-xs text-slate-500 bg-white/90 px-2 rounded-full">
+        0/500
+      </div>
+    </div>
+
+    <div class="flex gap-4 flex-wrap">
+      <button
+        type="button"
+        class="feedback-submit flex-1 min-w-[200px] py-3 rounded-xl
+               bg-gradient-to-br from-blue-500 to-blue-700
+               text-white font-semibold shadow
+               transition hover:-translate-y-1 hover:shadow-lg">
+        Submit Feedback
+      </button>
+
+      ${
+        showWhatsApp
+          ? `<button type="button"
+                class="whatsapp-btn flex items-center gap-2
+                       py-3 px-4 rounded-xl bg-gradient-to-br
+                       from-green-500 to-green-700
+                       text-white font-semibold shadow
+                       transition hover:-translate-y-1 hover:shadow-lg">
+                    <i class="fab fa-whatsapp"></i>
+                       </button>`
+          : ""
+      }
+    </div>
+
+    <div class="feedback-success hidden mt-5 flex items-center gap-3
+                p-5 rounded-xl border-2 border-green-600
+                bg-green-100 text-green-800 font-semibold">
+      🎉 Thank you for your feedback!
+    </div>
+
+  </div>
+  `;
+    }
+
+
+
     /* ---------- RENDER POLLS ---------- */
     function renderPolls() {
         const list = document.getElementById("quizList");
         if (!list) return;
 
         list.innerHTML = polls.map((poll) => {
-            const showFeedbackSection = poll.enable_feedback;
-            const showWhatsAppBtn = poll.enable_whatsapp && poll.whatsapp_number;
-
-            return `
-            <div class="quiz-card" data-poll-id="${poll.id}">
-                <h3 class="quiz-question">${poll.question}</h3>
-
-                <form data-quiz-id="${poll.id}" class="quiz-form">
-                    <ul class="quiz-options">
-                        ${poll.options
-                            .map(
-                                (opt) => `
-                            <li>
-                                <label data-option-id="${opt.id}">
-                                    <input 
-                                        type="radio" 
-                                        name="poll-${poll.id}" 
-                                        value="${opt.id}"
-                                    >
-                                    <span>${opt.option_text}</span>
-                                </label>
-                            </li>`
-                            )
-                            .join("")}
-                    </ul>
-
-                    <button type="submit" class="quiz-submit">
-                        Submit Vote
-                    </button>
-
-                    <!-- Vote Acknowledgement / Poll Result -->
-                    <div class="feedback-section hidden">
-                        <div class="feedback-text"></div>
-                    </div>
-
-                    <!-- Optional Viewer Feedback -->
-                    ${showFeedbackSection ? `
-                    <div class="user-feedback-section hidden">
-                        <div class="user-feedback-title">
-                            Share Your Thoughts
-                        </div>
-
-                        <div class="feedback-textarea-container">
-                            <textarea 
-                                class="feedback-textarea"
-                                placeholder="What did you think about this poll? Share your opinion..."
-                                maxlength="500"
-                            ></textarea>
-                            <div class="char-counter">0/500</div>
-                        </div>
-
-                        <div class="feedback-actions">
-                            <button type="button" class="feedback-submit">
-                                Submit Feedback
-                            </button>
-
-                            ${showWhatsAppBtn ? `
-                            <button type="button" class="whatsapp-btn">
-                                <i class="fab fa-whatsapp"></i> Share as voice note
-                            </button>
-                            ` : ''}
-                        </div>
-
-                        <div class="feedback-success hidden">
-                            Thank you for your feedback! We appreciate your input.
-                        </div>
-                    </div>
-                    ` : ''}
-                </form>
-            </div>
-            `;
+            return pollCardTemplate(poll);
         }).join('');
 
         // Initialize saved votes and setup event listeners
@@ -829,11 +433,11 @@
             const label = optionInput.closest('label');
             if (label) label.classList.add('selected');
 
-            // Disable inputs
-            const inputs = form.querySelectorAll("input");
+            const optionsList = form.querySelector(".quiz-options");
             const submitBtn = form.querySelector(".quiz-submit");
-            inputs.forEach(input => input.disabled = true);
-            if (submitBtn) submitBtn.disabled = true;
+
+            if (optionsList) optionsList.classList.add("hidden");
+            if (submitBtn) submitBtn.classList.add("hidden");
 
             // Show feedback
             showFeedback(form, pollId, optionId);
@@ -921,7 +525,8 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            answer_text: feedbackText
+                            answer_text: feedbackText,
+                            device_id: getDeviceId()
                         })
                     }
                 );
@@ -961,6 +566,10 @@
 
     /* ---------- SUBMIT HANDLER ---------- */
     function setupSubmitHandler() {
+        if (submitHandler) {
+            document.removeEventListener("submit", submitHandler);
+        }
+
         submitHandler = async function(e) {
             const form = e.target;
             if (!form.dataset.quizId) return;
@@ -999,7 +608,8 @@
                     },
                     body: JSON.stringify({
                         question_id: pollId,
-                        option_id: optionId
+                        option_id: optionId,
+                        device_id: getDeviceId(),
                     })
                 });
 
@@ -1010,10 +620,12 @@
 
                 StorageManager.saveVote(currentProgramId, pollId, optionId);
 
-                const inputs = form.querySelectorAll("input");
+                const optionsList = form.querySelector(".quiz-options");
                 const submitBtn = form.querySelector(".quiz-submit");
-                inputs.forEach(input => input.disabled = true);
-                if (submitBtn) submitBtn.disabled = true;
+
+                if (optionsList) optionsList.classList.add("hidden");
+                if (submitBtn) submitBtn.classList.add("hidden");
+
 
                 // Show poll feedback
                 showFeedback(form, pollId, optionId);

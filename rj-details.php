@@ -108,7 +108,41 @@
                                 <p
                                     id="rj-description"
                                     class=" max-w-3xl text-gray-400 leading-relaxed"></p>
+
+                                <div class="mt-3 flex items-center gap-4">
+
+                                    <a href="#" aria-label="whatsapp"
+                                        class="text-green-600 hover:scale-110 transition">
+                                        <i class="fab fa-whatsapp text-lg"></i>
+                                    </a>
+
+                                    <a href="#" aria-label="Instagram"
+                                        class="text-pink-600 hover:scale-110 transition">
+                                        <i class="fab fa-instagram text-lg"></i>
+                                    </a>
+
+                                    <a href="#" aria-label="Facebook"
+                                        class="text-blue-600 hover:scale-110 transition">
+                                        <i class="fab fa-facebook-f text-lg"></i>
+                                    </a>
+
+                                    <a href="#"
+                                        aria-label="X (Twitter)"
+                                        class="inline-flex items-center hover:scale-110 transition">
+
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            class="w-5 h-5 fill-black"
+                                            xmlns="http://www.w3.org/2000/svg">
+
+                                            <path d="M18.244 2H21.552L14.078 10.524L22.888 22H16.032L10.654 15.107L4.621 22H1.311L9.308 12.862L0.888 2H7.916L12.772 8.278L18.244 2ZM17.081 20.07H18.915L6.92 3.828H4.954L17.081 20.07Z" />
+                                        </svg>
+
+                                    </a>
+
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -131,14 +165,14 @@
 
                                 <button
                                     class="tab-btn active relative pb-3
-             text-sm font-semibold text-red-600 "
+             text-base font-semibold text-red-600 "
                                     data-target="shows-section">
                                     Shows
                                 </button>
 
                                 <button
                                     class="tab-btn relative pb-3
-             text-sm font-medium text-gray-500
+             text-base font-medium text-gray-500
              hover:text-gray-900 transition "
                                     data-target="podcast-section">
                                     Podcasts
@@ -146,7 +180,7 @@
 
                                 <button
                                     class="tab-btn relative pb-3
-             text-sm font-medium text-gray-500
+             text-base font-medium text-gray-500
              hover:text-gray-900 transition "
                                     data-target="news-section">
                                     News
@@ -154,7 +188,7 @@
 
                                 <button
                                     class="tab-btn relative pb-3
-             text-sm font-medium text-gray-500
+             text-base font-medium text-gray-500
              hover:text-gray-900 transition "
                                     data-target="blogs-post">
                                     Blogs
@@ -190,7 +224,7 @@
                         </header>
 
 
-                        <div id="rj-programs" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                        <div id="rj-programs" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center"></div>
                         <div id="rj-programs-empty"></div>
 
                     </section>
@@ -206,7 +240,7 @@
                             <span class="flex-1 h-[2px] bg-gradient-to-l from-transparent to-red-600 "></span>
                         </header>
 
-                        <div id="rj-podcasts" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                        <div id="rj-podcasts" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center"></div>
                         <div id="rj-podcasts-empty"></div>
                     </section>
 
@@ -221,7 +255,7 @@
                             <span class="flex-1 h-[2px] bg-gradient-to-l from-transparent to-red-600 "></span>
                         </header>
 
-                        <div id="rj-news" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                        <div id="rj-news" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center"></div>
                         <div id="rj-news-empty"></div>
                     </section>
 
@@ -236,7 +270,7 @@
                             <span class="flex-1 h-[2px] bg-gradient-to-l from-transparent to-red-600 "></span>
                         </header>
 
-                        <div id="rj-blogs" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                        <div id="rj-blogs" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center"></div>
                         <div id="rj-blogs-empty"></div>
 
                     </section>

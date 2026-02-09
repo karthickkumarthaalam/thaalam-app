@@ -17,3 +17,22 @@ function getGuestId() {
   localStorage.setItem("guest_id", finalId);
   return finalId;
 }
+
+function getDeviceId() {
+  const KEY = "radio_device_id";
+
+  let deviceId = localStorage.getItem(KEY);
+
+  if (!deviceId) {
+    if (crypto && crypto.randomUUID) {
+      deviceId = crypto.randomUUID();
+    } else {
+      deviceId =
+        Date.now().toString(36) + Math.random().toString(36).substring(2, 10);
+    }
+
+    localStorage.setItem(KEY, deviceId);
+  }
+
+  return deviceId;
+}

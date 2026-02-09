@@ -47,7 +47,23 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderPrograms(programs = []) {
     const el = document.getElementById("rj-programs");
     const emptyel = document.getElementById("rj-programs-empty");
-    if (!programs.length) return (emptyel.innerHTML = empty("No radio shows"));
+
+    if (!programs.length) {
+      el.innerHTML = "";
+      emptyel.innerHTML = empty("No radio shows");
+      return;
+    }
+
+    // 🔑 Dynamic grid layout
+    el.classList.remove("sm:grid-cols-2", "lg:grid-cols-3");
+    if (programs.length === 1) {
+      el.classList.add("grid-cols-1");
+    } else if (programs.length === 2) {
+      el.classList.remove("lg:grid-cols-3");
+      el.classList.add("lg:grid-cols-2");
+    } else {
+      el.classList.add("sm:grid-cols-2", "lg:grid-cols-3");
+    }
 
     el.innerHTML = programs
       .map((p) => {
@@ -56,28 +72,26 @@ document.addEventListener("DOMContentLoaded", () => {
           pc.image_url || "/assets/images/site-images/default-banner.jpg";
 
         return `
-      <div
-        class="group relative bg-white rounded-xl border border-gray-100
-               overflow-hidden transition
-               hover:-translate-y-1 hover:shadow-lg">
+        <div class="w-full max-w-sm group relative bg-white rounded-xl
+                    border border-gray-100 overflow-hidden transition
+                    hover:-translate-y-1 hover:shadow-lg">
+          <div class="relative h-40 overflow-hidden">
+            <img src="${img}"
+                 class="w-full h-full object-cover
+                        group-hover:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+          </div>
 
-        <div class="relative h-40 overflow-hidden">
-          <img src="${img}"
-               class="w-full h-full object-cover
-                      group-hover:scale-105 transition-transform duration-300">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+          <div class="p-4 space-y-1">
+            <h4 class="font-semibold text-gray-900">
+              ${pc.category || "Unnamed Show"}
+            </h4>
+            <p class="text-sm text-gray-500">
+              ${pc.start_time?.slice(0, 5) || "N/A"} – ${pc.end_time?.slice(0, 5) || "N/A"}
+            </p>
+          </div>
         </div>
-
-        <div class="p-4 space-y-1">
-          <h4 class="font-semibold text-gray-900">
-            ${pc.category || "Unnamed Show"}
-          </h4>
-          <p class="text-sm text-gray-500">
-            ${pc.start_time?.slice(0, 5) || "N/A"} – ${pc.end_time?.slice(0, 5) || "N/A"}
-          </p>
-        </div>
-      </div>
-    `;
+      `;
       })
       .join("");
   }
@@ -127,10 +141,23 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
   }
 
+  function applyCenteredGrid(el, itemsLength) {
+    el.classList.remove("lg:grid-cols-2", "lg:grid-cols-3");
+
+    if (itemsLength === 1) {
+      el.classList.add("lg:grid-cols-1");
+    } else if (itemsLength === 2) {
+      el.classList.add("lg:grid-cols-2");
+    } else {
+      el.classList.add("lg:grid-cols-3");
+    }
+  }
+
   function renderNews(news = []) {
     const el = document.getElementById("rj-news");
     const emptyel = document.getElementById("rj-news-empty");
     if (!news.length) return (emptyel.innerHTML = empty("No news available"));
+    applyCenteredGrid(el, news.length);
 
     el.innerHTML = news
       .map((n) =>
@@ -147,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const el = document.getElementById("rj-blogs");
     const emptyel = document.getElementById("rj-blogs-empty");
     if (!blogs.length) return (emptyel.innerHTML = empty("No blogs available"));
+    applyCenteredGrid(el, blogs.length);
 
     el.innerHTML = blogs
       .map((b) =>
@@ -164,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const emptyel = document.getElementById("rj-podcasts-empty");
     if (!podcasts.length)
       return (emptyel.innerHTML = empty("No podcasts available"));
+    applyCenteredGrid(el, podcasts.length);
 
     el.innerHTML = podcasts
       .map((p) =>

@@ -52,10 +52,6 @@ bg-gradient-to-br from-white via-slate-50 to-neutral-100/60
          hover:shadow-2xl hover:-translate-y-1.5
          hover:border-red-200
          overflow-hidden flex items-center justify-center">
-              <div class="absolute top-0 left-0 h-[2px] w-full overflow-hidden bg-gradient-to-r from-transparent via-indigo-500 to-transparent"></div>
-
- <div class="absolute bottom-0 left-0 h-[2px] w-full overflow-hidden bg-gradient-to-r from-transparent via-indigo-500 to-transparent"></div>
-
 
     <div class="flex flex-col items-center w-full  px-8 pb-4 pt-8">
 
@@ -78,9 +74,38 @@ bg-gradient-to-br from-white via-slate-50 to-neutral-100/60
       </h3>
 
       <!-- Role -->
-      <p class="mt-2 text-sm text-sky-700 px-3 py-2  rounded-3xl bg-blue-50 border border-sky-500">
-        Radio Host
-      </p>
+    <div class="mt-3 flex items-center gap-4">
+
+          <a href="#" aria-label="whatsapp"
+            class="text-green-600 hover:scale-110 transition">
+            <i class="fab fa-whatsapp text-lg"></i>
+            </a>
+
+        <a href="#" aria-label="Instagram"
+           class="text-pink-600 hover:scale-110 transition">
+          <i class="fab fa-instagram text-lg"></i>
+        </a>
+
+        <a href="#" aria-label="Facebook"
+           class="text-blue-600 hover:scale-110 transition">
+          <i class="fab fa-facebook-f text-lg"></i>
+        </a>
+
+       <a href="#"
+         aria-label="X (Twitter)"
+         class="inline-flex items-center hover:scale-110 transition">
+
+        <svg
+          viewBox="0 0 24 24"
+          class="w-5 h-5 fill-black"
+          xmlns="http://www.w3.org/2000/svg">
+
+          <path d="M18.244 2H21.552L14.078 10.524L22.888 22H16.032L10.654 15.107L4.621 22H1.311L9.308 12.862L0.888 2H7.916L12.772 8.278L18.244 2ZM17.081 20.07H18.915L6.92 3.828H4.954L17.081 20.07Z"/>
+        </svg>
+
+      </a>
+
+    </div>
 
       ${showsHTML}
 

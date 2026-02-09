@@ -249,7 +249,7 @@
 
                             <div class="container mx-auto p-0 px-3">
                                 <div class="flex justify-center items-center">
-                                    <div class="w-full relative
+                                    <div class="w-full max-w-xl relative
                                                      bg-white/25
                                                      backdrop-blur-xl
                                                      shadow-[0_25px_60px_rgba(0,0,0,0.1)]
@@ -275,7 +275,7 @@
                                                             src="assets/img/logo/thalam-logo.png"
                                                             alt="Thaalam Live"
                                                             class="w-32 h-32 
-                                                               rounded-xl object-contain" />
+                                                               rounded-xl object-contain border border-gray-900" />
 
                                                         <div class="flex flex-col  leading-tight">
 
