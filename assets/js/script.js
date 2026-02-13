@@ -51,7 +51,7 @@
             event.strftime("%M") +
             '</span> <span class="timeRef clr-2">mins</span> </div> </li> <li> <div class="box"> <span class="seconds">' +
             event.strftime("%S") +
-            '</span> <span class="timeRef clr-3">secs</span> </div> </li>'
+            '</span> <span class="timeRef clr-3">secs</span> </div> </li>',
         );
       });
     });
@@ -78,10 +78,10 @@
         },
       });
       $(".price-ranger .ranger-min-max-block .min").val(
-        "$" + $(".price-ranger #slider-range").slider("values", 0)
+        "$" + $(".price-ranger #slider-range").slider("values", 0),
       );
       $(".price-ranger .ranger-min-max-block .max").val(
-        "$" + $(".price-ranger #slider-range").slider("values", 1)
+        "$" + $(".price-ranger #slider-range").slider("values", 1),
       );
     }
   }
@@ -664,7 +664,7 @@
       },
       {
         accY: -50,
-      }
+      },
     );
   }
 
@@ -693,13 +693,13 @@
               complete: function () {
                 $t.find(".count-text").text(this.countNum);
               },
-            }
+            },
           );
         }
       },
       {
         accY: 0,
-      }
+      },
     );
   }
 
@@ -763,7 +763,7 @@
               $(form).find('input[type="text"]').val("");
               $(form).find('input[type="email"]').val("");
               $(form).find("textarea").val("");
-            }
+            },
           );
           return false;
         },
@@ -875,7 +875,7 @@
   }
   if ($(".stricky-header__content").length) {
     let navContent = document.querySelector(
-      ".main-menu-two__wrapper-inside"
+      ".main-menu-two__wrapper-inside",
     ).innerHTML;
     let mobileNavContainer = document.querySelector(".stricky-header__content");
     mobileNavContainer.innerHTML = navContent;
@@ -883,7 +883,7 @@
 
   if ($(".mobile-nav__container .main-menu__list").length) {
     let dropdownAnchor = $(
-      ".mobile-nav__container .main-menu__list .dropdown > a"
+      ".mobile-nav__container .main-menu__list .dropdown > a",
     );
     dropdownAnchor.each(function () {
       let self = $(this);
@@ -1093,7 +1093,7 @@
     if ($(".post-filter.has-dynamic-filters-counter").length) {
       // var allItem = $('.single-filter-item').length;
       var activeFilterItem = $(".post-filter.has-dynamic-filters-counter").find(
-        "li"
+        "li",
       );
       activeFilterItem.each(function () {
         var filterElement = $(this).data("filter");
@@ -1122,7 +1122,7 @@
               scrollTop: $(target.attr("href")).offset().top - headerH + "px",
             },
             200,
-            "easeInOutExpo"
+            "easeInOutExpo",
           );
         anchor.removeClass("current");
         anchor.removeClass("current-menu-ancestor");
@@ -1185,7 +1185,7 @@
       return;
     }
     const quotes = document.querySelectorAll(
-      ".sec-title-animation .title-animation"
+      ".sec-title-animation .title-animation",
     );
 
     quotes.forEach((quote) => {
@@ -1283,7 +1283,7 @@
       // var allItem = $('.single-filter-item').length;
 
       var activeFilterItem = $(".post-filter.has-dynamic-filter-counter").find(
-        "li"
+        "li",
       );
 
       activeFilterItem.each(function () {

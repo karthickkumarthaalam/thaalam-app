@@ -137,7 +137,7 @@
                 <div class="col-xl-12">
                     <div class="site-footer__bottom-inner">
                         <div class="site-footer__copyright">
-                            <p class="site-footer__copyright-text">Copyright © 2025 <a href="#">Thaalam media GmbH</a>.
+                            <p class="site-footer__copyright-text">Copyright © <span id="copyright-year"></span> <a href="#">Thaalam media GmbH</a>.
                                 All
                                 Rights Reserved</p>
                         </div>
@@ -146,5 +146,8 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById("copyright-year").textContent = new Date().getFullYear();
+    </script>
 </footer>
 <!--Site Footer End-->
