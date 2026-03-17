@@ -88,61 +88,104 @@
 
             <div id="rj-content" class="hidden ">
 
-                <div
-                    class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 backdrop-blur-xl">
-                    <div class="w-full max-w-5xl mx-auto">
-                        <div class="relative overflow-hidden flex flex-col md:flex-row items-center gap-8  p-10">
-                            <div
-                                class="relative w-44 h-44 shrink-0 rounded-md overflow-hidden  shadow-lg">
-                                <img
-                                    id="rj-image"
-                                    class="w-full h-full object-contain"
-                                    alt="RJ Profile" />
+                <!-- Hero Banner -->
+                <div class="relative overflow-hidden ">
+
+                    <!-- Background rings -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                        <div class="w-[500px] h-[500px] rounded-full border border-green-900 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+                        <div class="w-[380px] h-[380px] rounded-full border border-red-900 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" style="animation-delay:0.5s"></div>
+                        <div class="w-[260px] h-[260px] rounded-full border border-gray-900 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" style="animation-delay:1s"></div>
+                    </div>
+
+                    <!-- Red glow blob -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 bg-red-600 rounded-full blur-3xl opacity-10 pointer-events-none"></div>
+
+                    <div class="relative w-full max-w-5xl mx-auto px-6 py-14">
+                        <div class="flex flex-col items-center gap-12">
+
+                            <!-- Avatar with rings -->
+                            <div class="relative shrink-0 flex items-center justify-center">
+
+                                <!-- Outer pulsing ring -->
+                                <div class="absolute w-60 h-60 rounded-full border border-red-500/30 animate-pulse"></div>
+
+                                <!-- Spinning dashed ring -->
+                                <div class="absolute w-54 h-54 rounded-full border-2 border-dashed border-white/10 animate-spin" style="width:216px;height:216px;animation-duration:10s;"></div>
+
+                                <!-- Solid ring -->
+                                <div class="absolute w-52 h-52 rounded-full border border-red-500/40"></div>
+
+                                <!-- Avatar -->
+                                <div class="relative w-44 h-44 rounded-full overflow-hidden ring-4 ring-red-500 shadow-[0_0_40px_rgba(239,68,68,0.3)] z-10">
+                                    <img
+                                        id="rj-image"
+                                        class="w-full h-full object-cover object-top"
+                                        alt="RJ Profile" />
+                                </div>
+
+                                <!-- On Air badge -->
+                                <span class="absolute -bottom-1 z-20 flex items-center gap-1.5 bg-red-500
+                                             text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg shadow-red-500/40">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                    ON AIR
+                                </span>
                             </div>
 
-                            <div class="relative flex flex-col items-center justify-center md:items-start space-y-3">
-                                <h1
-                                    id="rj-name"
-                                    class="text-xl md:text-2xl text-gray-200 font-bold  tracking-tight"></h1>
+                            <!-- Info -->
+                            <div class="flex flex-col items-center  text-center  gap-4">
 
-                                <p
-                                    id="rj-description"
-                                    class=" max-w-3xl text-gray-400 leading-relaxed"></p>
+                                <span class="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30
+                                             text-red-400 text-xs font-bold uppercase tracking-[0.2em]
+                                             px-4 py-1.5 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+                                    Radio Jockey
+                                </span>
 
-                                <div class="mt-3 flex items-center gap-4">
+                                <h1 id="rj-name"
+                                    class="text-2xl md:text-3xl font-semibold text-gray-950 "></h1>
 
-                                    <a href="#" aria-label="whatsapp"
-                                        class="text-green-600 hover:scale-110 transition">
-                                        <i class="fab fa-whatsapp text-lg"></i>
+                                <!-- Red divider -->
+                                <div class="w-12 h-0.5 bg-red-500 rounded-full"></div>
+
+                                <p id="rj-description"
+                                    class="max-w-xl text-gray-400 text-sm leading-relaxed"></p>
+
+                                <!-- Socials -->
+                                <div class="flex items-center gap-3 mt-1">
+                                    <a href="#" aria-label="WhatsApp"
+                                        class="w-10 h-10 rounded-full border border-white/10 bg-white/5
+                                              flex items-center justify-center text-gray-400
+                                              hover:bg-green-500 hover:border-green-500 hover:text-white
+                                              transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-500/30">
+                                        <i class="fab fa-whatsapp"></i>
                                     </a>
-
                                     <a href="#" aria-label="Instagram"
-                                        class="text-pink-600 hover:scale-110 transition">
-                                        <i class="fab fa-instagram text-lg"></i>
+                                        class="w-10 h-10 rounded-full border border-white/10 bg-white/5
+                                              flex items-center justify-center text-gray-400
+                                              hover:bg-pink-500 hover:border-pink-500 hover:text-white
+                                              transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-500/30">
+                                        <i class="fab fa-instagram"></i>
                                     </a>
-
                                     <a href="#" aria-label="Facebook"
-                                        class="text-blue-600 hover:scale-110 transition">
-                                        <i class="fab fa-facebook-f text-lg"></i>
+                                        class="w-10 h-10 rounded-full border border-white/10 bg-white/5
+                                              flex items-center justify-center text-gray-400
+                                              hover:bg-blue-600 hover:border-blue-600 hover:text-white
+                                              transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/30">
+                                        <i class="fab fa-facebook-f"></i>
                                     </a>
-
-                                    <a href="#"
-                                        aria-label="X (Twitter)"
-                                        class="inline-flex items-center hover:scale-110 transition">
-
-                                        <svg
-                                            viewBox="0 0 24 24"
-                                            class="w-5 h-5 fill-black"
-                                            xmlns="http://www.w3.org/2000/svg">
-
+                                    <a href="#" aria-label="X (Twitter)"
+                                        class="w-10 h-10 rounded-full border border-white/10 bg-white/5
+                                              flex items-center justify-center text-gray-400
+                                              hover:bg-white hover:border-white hover:text-black
+                                              transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-white/20">
+                                        <svg viewBox="0 0 24 24" class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M18.244 2H21.552L14.078 10.524L22.888 22H16.032L10.654 15.107L4.621 22H1.311L9.308 12.862L0.888 2H7.916L12.772 8.278L18.244 2ZM17.081 20.07H18.915L6.92 3.828H4.954L17.081 20.07Z" />
                                         </svg>
-
                                     </a>
-
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
