@@ -192,6 +192,16 @@
                 background-position: 0 0;
             }
         }
+
+        @keyframes tickerScroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
     </style>
 
 </head>
@@ -249,7 +259,7 @@
 
                             <div class="container mx-auto p-0 px-3">
                                 <div class="flex justify-center items-center">
-                                    <div class="w-full max-w-xl relative
+                                    <div class="w-full max-w-4xl relative
                                                      bg-white/25
                                                      backdrop-blur-xl
                                                      shadow-[0_25px_60px_rgba(0,0,0,0.1)]
@@ -339,6 +349,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div id="flash-news-bar" class="my-2"></div>
                                     </div>
                                 </div>
 
