@@ -70,9 +70,51 @@ async function fetchEventDetails(slug) {
     });
     requestIdleCallback(() => renderContactDetails(data.id), { timeout: 200 });
     requestIdleCallback(() => renderHeaderContact(data.id), { timeout: 200 });
+
+    // Store event data globally for use in renderHero
+    window.eventData = data;
   } catch (e) {
     if (e.name !== "AbortError") renderError();
   }
+}
+
+function injectTicketEmbed(embedCode) {
+  if (!embedCode) return;
+
+  const temp = document.createElement("div");
+  temp.innerHTML = embedCode;
+
+  const scripts = temp.querySelectorAll("script");
+  const links = temp.querySelectorAll("link");
+
+  // ✅ Inject CSS into HEAD
+  links.forEach((link) => {
+    const href = link.href;
+    if (!document.querySelector(`link[href="${href}"]`)) {
+      const newLink = document.createElement("link");
+      newLink.rel = "stylesheet";
+      newLink.href = href;
+      document.head.appendChild(newLink);
+    }
+  });
+
+  // ✅ Inject Scripts
+  scripts.forEach((script) => {
+    if (script.src) {
+      // external script
+      if (!document.querySelector(`script[src="${script.src}"]`)) {
+        const newScript = document.createElement("script");
+        newScript.src = script.src;
+        newScript.defer = true;
+        document.body.appendChild(newScript);
+      }
+    } else {
+      // inline script
+      const newScript = document.createElement("script");
+      newScript.textContent = script.textContent;
+      document.body.appendChild(newScript);
+    }
+  });
 }
 
 function renderError() {
@@ -180,18 +222,27 @@ function renderHero(event) {
 
             <!-- CTA -->
             <div class="pt-3">
-                   <a href="#register"
-                       class="group px-8 py-4 rounded-xl font-semibold text-white
-                              bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500
-                              hover:from-blue-700 hover:via-blue-600 hover:to-cyan-600
-                              shadow-lg hover:shadow-xl hover:shadow-blue-500/25
-                              transition-all duration-300
-                              flex items-center justify-center gap-3
-                              transform hover:-translate-y-0.5">
-                      <span>Get Your Tickets</span>
-                      <span class="text-xl opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                    </a>
+            <a href="${event.ticket_url || "#"}"
+   ${event.ticket_url ? 'target="_blank" rel="noopener noreferrer"' : ""}
+   class="group px-8 py-4 rounded-xl font-semibold text-white
+          bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500
+          hover:from-blue-700 hover:via-blue-600 hover:to-cyan-600
+          shadow-lg hover:shadow-xl hover:shadow-blue-500/25
+          transition-all duration-300
+          flex items-center justify-center gap-3
+          transform hover:-translate-y-0.5">
+  <span>
+    ${event.ticket_url ? "Buy Tickets" : "Tickets Coming Soon"}
+  </span>
+</a>
             </div>
+            ${
+              event.ticket_url
+                ? `<p class="text-sm text-gray-400 mt-2">
+       You will be redirected to our ticket partner
+     </p>`
+                : ""
+            }
 
           </div>
 
@@ -240,6 +291,13 @@ function renderHero(event) {
   `;
 
   startEventCountdown(event.start_date, event.start_time);
+
+  // Inject ticket embed code if available
+  if (event.ticket_embed_code) {
+    setTimeout(() => {
+      injectTicketEmbed(event.ticket_embed_code);
+    }, 100);
+  }
 }
 
 /* ============================================================

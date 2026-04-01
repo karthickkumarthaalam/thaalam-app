@@ -31,7 +31,7 @@ $(document).ready(function () {
 
   $(document).on("click", ".event-card", function () {
     const slug = $(this).data("slug");
-    if (slug) window.location.href = `event-details.php?slug=${slug}`;
+    if (slug) window.location.href = `event/experience/details/${slug}`;
   });
 });
 

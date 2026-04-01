@@ -1,123 +1,128 @@
 document.addEventListener("DOMContentLoaded", function () {
   const rjList = document.getElementById("rj-list");
+  if (!rjList) return;
+
+  // Trigger hero animation
+  const hero = document.querySelector(".rj-fade-up");
+  if (hero) setTimeout(() => hero.classList.add("visible"), 100);
+
+  // IntersectionObserver for card scroll-in
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          observer.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
 
   function slugify(name) {
     return name.toLowerCase().replace(/\s+/g, "-");
   }
 
-  function socialLink(rj, platform) {
+  function socialHref(rj, platform) {
     return rj.socialLinks?.[platform] || "#";
   }
 
-  if (!rjList) return;
-
-  // Trigger header animation
-  const header = document.querySelector(".rj-fade-up");
-  if (header) setTimeout(() => header.classList.add("visible"), 100);
-
-  // IntersectionObserver for scroll-triggered card animations
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 },
-  );
-
-  rjList.innerHTML = Array(4)
-    .fill(
-      `
-    <div class="animate-pulse flex bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 h-80">
-      <div class="w-2/6 bg-gray-200"></div>
-      <div class="w-4/6 p-10 flex flex-col justify-center gap-3">
-        <div class="h-2 bg-gray-100 rounded w-1/4"></div>
-        <div class="h-7 bg-gray-200 rounded w-2/3"></div>
-        <div class="h-2 bg-gray-100 rounded w-1/2 mt-1"></div>
-        <div class="h-2 bg-gray-100 rounded w-2/5"></div>
-        <div class="flex gap-2 mt-3">
-          <div class="h-9 w-9 bg-gray-100 rounded-full"></div>
-          <div class="h-9 w-9 bg-gray-100 rounded-full"></div>
-          <div class="h-9 w-9 bg-gray-100 rounded-full"></div>
-        </div>
-        <div class="h-10 bg-gray-100 rounded-xl w-36 mt-2"></div>
-      </div>
-    </div>
-  `,
-    )
-    .join("");
+  function stars(n = 5) {
+    return Array.from({ length: n })
+      .map(() => `<svg class="w-4 h-4 fill-red-500 text-red-500" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`)
+      .join("");
+  }
 
   fetch(`${window.API_BASE_URL}/system-user/all-profile`)
-    .then((res) => res.json())
+    .then((r) => r.json())
     .then((res) => {
       const data = res.data || [];
       rjList.innerHTML = "";
 
-      data.forEach((rj, index) => {
-        const slug = slugify(rj.name);
-        const profile = rj.image
-          ? window.API_BASE_URL + "/" + rj.image.replace(/\\/g, "/")
-          : "/assets/img/home/default-rj.jpg";
+      if (!data.length) {
+        rjList.innerHTML = `<p class="text-center text-gray-400 py-20">No RJ profiles found.</p>`;
+        return;
+      }
 
-        const imageLeft = index % 2 === 0;
+      data.forEach((rj, idx) => {
+        const isEven   = idx % 2 === 0;
+        const slug     = slugify(rj.name);
+        const imgSrc   = rj.image
+          ? `${window.API_BASE_URL}/${rj.image.replace(/\\/g, "/")}`
+          : "assets/img/logo/thalam-logo.png";
 
-        const showsHTML =
-          rj.shows && rj.shows.length
-            ? `<div class="rj-shows mt-3 space-y-2">
-              ${rj.shows
-                .slice(0, 2)
-                .map(
-                  (show) => `
-                <div class="flex items-center gap-2 text-xs text-gray-500">
-                  <span class="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0"></span>
-                  <span class="font-semibold text-gray-600">${show.category.trim()}</span>
-                  <span class="ml-auto tabular-nums font-medium">${show.startTime.slice(0, 5)} – ${show.endTime.slice(0, 5)}</span>
-                </div>`,
-                )
-                .join("")}
-             </div>`
-            : `<div class="rj-shows"></div>`;
+        // show-time chips (up to 2)
+        const showChips = (rj.shows || []).slice(0, 2).map((s) => `
+          <div class="flex items-center gap-2.5 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 shadow-sm">
+            <svg class="w-4 h-4 text-red-500 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/>
+            </svg>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">${s.category.trim()}</p>
+              <p class="text-sm font-semibold text-gray-800">${s.startTime.slice(0,5)} – ${s.endTime.slice(0,5)}</p>
+            </div>
+          </div>`).join("");
 
-        const imageBlock = `
-          <div class="rj-img-wrap relative w-2/6 flex-shrink-0 bg-gray-100">
-            <img src="${profile}" alt="${rj.name}" loading="lazy"
-                 class="w-full h-full object-cover object-top" />
-            <!-- shimmer overlay on load -->
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
-                        -translate-x-full animate-[shimmer_1.5s_ease_1]"></div>
+        // social links
+        const socials = [
+          { platform: "instagram", icon: "fab fa-instagram", hover: "hover:border-pink-400 hover:text-pink-500 hover:bg-pink-50" },
+          { platform: "facebook",  icon: "fab fa-facebook-f", hover: "hover:border-blue-400 hover:text-blue-500 hover:bg-blue-50" },
+          { platform: "whatsapp",  icon: "fab fa-whatsapp",   hover: "hover:border-green-400 hover:text-green-500 hover:bg-green-50" },
+        ].map((s) => `
+          <a href="${socialHref(rj, s.platform)}" onclick="event.stopPropagation()" aria-label="${s.platform}"
+             class="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center
+                    text-gray-400 transition-all duration-200 hover:-translate-y-1 ${s.hover}">
+            <i class="${s.icon} text-sm"></i>
+          </a>`).join("");
+
+        // image block
+        const imgBlock = `
+          <div class="rj-img-block relative w-full lg:w-2/5 shrink-0">
+            <!-- offset decorative border -->
+            <div class="rj-offset absolute -top-4 h-full w-full rounded-3xl border-2 border-red-200
+                        ${isEven ? "-left-4" : "-right-4"}"></div>
+            <!-- image -->
+            <div class="rj-img-wrap relative overflow-hidden rounded-3xl shadow-2xl">
+              <img src="${imgSrc}" alt="${rj.name}"
+                   class="w-full h-[400px] object-cover object-top" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+              <!-- show badge -->
+              ${rj.shows?.length ? `
+              <div class="absolute bottom-5 left-5 rounded-full bg-red-500 px-4 py-1.5
+                          text-[11px] font-black uppercase tracking-wider text-white shadow-lg">
+                ${rj.shows[0].category.trim()}
+              </div>` : ""}
+            </div>
           </div>`;
 
+        // content block
         const contentBlock = `
-          <div class="rj-content flex-1 flex flex-col justify-center px-10 py-8">
-            <div class="rj-line mb-4"></div>
-            <span class="rj-tag text-xs font-bold text-red-500 uppercase tracking-[0.2em]">Radio Jockey</span>
-            <h3 class="rj-name mt-2 text-xl font-bold text-gray-900 ">${rj.name.trim()}</h3>
-            ${showsHTML}
-            <div class="rj-actions flex items-center gap-3 mt-6">
-              <a href="${socialLink(rj, "whatsapp")}" onclick="event.stopPropagation()" aria-label="WhatsApp"
-                 class="rj-social w-10 h-10 rounded-full border-2 border-gray-100 flex items-center justify-center
-                        text-gray-400 hover:border-green-400 hover:text-green-500 hover:bg-green-50">
-                <i class="fab fa-whatsapp text-base"></i>
-              </a>
-              <a href="${socialLink(rj, "instagram")}" onclick="event.stopPropagation()" aria-label="Instagram"
-                 class="rj-social w-10 h-10 rounded-full border-2 border-gray-100 flex items-center justify-center
-                        text-gray-400 hover:border-pink-400 hover:text-pink-500 hover:bg-pink-50">
-                <i class="fab fa-instagram text-base"></i>
-              </a>
-              <a href="${socialLink(rj, "facebook")}" onclick="event.stopPropagation()" aria-label="Facebook"
-                 class="rj-social w-10 h-10 rounded-full border-2 border-gray-100 flex items-center justify-center
-                        text-gray-400 hover:border-blue-400 hover:text-blue-500 hover:bg-blue-50">
-                <i class="fab fa-facebook-f text-base"></i>
-              </a>
-              <button class="rj-btn ml-2 flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold
+          <div class="flex-1 space-y-5">
+            <div>
+              <p class="rj-tag text-[11px] font-black uppercase tracking-[.3em] text-red-500 mb-2">Radio Jockey</p>
+              <div class="rj-line mb-3"></div>
+              <h2 class="rj-name text-3xl md:text-4xl font-bold text-gray-900">${rj.name.trim()}</h2>
+            </div>
+
+            <p class="rj-desc text-sm text-gray-500 leading-relaxed">
+              ${rj.bio || `${rj.name.trim()} is one of Thaalam Radio's beloved voices, bringing energy and passion to every show. Tune in and experience the magic live.`}
+            </p>
+
+            ${showChips ? `<div class="rj-chips flex flex-wrap gap-3 pt-1">${showChips}</div>` : ""}
+
+            <div class="rj-stars flex items-center gap-1 pt-1">
+              ${stars(5)}
+              <span class="ml-2 text-xs text-gray-400 font-medium">Live Performer</span>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              ${socials}
+              <button onclick="window.location.href='/rj-details?slug=${slug}'"
+                      class="rj-btn ml-1 flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold
                              text-white bg-red-500 hover:bg-red-600 shadow-md shadow-red-200
                              hover:shadow-red-300 hover:scale-105 active:scale-95 transition-all duration-300">
                 View Profile
-                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                     fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                 </svg>
               </button>
@@ -125,18 +130,15 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>`;
 
         const card = document.createElement("div");
-        card.className = `rj-card cursor-pointer group ${imageLeft ? "rj-slide-left" : "rj-slide-right"}`;
+        card.className = `rj-card cursor-pointer ${isEven ? "rj-slide-l" : "rj-slide-r"}`;
         card.innerHTML = `
-<article class="flex h-80 backdrop-blur-sm rounded-3xl overflow-hidden
-                shadow-[0_2px_20px_rgba(0,0,0,0.06)]
-                transition-all duration-500 ${imageLeft ? "" : "flex-row-reverse"}">
-  ${imageBlock}
-  <!-- Vertical divider -->
-  <div class="w-px bg-transparent  flex-shrink-0"></div>
-  ${contentBlock}
-</article>`;
+          <div class="flex flex-col gap-12 items-center ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"}">
+            ${imgBlock}
+            ${contentBlock}
+          </div>`;
 
-        card.addEventListener("click", () => {
+        card.addEventListener("click", (e) => {
+          if (e.target.closest("a")) return;
           window.location.href = `/rj-details?slug=${slug}`;
         });
 
@@ -145,9 +147,9 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     })
     .catch((err) => {
-      console.error("Error fetching RJ details:", err);
+      console.error("RJ fetch error:", err);
       rjList.innerHTML = `
-        <div class="text-center py-16">
+        <div class="text-center py-20">
           <div class="w-16 h-16 mx-auto mb-4 bg-red-50 rounded-full flex items-center justify-center">
             <i class="fas fa-exclamation-triangle text-red-400 text-xl"></i>
           </div>
