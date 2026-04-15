@@ -199,7 +199,7 @@
             }
 
             100% {
-                transform: translateX(-50%);
+                transform: translateX(-100%);
             }
         }
     </style>
@@ -391,10 +391,18 @@
                     </div>
                 </div>
 
-                <div id="popupBanner">
-                    <div class="popupBanner-container">
-                        <img src="" alt="popup banner image" id="popupBanner-image">
-                        <p id="close-popupBanner">X</p>
+                <div id="popupBanner" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+                    <div class="popupBanner-container relative w-full max-w-[32rem] sm:max-w-[36rem] md:max-w-[40rem] lg:max-w-[44rem] overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-black/10">
+                        <button id="close-popupBanner" type="button" class="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/50">
+                            <span class="text-lg leading-none">×</span>
+                        </button>
+                        <div class="relative mx-auto h-[60vh] md:h-[80vh] w-auto max-w-full min-w-[22rem] overflow-hidden rounded-[28px]  aspect-[1066/1600]">
+                            <img
+                                src=""
+                                alt="popup banner image"
+                                id="popupBanner-image"
+                                class="absolute inset-0 h-full w-full object-cover" />
+                        </div>
                     </div>
                 </div>
 

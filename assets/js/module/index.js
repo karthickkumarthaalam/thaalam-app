@@ -13,6 +13,171 @@ $(document).ready(function () {
     return name.split(" ").join("-");
   }
 
+  const $flashNewsBar = $("#flash-news-bar");
+
+  let flashNewsItems = [];
+  let flashNewsIndex = 0;
+  let flashNewsInitialized = false;
+  let flashNewsTitleEl = null;
+  let flashNewsTrackEl = null;
+
+  /* ------------------- HELPERS ------------------- */
+
+  function areFlashNewsItemsEqual(newItems) {
+    if (newItems.length !== flashNewsItems.length) return false;
+    return newItems.every(
+      (item, index) => item.id === flashNewsItems[index]?.id,
+    );
+  }
+
+  /* ------------------- DOM BUILD ------------------- */
+
+  function buildFlashNewsDOM() {
+    $flashNewsBar
+      .html(
+        `
+  <div class="max-w-full overflow-hidden rounded-md mx-2 sm:mx-3 md:mx-4 shadow-md border border-gray-200 bg-white">
+
+    <!-- TOP ROW -->
+    <div class="flex items-center h-[36px] sm:h-[40px] md:h-[44px]">
+
+      <!-- Breaking -->
+      <div class="bg-red-600 px-3 sm:px-4 h-full flex items-center font-bold uppercase text-xs tracking-wider text-white">
+        <span class="relative flex mr-2">
+          <span class="w-2 h-2 bg-white rounded-full animate-ping absolute"></span>
+          <span class="w-2 h-2 bg-white rounded-full"></span>
+        </span>
+        Breaking News
+      </div>
+
+      <!-- Title -->
+      <div class="flex-1 bg-slate-50 h-full flex items-center overflow-hidden relative">
+        <div id="news-title"
+          class="px-3 sm:px-4 text-gray-900 font-semibold text-sm uppercase truncate transition-all duration-500">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="bg-white text-gray-800 overflow-hidden h-[36px] flex items-center relative border-t">
+
+      <div id="news-track"
+        class="flex items-center whitespace-nowrap will-change-transform text-sm font-medium">
+      </div>
+
+    </div>
+
+  </div>
+`,
+      )
+      .show();
+
+    flashNewsTitleEl = document.getElementById("news-title");
+    flashNewsTrackEl = document.getElementById("news-track");
+  }
+
+  /* ------------------- TICKER ------------------- */
+
+  function buildTicker(text) {
+    if (!flashNewsTrackEl) return;
+
+    // Clear previous content (important)
+    flashNewsTrackEl.innerHTML = "";
+
+    flashNewsTrackEl.innerHTML = `
+    <div class="px-8">${text}</div>
+  `;
+
+    const contentWidth = flashNewsTrackEl.scrollWidth;
+    const containerWidth = flashNewsTrackEl.parentElement.clientWidth || 1;
+
+    const speedFactor = 0.04;
+    const duration = Math.max(
+      12,
+      Math.ceil((contentWidth + containerWidth) * speedFactor),
+    );
+
+    // Reset animation
+    flashNewsTrackEl.style.animation = "none";
+    flashNewsTrackEl.offsetHeight;
+
+    // Remove old listeners (important fix)
+    flashNewsTrackEl.replaceWith(flashNewsTrackEl.cloneNode(true));
+    flashNewsTrackEl = document.getElementById("news-track");
+
+    // Add animation end listener
+    flashNewsTrackEl.addEventListener(
+      "animationend",
+      () => {
+        flashNewsIndex = (flashNewsIndex + 1) % flashNewsItems.length;
+        showNews(flashNewsIndex);
+      },
+      { once: true },
+    );
+
+    flashNewsTrackEl.style.animation = `tickerScroll ${duration}s linear forwards`;
+  }
+
+  /* ------------------- TITLE ANIMATION ------------------- */
+
+  function animateTitle(newTitle) {
+    if (!flashNewsTitleEl) return;
+
+    flashNewsTitleEl.classList.add("-translate-y-full", "opacity-0");
+
+    setTimeout(() => {
+      flashNewsTitleEl.innerText = newTitle;
+      flashNewsTitleEl.classList.remove("-translate-y-full", "opacity-0");
+      flashNewsTitleEl.classList.add("translate-y-0", "opacity-100");
+
+      flashNewsTitleEl.classList.add("bg-gray-200/30");
+      setTimeout(() => {
+        flashNewsTitleEl.classList.remove("bg-gray-200/30");
+      }, 400);
+    }, 250);
+  }
+
+  /* ------------------- MAIN DISPLAY ------------------- */
+
+  function showNews(index, first = false) {
+    if (!flashNewsItems.length || !flashNewsTitleEl || !flashNewsTrackEl)
+      return;
+
+    const item = flashNewsItems[index];
+
+    const title = item.title || "Breaking";
+    const text = item.news_content || item.title;
+
+    if (first) {
+      flashNewsTitleEl.innerText = title;
+    } else {
+      animateTitle(title);
+    }
+
+    buildTicker(text);
+  }
+
+  /* ------------------- INIT ------------------- */
+
+  function initFlashNewsTicker(items) {
+    if (!Array.isArray(items) || !items.length) {
+      $flashNewsBar.hide();
+      return;
+    }
+
+    if (flashNewsInitialized && areFlashNewsItemsEqual(items)) {
+      return;
+    }
+
+    flashNewsItems = items;
+    flashNewsIndex = 0;
+
+    buildFlashNewsDOM();
+    showNews(0, true);
+
+    flashNewsInitialized = true;
+  }
   // ---------------- CAROUSEL + BANNERS ✅ ----------------
 
   async function updateCarousel(program, firstLoad = false) {
@@ -170,140 +335,8 @@ $(document).ready(function () {
       } else {
         $("#nextProgramNotice").fadeOut(200);
       }
-      const flashNews = res.flash_news || [];
 
-      if (!flashNews.length) {
-        $("#flash-news-bar").hide();
-        return;
-      }
-      const newsItems = flashNews;
-
-      const $ticker = $("#flash-news-bar");
-
-      $ticker
-        .html(
-          `
-  <div class="max-w-full overflow-hidden rounded-md mx-2 sm:mx-3 md:mx-4 shadow-md border border-gray-200 bg-white">
-
-    <!-- TOP ROW -->
-    <div class="flex items-center h-[36px] sm:h-[40px] md:h-[44px]">
-
-      <!-- Breaking -->
-      <div class="bg-gradient-to-r from-red-600 to-red-600 px-3 sm:px-4 h-full flex items-center font-extrabold uppercase text-[10px] sm:text-xs md:text-sm tracking-wider shrink-0 text-white">
-        <span class="relative flex mr-2">
-          <span class="w-2 h-2 bg-white rounded-full animate-ping absolute"></span>
-          <span class="w-2 h-2 bg-white rounded-full"></span>
-        </span>
-      Breaking
-        <span class="hidden sm:inline ml-1">News</span>
-      </div>
-
-      <!-- Title -->
-      <div class="flex-1 bg-slate-50 h-full flex items-center overflow-hidden relative">
-        <div id="news-title"
-          class="px-3 sm:px-4 text-gray-900 font-semibold text-[11px] sm:text-sm md:text-base uppercase truncate transition-all duration-500">
-        </div>
-
-        <!-- subtle shine -->
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse pointer-events-none"></div>
-      </div>
-
-    </div>
-
-    <!-- BOTTOM ROW -->
-    <div class="bg-white text-gray-800 overflow-hidden h-[32px] sm:h-[36px] md:h-[40px] flex items-center relative border-t">
-
-      <div id="news-track"
-        class="flex items-center whitespace-nowrap will-change-transform text-[11px] sm:text-sm md:text-base font-medium">
-      </div>
-
-      <!-- Fade edges -->
-      <div class="absolute right-0 top-0 h-full w-10 sm:w-12 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
-      <div class="absolute left-0 top-0 h-full w-6 sm:w-8 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
-
-    </div>
-
-  </div>
-`,
-        )
-        .show();
-
-      const titleEl = document.getElementById("news-title");
-      const track = document.getElementById("news-track");
-
-      function buildTicker(text) {
-        const content = `
-    <div class="px-8 font-medium text-xs sm:text-sm">${text}</div> `;
-
-        track.innerHTML = content;
-
-        const duration = 15;
-
-        track.style.animation = "none";
-        track.offsetHeight;
-
-        track.style.animation = `tickerScroll ${duration}s linear infinite`;
-      }
-
-      function animateTitle(newTitle) {
-        titleEl.classList.add("-translate-y-full", "opacity-0");
-
-        setTimeout(() => {
-          titleEl.innerText = newTitle;
-
-          titleEl.classList.remove("-translate-y-full", "opacity-0");
-          titleEl.classList.add("translate-y-0", "opacity-100");
-
-          // subtle flash
-          titleEl.classList.add("bg-gray-300/20");
-          setTimeout(() => titleEl.classList.remove("bg-gray-300/20"), 500);
-        }, 250);
-      }
-
-      function showNews(i, first = false) {
-        const item = newsItems[i];
-
-        const title = item.title || "Breaking";
-        const text = item.news_content || item.title;
-
-        if (first) {
-          titleEl.innerText = title;
-        } else {
-          animateTitle(title);
-        }
-
-        buildTicker(text);
-      }
-      let index = 0;
-      let interval;
-
-      showNews(index, true);
-
-      // Pause on hover
-      const bar = document.getElementById("flash-news-bar");
-
-      bar.addEventListener("mouseenter", () => {
-        track.style.animationPlayState = "paused";
-        clearInterval(interval);
-      });
-
-      bar.addEventListener("mouseleave", () => {
-        track.style.animationPlayState = "running";
-
-        interval = setInterval(() => {
-          index = (index + 1) % newsItems.length;
-          showNews(index);
-        }, 10000);
-      });
-
-      // INIT
-      showNews(index, true);
-
-      // LOOP
-      interval = setInterval(() => {
-        index = (index + 1) % newsItems.length;
-        showNews(index);
-      }, 15000);
+      initFlashNewsTicker(res.flash_news || []);
     } catch (err) {
       console.error("Program API Error:", err);
     }
@@ -446,14 +479,19 @@ $(document).ready(function () {
 
   // ---------------- POPUP BANNER API ✅ ----------------
 
+  function hidePopupBanner() {
+    $("#popupBanner").fadeOut(200);
+    document.body.style.overflow = "";
+  }
+
   async function loadPopupBanner() {
     try {
       const r = await $.ajax({
         url: `${window.API_BASE_URL}/popup-banner?status=active`,
         method: "GET",
       });
+      const b = r?.data?.[0];
 
-      const b = r?.data?.data?.[0];
       if (!b) return;
 
       const path = b.website_image.replace(/\\/g, "/");
@@ -463,8 +501,17 @@ $(document).ready(function () {
         $("#popupBanner").css("display", "flex").hide().fadeIn(400);
         document.body.style.overflow = "hidden";
       }
-    } catch {}
+    } catch (err) {
+      console.error("Popup banner failed:", err);
+    }
   }
+
+  $("#close-popupBanner").on("click", hidePopupBanner);
+  $("#popupBanner").on("click", function (event) {
+    if (event.target.id === "popupBanner") {
+      hidePopupBanner();
+    }
+  });
 
   loadPopupBanner();
 
