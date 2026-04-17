@@ -349,7 +349,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="flash-news-bar" class="my-2"></div>
+                                        <div id="flash-news-bar" class="my-4"></div>
                                     </div>
                                 </div>
 

@@ -16,10 +16,13 @@ $(document).ready(function () {
   const $flashNewsBar = $("#flash-news-bar");
 
   let flashNewsItems = [];
+  let flashNewsQueue = [];
   let flashNewsIndex = 0;
   let flashNewsInitialized = false;
+  let flashNewsTimer = null;
   let flashNewsTitleEl = null;
-  let flashNewsTrackEl = null;
+  let flashNewsContentEl = null;
+  let flashNewsCounterEl = null;
 
   /* ------------------- HELPERS ------------------- */
 
@@ -30,40 +33,83 @@ $(document).ready(function () {
     );
   }
 
+  function buildFlashNewsQueue(items) {
+    return items.flatMap((item) => {
+      const title = item.title || "Breaking";
+      const childItems = Array.isArray(item.items)
+        ? item.items.filter((child) => child.status === "active")
+        : [];
+
+      if (childItems.length) {
+        return childItems.map((child) => ({
+          title,
+          content: child.content || item.news_content || title,
+        }));
+      }
+
+      return [
+        {
+          title,
+          content: item.news_content || title,
+        },
+      ];
+    });
+  }
+
+  function clearFlashNewsTimer() {
+    if (flashNewsTimer) {
+      clearTimeout(flashNewsTimer);
+      flashNewsTimer = null;
+    }
+  }
+
   /* ------------------- DOM BUILD ------------------- */
 
   function buildFlashNewsDOM() {
     $flashNewsBar
       .html(
         `
-  <div class="max-w-full overflow-hidden rounded-md mx-2 sm:mx-3 md:mx-4 shadow-md border border-gray-200 bg-white">
+  <div class="relative max-w-full overflow-hidden  border-t  border-slate-200 bg-white">
 
-    <!-- TOP ROW -->
-    <div class="flex items-center h-[36px] sm:h-[40px] md:h-[44px]">
+    <!-- subtle gradient glow -->
+    <div class="absolute inset-0 bg-gradient-to-b from-red-50/10 via-transparent to-indigo-50/10 pointer-events-none"></div>
 
-      <!-- Breaking -->
-      <div class="bg-red-600 px-3 sm:px-4 h-full flex items-center font-bold uppercase text-xs tracking-wider text-white">
-        <span class="relative flex mr-2">
-          <span class="w-2 h-2 bg-white rounded-full animate-ping absolute"></span>
-          <span class="w-2 h-2 bg-white rounded-full"></span>
+    <!-- HEADER -->
+    <div class="relative flex flex-col items-center gap-3 px-5 py-4 border-b border-slate-200/70">
+
+      <!-- Breaking badge -->
+      <div class="flex items-center gap-2">
+        <div class="relative flex h-2.5 w-2.5">
+          <span class="absolute inset-0 rounded-full bg-red-500 animate-ping"></span>
+          <span class="relative block h-2.5 w-2.5 rounded-full bg-red-600"></span>
+        </div>
+
+        <span class="text-[16px] font-bold tracking-[0.25em] uppercase text-red-600">
+          Breaking
         </span>
-        Breaking News
       </div>
 
       <!-- Title -->
-      <div class="flex-1 bg-slate-50 h-full flex items-center overflow-hidden relative">
+      <div class="w-full overflow-hidden">
         <div id="news-title"
-          class="px-3 sm:px-4 text-gray-900 font-semibold text-sm uppercase truncate transition-all duration-500">
+          class="text-slate-900 text-center font-semibold text-base sm:text-lg tracking-tight truncate transition-all duration-500 ease-out">
         </div>
       </div>
 
     </div>
 
-    <!-- BOTTOM ROW -->
-    <div class="bg-white text-gray-800 overflow-hidden h-[36px] flex items-center relative border-t">
+    <!-- CONTENT -->
+    <div class="relative px-5 py-5 sm:px-6 sm:py-6">
 
-      <div id="news-track"
-        class="flex items-center whitespace-nowrap will-change-transform text-sm font-medium">
+      <div id="news-content"
+        class="text-slate-700 text-sm sm:text-[15px] leading-7 tracking-[0.01em] transition-all duration-500 ease-out opacity-100">
+      </div>
+
+      <!-- bottom progress bar -->
+      <div class="mt-4 h-[2px] w-full bg-slate-200 overflow-hidden rounded-full">
+        <div id="news-progress"
+          class="h-full w-0 bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 transition-all duration-300">
+        </div>
       </div>
 
     </div>
@@ -74,49 +120,8 @@ $(document).ready(function () {
       .show();
 
     flashNewsTitleEl = document.getElementById("news-title");
-    flashNewsTrackEl = document.getElementById("news-track");
-  }
-
-  /* ------------------- TICKER ------------------- */
-
-  function buildTicker(text) {
-    if (!flashNewsTrackEl) return;
-
-    // Clear previous content (important)
-    flashNewsTrackEl.innerHTML = "";
-
-    flashNewsTrackEl.innerHTML = `
-    <div class="px-8">${text}</div>
-  `;
-
-    const contentWidth = flashNewsTrackEl.scrollWidth;
-    const containerWidth = flashNewsTrackEl.parentElement.clientWidth || 1;
-
-    const speedFactor = 0.04;
-    const duration = Math.max(
-      12,
-      Math.ceil((contentWidth + containerWidth) * speedFactor),
-    );
-
-    // Reset animation
-    flashNewsTrackEl.style.animation = "none";
-    flashNewsTrackEl.offsetHeight;
-
-    // Remove old listeners (important fix)
-    flashNewsTrackEl.replaceWith(flashNewsTrackEl.cloneNode(true));
-    flashNewsTrackEl = document.getElementById("news-track");
-
-    // Add animation end listener
-    flashNewsTrackEl.addEventListener(
-      "animationend",
-      () => {
-        flashNewsIndex = (flashNewsIndex + 1) % flashNewsItems.length;
-        showNews(flashNewsIndex);
-      },
-      { once: true },
-    );
-
-    flashNewsTrackEl.style.animation = `tickerScroll ${duration}s linear forwards`;
+    flashNewsContentEl = document.getElementById("news-content");
+    flashNewsCounterEl = document.getElementById("news-count");
   }
 
   /* ------------------- TITLE ANIMATION ------------------- */
@@ -141,27 +146,45 @@ $(document).ready(function () {
   /* ------------------- MAIN DISPLAY ------------------- */
 
   function showNews(index, first = false) {
-    if (!flashNewsItems.length || !flashNewsTitleEl || !flashNewsTrackEl)
+    if (!flashNewsQueue.length || !flashNewsTitleEl || !flashNewsContentEl)
       return;
 
-    const item = flashNewsItems[index];
+    clearFlashNewsTimer();
 
+    const item = flashNewsQueue[index];
     const title = item.title || "Breaking";
-    const text = item.news_content || item.title;
+    const content = item.content || title;
 
     if (first) {
       flashNewsTitleEl.innerText = title;
+      flashNewsContentEl.innerText = content;
     } else {
       animateTitle(title);
+      flashNewsContentEl.classList.remove("opacity-100");
+      flashNewsContentEl.classList.add("opacity-0");
+
+      setTimeout(() => {
+        flashNewsContentEl.innerText = content;
+        flashNewsContentEl.classList.remove("opacity-0");
+        flashNewsContentEl.classList.add("opacity-100");
+      }, 200);
     }
 
-    buildTicker(text);
+    if (flashNewsCounterEl) {
+      flashNewsCounterEl.innerText = `${index + 1} of ${flashNewsQueue.length} updates`;
+    }
+
+    flashNewsTimer = setTimeout(() => {
+      flashNewsIndex = (flashNewsIndex + 1) % flashNewsQueue.length;
+      showNews(flashNewsIndex);
+    }, 10000);
   }
 
   /* ------------------- INIT ------------------- */
 
   function initFlashNewsTicker(items) {
     if (!Array.isArray(items) || !items.length) {
+      clearFlashNewsTimer();
       $flashNewsBar.hide();
       return;
     }
@@ -171,6 +194,7 @@ $(document).ready(function () {
     }
 
     flashNewsItems = items;
+    flashNewsQueue = buildFlashNewsQueue(items);
     flashNewsIndex = 0;
 
     buildFlashNewsDOM();

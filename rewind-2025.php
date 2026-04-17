@@ -63,7 +63,7 @@
                 <div class="bg-transparent">
                     <div class="relative z-10 text-center">
                         <h1 class="text-2xl md:text-3xl font-semibold text-dark tracking-tight animate-sideFadeLeft">
-                            Thaalam <span class="text-red-500">Rewind 2025</span>
+                            Thaalam <span class="text-red-600">Rewind 2025</span>
                         </h1>
                         </h1>
                         <p class="text-[14px] sm:text-sm text-gray-500 mt-1 animate-cardReveal">

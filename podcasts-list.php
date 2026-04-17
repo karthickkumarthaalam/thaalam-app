@@ -556,22 +556,9 @@
         <?php include 'php/header.php'; ?>
 
 
-        <section class="relative">
-            <!-- 🔥 PREMIUM JELLY BACKGROUND ANIMATIONS -->
-            <div class="jelly-layer">
-                <!-- Main jelly blobs -->
-                <div class="jelly-blob jelly-1 jelly-interactive"></div>
-                <div class="jelly-blob jelly-2 jelly-interactive"></div>
-                <div class="jelly-blob jelly-3"></div>
-
-                <!-- Jelly shapes -->
-                <div class="jelly-shape shape-1"></div>
-                <div class="jelly-shape shape-2"></div>
-                <div class="jelly-shape shape-3"></div>
-
-                <!-- Wave effect -->
-                <div class="jelly-wave"></div>
-            </div>
+        <section class="relative" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg'); ">
 
             <section class="max-w-7xl mx-auto px-4 py-6 relative overflow-hidden min-h-screen bg-white/10 backdrop-blur-[42px]  rounded-2xl">
                 <!-- Content wrapper -->
@@ -630,44 +617,6 @@
     <!-- Enhanced animations script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Interactive jelly effect
-            const jellyLayer = document.querySelector('.jelly-layer');
-
-            // Mouse move effect on jelly background
-            document.addEventListener('mousemove', (e) => {
-                const x = e.clientX / window.innerWidth;
-                const y = e.clientY / window.innerHeight;
-
-                const blobs = document.querySelectorAll('.jelly-interactive');
-                blobs.forEach((blob, index) => {
-                    const speed = 0.05 + (index * 0.02);
-                    const moveX = (x - 0.5) * 100 * speed;
-                    const moveY = (y - 0.5) * 100 * speed;
-
-                    blob.style.transform = `translate(${moveX}px, ${moveY}px) scale(${1 + (index * 0.1)})`;
-                });
-            });
-
-            // Parallax effect on scroll
-            let lastScrollY = window.scrollY;
-
-            function updateJellyParallax() {
-                const scrolled = window.scrollY;
-                const blobs = document.querySelectorAll('.jelly-blob');
-
-                blobs.forEach((blob, index) => {
-                    const speed = 0.3 + (index * 0.1);
-                    const yPos = -(scrolled * speed * 0.5);
-                    blob.style.transform += ` translateY(${yPos}px)`;
-                });
-
-                lastScrollY = scrolled;
-                requestAnimationFrame(updateJellyParallax);
-            }
-
-            // Start parallax effect
-            requestAnimationFrame(updateJellyParallax);
-
             // Add animation to cards when they load
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
