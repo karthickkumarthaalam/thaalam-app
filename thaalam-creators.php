@@ -52,7 +52,7 @@
     <?php include 'php/toast.php'; ?>
 
     <div class="page-wrapper">
-        <?php include 'php/header.php'; ?>
+        <?php include 'php/header2.php'; ?>
 
         <section class="pt-20 pb-20 px-6 bg-gradient-to-b from-purple-50 to-white overflow-hidden border-b border-purple-300">
             <div class="container mx-auto">

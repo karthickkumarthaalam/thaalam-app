@@ -7,6 +7,7 @@
     <title>Payment Success</title>
 
     <?php include 'php/css.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         /* Container */
@@ -145,7 +146,7 @@
     <?php include 'php/preloader.php'; ?>
 
     <div class="page-wrapper">
-        <?php include 'php/header.php'; ?>
+        <?php include 'php/header2.php'; ?>
 
         <section class="team-details" style="
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 

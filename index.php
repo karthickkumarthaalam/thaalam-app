@@ -106,7 +106,7 @@
 
         @media (min-width: 1200px) {
             .main-slider {
-                min-height: 700px;
+                max-height: 80vh;
             }
         }
 
@@ -224,7 +224,7 @@
             </div> -->
 
             <div>
-                <?php include 'php/header.php'; ?>
+                <?php include 'php/header2.php'; ?>
 
                 <!-- Main Slider Start -->
                 <section class="main-slider">
@@ -255,7 +255,7 @@
                             <p class="home-page__subtitle">Streaming & Audio</p>
                         </div>
 
-                        <section class="md:pb-10 border-b  border-gray-300">
+                        <section class="md:pb-10">
 
                             <div class="container mx-auto p-0 px-3">
                                 <div class="flex justify-center items-center">
@@ -357,7 +357,7 @@
                             </div>
                         </section>
 
-                        <section class="py-8  bg-gradient-to-r from-slate-50 via-white  to-slate-50">
+                        <section class="py-8 ">
                             <div class="max-w-7xl mx-auto px-4">
 
                                 <div>

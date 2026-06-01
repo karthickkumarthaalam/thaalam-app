@@ -20,7 +20,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-  --fistudy-font: "Outfit", sans-serif;
+  --fistudy-font: "Noto Sans Tamil", sans-serif;
   --fistudy-font-two: "Roboto", sans-serif;
   --fistudy-gray: #6B778B;
   --fistudy-gray-rgb: 107, 119, 139;
@@ -137,7 +137,7 @@ ul {
   margin: 0 auto;
   width: 100%;
   min-width: 300px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .container {
@@ -2981,7 +2981,7 @@ ul {
   width: 100%;
   position: relative;
   overflow: hidden;
-  max-height: 90vh;
+  max-height: 70vh;
   background-color: white;
 }
 
@@ -2994,34 +2994,6 @@ ul {
   background-size: cover;
   background-position: center;
 }
-
-
-/* 992px - 1199px (Laptop / small desktop) */
-/* @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .main-slider .item {
-    height: 55vh;
-  }
-} */
-
-/* 768px - 991px (Tablet) */
-/* @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .main-slider .item {
-    height: 50vh;
-  }
-} */
-
-/* 576px - 767px (Large Mobile) */
-/* @media only screen and (min-width: 576px) and (max-width: 767px) {
-  .main-slider .item {
-    height: 35vh;
-  }
-}
-
-@media only screen and (max-width: 575px) {
-  .main-slider .item {
-    height: 25vh;
-  }
-} */
 
 @media (min-width: 992px) {
   .col-lg-20 {

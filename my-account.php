@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/module-css/my-account.css">
 
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="custom-cursor">
@@ -23,7 +24,7 @@
     <div class="page-wrapper">
         <div class="row">
             <div>
-                <?php include 'php/header.php'; ?>
+                <?php include 'php/header2.php'; ?>
 
                 <section class="my-acc-sec" style="background-image: 
           linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 

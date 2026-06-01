@@ -10,6 +10,8 @@
     <meta name="description" content="Latest Tamil entertainment, music, and tech blogs from Thaalam Radio">
     <?php include 'php/css.php'; ?>
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
 <body class="custom-cursor">
@@ -21,7 +23,7 @@
 
 
     <div class="page-wrapper">
-        <?php include 'php/header.php'; ?>
+        <?php include 'php/header2.php'; ?>
 
         <section class="blog-details" style="background-image:
       linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)),

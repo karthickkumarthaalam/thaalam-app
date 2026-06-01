@@ -12,6 +12,7 @@
 
     <?php include 'php/css.php'; ?>
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="custom-cursor">
@@ -23,7 +24,7 @@
     <div class="page-wrapper">
         <div class="row">
             <div>
-                <?php include 'php/header.php'; ?>
+                <?php include 'php/header2.php'; ?>
 
                 <!--Team Details Start-->
                 <section class="team-details" style=" 

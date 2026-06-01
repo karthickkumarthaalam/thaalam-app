@@ -23,7 +23,7 @@
     <div class="page-wrapper">
         <div class="row">
             <div>
-                <?php include 'php/header.php'; ?>
+                <?php include 'php/header2.php'; ?>
 
                 <section class="forgot-password-section" style="background-image: 
         linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 

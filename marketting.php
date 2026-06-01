@@ -32,7 +32,7 @@
     <div class="page-wrapper">
         <div class="row">
             <div>
-                <?php include 'php/header.php'; ?>
+                <?php include 'php/header2.php'; ?>
 
                 <section class="marketting-bnr">
                     <img src="assets/img/common/marketting/marketting-bnr.png" alt="">

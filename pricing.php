@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="assets/css/module-css/pricing.css">
 
   <?php include 'php/analyticsHeader.php'; ?>
+  <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
 <body class="custom-cursor">
@@ -26,7 +28,7 @@
   <?php include 'php/preloader.php'; ?>
 
   <div class="page-wrapper">
-    <?php include 'php/header.php'; ?>
+    <?php include 'php/header2.php'; ?>
 
     <div class="row">
       <div>

@@ -9,6 +9,7 @@
     <?php include 'php/css.php'; ?>
 
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
@@ -24,7 +25,7 @@
         <div class="row">
 
             <div>
-                <?php include 'php/header.php'; ?>
+                <?php include 'php/header2.php'; ?>
                 <!--Blog Page Start-->
                 <section class="blog-page" style="background-image: 
         linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 

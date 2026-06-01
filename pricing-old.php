@@ -20,7 +20,7 @@
         <div class="row">
 
             <div>
-                <?php include 'php/header.php'; ?>
+                <?php include 'php/header2.php'; ?>
 
                 <!--Pricing One Start -->
                 <section class="pricing-one pricing-page">

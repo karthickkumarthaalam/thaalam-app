@@ -11,10 +11,61 @@
     ?>
 
     <?php include 'php/css.php'; ?>
-    <link rel="stylesheet" href="assets/css/module-css/register.css">
-    <link rel="stylesheet" href="assets/css/module-css/careers.css">
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
 
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes blob {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(-12px, 12px) scale(1.05);
+            }
+
+            66% {
+                transform: translate(12px, -12px) scale(0.95);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.9s ease-out both;
+        }
+
+        .animate-blob {
+            animation: blob 8s ease-in-out infinite;
+        }
+
+        .animation-delay-1000 {
+            animation-delay: 1s;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+            appearance: none;
+        }
+    </style>
 </head>
 
 <body class="custom-cursor">
@@ -25,31 +76,44 @@
 
     <?php include 'php/toast.php'; ?>
 
-    <div class="page-wrapper">
-        <div class="row">
-            <div>
-                <?php include 'php/header.php'; ?>
-                <section class="signup-section" style=" 
-            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
-                        url('./assets/images/backgrounds/background_image.jpg');">
-                    <div class="career-form-container container">
-                        <h2 class="form-title">Register Your Account</h2>
-                        <p class="form-subtitle">Join our platform to get started</p>
+    <div class="min-h-screen bg-white text-slate-900 antialiased">
+        <?php include 'php/header2.php'; ?>
 
-                        <form id="signupForm" class="modern-form">
-                            <!-- Personal Information -->
-                            <div class="form-section">
-                                <h3><i class="fas fa-user"></i> Personal Information</h3>
+        <section class="relative overflow-hidden px-4 py-12 sm:px-6 lg:px-8"
+            style="background-image: linear-gradient(rgba(255,255,255,0.16), rgba(255,255,255,0.16)), url('./assets/images/backgrounds/background_image.jpg'); background-size: cover; background-position: center;">
+            <div class="relative mx-auto max-w-4xl">
+                <div class="animate-fade-up rounded-[40px] border border-red-100 bg-white p-8 shadow-[0_40px_120px_rgba(15,23,42,0.08)]">
+                    <div class="mb-8 text-center">
+                        <span class="inline-flex rounded-full border border-red-100 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-red-700 shadow-sm">Join Us</span>
+                        <h1 class="mt-6 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">Create Your Account</h1>
+                        <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-600">Join our music community and get access to exclusive content, shows, and podcasts.</p>
+                    </div>
 
-                                <div class="form-row">
-                                    <div class="form-group half-width">
-                                        <label for="name"><i class="fas fa-signature"></i> Full Name *</label>
-                                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    <form id="signupForm" class="space-y-6">
+                        <!-- Personal Information Section -->
+                        <div class="space-y-4">
+                            <h3 class="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                                <i class="fas fa-user h-4 w-4 text-slate-500"></i>
+                                Personal Information
+                            </h3>
+                            <div class="grid gap-4 sm:grid-cols-2">
+                                <div class="space-y-3">
+                                    <label for="name" class="block text-sm font-medium text-slate-700">Full Name *</label>
+                                    <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                        <i class="fas fa-signature text-slate-500"></i>
+                                        <input type="text" id="name" name="name" placeholder="John Doe"
+                                            class="w-full bg-transparent text-sm text-slate-900 placeholder-slate-500 outline-none"
+                                            required>
                                     </div>
+                                </div>
 
-                                    <div class="form-group half-width">
-                                        <label for="gender"><i class="fas fa-venus-mars"></i> Gender *</label>
-                                        <select id="gender" name="gender" required>
+                                <div class="space-y-3">
+                                    <label for="gender" class="block text-sm font-medium text-slate-700">Gender *</label>
+                                    <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                        <i class="fas fa-venus-mars text-slate-500"></i>
+                                        <select id="gender" name="gender"
+                                            class="w-full bg-transparent text-sm text-slate-900 outline-none"
+                                            required>
                                             <option value="">Select Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -58,98 +122,138 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Address Information -->
-                            <div class="form-section">
-                                <h3><i class="fas fa-map-marked-alt"></i> Address Information</h3>
-
-                                <div class="form-row">
-                                    <div class="form-group half-width">
-                                        <label for="address1"><i class="fas fa-map-marker-alt"></i> Address Line 1 *</label>
-                                        <input type="text" id="address1" name="address1" placeholder="Street address" required>
-                                    </div>
-
-                                    <div class="form-group half-width">
-                                        <label for="address2"><i class="fas fa-map-marker-alt"></i> Address Line 2</label>
-                                        <input type="text" id="address2" name="address2" placeholder="Apt, suite, etc. (optional)">
+                        <!-- Address Information Section -->
+                        <div class="space-y-4">
+                            <h3 class="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                                <i class="fas fa-map-marked-alt h-4 w-4 text-slate-500"></i>
+                                Address Information
+                            </h3>
+                            <div class="grid gap-4 sm:grid-cols-2">
+                                <div class="space-y-3">
+                                    <label for="address1" class="block text-sm font-medium text-slate-700">Address Line 1 *</label>
+                                    <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                        <i class="fas fa-map-marker-alt text-slate-500"></i>
+                                        <input type="text" id="address1" name="address1" placeholder="Street address"
+                                            class="w-full bg-transparent text-sm text-slate-900 placeholder-slate-500 outline-none"
+                                            required>
                                     </div>
                                 </div>
 
-                                <div class="form-row">
-                                    <div class="form-group half-width">
-                                        <label for="country"><i class="fas fa-globe"></i> Country *</label>
-                                        <select id="country" name="country" required></select>
+                                <div class="space-y-3">
+                                    <label for="address2" class="block text-sm font-medium text-slate-700">Address Line 2</label>
+                                    <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                        <i class="fas fa-map-marker-alt text-slate-500"></i>
+                                        <input type="text" id="address2" name="address2" placeholder="Apt, suite, etc."
+                                            class="w-full bg-transparent text-sm text-slate-900 placeholder-slate-500 outline-none">
                                     </div>
+                                </div>
+                            </div>
 
-                                    <div class="form-group half-width">
-                                        <label for="state"><i class="fas fa-map"></i> State *</label>
-                                        <select id="state" name="state" required>
+                            <div class="grid gap-4 sm:grid-cols-2">
+                                <div class="space-y-3">
+                                    <label for="country" class="block text-sm font-medium text-slate-700">Country *</label>
+                                    <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                        <i class="fas fa-globe text-slate-500"></i>
+                                        <select id="country" name="country"
+                                            class="w-full bg-transparent text-sm text-slate-900 outline-none"
+                                            required></select>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <label for="state" class="block text-sm font-medium text-slate-700">State *</label>
+                                    <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                        <i class="fas fa-map text-slate-500"></i>
+                                        <select id="state" name="state"
+                                            class="w-full bg-transparent text-sm text-slate-900 outline-none"
+                                            required>
                                             <option value="">Select State</option>
                                         </select>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="form-row">
-                                    <div class="form-group full-width">
-                                        <label for="city"><i class="fas fa-city"></i> City *</label>
-                                        <select id="city" name="city" required>
-                                            <option value="">Select City</option>
-                                        </select>
+                            <div class="space-y-3">
+                                <label for="city" class="block text-sm font-medium text-slate-700">City *</label>
+                                <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                    <i class="fas fa-city text-slate-500"></i>
+                                    <select id="city" name="city"
+                                        class="w-full bg-transparent text-sm text-slate-900 outline-none"
+                                        required>
+                                        <option value="">Select City</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information Section -->
+                        <div class="space-y-4">
+                            <h3 class="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                                <i class="fas fa-phone-alt h-4 w-4 text-slate-500"></i>
+                                Contact Information
+                            </h3>
+                            <div class="space-y-3">
+                                <label for="mobile" class="block text-sm font-medium text-slate-700">Mobile *</label>
+                                <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                    <i class="fas fa-phone text-slate-500"></i>
+                                    <input type="tel" id="mobile" name="mobile" placeholder="+41 79 123 45 67"
+                                        class="w-full bg-transparent text-sm text-slate-900 placeholder-slate-500 outline-none"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account Information Section -->
+                        <div class="space-y-4">
+                            <h3 class="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                                <i class="fas fa-user-lock h-4 w-4 text-slate-500"></i>
+                                Account Information
+                            </h3>
+                            <div class="grid gap-4 sm:grid-cols-2">
+                                <div class="space-y-3">
+                                    <label for="email" class="block text-sm font-medium text-slate-700">Email *</label>
+                                    <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                        <i class="fas fa-envelope text-slate-500"></i>
+                                        <input type="email" id="email" name="email" placeholder="your@email.com"
+                                            class="w-full bg-transparent text-sm text-slate-900 placeholder-slate-500 outline-none"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <label for="password" class="block text-sm font-medium text-slate-700">Password *</label>
+                                    <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                        <i class="fas fa-lock text-slate-500"></i>
+                                        <input type="password" id="password" name="password" placeholder="At least 8 characters"
+                                            class="w-full bg-transparent text-sm text-slate-900 placeholder-slate-500 outline-none"
+                                            required>
+                                        <i class="fas fa-eye-slash password-toggle text-slate-400 cursor-pointer hover:text-slate-600"></i>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Contact Information -->
-                            <div class="form-section">
-                                <h3><i class="fas fa-phone-alt"></i> Contact Information</h3>
+                        <!-- Submit Button -->
+                        <button type="submit" id="submitBtn"
+                            class="group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition duration-300 hover:-translate-y-0.5 hover:from-red-700 hover:to-red-600 focus:outline-none focus:ring-4 focus:ring-red-500/20">
+                            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition duration-300 group-hover:bg-white/25">
+                                <i class="fas fa-paper-plane"></i>
+                            </span>
+                            Create Account
+                        </button>
 
-                                <div class="form-row">
-                                    <div class="form-group full-width">
-                                        <label for="mobile"><i class="fas fa-phone rot-90"></i> Mobile *</label>
-                                        <input type="tel" id="mobile" name="mobile" placeholder="+41 79 123 45 67" required>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Account Information -->
-                            <div class="form-section">
-                                <h3><i class="fas fa-user-lock"></i> Account Information</h3>
-
-                                <div class="form-row">
-                                    <div class="form-group half-width">
-                                        <label for="email"><i class="fas fa-envelope"></i> Email *</label>
-                                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                                    </div>
-
-                                    <div class="form-group half-width">
-                                        <label for="password"><i class="fas fa-lock"></i> Password *</label>
-                                        <div class="input-container">
-                                            <input type="password" id="password" name="password" placeholder="At least 8 characters" required>
-                                            <i class="fas fa-eye-slash password-toggle"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Submit Section -->
-                            <div class="form-actions">
-                                <button type="submit" id="submitBtn" class="submit-btn">
-                                    <i class="fas fa-paper-plane"></i>
-                                    Create Account
-                                </button>
-                            </div>
-                            <p class="login-link">Already have an account? <a href="login">Log in</a></p>
-
-                        </form>
-                    </div>
-                </section>
-
-                <?php include 'php/footer.php'; ?>
-
+                        <div class="pt-4 text-center text-sm text-slate-600">
+                            <p>Already have an account? <a href="login" class="font-semibold text-red-600 transition hover:text-red-700">Sign in</a></p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
 
-    </div><!-- /.page-wrapper -->
+        <?php include 'php/footer.php'; ?>
+    </div>
 
     <?php include 'php/mob-nav.php'; ?>
 

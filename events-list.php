@@ -24,7 +24,7 @@
     <?php include 'php/toast.php'; ?>
 
     <div class="page-wrapper">
-        <?php include 'php/header.php'; ?>
+        <?php include 'php/header2.php'; ?>
         <div style=" 
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
                         url('./assets/images/backgrounds/background_image.jpg'); ">

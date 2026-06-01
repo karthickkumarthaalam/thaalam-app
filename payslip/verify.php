@@ -352,7 +352,7 @@
             errorMsg.textContent = "No payslip ID provided!";
         } else {
 
-            fetch(`https://api.demoview.ch/api/payslip/verify-data?id=${1}`)
+            fetch(`https://api.thaalam.ch/api/payslip/verify-data?id=${qrid}`)
                 .then(res => {
                     return res.json();
                 })

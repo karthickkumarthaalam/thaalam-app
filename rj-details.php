@@ -83,7 +83,7 @@
     <?php include 'php/toast.php'; ?>
 
     <div class="page-wrapper">
-        <?php include 'php/header.php'; ?>
+        <?php include 'php/header2.php'; ?>
         <section>
 
             <div id="rj-content" class="hidden ">

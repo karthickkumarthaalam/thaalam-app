@@ -174,6 +174,54 @@
             border: 1px solid #fecaca;
         }
 
+        @media (max-width: 768px) {
+            .header {
+                padding: 25px 30px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .header-right {
+                text-align: left;
+            }
+
+            .content {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .header-left {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+        }
+
+
         @keyframes fadeIn {
             from {
                 opacity: 0;

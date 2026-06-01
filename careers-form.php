@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="assets/css/module-css/careers.css">
 
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
@@ -29,7 +30,7 @@
         <div class="row">
 
             <div>
-                <?php include 'php/header.php'; ?>
+                <?php include 'php/header2.php'; ?>
 
                 <section class="career-sec" style=" 
             background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 

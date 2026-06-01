@@ -7,8 +7,53 @@
     <title>Register OTP - Thaalam Radio Station</title>
 
     <?php include 'php/css.php' ?>
-    <link rel="stylesheet" href="assets/css/module-css/login.css">
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes blob {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(-12px, 12px) scale(1.05);
+            }
+
+            66% {
+                transform: translate(12px, -12px) scale(0.95);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.9s ease-out both;
+        }
+
+        .animate-blob {
+            animation: blob 8s ease-in-out infinite;
+        }
+
+        .animation-delay-1000 {
+            animation-delay: 1s;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+    </style>
 
 </head>
 
@@ -20,41 +65,47 @@
 
     <?php include 'php/toast.php' ?>
 
-    <div class="page-wrapper">
-        <div class="row">
+    <div class="min-h-screen bg-white text-slate-900 antialiased">
+        <?php include 'php/header2.php' ?>
 
-            <div>
-                <?php include 'php/header.php' ?>
-                <section class="login-section" style=" 
-            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
-                        url('./assets/images/backgrounds/background_image.jpg');">
-                    <div class="login-header">
-                        <h2>Verification required</h2>
-                        <p class="subtext">OTP sent to your registered Email Address</p>
+        <section class="relative min-h-screen overflow-hidden px-4 py-12 sm:px-6 lg:px-8"
+            style="background-image: linear-gradient(rgba(255,255,255,0.16), rgba(255,255,255,0.16)), url('./assets/images/backgrounds/background_image.jpg'); background-size: cover; background-position: center;">
+
+
+            <div class="relative mx-auto max-w-lg">
+                <div class="animate-fade-up rounded-[40px] border border-red-100 bg-white p-8 shadow-[0_40px_120px_rgba(15,23,42,0.08)]">
+                    <div class="mb-8 text-center">
+                        <h1 class="mt-6 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">Verification Required</h1>
                     </div>
-                    <div class="login-container">
-                        <form id="otpForm" class="login-form">
-                            <div class="form-group">
-                                <label for="otp">Enter your OTP</label>
-                                <div class="input-container">
-                                    <input type="text" id="otp" name="otp" required>
-                                </div>
+
+                    <form id="otpForm" class="space-y-6">
+                        <div class="space-y-3">
+                            <label for="otp" class="block text-sm font-medium text-slate-700">Enter your OTP</label>
+                            <div class="flex items-center gap-3 rounded-[28px] border border-red-100 bg-slate-50 px-4 py-3 shadow-sm transition duration-300 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500/20">
+                                <i class="fas fa-shield-alt text-slate-500"></i>
+                                <input type="text" id="otp" name="otp" placeholder="Enter 6-digit OTP"
+                                    class="w-full bg-transparent text-sm text-slate-900 placeholder-slate-500 outline-none"
+                                    required>
                             </div>
+                        </div>
 
-                            <button type="submit" id="submitBtn" class="btn-primary">
+                        <button type="submit" id="submitBtn"
+                            class="group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition duration-300 hover:-translate-y-0.5 hover:from-red-700 hover:to-red-600 focus:outline-none focus:ring-4 focus:ring-red-500/20">
+                            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition duration-300 group-hover:bg-white/25">
                                 <i class="fas fa-paper-plane"></i>
-                                Verify OTP
-                            </button>
-                        </form>
+                            </span>
+                            Verify OTP
+                        </button>
 
-                    </div>
-
-                </section>
-
-                <?php include 'php/footer.php'; ?>
-
+                        <div class="pt-4 text-center text-sm text-slate-600">
+                            <p>Didn't receive the code? <a href="#" class="font-semibold text-red-600 transition hover:text-red-700">Resend OTP</a></p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <?php include 'php/footer.php'; ?>
     </div>
 
     <?php include 'php/mob-nav.php'; ?>

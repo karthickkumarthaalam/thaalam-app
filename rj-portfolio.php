@@ -149,7 +149,7 @@
     <div class="page-wrapper">
         <div class="row">
             <div>
-                <?php include 'php/header.php'; ?>
+                <?php include 'php/header2.php'; ?>
 
                 <!-- ── Page Hero ── -->
                 <div class="rj-fade-up text-center py-16 px-4"

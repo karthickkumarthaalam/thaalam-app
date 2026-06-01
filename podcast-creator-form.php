@@ -97,7 +97,7 @@
     <?php include 'php/toast.php'; ?>
 
     <div class="page-wrapper">
-        <?php include 'php/header.php'; ?>
+        <?php include 'php/header2.php'; ?>
         <section class="p-10 min-h-screen bg-gradient-to-b from-purple-50 to-white ">
             <div class="max-w-3xl mx-auto pb-10 text-center">
                 <h1 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-3 text-gray-800 relative inline-block">

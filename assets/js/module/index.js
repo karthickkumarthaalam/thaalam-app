@@ -426,18 +426,20 @@ $(document).ready(function () {
           const duration = `${p.duration ?? 0} min`;
 
           return `
-        <a href="podcast-details.php?id=${p.id}" class="podcast-card block group">
-          <div class="relative overflow-hidden">
-            <img src="${img}" alt="podcast-cover"
-                 class="w-full h-[160px] object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-            ${i < 2 ? `<span class="absolute top-2 left-2 bg-red-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">NEW</span>` : ""}
-            <span class="absolute bottom-2 right-2 flex items-center gap-1 bg-black/60 text-white text-[10px] font-medium px-2 py-0.5 rounded-full">
-              <i class="fa fa-clock text-[9px]"></i> ${duration}
+        <a href="podcast-details.php?id=${p.id}" class="podcast-card block group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+       <div class="p-2">
+          <div class="relative overflow-hidden rounded-xl">
+            <img src="${img}" alt="${title}"
+                 class="w-full h-[180px]  object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            ${i < 2 ? `<span class="absolute top-3 left-3 bg-white text-red-600 text-[10px] font-semibold px-3 py-1 rounded-lg">NEW</span>` : ""}
+            <span class="absolute bottom-3 right-3 inline-flex items-center gap-1 bg-black/70 text-white text-[11px] font-medium px-3 py-1 rounded-full">
+              <i class="fa fa-clock"></i> ${duration}
             </span>
           </div>
-          <div class="p-3">
-            <p class="text-sm font-semibold text-gray-900 leading-snug line-clamp-2">${title}</p>
+       </div>
+          <div class="px-4 py-2">
+            <p class="text-sm font-semibold text-slate-900 leading-snug line-clamp-2">${title}</p>
           </div>
         </a>
       `;
@@ -445,7 +447,7 @@ $(document).ready(function () {
         .join("");
 
       $podcastList.html(`
-      <div class="grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
         ${html}
       </div>
     `);
@@ -651,6 +653,10 @@ $(document).ready(function () {
         .writeText(window.location.href)
         .then(() => showToast("Link Copied", "success"))
         .catch(console.error);
+    });
+
+    $(document).on("click", ".js-hero-listen", () => {
+      playBtn?.click();
     });
   }
 

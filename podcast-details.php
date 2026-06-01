@@ -9,7 +9,7 @@
     $slug = $_GET['slug'] ?? null;
     $podcastId = $_GET['id'] ?? null;
 
-    $baseUrl = "https://api.demoview.ch/api";
+    $baseUrl = "https://api.thaalam.ch/api";
     $metaUrl = "$baseUrl/podcasts/$slug/meta-data";
 
     $response = @file_get_contents($metaUrl);
@@ -235,7 +235,7 @@
     </audio>
 
     <div class="page-wrapper">
-        <?php include 'php/header.php'; ?>
+        <?php include 'php/header2.php'; ?>
 
         <div class=" min-h-screen" style="background-image: 
         url('./assets/images/backgrounds/background_image.jpg');background-size: contain;">
