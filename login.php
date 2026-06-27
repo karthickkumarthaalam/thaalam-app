@@ -104,6 +104,7 @@
                         </div>
                     </div>
 
+
                     <button type="submit"
                         class=" group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-red-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition duration-300 hover:-translate-y-0.5 hover:from-red-700 hover:to-red-600 focus:outline-none focus:ring-4 focus:ring-red-500/20">
                         <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition duration-300 group-hover:bg-white/25">
@@ -112,9 +113,14 @@
                         Sign In
                     </button>
 
+
                     <div class="pt-4 text-center text-sm text-slate-600">
+                        <a href="forget-password" class="font-semibold text-red-600 transition hover:text-red-700">Forget Password</a>
+                    </div>
+                    <div class=" text-center text-sm text-slate-600">
                         <p>New to thaalam? <a href="register" class="font-semibold text-red-600 transition hover:text-red-700">Sign up</a></p>
                     </div>
+
                 </form>
             </div>
         </section>

@@ -114,7 +114,8 @@
                 </li>
 
                 <li>
-                    <a href="rj-portfolio"
+                    <!-- <a href="rj-portfolio" -->
+                    <a href="#"
                         class="flex items-center gap-2 px-2 py-1 transition duration-200 hover:text-red-600">
 
                         <span class="flex items-center justify-center w-6 h-6 rounded-md bg-slate-100 text-slate-600">

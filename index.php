@@ -300,8 +300,7 @@
 
 
                                                             <p class="text-sm text-gray-700 font-semibold flex items-center justify-center  gap-2  ">
-                                                                <span id="programArtist">Live RJ</span>
-                                                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse "></span>
+                                                                <!-- <span id="programArtist">Live RJ</span> -->
                                                             </p>
 
                                                             <p

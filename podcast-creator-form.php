@@ -11,116 +11,66 @@
     ?>
 
     <?php include 'php/css.php'; ?>
+    <link rel="stylesheet" href="assets/css/module-css/podcast-creator-form.css">
     <?php include 'php/analyticsHeader.php'; ?>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .tab-btn {
-            padding: 0.55rem 1.4rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: #4b5563;
-            /* gray-600 */
-            background: #f3f4f6;
-            /* gray-100 */
-            border: 1px solid #e5e7eb;
-            /* gray-200 */
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.25s ease;
-        }
-
-        .tab-btn:hover {
-            background: #e5e7eb;
-            /* gray-200 */
-            color: #111827;
-            /* gray-900 */
-        }
-
-        .tab-btn.active {
-            color: #ffffff;
-            background: linear-gradient(135deg, #f53f3fff, #ee3030ff);
-            border-color: transparent;
-            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.35);
-        }
-
-        .tab-btn.active i {
-            color: #ffffff;
-        }
-
-
-        .tab-panel {
-            display: none;
-        }
-
-        .tab-panel.active {
-            display: block;
-        }
-
-        /* Mobile tab improvements */
-        @media (max-width: 640px) {
-            .tab-btn {
-                flex: 1 1 auto;
-                justify-content: center;
-                padding: 0.6rem 0.75rem;
-                font-size: 0.8rem;
-                border-radius: 0.75rem;
-                gap: 0.4rem;
-            }
-
-
-            /* Make tabs scrollable instead of wrapping */
-            .tab-btn-container {
-                display: flex;
-                gap: 0.5rem;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                /* Firefox */
-            }
-
-            .tab-btn-container::-webkit-scrollbar {
-                display: none;
-                /* Chrome / Safari */
-            }
-        }
-    </style>
-
 </head>
 
-<body class="bg-white custom-cursor">
+<body class="custom-cursor">
     <?php $pagename = "podcast-creator-form"; ?>
 
     <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
     <?php include 'php/toast.php'; ?>
 
-    <div class="page-wrapper">
+    <div class=" creator-form-page">
         <?php include 'php/header2.php'; ?>
-        <section class="p-10 min-h-screen bg-gradient-to-b from-purple-50 to-white ">
-            <div class="max-w-3xl mx-auto pb-10 text-center">
-                <h1 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-3 text-gray-800 relative inline-block">
-                    Become a <span class="text-red-600">Podcast Creator</span>
-                </h1>
+        <section class="creator-application">
+            <!-- <div class="creator-form-grid" aria-hidden="true"></div>
+            <div class="creator-form-glow creator-form-glow--one" aria-hidden="true"></div>
+            <div class="creator-form-glow creator-form-glow--two" aria-hidden="true"></div> -->
 
-                <p class="text-lg text-gray-800">
-                    Share your voice with the world. Submit your details and join the Thaalam Media.
-                </p>
+            <div class="creator-form-intro">
+                <a href="/thaalam-creators" class="creator-form-back">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M19 12H5m6 6-6-6 6-6"></path>
+                    </svg>
+                    Creator program
+                </a>
+                <div class="creator-form-eyebrow"><span></span> Your story starts here</div>
+                <h1>Step up to the <span>mic.</span></h1>
+                <p>Tell us about you and the voice you want to share. It only takes a few minutes.</p>
+                <div class="creator-form-wave" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
             </div>
 
             <form
                 novalidate
                 id="podcastCreatorForm"
                 enctype="multipart/form-data"
-                class="w-full max-w-6xl mx-auto rounded-xl shadow-lg bg-white p-3 sm:p-6 md:p-10 lg:p-12 space-y-6">
+                class="creator-application-card w-full max-w-6xl mx-auto">
+
+                <div class="creator-form-card__top">
+                    <div>
+                        <span class="creator-form-card__kicker">Creator application</span>
+                        <strong>Let’s build your profile</strong>
+                    </div>
+                    <div class="creator-form-progress-copy">
+                        <span id="creatorProgressLabel">Step 1 of 4</span>
+                        <strong id="creatorProgressPercent">25%</strong>
+                    </div>
+                </div>
+
+                <div class="creator-form-progress" aria-hidden="true"><span id="creatorProgressBar"></span></div>
 
                 <!-- TAB NAV -->
-                <div class="flex items-center justify-center gap-2 mb-8 border-b pb-4 tab-btn-container">
-                    <button type="button" class="tab-btn active" data-tab="personal">Personal</button>
-                    <button type="button" class="tab-btn" data-tab="address">Address</button>
-                    <button type="button" class="tab-btn whitespace-nowrap" data-tab="id">ID Proof</button>
-                    <button type="button" class="tab-btn" data-tab="creator">Creator</button>
+                <div class="tab-btn-container">
+                    <button type="button" class="tab-btn active" data-tab="personal"><span>01</span> Personal</button>
+                    <button type="button" class="tab-btn" data-tab="address"><span>02</span> Address</button>
+                    <button type="button" class="tab-btn whitespace-nowrap" data-tab="id"><span>03</span> ID Proof</button>
+                    <button type="button" class="tab-btn" data-tab="creator"><span>04</span> Creator</button>
                 </div>
 
                 <div class="tab-panel active min-h-[50vh]" id="tab-personal">

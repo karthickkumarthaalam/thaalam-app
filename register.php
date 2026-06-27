@@ -81,14 +81,28 @@
 
         <section class="relative overflow-hidden px-4 py-12 sm:px-6 lg:px-8"
             style="background-image: linear-gradient(rgba(255,255,255,0.16), rgba(255,255,255,0.16)), url('./assets/images/backgrounds/background_image.jpg'); background-size: cover; background-position: center;">
-            <div class="relative mx-auto max-w-4xl">
+            <div class="relative mx-auto max-w-5xl">
                 <div class="animate-fade-up rounded-[40px] border border-red-100 bg-white p-8 shadow-[0_40px_120px_rgba(15,23,42,0.08)]">
-                    <div class="mb-8 text-center">
-                        <span class="inline-flex rounded-full border border-red-100 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-red-700 shadow-sm">Join Us</span>
-                        <h1 class="mt-6 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">Create Your Account</h1>
-                        <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-600">Join our music community and get access to exclusive content, shows, and podcasts.</p>
-                    </div>
+                    <div class="mb-10 text-center">
 
+                        <span class="inline-flex items-center gap-2 rounded-full border border-red-100 bg-red-50 px-5 py-2 text-xs font-bold uppercase tracking-[0.28em] text-red-700 shadow-sm">
+                            <span class="h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
+                            Join Us
+                        </span>
+
+                        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                            Create Your
+                            <span class="bg-gradient-to-r from-red-600 via-red-500 to-orange-500 bg-clip-text text-transparent">
+                                Account
+                            </span>
+                        </h1>
+
+                        <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+                            Join our music community and unlock access to exclusive podcasts,
+                            live shows, and unforgettable experiences crafted just for you.
+                        </p>
+
+                    </div>
                     <form id="signupForm" class="space-y-6">
                         <!-- Personal Information Section -->
                         <div class="space-y-4">

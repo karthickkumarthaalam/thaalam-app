@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <?php
@@ -10,289 +10,310 @@
     include 'php/meta.php'; ?>
 
     <?php include 'php/css.php'; ?>
-    <?php include 'php/analyticsHeader.php'; ?>
+    <link rel="stylesheet" href="assets/css/module-css/thaalam-creators.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
 
-            to {
-                opacity: 1;
-            }
-        }
-
-        .animate-fade {
-            opacity: 0;
-            animation: fade-in 0.9s ease-out forwards;
-        }
-
-        .fade-delay-1 {
-            animation-delay: 1s;
-        }
-
-        .fade-delay-2 {
-            animation-delay: 1.2;
-        }
-
-        .fade-delay-3 {
-            animation-delay: 1.2s;
-        }
-    </style>
-
-
+    <?php include 'php/analyticsHeader.php'; ?>
 </head>
 
-<body class="bg-white custom-cursor">
+<body class="custom-cursor">
     <?php $pagename = "podcast-creator"; ?>
 
     <?php include 'php/analyticsBody.php'; ?>
     <?php include 'php/preloader.php'; ?>
     <?php include 'php/toast.php'; ?>
 
-    <div class="page-wrapper">
+    <div class="page-wrapper creator-page">
         <?php include 'php/header2.php'; ?>
 
-        <section class="pt-20 pb-20 px-6 bg-gradient-to-b from-purple-50 to-white overflow-hidden border-b border-purple-300">
-            <div class="container mx-auto">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+        <main>
+            <section class="creator-hero" aria-labelledby="creator-title">
+                <div class="creator-glow creator-glow--one" aria-hidden="true"></div>
+                <div class="creator-glow creator-glow--two" aria-hidden="true"></div>
+                <div class="creator-grid" aria-hidden="true"></div>
 
-                    <!-- TEXT -->
-                    <div class="space-y-6  md:ml-6 lg:ml-12 ">
-                        <h1 class="text-3xl lg:text-4xl  font-semibold text-gray-900 leading-tight animate-fade">
-                            Your Voice Deserves to be
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
-                                Heard & Rewarded
-                            </span>
+                <div class="creator-container creator-hero__grid">
+                    <div class="creator-hero__content">
+                        <div class="creator-eyebrow creator-hero__eyebrow">
+                            <span class="creator-eyebrow__dot"></span>
+                            Thaalam Creator Program
+                        </div>
+
+                        <h1 id="creator-title">
+                            Your story has a
+                            <span class="creator-gradient-text">frequency.</span>
+                            Let the world tune in.
                         </h1>
 
-                        <p class="text-base lg:text-xl text-gray-600 leading-relaxed animate-fade">
-                            Join Thaalam Radio's Creator Program! Share your podcast with our audience and get paid based on your reach.
-                            No experience needed – just your unique story and passion.
+                        <p class="creator-hero__copy">
+                            Create the podcast only you can make. Thaalam helps you publish, reach a global
+                            Tamil audience, and earn as your community grows.
                         </p>
 
-                        <div class="flex flex-col items-center justify-start flex-row gap-4 pt-4 animate-fade ">
-                            <a href="/podcast-creator-form"
-                                class="border-2 border-red-500 bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-2 rounded-full text-base font-semibold hover:shadow-xl transition-all text-center">
-                                Become a Creator
-                            </a>
-
-                            <a href="#how-it-works"
-                                class="border-2 border-red-500 text-red-600 px-3 py-2 rounded-full text-base font-semibold hover:bg-red-50 transition-all text-center">
-                                Learn More
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- IMAGE -->
-                    <div class="animate-fade ">
-                        <img
-                            src="assets/img/radio/podcast-sofa.webp"
-                            alt="Podcast recording microphone for Thaalam Podcast Creator"
-                            class="w-full max-w-sm lg:max-w-lg mx-auto h-auto object-contain"
-                            loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="py-10 px-6 ">
-            <div class="container mx-auto">
-
-                <div class="flex flex-col-reverse md:flex-row gap-12 items-center">
-
-                    <!-- IMAGE (first on desktop) -->
-                    <div class=" flex justify-center md:w-1/2">
-                        <img
-                            src="assets/img/radio/radio-mic.webp"
-                            alt="Podcast recording microphone for Thaalam Podcast Creator"
-                            class="w-full max-w-sm md:max-w-md lg:max-w-lg rounded-xl shadow-lg object-contain"
-                            loading="lazy">
-                    </div>
-
-                    <!-- CONTENT (first on mobile) -->
-                    <div class=" space-y-6 md:w-1/2">
-                        <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">
-                            About Thaalam Podcast
-                        </span>
-                        <h2 class="text-3xl lg:text-4xl font-bold text-gray-800">
-                            Expanding Our Voice with Yours
-                        </h2>
-                        <p class="text-base lg:text-lg text-gray-600 leading-relaxed">
-                            For years, our talented RJs have been creating engaging podcasts that our community loves.
-                            Now, we're opening our platform to YOU – our listeners!
-                        </p>
-                        <p class="text-base lg:text-lg text-gray-600 leading-relaxed">
-                            We believe everyone has a story worth sharing. Whether you're passionate about music,
-                            technology, culture, storytelling, or any topic that moves you,
-                            Thaalam Radio wants to amplify your voice.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="how-it-works" class="py-20 px-6 bg-slate-50">
-            <div class="container mx-auto">
-                <div class="text-center mb-16">
-                    <span class="text-red-500 font-semibold text-base uppercase tracking-wider">Simple Process</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-3 mb-3">How It Works</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">From creation to earnings – your journey on Thaalam Radio</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-                    <div class="bg-white p-8 rounded-2xl shadow-lg text-center relative">
-                        <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold shadow-lg">1</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Create Your Podcast</h3>
-                        <p class="text-gray-600">Record your podcast on any topic you're passionate about. Use your phone or any recording device.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg text-center relative">
-                        <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold shadow-lg">2</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Submit for Review</h3>
-                        <p class="text-gray-600">Upload your podcast through our application. Our team reviews it within 48 hours.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg text-center relative">
-                        <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold shadow-lg">3</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Get Published</h3>
-                        <p class="text-gray-600">Once approved, we publish your podcast on our platform and promote it to our audience.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl shadow-lg text-center relative">
-                        <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold shadow-lg">4</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Earn Money</h3>
-                        <p class="text-gray-600">Get paid monthly based on your podcast's reach, listens, and engagement metrics.</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="looking-for" class="py-20 px-6 bg-gradient-to-b from-white to-purple-50">
-            <div class="container mx-auto">
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                    <div class="grid lg:grid-cols-2">
-                        <div class="p-10 space-y-6">
-                            <h3 class="text-2xl font-bold text-gray-900">What We're Looking For</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start space-x-3">
-                                    <svg class="w-6 h-6 text-red-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                    <div>
-                                        <div class="font-semibold text-gray-900">Original Content</div>
-                                        <div class="text-gray-600">Share your unique perspective and stories</div>
-                                    </div>
-                                </li>
-                                <li class="flex items-start space-x-3">
-                                    <svg class="w-6 h-6 text-red-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                    <div>
-                                        <div class="font-semibold text-gray-900">Clear Audio Quality</div>
-                                        <div class="text-gray-600">Good sound quality (professional equipment not required)</div>
-                                    </div>
-                                </li>
-                                <li class="flex items-start space-x-3">
-                                    <svg class="w-6 h-6 text-red-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                    <div>
-                                        <div class="font-semibold text-gray-900">Engaging Topics</div>
-                                        <div class="text-gray-600">Stories, interviews, education, entertainment, or inspiration</div>
-                                    </div>
-                                </li>
-                                <li class="flex items-start space-x-3">
-                                    <svg class="w-6 h-6 text-red-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                    <div>
-                                        <div class="font-semibold text-gray-900">Length: 10-45 minutes</div>
-                                        <div class="text-gray-600">Perfect duration for listener engagement</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="relative h-full min-h-96">
-                            <img src="assets/img/radio/radio-room.webp" alt="Podcast recording microphone for Thaalam Podcast Creator"
-                                class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="earnings" class="relative py-16 px-6 bg-gradient-to-b from-purple-50 to-white">
-            <div class="max-w-4xl mx-auto">
-
-                <div class=" overflow-hidden rounded-3xl shadow-2xl bg-gradient-to-br from-red-500 via-red-600 via-red-700 to-red-800 p-10 md:p-14 text-white">
-                    <!-- CONTENT -->
-                    <div class="relative z-10">
-
-                        <h2 class="text-2xl md:text-3xl text-white font-extrabold mb-4">
-                            Ready to Get Started?
-                        </h2>
-
-                        <p class="text-red-100 mb-10 text-lg md:text-xl max-w-2xl">
-                            Submit your podcast today and join our growing community of creators.
-                            Turn your voice into impact — and income.
-                        </p>
-
-                        <!-- FEATURES -->
-                        <div class="grid md:grid-cols-2 gap-6 mb-12">
-                            <div class="flex items-start gap-4">
-                                <span class="flex-shrink-0 mt-1">
-                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
-                                <p class="text-base md:text-lg">Quick 48-hour review process</p>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <span class="flex-shrink-0 mt-1">
-                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
-                                <p class="text-base md:text-lg">No upfront costs or hidden fees</p>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <span class="flex-shrink-0 mt-1">
-                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
-                                <p class="text-base md:text-lg">You keep 100% creative rights</p>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <span class="flex-shrink-0 mt-1">
-                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
-                                <p class="text-base md:text-lg">Dedicated creator support</p>
-                            </div>
-                        </div>
-
-                        <!-- CTA -->
-                        <div class="flex justify-center md:justify-start">
-                            <a
-                                href="/podcast-creator-form"
-                                class="inline-flex items-center gap-3 bg-white text-red-600 px-4 py-3 rounded-full text-base  md:text-lg font-bold shadow-lg hover:shadow-2xl hover:scale-105 transition-all">
-                                Become a Podcast Creator
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        <div class="creator-actions">
+                            <a href="/podcast-creator-form" class="creator-button creator-button--primary">
+                                Start creating
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
                                 </svg>
                             </a>
+                            <a href="#how-it-works" class="creator-button creator-button--ghost">
+                                <span class="creator-play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="m9 7 8 5-8 5V7Z"></path>
+                                    </svg>
+                                </span>
+                                See how it works
+                            </a>
                         </div>
 
+                        <div class="creator-trust">
+                            <div class="creator-avatars" aria-hidden="true">
+                                <span>RJ</span><span>ST</span><span>YOU</span>
+                            </div>
+                            <div>
+                                <div class="creator-stars" aria-label="Five stars">★★★★★</div>
+                                <p>Built for original voices</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="creator-hero__visual" data-parallax-area aria-label="Podcast creator studio illustration">
+                        <div class="creator-orbit creator-orbit--outer" aria-hidden="true"></div>
+                        <div class="creator-orbit creator-orbit--inner" aria-hidden="true"></div>
+
+                        <div class="creator-studio-card" data-parallax-item>
+                            <div class="creator-studio-card__top">
+                                <span class="creator-live"><i></i> Recording</span>
+                                <span class="creator-time">12:48</span>
+                            </div>
+                            <img src="assets/img/radio/podcast-sofa.webp"
+                                alt="A comfortable podcast recording setup"
+                                width="640" height="520">
+                            <div class="creator-waveform" aria-hidden="true">
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+
+                        <div class="creator-float-card creator-float-card--reach" data-float-depth="1">
+                            <span class="creator-float-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M4 19V9m6 10V5m6 14v-7m4 7H2"></path>
+                                </svg>
+                            </span>
+                            <div><strong>Grow your reach</strong><small>One story at a time</small></div>
+                        </div>
+
+                        <div class="creator-float-card creator-float-card--rights" data-float-depth="2">
+                            <span class="creator-float-icon creator-float-icon--warm">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 21s8-4.4 8-11V5l-8-3-8 3v5c0 6.6 8 11 8 11Z"></path>
+                                    <path d="m9 12 2 2 4-4"></path>
+                                </svg>
+                            </span>
+                            <div><strong>100% yours</strong><small>Keep your creative rights</small></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
+                <a class="creator-scroll-cue" href="#about" aria-label="Scroll to learn more">
+                    <span></span> Explore
+                </a>
+            </section>
+
+            <section id="about" class="creator-section creator-about">
+                <div class="creator-container creator-about__grid">
+                    <div class="creator-about__visual creator-reveal">
+                        <div class="creator-image-frame">
+                            <img src="assets/img/radio/radio-mic.webp"
+                                alt="Microphone ready to record a Thaalam podcast"
+                                loading="lazy" width="640" height="640">
+                            <div class="creator-image-frame__badge">
+                                <span class="creator-pulse-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 2a4 4 0 0 0-4 4v6a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4Z"></path>
+                                        <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8"></path>
+                                    </svg>
+                                </span>
+                                <span><strong>Your voice.</strong><small>Your platform.</small></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="creator-about__content creator-reveal">
+                        <div class="creator-kicker">More than a microphone</div>
+                        <h2>We turn fresh voices into <span>shared experiences.</span></h2>
+                        <p>
+                            For years, Thaalam's RJs have made podcasts our community loves. Now the studio
+                            door is open to you—our listeners, storytellers, and next generation of creators.
+                        </p>
+                        <p>
+                            Music, technology, culture, interviews or a story no one else has told yet:
+                            bring the passion and we will help amplify it.
+                        </p>
+
+                        <div class="creator-mini-stats">
+                            <div><strong>48h</strong><span>Review window</span></div>
+                            <div><strong>10–45</strong><span>Ideal minutes</span></div>
+                            <div><strong>0</strong><span>Upfront cost</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="how-it-works" class="creator-section creator-process">
+                <div class="creator-process__halo" aria-hidden="true"></div>
+                <div class="creator-container">
+                    <div class="creator-heading creator-reveal">
+                        <div class="creator-kicker">Simple by design</div>
+                        <h2>From first take to <span>first listener.</span></h2>
+                        <p>Four clear steps. No complicated production maze.</p>
+                    </div>
+
+                    <div class="creator-process__track">
+                        <div class="creator-process__line" aria-hidden="true"><span></span></div>
+
+                        <article class="creator-step creator-reveal">
+                            <div class="creator-step__number">01</div>
+                            <div class="creator-step__icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 2a4 4 0 0 0-4 4v6a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4Z"></path>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8"></path>
+                                </svg>
+                            </div>
+                            <h3>Create</h3>
+                            <p>Record a story or topic you care about using the setup you already have.</p>
+                        </article>
+
+                        <article class="creator-step creator-reveal">
+                            <div class="creator-step__number">02</div>
+                            <div class="creator-step__icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 16V4m0 0L7 9m5-5 5 5"></path>
+                                    <path d="M20 15v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"></path>
+                                </svg>
+                            </div>
+                            <h3>Submit</h3>
+                            <p>Send your episode through our creator application for a quick review.</p>
+                        </article>
+
+                        <article class="creator-step creator-reveal">
+                            <div class="creator-step__number">03</div>
+                            <div class="creator-step__icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M8 5v14l11-7L8 5Z"></path>
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg>
+                            </div>
+                            <h3>Go live</h3>
+                            <p>Once approved, Thaalam publishes and shares it with our growing audience.</p>
+                        </article>
+
+                        <article class="creator-step creator-reveal">
+                            <div class="creator-step__number">04</div>
+                            <div class="creator-step__icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                            </div>
+                            <h3>Grow & earn</h3>
+                            <p>Build an audience and earn monthly based on reach and engagement.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="looking-for" class="creator-section creator-fit">
+                <div class="creator-container">
+                    <div class="creator-fit__card creator-reveal">
+                        <div class="creator-fit__content">
+                            <div class="creator-kicker creator-kicker--light">Your show, your signature</div>
+                            <h2>What makes a great <span>Thaalam podcast?</span></h2>
+                            <p class="creator-fit__intro">No expensive studio required. The things that matter most cannot be bought.</p>
+
+                            <div class="creator-checks">
+                                <div class="creator-check">
+                                    <span><svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="m5 12 4 4L19 6"></path>
+                                        </svg></span>
+                                    <div><strong>Original perspective</strong><small>A voice and story that feel unmistakably yours.</small></div>
+                                </div>
+                                <div class="creator-check">
+                                    <span><svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="m5 12 4 4L19 6"></path>
+                                        </svg></span>
+                                    <div><strong>Clear, listenable audio</strong><small>Your phone and a quiet room can be enough.</small></div>
+                                </div>
+                                <div class="creator-check">
+                                    <span><svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="m5 12 4 4L19 6"></path>
+                                        </svg></span>
+                                    <div><strong>A topic with energy</strong><small>Teach, entertain, interview, or inspire.</small></div>
+                                </div>
+                                <div class="creator-check">
+                                    <span><svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="m5 12 4 4L19 6"></path>
+                                        </svg></span>
+                                    <div><strong>A focused 10–45 minutes</strong><small>Long enough to matter, tight enough to replay.</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="creator-fit__image">
+                            <img src="assets/img/radio/radio-room.webp"
+                                alt="Thaalam Radio podcast recording room"
+                                loading="lazy" width="760" height="900">
+                            <div class="creator-now-playing">
+                                <span class="creator-now-playing__play" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="m9 7 8 5-8 5V7Z"></path>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span>Now recording</span>
+                                    <strong>Your next big idea</strong>
+                                </div>
+                                <div class="creator-mini-wave" aria-hidden="true">
+                                    <i></i><i></i><i></i><i></i><i></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="earnings" class="creator-section creator-cta">
+                <div class="creator-container">
+                    <div class="creator-cta__card creator-reveal">
+                        <div class="creator-cta__rings" aria-hidden="true"></div>
+                        <div class="creator-cta__wave" aria-hidden="true">
+                            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                        </div>
+                        <div class="creator-kicker creator-kicker--light">The mic is ready</div>
+                        <h2>Make something worth<br><span>listening to.</span></h2>
+                        <p>Join Thaalam's creator community. Your first episode could be the one someone needs today.</p>
+
+                        <div class="creator-cta__benefits">
+                            <span><i>✓</i> 48-hour review</span>
+                            <span><i>✓</i> No hidden fees</span>
+                            <span><i>✓</i> You keep your rights</span>
+                        </div>
+
+                        <a href="/podcast-creator-form" class="creator-button creator-button--white">
+                            Become a podcast creator
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
 
         <?php include 'php/footer.php'; ?>
     </div>
@@ -300,6 +321,7 @@
     <?php include 'php/mob-nav.php'; ?>
     <?php include 'php/config-js.php'; ?>
     <?php include 'php/scripts.php'; ?>
+    <script src="assets/js/module/thaalam-creators.js" defer></script>
 </body>
 
 </html>

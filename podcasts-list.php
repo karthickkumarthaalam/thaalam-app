@@ -552,7 +552,7 @@
     <?php include 'php/preloader.php'; ?>
     <?php include 'php/toast.php'; ?>
 
-    <div class="page-wrapper">
+    <div class="">
         <?php include 'php/header2.php'; ?>
 
 
@@ -594,7 +594,7 @@
                     </div>
 
                     <!-- CARDS GRID -->
-                    <div id="podcast-list" class="min-h-screen "></div>
+                    <div id="podcast-list" class="min-h-screen"></div>
 
                     <!-- PAGINATION -->
                     <div id="pagination" class="flex justify-center my-6"></div>

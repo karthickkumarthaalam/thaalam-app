@@ -110,22 +110,22 @@
                             </div>
 
                             <div class="flex justify-center mb-10">
-                                <div class="relative flex items-center gap-2 px-2 py-2 bg-[#0f0f0f] border border-white/10 rounded-full shadow-md">
+                                <div class="relative flex items-center gap-2 px-2 py-2 border border-white/10 rounded-full shadow-md">
 
                                     <!-- ACTIVE BACKGROUND -->
                                     <div id="tab-indicator"
-                                        class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-red-600/90 rounded-full transition-all duration-300">
+                                        class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-gradient-to-r from-red-600 to-red-500 rounded-full transition-all duration-300">
                                     </div>
 
                                     <!-- FEEDBACK -->
                                     <button onclick="switchTab('contactForm', 0)"
-                                        class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-white transition">
+                                        class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-gray-100 transition">
                                         Feedback
                                     </button>
 
                                     <!-- ADVERTISEMENT -->
                                     <button onclick="switchTab('advertisementForm', 1)"
-                                        class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-white transition">
+                                        class="tab-btn relative z-10 px-6 py-2 text-sm font-medium text-gray-400 transition">
                                         Advertisement
                                     </button>
 
@@ -411,7 +411,7 @@
 
             // Update active text
             buttons.forEach((btn, i) => {
-                btn.classList.toggle('text-gray-900', i === index);
+                btn.classList.toggle('text-gray-100', i === index);
                 btn.classList.toggle('text-gray-400', i !== index);
             });
 

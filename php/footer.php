@@ -151,3 +151,4 @@
     </script>
 </footer>
 <!--Site Footer End-->
+<?php include __DIR__ . '/radio-modal.php'; ?>

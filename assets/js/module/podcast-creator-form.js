@@ -8,8 +8,12 @@ let currentTab = 0;
 const tabButtons = document.querySelectorAll(".tab-btn");
 const panels = document.querySelectorAll(".tab-panel");
 const form = document.getElementById("podcastCreatorForm");
+const progressBar = document.getElementById("creatorProgressBar");
+const progressLabel = document.getElementById("creatorProgressLabel");
+const progressPercent = document.getElementById("creatorProgressPercent");
 
 function showTab(index) {
+  const tabChanged = currentTab !== index;
   panels.forEach((p) => p.classList.remove("active"));
   tabButtons.forEach((b) => b.classList.remove("active"));
 
@@ -17,6 +21,13 @@ function showTab(index) {
   tabButtons[index].classList.add("active");
 
   currentTab = index;
+  const percent = Math.round(((index + 1) / tabs.length) * 100);
+  if (progressBar) progressBar.style.width = `${percent}%`;
+  if (progressLabel) progressLabel.textContent = `Step ${index + 1} of ${tabs.length}`;
+  if (progressPercent) progressPercent.textContent = `${percent}%`;
+  if (tabChanged && window.matchMedia("(max-width: 767px)").matches) {
+    tabButtons[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }
   updateNavButtons();
 }
 

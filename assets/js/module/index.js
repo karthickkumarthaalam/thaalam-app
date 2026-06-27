@@ -304,16 +304,6 @@ $(document).ready(function () {
       const program = res.current;
       const programId = program?.id || null;
 
-      if (programId) {
-        window.dispatchEvent(
-          new CustomEvent("program:changed", {
-            detail: {
-              programId,
-            },
-          }),
-        );
-      }
-
       const title = program?.program_category?.category || "No live program";
       const rj = program?.system_users?.name || "";
       const rjSlug = slugify(rj);
@@ -330,20 +320,29 @@ $(document).ready(function () {
             "/",
           )}`
         : "images/default-cover.png";
+      const bannerURL = program?.program_category?.image_url || "";
+
+      if (programId) {
+        window.dispatchEvent(
+          new CustomEvent("program:changed", {
+            detail: { programId, title, rj, imgURL, bannerURL },
+          }),
+        );
+      }
 
       if (first) updateCarousel(program, true);
 
       $("#programTitle").text(title);
       $("#programArtist").text(rj);
       $("#showTime").text(time);
-      $("#programImage").attr("src", imgURL).attr("alt", title);
+      // $("#programImage").attr("src", imgURL).attr("alt", title);
 
-      $("#programImage")
-        .css("cursor", "pointer")
-        .off("click")
-        .on("click", () => {
-          window.location.href = rjurl;
-        });
+      // $("#programImage")
+      //   .css("cursor", "pointer")
+      //   .off("click")
+      //   .on("click", () => {
+      //     window.location.href = rjurl;
+      //   });
 
       $("#programArtist")
         .css("cursor", "pointer")
@@ -376,10 +375,45 @@ $(document).ready(function () {
 
     for (let i = 0; i < count; i++) {
       html += `
-      <div class="bg-white rounded-xl border border-gray-100 p-2 shadow-sm">
-        <div class="skeleton w-full h-[150px] mb-3"></div>
-        <div class="skeleton h-4 w-3/4 mb-2"></div>
-        <div class="skeleton h-3 w-1/3"></div>
+      <div class="flex gap-4 p-3 bg-white rounded-2xl border border-gray-100 shadow-sm">
+
+        <!-- Image Skeleton -->
+        <div class="flex-shrink-0">
+          <div class="skeleton w-32 h-32 rounded-2xl"></div>
+        </div>
+
+        <!-- Content Skeleton -->
+        <div class="flex flex-1 flex-col justify-between py-1">
+
+          <div>
+            <!-- Title -->
+            <div class="skeleton h-4 w-5/6 rounded mb-3"></div>
+            <div class="skeleton h-4 w-2/3 rounded"></div>
+
+            <!-- Author -->
+            <div class="flex items-center gap-2 mt-4">
+              <div class="skeleton w-8 h-8 rounded-full"></div>
+
+              <div class="flex-1">
+                <div class="skeleton h-2 w-16 rounded mb-2"></div>
+                <div class="skeleton h-3 w-24 rounded"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="flex items-center justify-between mt-4">
+
+            <!-- Duration -->
+            <div class="skeleton h-8 w-20 rounded-full"></div>
+
+            <!-- Play Button -->
+            <div class="skeleton w-11 h-11 rounded-full"></div>
+
+          </div>
+
+        </div>
+
       </div>
     `;
     }
@@ -387,10 +421,10 @@ $(document).ready(function () {
     $("#new-podcasts")
       .html(
         `
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-      ${html}
-    </div>
-  `,
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        ${html}
+      </div>
+    `,
       )
       .show();
   }
@@ -417,41 +451,89 @@ $(document).ready(function () {
       }
 
       const html = podcasts
-        .map((p, i) => {
+        .map((p, index) => {
           const img =
             p.image_url ||
             "assets/img/common/podcast-details/podcast-banner.jpg";
+
           const title =
-            (p.title || "").slice(0, 80) + (p.title?.length > 80 ? "…" : "");
+            (p.title || "").slice(0, 60) + (p.title?.length > 60 ? "..." : "");
+
           const duration = `${p.duration ?? 0} min`;
+          const author = p.rjname || p.author || "Podcast";
 
           return `
-        <a href="podcast-details.php?id=${p.id}" class="podcast-card block group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-       <div class="p-2">
-          <div class="relative overflow-hidden rounded-xl">
-            <img src="${img}" alt="${title}"
-                 class="w-full h-[180px]  object-cover transition-transform duration-500 group-hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-            ${i < 2 ? `<span class="absolute top-3 left-3 bg-white text-red-600 text-[10px] font-semibold px-3 py-1 rounded-lg">NEW</span>` : ""}
-            <span class="absolute bottom-3 right-3 inline-flex items-center gap-1 bg-black/70 text-white text-[11px] font-medium px-3 py-1 rounded-full">
-              <i class="fa fa-clock"></i> ${duration}
-            </span>
-          </div>
+      <a href="podcast-details?id=${p.id}"
+         class="group flex gap-4 p-1 md:p-3 bg-white rounded-2xl border border-gray-100 overflow-hidden
+                transition-all duration-300 hover:-translate-y-1
+                hover:border-red-200">
+
+        <!-- Image -->
+        <div class="relative flex-shrink-0">
+
+          <img
+            src="${img}"
+            alt="${title}"
+            class="w-32 lg:w-48 h-32 rounded-2xl object-cover transition duration-500 group-hover:scale-105"
+          />
+
+           ${
+             index < 2
+               ? `
+               <span
+                 class="absolute top-2 left-2 bg-white/95 text-red-600 text-[10px]
+                           font-semibold px-2 py-1 rounded-full shadow-sm"
+               >
+                 NEW
+               </span>
+            `
+               : ""
+           }
+
+         <div class="absolute bottom-1 right-1 bg-gray-50/70 
+                         text-[10px] font-bold text-gray-800 inline-flex items-center
+                         px-1.5 py-1 rounded-full">
+              ${duration}
+         </div>
+        
+
+        </div>
+
+        <!-- Content -->
+        <div class="flex flex-1 flex-col justify-between min-w-0 py-1">
+
+          <div>
+            <h3 class="text-gray-900 font-bold text-[12px] md:text-[15px] leading-6 line-clamp-2
+                       group-hover:text-red-600 transition-colors">
+              ${title}
+            </h3>
+
+            <div class="flex items-center gap-2 mt-3">
+              <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                <i class="fa fa-microphone text-red-600 text-xs"></i>
+              </div>
+
+              <div>
+                <p class="text-xs text-gray-500">Hosted by</p>
+                <p class="text-sm font-medium text-gray-700 truncate">
+                  ${author}
+                </p>
+              </div>
+            </div>
        </div>
-          <div class="px-4 py-2">
-            <p class="text-sm font-semibold text-slate-900 leading-snug line-clamp-2">${title}</p>
-          </div>
-        </a>
-      `;
+
+        </div>
+
+      </a>
+    `;
         })
         .join("");
 
       $podcastList.html(`
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-        ${html}
-      </div>
-    `);
-
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+    ${html}
+  </div>
+`);
       $podcastList.fadeIn(300);
     } catch (err) {
       console.error("Podcast failed:", err);
