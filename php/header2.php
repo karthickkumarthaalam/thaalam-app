@@ -132,6 +132,18 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="our-shows"
+                        class="flex items-center gap-2 px-2 py-1 transition duration-200 hover:text-red-600">
+
+                        <span class="flex items-center justify-center w-6 h-6 rounded-md bg-slate-100 text-slate-600">
+                            <i class="fas fa-broadcast-tower text-xs"></i>
+                        </span>
+
+                        Our Shows
+                    </a>
+                </li>
+
                 <!-- About -->
                 <li class="relative group">
                     <button id="aboutBtn" class="flex items-center gap-2 px-2 py-1 transition duration-200 hover:text-red-600">
