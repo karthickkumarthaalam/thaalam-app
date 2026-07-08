@@ -61,8 +61,8 @@ $(document).ready(function () {
         data: JSON.stringify(payload),
         success: function (response) {
           localStorage.setItem("token", response.token);
-          localStorage.setItem("memberId", response.memberid);
-          localStorage.setItem("username", response.username);
+          localStorage.setItem("memberId", response.member.memberId);
+          localStorage.setItem("username", response.member.name);
           showToast(response.message || "Login Successful!", "success");
           $("#loginForm")[0].reset();
           window.location.href = "index";

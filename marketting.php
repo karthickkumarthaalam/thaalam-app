@@ -20,6 +20,7 @@
     </style>
 
     <?php include 'php/analyticsHeader.php'; ?>
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 

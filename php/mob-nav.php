@@ -84,8 +84,8 @@
                      </a>
                  </li>
                  <li>
-                     <!-- <a href="rj-portfolio"> -->
-                     <a href="#">
+                     <a href="rj-portfolio">
+                         <!-- <a href="#"> -->
                          <div class="d-flex align-items-center">
                              <i class="fas fa-users pe-2"></i>
                              <p>Our Team</p>

@@ -62,7 +62,7 @@
                         Podcast
                     </a>
                 </li>
-
+                <!-- 
                 <li>
                     <a href="rewind-2025"
                         class="flex items-center gap-2 px-2 py-1 transition duration-200 hover:text-red-600">
@@ -73,7 +73,7 @@
 
                         Rewind
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Explore -->
                 <li class="relative group">
@@ -96,6 +96,13 @@
                     <div id="exploreMenu"
                         class="nav-dropdown absolute left-1/2 -translate-x-1/2 top-7 w-48 rounded-xl bg-white shadow-lg border border-slate-100 p-2 z-50">
 
+                        <a href="rewind-2025"
+                            class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-100 transition">
+
+                            <i class="fas fa-backward text-slate-500 text-xs"></i>
+                            Rewind
+                        </a>
+
                         <a href="news-list"
                             class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-100 transition">
 
@@ -114,8 +121,7 @@
                 </li>
 
                 <li>
-                    <!-- <a href="rj-portfolio" -->
-                    <a href="#"
+                    <a href="rj-portfolio"
                         class="flex items-center gap-2 px-2 py-1 transition duration-200 hover:text-red-600">
 
                         <span class="flex items-center justify-center w-6 h-6 rounded-md bg-slate-100 text-slate-600">

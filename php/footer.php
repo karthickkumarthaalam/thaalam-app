@@ -37,17 +37,17 @@
                                     <div class="site-footer__links mob-top2">
                                         <h4 class="site-footer__title">Quick Link</h4>
                                         <ul class="site-footer__links-list list-unstyled">
-                                            <li><a href="about-us.php"> <span class="icon-plus"></span>
+                                            <li><a href="about-us"> <span class="icon-plus"></span>
                                                     About Us</a>
                                             </li>
-                                            <li><a href="marketting.php"> <span class="icon-plus"></span>
+                                            <li><a href="marketting"> <span class="icon-plus"></span>
                                                     Marketting</a></li>
-                                            <li><a href="pricing.php"> <span class="icon-plus"></span>
+                                            <li><a href="pricing"> <span class="icon-plus"></span>
                                                     Pricing</a></li>
                                             </li>
-                                            <li><a href="news-list.php"> <span class="icon-plus"></span>
+                                            <li><a href="news-list"> <span class="icon-plus"></span>
                                                     News</a></li>
-                                            <li><a href="blogs-list.php"> <span class="icon-plus"></span>
+                                            <li><a href="blogs-list"> <span class="icon-plus"></span>
                                                     Blogs</a>
                                             </li>
 
