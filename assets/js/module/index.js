@@ -1,13 +1,5 @@
 $(document).ready(function () {
   const $carousel = $(".main-slider__carousel");
-  const $podcastList = $("#new-podcasts");
-  const $festivalLeft = $("#festivalLeft");
-  const $festivalRight = $("#festivalRight");
-
-  // Hide sections until content injected
-  $festivalLeft.hide();
-  $festivalRight.hide();
-  $podcastList.hide();
 
   function slugify(name) {
     return name.split(" ").join("-");
@@ -69,11 +61,7 @@ $(document).ready(function () {
     $flashNewsBar
       .html(
         `
-  <div class="relative max-w-full overflow-hidden  border-t  border-slate-200 bg-white">
-
-    <!-- subtle gradient glow -->
-    <div class="absolute inset-0 bg-gradient-to-b from-red-50/10 via-transparent to-indigo-50/10 pointer-events-none"></div>
-
+  <div class="relative max-w-full overflow-hidden  border-t  border-slate-200 bg-white/90 backdrop-blur-md">
     <!-- HEADER -->
     <div class="relative flex flex-col items-center gap-3 px-5 py-4 border-b border-slate-200/70">
 
@@ -102,7 +90,7 @@ $(document).ready(function () {
     <div class="relative px-5 py-5 sm:px-6 sm:py-6">
 
       <div id="news-content"
-        class="text-slate-700 text-sm sm:text-[15px] leading-7 tracking-[0.01em] transition-all duration-500 ease-out opacity-100">
+        class="text-slate-700 text-center text-sm sm:text-[15px] leading-7 tracking-[0.01em] transition-all duration-500 ease-out opacity-100">
       </div>
 
       <!-- bottom progress bar -->
@@ -216,13 +204,13 @@ $(document).ready(function () {
     const slides = [];
     const programImage = program?.program_category?.image_url;
 
-    if (programImage) {
-      slides.push(`
-        <div class="item"><div class="main-slider__bg">
-          <img src="${programImage}" decoding="async" fetchpriority="high"  alt="${programImage}" />
-        </div></div>
-      `);
-    }
+    // if (programImage) {
+    //   slides.push(`
+    //     <div class="item"><div class="main-slider__bg">
+    //       <img src="${programImage}" decoding="async" fetchpriority="high"  alt="${programImage}" />
+    //     </div></div>
+    //   `);
+    // }
 
     try {
       const bannerRes = await $.ajax({
@@ -367,261 +355,6 @@ $(document).ready(function () {
 
   loadCurrentProgram(true);
   setInterval(() => loadCurrentProgram(false), 1 * 60 * 1000);
-
-  // ---------------- PODCASTS API ✅ ----------------
-
-  function renderPodcastSkeleton(count = 4) {
-    let html = "";
-
-    for (let i = 0; i < count; i++) {
-      html += `
-      <div class="flex gap-4 p-3 bg-white rounded-2xl border border-gray-100 shadow-sm">
-
-        <!-- Image Skeleton -->
-        <div class="flex-shrink-0">
-          <div class="skeleton w-32 h-32 rounded-2xl"></div>
-        </div>
-
-        <!-- Content Skeleton -->
-        <div class="flex flex-1 flex-col justify-between py-1">
-
-          <div>
-            <!-- Title -->
-            <div class="skeleton h-4 w-5/6 rounded mb-3"></div>
-            <div class="skeleton h-4 w-2/3 rounded"></div>
-
-            <!-- Author -->
-            <div class="flex items-center gap-2 mt-4">
-              <div class="skeleton w-8 h-8 rounded-full"></div>
-
-              <div class="flex-1">
-                <div class="skeleton h-2 w-16 rounded mb-2"></div>
-                <div class="skeleton h-3 w-24 rounded"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Footer -->
-          <div class="flex items-center justify-between mt-4">
-
-            <!-- Duration -->
-            <div class="skeleton h-8 w-20 rounded-full"></div>
-
-            <!-- Play Button -->
-            <div class="skeleton w-11 h-11 rounded-full"></div>
-
-          </div>
-
-        </div>
-
-      </div>
-    `;
-    }
-
-    $("#new-podcasts")
-      .html(
-        `
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-        ${html}
-      </div>
-    `,
-      )
-      .show();
-  }
-
-  async function loadPodcasts() {
-    if (!$podcastList.length) return;
-
-    $podcastList.empty();
-    renderPodcastSkeleton(4);
-
-    try {
-      const res = await $.ajax({
-        url: `${window.API_BASE_URL}/podcasts?status=approved&limit=4`,
-        method: "GET",
-      });
-
-      const podcasts = res?.data?.data || [];
-
-      if (!podcasts.length) {
-        $podcastList.html(
-          `<p class="text-sm text-gray-400 text-center mt-8">No Podcasts Found</p>`,
-        );
-        return;
-      }
-
-      const html = podcasts
-        .map((p, index) => {
-          const img =
-            p.image_url ||
-            "assets/img/common/podcast-details/podcast-banner.jpg";
-
-          const title =
-            (p.title || "").slice(0, 60) + (p.title?.length > 60 ? "..." : "");
-
-          const duration = `${p.duration ?? 0} min`;
-          const author = p.rjname || p.author || "Podcast";
-
-          return `
-      <a href="podcast-details?id=${p.id}"
-         class="group flex gap-4 p-1 md:p-3 bg-white rounded-2xl border border-gray-100 overflow-hidden
-                transition-all duration-300 hover:-translate-y-1
-                hover:border-red-200">
-
-        <!-- Image -->
-        <div class="relative flex-shrink-0">
-
-          <img
-            src="${img}"
-            alt="${title}"
-            class="w-32 lg:w-48 h-32 rounded-2xl object-cover transition duration-500 group-hover:scale-105"
-          />
-
-           ${
-             index < 2
-               ? `
-               <span
-                 class="absolute top-2 left-2 bg-white/95 text-red-600 text-[10px]
-                           font-semibold px-2 py-1 rounded-full shadow-sm"
-               >
-                 NEW
-               </span>
-            `
-               : ""
-           }
-
-         <div class="absolute bottom-1 right-1 bg-gray-50/70 
-                         text-[10px] font-bold text-gray-800 inline-flex items-center
-                         px-1.5 py-1 rounded-full">
-              ${duration}
-         </div>
-        
-
-        </div>
-
-        <!-- Content -->
-        <div class="flex flex-1 flex-col justify-between min-w-0 py-1">
-
-          <div>
-            <h3 class="text-gray-900 font-bold text-[12px] md:text-[15px] leading-6 line-clamp-2
-                       group-hover:text-red-600 transition-colors">
-              ${title}
-            </h3>
-
-            <div class="flex items-center gap-2 mt-3">
-              <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
-                <i class="fa fa-microphone text-red-600 text-xs"></i>
-              </div>
-
-              <div>
-                <p class="text-xs text-gray-500">Hosted by</p>
-                <p class="text-sm font-medium text-gray-700 truncate">
-                  ${author}
-                </p>
-              </div>
-            </div>
-       </div>
-
-        </div>
-
-      </a>
-    `;
-        })
-        .join("");
-
-      $podcastList.html(`
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-    ${html}
-  </div>
-`);
-      $podcastList.fadeIn(300);
-    } catch (err) {
-      console.error("Podcast failed:", err);
-    }
-  }
-
-  loadPodcasts();
-
-  // ---------------- FESTIVAL GIFS API ✅ ----------------
-
-  async function loadFestivalGifs() {
-    if (!$festivalLeft.length && !$festivalRight.length) return;
-
-    try {
-      const r = await $.ajax({
-        url: `${window.API_BASE_URL}/festival-gif?status=true`,
-        method: "GET",
-      });
-
-      const gif = r?.data?.data?.[0];
-      if (!gif) return;
-
-      if (gif.left_side_image) {
-        $festivalLeft
-          .attr(
-            "src",
-            `${window.API_BASE_URL}/${gif.left_side_image.replace(/\\/g, "/")}`,
-          )
-          .fadeIn(400);
-      } else {
-        $festivalLeft.fadeOut(200);
-      }
-
-      if (gif.right_side_image) {
-        $festivalRight
-          .attr(
-            "src",
-            `${window.API_BASE_URL}/${gif.right_side_image.replace(/\\/g, "/")}`,
-          )
-          .fadeIn(400);
-      } else {
-        $festivalRight.fadeOut(200);
-      }
-    } catch (err) {
-      console.error("GIF API error:", err);
-    }
-  }
-
-  loadFestivalGifs();
-  setInterval(loadFestivalGifs, 10 * 60 * 1000);
-
-  // ---------------- POPUP BANNER API ✅ ----------------
-
-  function hidePopupBanner() {
-    $("#popupBanner").fadeOut(200);
-    document.body.style.overflow = "";
-  }
-
-  async function loadPopupBanner() {
-    try {
-      const r = await $.ajax({
-        url: `${window.API_BASE_URL}/popup-banner?status=active`,
-        method: "GET",
-      });
-      const b = r?.data?.[0];
-
-      if (!b) return;
-
-      const path = b.website_image.replace(/\\/g, "/");
-      $("#popupBanner-image").attr("src", `${window.API_BASE_URL}/${path}`);
-
-      if (b.status === "active") {
-        $("#popupBanner").css("display", "flex").hide().fadeIn(400);
-        document.body.style.overflow = "hidden";
-      }
-    } catch (err) {
-      console.error("Popup banner failed:", err);
-    }
-  }
-
-  $("#close-popupBanner").on("click", hidePopupBanner);
-  $("#popupBanner").on("click", function (event) {
-    if (event.target.id === "popupBanner") {
-      hidePopupBanner();
-    }
-  });
-
-  loadPopupBanner();
 
   // ---------------- VISITOR TRACKING ✅ ----------------
 

@@ -1,17 +1,13 @@
-<section class="bg-transparent">
-    <div class="max-w-[1200px] mx-auto">
+<section id="liveInteraction" class="bg-slate-950 px-4 hidden">
+    <div class="max-w-[1200px] mx-auto py-16">
         <!-- Header -->
-        <div id="liveInteractionHeader"
-            class="text-center mt-12 mb-12 hidden">
-            <h2 class="text-[1.6rem] font-semibold text-slate-800 tracking-tight mb-3">
+        <div class="text-center mt-12 mb-12 ">
+            <h2 class="text-[1.6rem] md:text-[2rem] font-semibold text-slate-100 tracking-tight mb-3">
                 Live Program Interaction
             </h2>
-            <p class="text-slate-500 font-medium max-w-[500px] mx-auto leading-relaxed">
+            <p class="text-slate-400 font-medium max-w-[500px] mx-auto leading-relaxed">
                 Vote & participate in the current show
             </p>
-            <div
-                class="w-20 h-1 mx-auto mt-5 rounded bg-gradient-to-r from-red-600 to-gray-100">
-            </div>
         </div>
 
         <!-- Poll List -->
@@ -259,14 +255,14 @@
             const activePolls = (json.data || []).filter(poll => poll.question_type === 'poll');
             polls.push(...activePolls);
 
-            const header = document.getElementById("liveInteractionHeader");
+            const pollSection = document.getElementById("liveInteraction");
 
             if (!polls.length) {
-                if (header) header.style.display = "none";
+                if (pollSection) pollSection.style.display = "none";
                 return;
             }
 
-            if (header) header.style.display = "block";
+            if (pollSection) pollSection.style.display = "block";
 
             renderPolls();
             setupSubmitHandler();

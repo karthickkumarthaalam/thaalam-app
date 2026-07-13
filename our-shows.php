@@ -14,61 +14,27 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        .show-fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity .7s ease, transform .7s ease;
-        }
-
         .show-card {
             opacity: 0;
-            transition: opacity .7s ease, transform .7s ease;
-        }
-
-        .show-card-left {
-            transform: translateX(-70px);
-        }
-
-        .show-card-right {
-            transform: translateX(70px);
+            transform: translateY(40px);
+            transition: all .7s ease;
         }
 
         .show-card.visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
         }
 
         .show-line {
             width: 0;
-            height: 3px;
-            background: #f00000;
+            height: 2px;
+            background: #ef4444;
             border-radius: 9999px;
-            transition: width .6s ease .25s;
-        }
-
-        .show-fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
+            transition: width .6s ease;
         }
 
         .show-card.visible .show-line {
-            width: 3rem;
-        }
-
-        .show-card:hover .show-card-image {
-            transform: scale(1.06);
-        }
-
-        @media (max-width: 1023px) {
-
-            .show-card-left,
-            .show-card-right {
-                transform: translateY(40px);
-            }
-
-            .show-card.visible {
-                transform: translateY(0);
-            }
+            width: 70px;
         }
     </style>
 </head>
@@ -81,20 +47,19 @@
         <div>
             <?php include 'php/header2.php'; ?>
 
-            <div class="show-fade-up text-center py-8 lg:py-16 px-4"
-                style="background:linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)),url('./assets/images/backgrounds/background_image.jpg') center/cover">
+            <div class="show-fade-up home-hero home-grid text-center py-8 lg:py-16 px-4">
                 <span class="inline-block text-[11px] font-black uppercase tracking-[.3em] text-red-500 mb-3">Our Lineup</span>
                 <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-                    Featured <span class="text-red-500">Radio Shows</span>
+                    Featured <span class="text-red-600">Radio Shows</span>
                 </h1>
                 <p class="mt-4 text-gray-500 text-sm max-w-5xl mx-auto leading-relaxed">
                     The heartbeat of Thaalam Radio — a dynamic schedule of original programs designed to inform, entertain, and connect. From morning motivation to late-night grooves, there's always a show for every mood.
                 </p>
             </div>
-            <section
-                style="background:linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)),url('./assets/images/backgrounds/background_image.jpg') center/cover">
-
-                <div class="mx-auto max-w-7xl px-4 sm:px-6">
+            <section class="relative overflow-hidden py-12" style=" 
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('./assets/images/backgrounds/background_image.jpg'); ">
+                <div class="relative mx-auto max-w-6xl px-6">
                     <div id="show-list"></div>
                 </div>
             </section>

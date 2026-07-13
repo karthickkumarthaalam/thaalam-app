@@ -110,14 +110,6 @@
             }
         }
 
-        .festival-side {
-            display: none;
-        }
-
-        .festival-side[src] {
-            display: block;
-        }
-
         .rewind-link {
             display: inline-flex;
             align-items: center;
@@ -183,6 +175,16 @@
             border-radius: 8px;
         }
 
+        .home-hero {
+            background: radial-gradient(circle at 16% 20%, rgba(239, 68, 68, .18), transparent 31%), radial-gradient(circle at 83% 75%, rgba(248, 113, 113, .2), transparent 26%), #fff;
+        }
+
+        .home-grid {
+            background-image: linear-gradient(rgba(248, 113, 113, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(248, 113, 113, .07) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+
         @keyframes skeleton-loading {
             0% {
                 background-position: 100% 0;
@@ -218,206 +220,93 @@
     <?php include 'php/config-js.php'; ?>
 
     <div class="page-wrapper">
-        <div class="row">
-            <!-- <div class="col-lg-20">
-                <?php include 'php/side-nav.php'; ?>
-            </div> -->
+        <div>
+            <?php include 'php/header2.php'; ?>
 
-            <div>
-                <?php include 'php/header2.php'; ?>
+            <!-- Main Slider Start -->
+            <section class="main-slider">
+                <h2 class="visually-hidden">24/7 Live Tamil radio streaming and shows from Switzerland</h2>
+                <div id="bannerLoader" class="banner-loader">
+                    <div class="signal-loader"></div>
+                </div>
+                <div class="main-slider__carousel owl-carousel owl-theme">
 
-                <!-- Main Slider Start -->
-                <section class="main-slider">
-                    <h2 class="visually-hidden">24/7 Live Tamil radio streaming and shows from Switzerland</h2>
-                    <div id="bannerLoader" class="banner-loader">
-                        <div class="signal-loader"></div>
-                    </div>
-                    <div class="main-slider__carousel owl-carousel owl-theme">
+                </div>
+            </section>
+            <!--Main Slider Start -->
 
-                    </div>
-                </section>
-                <!--Main Slider Start -->
-
-                <!-- Podcast Show Section -->
-                <div class="festival-wrapper">
-                    <img id="festivalLeft" alt="Festival Left" class="festival-side left">
-                    <img id="festivalRight" alt="Festival Right" class="festival-side right">
-
-
-                    <div class="" style="
-                              background-image: url('assets/images/backgrounds/background_image.jpg');
-                              background-size: cover;
-                              background-position: center;
-                              background-repeat: no-repeat;
-                            ">
-                        <div class="home-page__header animate-fade-up mt-2">
-                            <h1 class="home-page__title">Thaalam <span style="color:#000">BroadCasting</span></h1>
-                            <p class="home-page__subtitle">Streaming & Audio</p>
-                        </div>
-
-                        <section class="md:pb-10">
-
-                            <div class="container mx-auto p-0 px-3">
-                                <div class="flex justify-center items-center">
-                                    <div class="w-full max-w-4xl relative
-                                                     bg-white/25
-                                                     backdrop-blur-xl
-                                                     shadow-[0_25px_60px_rgba(0,0,0,0.1)]
-                                                     rounded-2xl
-                                                     border border-white/30
-                                                     overflow-hidden
-                                                     transition-all duration-300
-                                                     hover:-translate-y-1
-                                                     hover:shadow-[0_35px_80px_rgba(0,0,0,0.15)]">
-
-                                        <div class="absolute top-0 left-0 h-[2px] w-full overflow-hidden bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
-
-                                        <div class="absolute bottom-0 left-0 h-[2px] w-full overflow-hidden bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
-
-                                        <div class="overflow-hidden rounded-2xl">
-                                            <div class="gap-6 px-4 pt-0 pb-4 md:p-6">
-                                                <div class="flex-1 w-full space-y-3">
-                                                    <div class="flex flex-col  items-center justify-center  gap-3 sm:gap-4
-                                                            pl-3 sm:pl-4 py-3  border-b border-dashed border-gray-500">
-
-                                                        <img
-                                                            id="programImage"
-                                                            src="assets/img/logo/thalam-logo.png"
-                                                            alt="Thaalam Live"
-                                                            class="w-32 h-32 
-                                                               rounded-xl object-contain border border-gray-900" />
-
-                                                        <div class="flex flex-col  leading-tight">
-
-                                                            <h3
-                                                                id="programTitle"
-                                                                class="text-base text-center
-                                                                 sm:text-lg md:text-xl font-semibold text-gray-900
-                                                                 truncate max-w-[220px] sm:max-w-full
-                                                                 mx-auto md:ml-auto mb-2">
-                                                                Thaalam Live Stream
-                                                            </h3>
-
-
-                                                            <p class="text-sm text-gray-700 font-semibold flex items-center justify-center  gap-2  ">
-                                                                <!-- <span id="programArtist">Live RJ</span> -->
-                                                            </p>
-
-                                                            <p
-                                                                id="showTime"
-                                                                class="text-xs text-gray-500 flex items-center justify-center  gap-1 ">
-                                                                <span>Now Streaming</span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-
-
-
-                                                    <div class="flex flex-wrap items-center justify-center   gap-4 mt-4 pl-6 ">
-
-
-                                                        <button
-                                                            id="volumeBtn"
-                                                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
-                                                            <i class="fas fa-volume-up" id="volumeIcon"></i>
-                                                        </button>
-
-                                                        <button
-                                                            id="mainPlayBtn"
-                                                            class="w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-600  text-white shadow-md transition hover:scale-105">
-                                                            <i class="fas fa-play" id="mainPlayIcon"></i>
-                                                        </button>
-
-                                                        <button
-                                                            id="shareBtn"
-                                                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
-                                                            <i class="fas fa-share-alt"></i>
-                                                        </button>
-                                                    </div>
-
-                                                    <div
-                                                        id="nextProgramNotice"
-                                                        class="text-sm text-red-500 text-center font-semibold animate-pulse mt-4"></div>
-
-                                                    <audio
-                                                        id="audioPlayer"
-                                                        src="https://thaalam.out.airtime.pro/thaalam_b"
-                                                        autoplay></audio>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="flash-news-bar" class="my-4"></div>
-                                    </div>
-                                </div>
-
-                                <?php include 'php/quiz.php'; ?>
-                            </div>
-                        </section>
-
-                        <section class="py-8 ">
-                            <div class="max-w-7xl mx-auto px-4">
-
-                                <div>
-                                    <div class="mb-8 animate-fade-up">
-
-                                        <h2 class="text-xl md:text-2xl text-center font-medium text-gray-900 ">
-                                            Discover Our Latest <br>
-                                            <span class="text-[#f90000]">Podcasts</span>
-                                        </h2>
-                                    </div>
-
-
-                                    <div id="new-podcasts">
-                                    </div>
-
-                                    <div class="mt-6 flex justify-end">
-                                        <a
-                                            href="podcasts-list"
-                                            class="inline-flex items-center gap-1 text-sm font-semibold text-gray-800 hover:text-gray-900 transition">
-                                            Listen More Podcasts
-                                            <span aria-hidden="true">→</span>
-                                        </a>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </section>
-
-
+            <section class="home-hero home-grid">
+                <div class="mx-auto my-4 max-w-3xl px-4 sm:px-6">
+                    <div class="text-center mb-6">
+                        <p class="text-sm font-semibold uppercase tracking-[.35em] text-red-600">Live On Air</p>
+                        <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-slate-900"><span class="text-red-600">Thaalam</span> Broadcasting</h2>
+                        <p class="mt-4 max-w-4xl mx-auto text-sm sm:text-base text-slate-600">Listen live to Switzerland’s Tamil radio station for nonstop music, exclusive live shows, and the latest local culture updates.</p>
                     </div>
                 </div>
-
-                <div id="popupBanner" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-                    <div class="popupBanner-container relative w-full max-w-[32rem] sm:max-w-[36rem] md:max-w-[40rem] lg:max-w-[44rem] overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-black/10">
-                        <button id="close-popupBanner" type="button" class="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/50">
-                            <span class="text-lg leading-none">×</span>
-                        </button>
-                        <div class="relative mx-auto h-[60vh] md:h-[80vh] w-auto max-w-full min-w-[22rem] overflow-hidden rounded-[28px]  aspect-[1066/1600]">
+                <div class="mx-auto my-4">
+                    <div class="w-full max-w-xl mx-auto rounded-[2rem] border border-white/80 bg-white/10 p-6 shadow-[0_24px_70px_rgba(15,23,42,.12)] backdrop-blur-sm">
+                        <div class="flex flex-col items-center justify-center gap-3 sm:gap-4 pl-3 sm:pl-4 py-3  border-b border-dashed border-gray-500">
                             <img
-                                src=""
-                                alt="popup banner image"
-                                id="popupBanner-image"
-                                class="absolute inset-0 h-full w-full object-cover" />
+                                id="programImage"
+                                src="assets/img/logo/thalam-logo.png"
+                                alt="Thaalam Live"
+                                class="w-32 h-32 rounded-xl object-contain border border-gray-900" />
+
+                            <div class="mt-5 text-center">
+                                <p class="text-xs font-bold uppercase tracking-[.22em] text-slate-400">Now streaming</p>
+                                <h2 id="programTitle" class="mt-2 text-xl md:text-2xl font-bold text-slate-800">Thaalam Live</h2>
+                                <p id="showTime" class="mt-1 text-sm text-slate-500">Current show: Feel the rhythm with your favourite Tamil melodies.</p>
+                            </div>
                         </div>
+                        <div class="flex flex-wrap items-center justify-center   gap-4 mt-4 pl-6 ">
+                            <button
+                                id="volumeBtn"
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
+                                <i class="fas fa-volume-up" id="volumeIcon"></i>
+                            </button>
+
+                            <button
+                                id="mainPlayBtn"
+                                class="w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-600  text-white shadow-md transition hover:scale-105">
+                                <i class="fas fa-play" id="mainPlayIcon"></i>
+                            </button>
+
+                            <button
+                                id="shareBtn"
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+
+                        <div
+                            id="nextProgramNotice"
+                            class="text-sm text-red-500 text-center font-semibold animate-pulse mt-4">
+                        </div>
+
+                        <audio
+                            id="audioPlayer"
+                            src="https://thaalam.out.airtime.pro/thaalam_b"
+                            autoplay></audio>
+
                     </div>
                 </div>
+                <div id="flash-news-bar" class="my-4">
+                </div>
+            </section>
 
-                <?php include 'php/footer.php'; ?>
 
-            </div>
+            <?php include 'php/quiz.php'; ?>
+
+            <?php include 'php/footer.php'; ?>
+
         </div>
 
-    </div>
+        <?php include 'php/mob-nav.php'; ?>
 
-    <?php include 'php/mob-nav.php'; ?>
-
-    <?php include 'php/scripts.php'; ?>
+        <?php include 'php/scripts.php'; ?>
 
 
-    <script src="assets/js/module/index.js" defer></script>
+        <script src="assets/js/module/index.js" defer></script>
 </body>
 
 </html>

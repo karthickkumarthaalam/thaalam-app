@@ -73,49 +73,77 @@ document.addEventListener("DOMContentLoaded", function () {
               <p class="text-[11px] font-black uppercase tracking-[.35em]">Live Show</p>
             </div>
           </div>`;
-
       card.innerHTML = `
-        <div class="flex flex-col gap-6 p-2 lg:items-center lg:p-6 ${isEven ? "lg:flex-row-reverse" : "lg:flex-row"}">
-          ${imageMarkup}
-          <div class="flex-1 space-y-5">
-            <div class="space-y-3">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="text-[11px] font-black uppercase tracking-[0.3em] text-gray-400">${item.country}</span>
-              </div>
-              <h3 class="text-xl md:text-3xl font-bold tracking-tight text-gray-900">${item.category.trim()}</h3>
-                            <div class="show-line mb-2"></div>
-              <p class="text-sm leading-7 text-gray-600">
-              ${description}
-              </p>
+<div class="group relative border-b border-gray-200 py-2 transition-all duration-500 hover:border-red-500">
+    <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
+        <div class="flex-1 pl-0 lg:pl-6">
+
+            <div class="flex items-center gap-3">
+
+                <span class="text-[11px] font-bold uppercase tracking-[0.35em] text-red-500">
+                    ${item.country}
+                </span>
+
+                <span class="h-px w-12 bg-red-200"></span>
+
             </div>
 
-            <div class="flex flex-wrap gap-3">
-              <div class="flex min-w-[150px] items-center gap-2 rounded-2xl border border-gray-200/80 bg-gray-50 px-3 py-2.75 shadow-sm">
-                <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-red-50 text-red-500">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/>
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-[10px] font-black uppercase tracking-[.25em] text-gray-400">Time</p>
-                  <p class="text-sm font-semibold text-gray-800">${formatTime(item.start_time)} – ${formatTime(item.end_time)}</p>
-                </div>
-              </div>
-              <div class="hidden md:flex min-w-[150px] items-center gap-2 rounded-2xl border border-gray-200/80 bg-gray-50 px-3 py-2.75 shadow-sm">
-                <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-red-50 text-red-500">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"/>
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-[10px] font-black uppercase tracking-[.25em] text-gray-400">Region</p>
-                  <p class="text-sm font-semibold text-gray-800">${item.country}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>`;
+            <h2 class="mt-5 text-2xl  lg:text-3xl font-bold tracking-tight text-gray-900 transition-colors duration-300 ">
+                ${item.category.trim()}
+            </h2>
 
+            <p class="mt-6 max-w-3xl text-[15px] leading-8 text-gray-600">
+                ${description}
+            </p>
+
+        </div>
+
+   <div class="lg:min-w-[240px] flex flex-col gap-8">
+
+    <div class="flex items-start gap-4">
+        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-red-50 text-red-500">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/>
+            </svg>
+        </div>
+
+        <div>
+            <p class="text-[11px] uppercase tracking-[0.35em] text-gray-400">
+                Broadcast Time
+            </p>
+
+            <p class="mt-1 text-lg font-semibold text-gray-900">
+                ${formatTime(item.start_time)} – ${formatTime(item.end_time)}
+            </p>
+        </div>
+    </div>
+
+    <div class="h-px bg-gray-200"></div>
+
+    <div class="hidden lg:flex items-start gap-4">
+        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-red-50 text-red-500">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"/>
+            </svg>
+        </div>
+
+        <div>
+            <p class="text-[11px] uppercase tracking-[0.35em] text-gray-400">
+                Region
+            </p>
+
+            <p class="mt-1 text-lg font-semibold text-gray-900">
+                ${item.country}
+            </p>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+`;
       showList.appendChild(card);
       observer.observe(card);
     });

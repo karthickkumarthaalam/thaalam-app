@@ -152,11 +152,10 @@
                 <?php include 'php/header2.php'; ?>
 
                 <!-- ── Page Hero ── -->
-                <div class="rj-fade-up text-center py-16 px-4"
-                    style="background:linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)),url('./assets/images/backgrounds/background_image.jpg') center/cover">
+                <div class=" home-hero home-grid rj-fade-up text-center py-16 px-4">
                     <span class="inline-block text-[11px] font-black uppercase tracking-[.3em] text-red-500 mb-3">Meet The Team</span>
                     <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-                        Our <span class=" text-red-500">Radio Jockeys</span>
+                        Our <span class=" text-red-600">Radio Jockeys</span>
                     </h1>
                     <p class="mt-4 text-gray-500 text-sm max-w-xl mx-auto leading-relaxed">
                         The voices behind Thaalam Radio — passionate, energetic, and always live. Each RJ brings a unique flavour to the airwaves.

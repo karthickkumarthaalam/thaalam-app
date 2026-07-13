@@ -3958,3 +3958,12 @@ ul {
     font-size: 0.8rem;
   }
 }
+
+.home-hero {
+  background: radial-gradient(circle at 16% 20%, rgba(239, 68, 68, .18), transparent 31%), radial-gradient(circle at 83% 75%, rgba(248, 113, 113, .2), transparent 26%), #fff;
+}
+
+.home-grid {
+  background-image: linear-gradient(rgba(248, 113, 113, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(248, 113, 113, .07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}

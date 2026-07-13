@@ -93,6 +93,15 @@
                      </a>
                  </li>
                  <li>
+                     <a href="our-shows">
+                         <!-- <a href="#"> -->
+                         <div class="d-flex align-items-center">
+                             <i class="fas fa-broadcast-tower pe-2"></i>
+                             <p>Our Shows</p>
+                         </div>
+                     </a>
+                 </li>
+                 <li>
                      <a href="careers-form">
                          <div class="d-flex align-items-center">
                              <i class="fas fa-suitcase pe-2"></i>
