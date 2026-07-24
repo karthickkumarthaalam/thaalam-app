@@ -36,7 +36,7 @@
             </a>
 
             <!-- Desktop Menu -->
-            <ul class="hidden lg:flex items-center gap-6 text-[15px] font-medium text-slate-800">
+            <ul class="hidden xl:flex items-center gap-6 text-[15px] font-medium text-slate-800">
 
                 <!-- Item -->
                 <li>
@@ -196,10 +196,10 @@
             </ul>
 
             <!-- Right Section -->
-            <div id="menu-right" class="hidden lg:flex items-center gap-3"></div>
+            <div id="menu-right" class="hidden xl:flex items-center gap-3"></div>
 
             <!-- Mobile Header Right -->
-            <div class="lg:hidden flex items-center gap-2">
+            <div class="xl:hidden flex items-center gap-2">
                 <div id="mobile-menu-right" class="flex items-center gap-2"></div>
                 <!-- Mobile Menu Button -->
                 <button id="menu-toggle" class="mobile-nav__toggler px-2 py-1.5 text-lg  font-medium border border-red-500 rounded-lg">
@@ -226,30 +226,30 @@
                 <!-- USER UI -->
                 <div class="relative">
                     <button id="userMenuBtn"
-                        class="inline-flex items-center justify-center gap-2 rounded-lg lg:rounded-full border border-slate-200 bg-white px-2 lg:px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm hover:border-red-400 hover:text-red-600 transition">
+                        class="inline-flex items-center justify-center gap-2 rounded-lg xl:rounded-full border border-slate-200 bg-white px-2 xl:px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm hover:border-red-400 hover:text-red-600 transition">
 
-                        <div class="w-8 h-8 lg:w-7 lg:h-7 rounded-lg lg:rounded-full bg-gradient-to-br from-red-600 to-red-500 flex items-center justify-center text-white text-xs font-bold shadow-md">
+                        <div class="w-8 h-8 xl:w-7 xl:h-7 rounded-lg xl:rounded-full bg-gradient-to-br from-red-600 to-red-500 flex items-center justify-center text-white text-xs font-bold shadow-md">
                             ${username.charAt(0).toUpperCase()}
                         </div>
 
-                        <span class="hidden lg:block truncate max-w-[120px]">${username}</span>
-                        <i class="fas fa-chevron-down text-xs hidden lg:block"></i>
+                        <span class="hidden xl:block truncate max-w-[120px]">${username}</span>
+                        <i class="fas fa-chevron-down text-xs hidden xl:block"></i>
                     </button>
 
                     <div id="userMenu"
-                        class="hidden absolute -right-12 lg:right-0 w-56 lg:w-48 mt-2 rounded-xl border border-slate-200 bg-white shadow-2xl z-50 origin-top-right animate-in fade-in duration-200">
+                        class="hidden absolute -right-12 xl:right-0 w-56 xl:w-48 mt-2 rounded-xl border border-slate-200 bg-white shadow-2xl z-50 origin-top-right animate-in fade-in duration-200">
 
-                        <div class="px-4 py-3 border-b border-slate-100 lg:hidden">
+                        <div class="px-4 py-3 border-b border-slate-100 xl:hidden">
                             <p class="text-sm font-semibold text-slate-900">${username}</p>
                             <p class="text-xs text-slate-500">Account Menu</p>
                         </div>
 
-                        <a href="my-account" class="flex items-center gap-3 px-4 py-3  lg:px-3 lg:py-2 rounded-xl hover:bg-slate-50 transition duration-150">
+                        <a href="my-account" class="flex items-center gap-3 px-4 py-3  xl:px-3 xl:py-2 rounded-xl hover:bg-slate-50 transition duration-150">
                             <i class="fas fa-user text-slate-600 text-sm"></i>
                             <span class="text-sm font-medium text-slate-700">Profile</span>
                         </a>
 
-                        <button id="logoutBtn" class=" logoutBtn w-full flex items-center gap-3 px-4 py-3 lg:px-3 lg:py-2 rounded-xl hover:bg-red-50 transition duration-150 text-left border-t border-slate-100">
+                        <button id="logoutBtn" class=" logoutBtn w-full flex items-center gap-3 px-4 py-3 xl:px-3 xl:py-2 rounded-xl hover:bg-red-50 transition duration-150 text-left border-t border-slate-100">
                             <i class="fas fa-sign-out-alt text-red-600 text-sm"></i>
                             <span class="text-sm font-medium text-red-600">Logout</span>
                         </button>
@@ -259,19 +259,19 @@
         } else {
             html = `
                 <a href="register"
-                    class="hidden lg:flex items-center justify-center px-4 py-2 border border-slate-300 rounded-full text-sm font-medium text-slate-700 transition hover:border-red-400 hover:text-red-600 hover:bg-red-50">
+                    class="hidden xl:flex items-center justify-center px-4 py-2 border border-slate-300 rounded-full text-sm font-medium text-slate-700 transition hover:border-red-400 hover:text-red-600 hover:bg-red-50">
                 
                     <span>Register</span>
                 </a>
                 
                 <a href="login"
-                    class="flex items-center justify-center w-9 h-9 lg:w-auto lg:h-auto lg:px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white  rounded-md lg:rounded-full text-sm font-medium shadow transition hover:from-red-700 hover:to-red-600">
+                    class="flex items-center justify-center w-9 h-9 xl:w-auto xl:h-auto xl:px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white  rounded-md xl:rounded-full text-sm font-medium shadow transition hover:from-red-700 hover:to-red-600">
                 
                     <!-- Mobile Icon -->
-                    <i class="fas fa-sign-in-alt lg:hidden text-sm"></i>
+                    <i class="fas fa-sign-in-alt xl:hidden text-sm"></i>
                 
                     <!-- Desktop Text -->
-                    <span class="hidden lg:inline">Login</span>
+                    <span class="hidden xl:inline">Login</span>
                 </a>
                 `;
         }

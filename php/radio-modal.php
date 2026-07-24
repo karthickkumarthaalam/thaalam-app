@@ -16,7 +16,7 @@
 
         <!-- Close -->
         <button id="rmClose" class="absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 text-xs">
-            <i class="fas fa-times"></i>
+            <i class="fas fa-minus"></i>
         </button>
     </div>
 
@@ -26,10 +26,10 @@
             class="w-12 h-12 rounded-lg object-contain border-2 border-red-100 flex-shrink-0" />
         <div class="min-w-0">
             <p id="rmTitle" class="text-sm font-semibold text-slate-900 truncate">Thaalam Live Stream</p>
-            <p id="rmRjName" class="text-xs text-slate-500 truncate flex items-center gap-1">
+            <!-- <p id="rmRjName" class="text-xs text-slate-500 truncate flex items-center gap-1">
                 Live RJ
                 <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse inline-block"></span>
-            </p>
+            </p> -->
         </div>
     </div>
 
@@ -105,9 +105,7 @@
             sessionStorage.removeItem('radioModalOpen');
             sessionStorage.setItem('radioPlaying', 'false');
 
-            audio.pause();
-            playing = false;
-            playIcon.className = 'fas fa-play';
+
         });
 
         playBtn.addEventListener('click', () => {
@@ -203,8 +201,8 @@
         // Sync with index page player via event, or fetch independently on other pages
         function updateModalInfo(title, rjName, imgURL, bannerURL) {
             if (title) document.getElementById('rmTitle').textContent = title;
-            if (rjName) document.getElementById('rmRjName').innerHTML =
-                rjName + ' <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse inline-block"></span>';
+            // if (rjName) document.getElementById('rmRjName').innerHTML =
+            //     rjName + ' <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse inline-block"></span>';
             if (imgURL) document.getElementById('rmRjImage').src = imgURL;
             if (bannerURL) document.getElementById('rmBanner').src = bannerURL;
         }

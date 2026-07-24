@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.15 },
   );
 
   function slugify(name) {
@@ -29,7 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function stars(n = 5) {
     return Array.from({ length: n })
-      .map(() => `<svg class="w-4 h-4 fill-red-500 text-red-500" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`)
+      .map(
+        () =>
+          `<svg class="w-4 h-4 fill-red-500 text-red-500" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
+      )
       .join("");
   }
 
@@ -45,35 +48,57 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       data.forEach((rj, idx) => {
-        const isEven   = idx % 2 === 0;
-        const slug     = slugify(rj.name);
-        const imgSrc   = rj.image
+        const isEven = idx % 2 === 0;
+        const slug = slugify(rj.name);
+        const imgSrc = rj.image
           ? `${window.API_BASE_URL}/${rj.image.replace(/\\/g, "/")}`
           : "assets/img/logo/thalam-logo.png";
 
         // show-time chips (up to 2)
-        const showChips = (rj.shows || []).slice(0, 2).map((s) => `
+        const showChips = (rj.shows || [])
+          .slice(0, 2)
+          .map(
+            (s) => `
           <div class="flex items-center gap-2.5 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 shadow-sm">
             <svg class="w-4 h-4 text-red-500 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/>
             </svg>
             <div>
               <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">${s.category.trim()}</p>
-              <p class="text-sm font-semibold text-gray-800">${s.startTime.slice(0,5)} – ${s.endTime.slice(0,5)}</p>
+              <p class="text-sm font-semibold text-gray-800">${s.startTime.slice(0, 5)} – ${s.endTime.slice(0, 5)}</p>
             </div>
-          </div>`).join("");
+          </div>`,
+          )
+          .join("");
 
         // social links
         const socials = [
-          { platform: "instagram", icon: "fab fa-instagram", hover: "hover:border-pink-400 hover:text-pink-500 hover:bg-pink-50" },
-          { platform: "facebook",  icon: "fab fa-facebook-f", hover: "hover:border-blue-400 hover:text-blue-500 hover:bg-blue-50" },
-          { platform: "whatsapp",  icon: "fab fa-whatsapp",   hover: "hover:border-green-400 hover:text-green-500 hover:bg-green-50" },
-        ].map((s) => `
+          {
+            platform: "instagram",
+            icon: "fab fa-instagram",
+            hover: "hover:border-pink-400 hover:text-pink-500 hover:bg-pink-50",
+          },
+          {
+            platform: "facebook",
+            icon: "fab fa-facebook-f",
+            hover: "hover:border-blue-400 hover:text-blue-500 hover:bg-blue-50",
+          },
+          {
+            platform: "whatsapp",
+            icon: "fab fa-whatsapp",
+            hover:
+              "hover:border-green-400 hover:text-green-500 hover:bg-green-50",
+          },
+        ]
+          .map(
+            (s) => `
           <a href="${socialHref(rj, s.platform)}" onclick="event.stopPropagation()" aria-label="${s.platform}"
              class="w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center
                     text-gray-400 transition-all duration-200 hover:-translate-y-1 ${s.hover}">
             <i class="${s.icon} text-sm"></i>
-          </a>`).join("");
+          </a>`,
+          )
+          .join("");
 
         // image block
         const imgBlock = `
@@ -87,11 +112,15 @@ document.addEventListener("DOMContentLoaded", function () {
                    class="w-full h-[400px] object-cover object-top" loading="lazy" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
               <!-- show badge -->
-              ${rj.shows?.length ? `
+              ${
+                rj.shows?.length
+                  ? `
               <div class="absolute bottom-5 left-5 rounded-full bg-red-500 px-4 py-1.5
                           text-[11px] font-black uppercase tracking-wider text-white shadow-lg">
                 ${rj.shows[0].category.trim()}
-              </div>` : ""}
+              </div>`
+                  : ""
+              }
             </div>
           </div>`;
 
@@ -101,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div>
               <p class="rj-tag text-[11px] font-black uppercase tracking-[.3em] text-red-500 mb-2">Radio Jockey</p>
               <div class="rj-line mb-3"></div>
-              <h2 class="rj-name text-3xl md:text-4xl font-bold text-gray-900">${rj.name.trim()}</h2>
+              <h2 class="rj-name text-2xl md:text-3xl font-semibold text-gray-900">${rj.name.trim()}</h2>
             </div>
 
             <p class="rj-desc text-sm text-gray-500 leading-relaxed">

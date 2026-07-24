@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const item = normalizeShow(show);
       const card = document.createElement("article");
       const isEven = index % 2 === 0;
-      card.className = `show-card py-6 lg:py-16 group relative overflow-hidden rounded-[34px] transition-all duration-700 ${isEven ? "show-card-left" : "show-card-right"}`;
+      card.className = `show-card py-6 lg:py-12 group relative overflow-hidden rounded-[34px] transition-all duration-700 ${isEven ? "show-card-left" : "show-card-right"}`;
       const description = item?.description
         ? item.description
         : "A thoughtfully curated broadcast experience that brings atmosphere, music, and meaningful conversation to the air.";
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             </div>
 
-            <h2 class="mt-5 text-2xl  lg:text-3xl font-bold tracking-tight text-gray-900 transition-colors duration-300 ">
+            <h2 class="mt-5 text-xl  lg:text-2xl font-semibold tracking-tight text-gray-900 transition-colors duration-300 ">
                 ${item.category.trim()}
             </h2>
 

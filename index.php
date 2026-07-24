@@ -239,7 +239,7 @@
                 <div class="mx-auto my-4 max-w-3xl px-4 sm:px-6">
                     <div class="text-center mb-6">
                         <p class="text-sm font-semibold uppercase tracking-[.35em] text-red-600">Live On Air</p>
-                        <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-slate-900"><span class="text-red-600">Thaalam</span> Broadcasting</h2>
+                        <h2 class="mt-3 text-2xl sm:text-3xl font-bold text-slate-900"><span class="text-red-600">Thaalam</span> Broadcasting</h2>
                         <p class="mt-4 max-w-4xl mx-auto text-sm sm:text-base text-slate-600">Listen live to Switzerland’s Tamil radio station for nonstop music, exclusive live shows, and the latest local culture updates.</p>
                     </div>
                 </div>
@@ -254,7 +254,7 @@
 
                             <div class="mt-5 text-center">
                                 <p class="text-xs font-bold uppercase tracking-[.22em] text-slate-400">Now streaming</p>
-                                <h2 id="programTitle" class="mt-2 text-xl md:text-2xl font-bold text-slate-800">Thaalam Live</h2>
+                                <h2 id="programTitle" class="mt-2 text-xl md:text-2xl font-semibold text-slate-800">Thaalam Live</h2>
                                 <p id="showTime" class="mt-1 text-sm text-slate-500">Current show: Feel the rhythm with your favourite Tamil melodies.</p>
                             </div>
                         </div>

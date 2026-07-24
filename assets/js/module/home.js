@@ -104,56 +104,53 @@
       if (!response.ok) throw new Error("Podcast request failed");
       const podcasts = (await response.json())?.data?.data || [];
       if (!podcasts.length) throw new Error("No podcasts");
-      container.innerHTML = podcasts
+      const cards = podcasts
         .slice(0, 4)
         .map((podcast) => {
           const title = escapeHtml(podcast.title || "Thaalam Podcast");
-          const author = escapeHtml(
-            podcast.rjname || podcast.author || "Thaalam Radio",
-          );
           const duration = escapeHtml(`${podcast.duration ?? 0} min`);
           const image = escapeHtml(
             podcast.image_url ||
               "assets/img/common/podcast-details/podcast-banner.jpg",
           );
+
           return `
 <a href="podcast-details?id=${encodeURIComponent(podcast.id)}"
-   class="group block overflow-hidden rounded-xl border border-slate-100 bg-white p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+   class="group podcast-card block shrink-0 overflow-hidden rounded-xl border border-slate-100 bg-white p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
 
-    <!-- Image -->
     <div class="relative mb-3 overflow-hidden rounded-lg">
         <img
             src="${image}"
             alt="${title}"
-            class="h-[150px] w-full object-cover transition duration-500 group-hover:scale-105">
+            class="h-[170px] w-full object-cover transition duration-500 group-hover:scale-105">
 
-        <div class="absolute inset-0 bg-black/10 transition-all group-hover:bg-black/20"></div>
-
-        <!-- Duration -->
         <div class="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm">
             <i class="far fa-clock mr-1 text-red-500"></i>
             ${duration}
         </div>
     </div>
 
-    <!-- Content -->
-    <div class="px-1 pb-1">
-
+    <div class="px-1 pb-2">
         <span class="inline-flex items-center rounded-full bg-red-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-red-600">
-            <i class="fas fa-podcast mr-1 text-[9px]"></i>
             Podcast
         </span>
 
-        <h3 class="mt-3 line-clamp-2 min-h-[3.4rem] text-[17px] font-semibold leading-7 text-slate-900 transition-colors duration-300 group-hover:text-red-600">
+        <h3 class="mt-3 line-clamp-2 min-h-[3.4rem] text-[17px] font-semibold leading-7 text-slate-900 group-hover:text-red-600">
             ${title}
         </h3>
-
     </div>
 
-</a>
-`;
+</a>`;
         })
         .join("");
+
+      container.innerHTML = `
+    <div class="podcast-track">
+        ${cards}
+        ${cards}
+        ${cards}
+    </div>
+`;
     } catch (error) {
       console.error("Unable to load podcasts", error);
       container.innerHTML =

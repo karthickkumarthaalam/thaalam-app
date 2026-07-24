@@ -154,7 +154,7 @@
                 <!-- ── Page Hero ── -->
                 <div class=" home-hero home-grid rj-fade-up text-center py-16 px-4">
                     <span class="inline-block text-[11px] font-black uppercase tracking-[.3em] text-red-500 mb-3">Meet The Team</span>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
                         Our <span class=" text-red-600">Radio Jockeys</span>
                     </h1>
                     <p class="mt-4 text-gray-500 text-sm max-w-xl mx-auto leading-relaxed">
